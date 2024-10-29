@@ -46,9 +46,12 @@ app.get("*", (req, res, next) => {
 });
 
 const sslOptionsSub = {
-  key: fs.readFileSync(""),
-  cert: fs.readFileSync(""),
-  ca: fs.readFileSync(""),
+  // key: fs.readFileSync(""),
+  // cert: fs.readFileSync(""),
+  // ca: fs.readFileSync(""),
+  key: "",
+  cert: "",
+  ca: "",
 };
 // Start HTTPS server
 https.createServer(sslOptionsSub, app).listen(443, () => {
