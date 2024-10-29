@@ -13,7 +13,7 @@ app.use(
 );
 app.use((req, res, next) => {
   const buildDir =
-    req.hostname === "app.desktopcrm.com"
+    req.hostname === "https://146.190.175.199" || "http://146.190.175.199"
       ? "build"
       : req.hostname === "desktopcrm.com" && "build2";
   const buildPath = path.join(__dirname, buildDir);
@@ -26,13 +26,16 @@ app.use((req, res, next) => {
 });
 
 app.get("*", (req, res, next) => {
-  const buildDir = req.hostname === "app.desktopcrm.com" ? "build" : "build2";
+  const buildDir =
+    req.hostname === "https://146.190.175.199" || "http://146.190.175.199"
+      ? "build"
+      : "build2";
   const buildPath = path.join(__dirname, buildDir);
 
   if (fs.existsSync(buildPath)) {
     if (
-      req.hostname === "app.desktopcrm.com" &&
-      !req.url.includes("/auth/google")
+      req.hostname === "https://146.190.175.199" ||
+      ("http://146.190.175.199" && !req.url.includes("/auth/google"))
     ) {
       res.sendFile(path.join(buildPath, "index.html"));
     } else if (req.hostname === "desktopcrm.com") {
@@ -46,12 +49,9 @@ app.get("*", (req, res, next) => {
 });
 
 const sslOptionsSub = {
-  // key: fs.readFileSync(""),
-  // cert: fs.readFileSync(""),
-  // ca: fs.readFileSync(""),
-  key: "",
-  cert: "",
-  ca: "",
+  key: fs.readFileSync("desktopcrm.key"),
+  cert: fs.readFileSync("desktopcrm_com.crt"),
+  ca: fs.readFileSync("desktopcrm_com.ca-bundle"),
 };
 // Start HTTPS server
 https.createServer(sslOptionsSub, app).listen(443, () => {
