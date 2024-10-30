@@ -30,6 +30,8 @@ app.use((req, res, next) => {
 });
 
 const sslOptionsSub = {
+  // key: fs.readFileSync("emailrightaway.key"),
+  // cert: fs.readFileSync("emailrightaway.pem"),
   key: fs.readFileSync("desktopcrm.key"),
   cert: fs.readFileSync("desktopcrm_com.crt"),
   ca: fs.readFileSync("desktopcrm_com.ca-bundle"),
