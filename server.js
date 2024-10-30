@@ -12,37 +12,18 @@ app.use(
   })
 );
 app.use((req, res, next) => {
+  console.log(req.hostname);
   const buildDir =
-    req.hostname === "https://146.190.175.199" || "http://146.190.175.199"
+    req.hostname === "127.0.0.1" ||
+    req.hostname === "146.190.175.199" ||
+    req.hostname === "emailrightaway.com"
       ? "build"
       : req.hostname === "desktopcrm.com" && "build2";
+  console.log("🚀 ~ app.use ~ buildDir:", buildDir);
   const buildPath = path.join(__dirname, buildDir);
 
   if (fs.existsSync(buildPath)) {
     express.static(buildPath)(req, res, next);
-  } else {
-    res.sendFile(path.join(__dirname, "maintainance.html"));
-  }
-});
-
-app.get("*", (req, res, next) => {
-  const buildDir =
-    req.hostname === "https://146.190.175.199" || "http://146.190.175.199"
-      ? "build"
-      : "build2";
-  const buildPath = path.join(__dirname, buildDir);
-
-  if (fs.existsSync(buildPath)) {
-    if (
-      req.hostname === "https://146.190.175.199" ||
-      ("http://146.190.175.199" && !req.url.includes("/auth/google"))
-    ) {
-      res.sendFile(path.join(buildPath, "index.html"));
-    } else if (req.hostname === "desktopcrm.com") {
-      res.sendFile(path.join(buildPath, "index.html"));
-    } else {
-      next();
-    }
   } else {
     res.sendFile(path.join(__dirname, "maintainance.html"));
   }
