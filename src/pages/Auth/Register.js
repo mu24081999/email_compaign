@@ -7,7 +7,7 @@ import { MdDriveFileRenameOutline, MdPassword } from "react-icons/md";
 import Button from "../../components/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { registerUser } from "../../redux/services/auth";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 const Register = () => {
   const {
     handleSubmit,
@@ -136,21 +136,18 @@ const Register = () => {
                     label="Remember me"
                   />{" "}
                 </div>
-                <a
-                  href="#"
-                  className="ms-auto text-sm font-medium text-blue-600 hover:underline dark:text-blue-500"
-                >
-                  Lost Password?
-                </a>
               </div>
               <Button type="submit" variant="success" size="lg" className="">
                 Sign up your account
               </Button>
               <div className="text-sm font-medium text-gray-900 dark:text-white">
                 Already have an account{" "}
-                <a className="text-blue-600 hover:underline dark:text-blue-500">
+                <Link
+                  to="/sign-in"
+                  className="text-blue-600 hover:underline dark:text-blue-500"
+                >
                   Login
-                </a>
+                </Link>
               </div>
             </form>
           </div>
