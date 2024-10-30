@@ -16,7 +16,7 @@ app.use((req, res, next) => {
   const buildDir =
     req.hostname === "127.0.0.1" ||
     req.hostname === "146.190.175.199" ||
-    req.hostname === "emailrightaway.com"
+    req.hostname === "app.emailrightaway.com"
       ? "build"
       : req.hostname === "desktopcrm.com" && "build2";
   console.log("🚀 ~ app.use ~ buildDir:", buildDir);
@@ -30,9 +30,9 @@ app.use((req, res, next) => {
 });
 
 const sslOptionsSub = {
-  key: fs.readFileSync("desktopcrm.key"),
-  cert: fs.readFileSync("desktopcrm_com.crt"),
-  ca: fs.readFileSync("desktopcrm_com.ca-bundle"),
+  key: fs.readFileSync("emailrightaway.key"),
+  cert: fs.readFileSync("emailrightaway.crt"),
+  // ca: fs.readFileSync("desktopcrm_com.ca-bundle"),
 };
 // Start HTTPS server
 https.createServer(sslOptionsSub, app).listen(443, () => {
