@@ -33,9 +33,9 @@ app.use((req, res, next) => {
 const sslOptionsSub = {
   // key: fs.readFileSync("emailrightaway.key"),
   // cert: fs.readFileSync("emailrightaway.pem"),
-  key: fs.readFileSync("desktopcrm.key"),
-  cert: fs.readFileSync("desktopcrm_com.crt"),
-  ca: fs.readFileSync("desktopcrm_com.ca-bundle"),
+  key: fs.readFileSync("senderside_com.key"),
+  cert: fs.readFileSync("senderside_com.crt"),
+  ca: fs.readFileSync("senderside_com.ca-bundle"),
 };
 // Start HTTPS server
 https.createServer(sslOptionsSub, app).listen(443, (res) => {

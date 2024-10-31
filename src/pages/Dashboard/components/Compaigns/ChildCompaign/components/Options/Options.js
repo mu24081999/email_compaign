@@ -297,7 +297,10 @@ const Options = () => {
           </div>
         </div>
         <div>
-          {compaign?.status === (null || undefined || "" || "pending") ? (
+          {compaign?.status === null ||
+          compaign?.status === undefined ||
+          compaign?.status === "" ||
+          compaign?.status === "pending" ? (
             <Button type="submit" className="py-3 px-2 bg-red-400">
               Lounch
             </Button>
