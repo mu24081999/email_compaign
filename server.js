@@ -31,11 +31,10 @@ app.use((req, res, next) => {
 });
 
 const sslOptionsSub = {
-  // key: fs.readFileSync("emailrightaway.key"),
-  // cert: fs.readFileSync("emailrightaway.pem"),
-  key: fs.readFileSync("senderside_com.key"),
+  key: fs.readFileSync("senderside.key"),
   cert: fs.readFileSync("senderside_com.crt"),
   ca: fs.readFileSync("senderside_com.ca-bundle"),
+  passphrase: "12345678",
 };
 // Start HTTPS server
 https.createServer(sslOptionsSub, app).listen(443, (res) => {
