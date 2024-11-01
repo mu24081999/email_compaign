@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getWarmupApi, sendWarmupEmail } from "../../redux/services/warmup";
 import { getEmailAccountsApi } from "../../redux/services/email";
 import { toast } from "react-toastify";
+import Layout from "../../layout/Layout";
 
 const DashboardContent = () => {
   const { user_id, token } = useSelector((state) => state.auth);
@@ -152,7 +153,8 @@ const DashboardContent = () => {
   }, [user_id, token, dispatch]);
   return (
     <div>
-      <Tabs tabsData={tabsData} />
+      {/* <Tabs tabsData={tabsData} /> */}
+      <Dashboard />
     </div>
   );
 };

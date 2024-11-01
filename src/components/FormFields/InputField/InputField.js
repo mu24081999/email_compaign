@@ -30,8 +30,6 @@ const InputField = React.forwardRef((props, ref) => {
     <div className="w-full">
       <div
         className={`w-full   ${
-          style ? "bg-transparent" : ""
-        } bg-transparent focus-within:bg-transparent rounded-lg ${
           props?.rules && err
             ? "focus-within:border-red border-red"
             : "focus-within:border-primary"
@@ -44,10 +42,8 @@ const InputField = React.forwardRef((props, ref) => {
           defaultValue={defaultValue ? defaultValue : ""}
           render={({ field }) => (
             <>
-              {label && <h1 className="font-extrabold pb-2">{label}</h1>}
-
-              <label className="relative block border rounded-xl border-gray-400">
-                <span class="absolute inset-y-0 left-0 flex items-center text-indigo-600 mx-2 pl-2">
+              <div className="relative">
+                <span class="absolute inset-y-0 right-0  px-3 my-1 rounded flex items-center bg-gray-800 mx-1  text-white">
                   {svg}
                 </span>
                 <input
@@ -65,16 +61,21 @@ const InputField = React.forwardRef((props, ref) => {
                   }}
                   min={type === "number" && !props.min ? 0 : props.min}
                   disabled={props.isDisabled}
-                  placeholder={props.placeholder ? props.placeholder : ""}
+                  // placeholder={props.placeholder ? props.placeholder : ""}
                   value={field.value}
-                  className={`py-3 w-full bg-white rounded-xl shadow-sm px-10 block flex-1 border-0 bg-transparent  text-gray-900 placeholder:text-gray-400 ring-gray-300 focus:ring-2  focus:ring-inset focus:rounded-xl focus:ring-indigo-600 focus:right-2 sm:text-sm sm:leading-6  ${
+                  className={`ps-3 py-3 peer w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow g-6 dark:text-white  ${
                     props.isDisabled && "bg-gray-400 cursor-not-allowed"
                   }  ${isHighLight && " bg-highLight  "}  `}
                   style={{ fontSize: "14.5px" }}
                   {...others}
                 />
-              </label>
-              {description && <p className="pb-5 pt-1 ps-1">{description}</p>}
+                {label && (
+                  <label class="absolute bg-white dark:bg-gray-800 cursor-text px-1 left-2.5 top-3.5 text-slate-400 text-sm transition-all transform origin-left peer-focus:-top-2 peer-focus:left-2.5 peer-focus:text-xs peer-focus:text-slate-400 peer-focus:scale-90">
+                    {label}
+                  </label>
+                )}
+                {description && <p className="pb-5 pt-1 ps-1">{description}</p>}
+              </div>
             </>
           )}
         />

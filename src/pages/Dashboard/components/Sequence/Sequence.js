@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
-import ReactSelectField from "../../../../components/FormFields/ReactSelectField/ReactSelectField";
+import { MdOutlineSubject } from "react-icons/md";
 import InputField from "../../../../components/FormFields/InputField/InputField";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserTemplateList } from "../../../../redux/services/template";
@@ -16,6 +16,7 @@ import EmailEditor from "react-email-editor";
 import { getEmailAccountsApi } from "../../../../redux/services/email";
 import _ from "lodash";
 import TextEditor from "../../../../components/FormFields/TextEditor/TextEditor";
+import Layout from "../../../../layout/Layout";
 
 const Sequence = () => {
   const {
@@ -154,103 +155,71 @@ const Sequence = () => {
   };
 
   return (
-    <>
-      <form
-        onSubmit={handleSubmit(addSequence)}
-        className="flex flex-col gap-5"
-      >
-        {/* <ReactSelectField
-          name="template"
-          control={control}
-          label="Select Template"
-          errors={errors}
-          onChange={(e) => setEditorValueWithHTML(e)}
-          options={
-            Array.isArray(templates?.templatesData) &&
-            templates?.templatesData?.map((temp, index) => {
-              return {
-                label: temp?.title,
-                value: temp?.id,
-                ...temp,
-              };
-            })
-          }
-        /> */}
-        <InputField
-          name="subject"
-          control={control}
-          label="Subject"
-          errors={errors}
-        />
-        <TextEditor
-          defaultValue={
-            currentTemplate !== undefined
-              ? currentTemplate?.content
-              : "<p>Please Add Your Content</p>"
-          }
-          label="Sequence"
-          name="content"
-          control={control}
-          errors={errors}
-        />
-        {/* <h1 className="font-extrabold">Add Your Template and Set Sequence</h1>
-        <div className=" overflow-hidden shadow-lg border">
-          <div className="h-[64vh]">
-            <EmailEditor
-              ref={emailEditorRef}
-              // onLoad={onLoad}
-              options={{ displayMode: "email" }}
-              style={{
-                maxWidth: "100%",
-                overflow: "scroll",
-                display: "flex",
-                height: "70vh",
-              }}
+    <Layout
+      component={
+        <>
+          <form
+            onSubmit={handleSubmit(addSequence)}
+            className="flex flex-col gap-5"
+          >
+            <InputField
+              name="subject"
+              control={control}
+              label="Subject"
+              errors={errors}
+              svg={<MdOutlineSubject />}
             />
+            <TextEditor
+              defaultValue={
+                currentTemplate !== undefined
+                  ? currentTemplate?.content
+                  : "<p>Please Add Your Content</p>"
+              }
+              label="Sequence"
+              name="content"
+              control={control}
+              errors={errors}
+            />
+            <Button type="submit" className="py-2">
+              Submit
+            </Button>
+          </form>
+          <div className="py-5">
+            <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-5 items-center min-h-screen flex-wrap">
+              {Array?.isArray(sequences?.sequencesData) &&
+                sequences?.sequencesData?.map((sequence, index) => (
+                  <>
+                    <div
+                      className={` mx-auto rounded-xl ${
+                        sequence?.id === selectedSequence?.id &&
+                        "border-2 border-blue-600"
+                      } `}
+                    >
+                      {/* <!-- Centering wrapper --> */}
+                      <div className="relative flex flex-col text-gray-700 bg-white shadow-md bg-clip-border rounded-xl ">
+                        <div className="relative mx-4 mt-4 overflow-hidden text-gray-700 bg-white bg-clip-border rounded-xl h-80">
+                          <iframe
+                            srcDoc={sequence?.content}
+                            className=" h-[300px] border border-gray-300 shadow-md"
+                            title={sequence.title}
+                          ></iframe>
+                        </div>
+                        <div className=" py-2">
+                          <p className="block font-sans font-extrabold antialiased text-xl  leading-relaxed text-blue-gray-900 text-center">
+                            {sequence?.subject
+                              ? sequence?.subject
+                              : "No Subject"}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </>
+                ))}
+            </div>
           </div>
-        </div> */}
-        <Button type="submit" className="py-2">
-          Submit
-        </Button>
-      </form>
-      <div className="py-5">
-        {/* <Heading
-          text="Sequence List"
-          level={1}
-          align="center"
-          className="font-sans font-extrabold text-3xl mb-10"
-        /> */}
-        <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-5 items-center min-h-screen flex-wrap">
-          {Array?.isArray(sequences?.sequencesData) &&
-            sequences?.sequencesData?.map((sequence, index) => (
-              <>
-                <div
-                  className={` mx-auto rounded-xl ${
-                    sequence?.id === selectedSequence?.id &&
-                    "border-2 border-blue-600"
-                  } `}
-                >
-                  {/* <!-- Centering wrapper --> */}
-                  <div className="relative flex flex-col text-gray-700 bg-white shadow-md bg-clip-border rounded-xl ">
-                    <div className="relative mx-4 mt-4 overflow-hidden text-gray-700 bg-white bg-clip-border rounded-xl h-80">
-                      <iframe
-                        srcDoc={sequence?.content}
-                        className=" h-[300px] border border-gray-300 shadow-md"
-                        title={sequence.title}
-                      ></iframe>
-                    </div>
-                    <div className=" py-2">
-                      <p className="block font-sans font-extrabold antialiased text-xl  leading-relaxed text-blue-gray-900 text-center">
-                        {sequence?.subject ? sequence?.subject : "No Subject"}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </>
-            ))}
-        </div>
-      </div>
-    </>
+        </>
+      }
+    />
   );
 };
 

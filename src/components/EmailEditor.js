@@ -10,6 +10,7 @@ import {
   addTemplateRec,
   getUserTemplateList,
 } from "../redux/services/template";
+import { FaPlus } from "react-icons/fa";
 const EmailEditorComponent = () => {
   const {
     handleSubmit,
@@ -76,7 +77,7 @@ const EmailEditorComponent = () => {
     dispatch(getUserTemplateList(token, user_id));
   }, [token, user_id, dispatch]);
   return (
-    <div className="h-full bg-gray-50">
+    <div className="">
       {/* Email Editor Section */}
       <div className="">
         {/* <Heading
@@ -87,35 +88,38 @@ const EmailEditorComponent = () => {
         /> */}
 
         {/* Form for Adding a New Template */}
-        <form onSubmit={handleSubmit(addTemplate)} className="mt-8 space-y-6 ">
-          <InputField
-            name="title"
-            label="Title"
-            control={control}
-            errors={errors}
-            rules={{
-              required: {
-                value: true,
-                message: "Title is required!",
-              },
-            }}
-          />
-          <div className=" overflow-hidden shadow-lg border">
-            <div className="h-[64vh]">
+        <form onSubmit={handleSubmit(addTemplate)} className=" space-y-6 ">
+          <div className=" overflow-hidden shadow-lg border rounded">
+            <div className="h-[77vh] rounded">
               <EmailEditor
                 ref={emailEditorRef}
                 style={{
                   maxWidth: "100%",
                   overflow: "scroll",
                   display: "flex",
-                  height: "70vh",
+                  height: "83vh",
                 }}
               />
             </div>
           </div>
-          <Button type="submit" className="py-3">
-            Add Template
-          </Button>
+          <div className="flex">
+            <InputField
+              name="title"
+              label="Title"
+              svg={<FaPlus />}
+              control={control}
+              errors={errors}
+              rules={{
+                required: {
+                  value: true,
+                  message: "Title is required!",
+                },
+              }}
+            />
+            <Button type="submit" className="py-3 min-w-[200px]">
+              Add Template
+            </Button>
+          </div>
         </form>
 
         {/* Exported HTML Preview Section */}

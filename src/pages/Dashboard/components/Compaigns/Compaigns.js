@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getUserCompaignsApi } from "../../../../redux/services/compaign";
 import { useNavigate } from "react-router-dom";
 import Button from "../../../../components/Button";
+import Layout from "../../../../layout/Layout";
 
 const Compaigns = () => {
   const dispatch = useDispatch();
@@ -42,8 +43,8 @@ const Compaigns = () => {
     { label: "Title", accessor: "title", type: "link" },
     { label: "Status", accessor: "status" },
     { label: "Progress", accessor: "progress" }, // Example of nested accessor
-    { label: "Sent", accessor: "sent" },
-    { label: "Click", accessor: "click" },
+    { label: "Sent", accessor: "email_sent_counter" },
+    { label: "Click", accessor: "email_opens_counter" },
 
     // {
     //   label: "Actions",
@@ -115,18 +116,20 @@ const Compaigns = () => {
     onClick: () => navigateTo("/"),
   };
   return (
-    <div>
-      <div className="pt-10">
-        <Button
-          onClick={() => navigateTo("/add-compaign")}
-          size="lg"
-          className="py-1 flex"
-        >
-          Add Compaign
-        </Button>
-        <Table columns={columns} data={compaignsData} />
-      </div>
-    </div>
+    <Layout
+      component={
+        <div>
+          <Button
+            onClick={() => navigateTo("/add-compaign")}
+            size="lg"
+            className="py-1 flex"
+          >
+            Add Compaign
+          </Button>
+          <Table columns={columns} data={compaignsData} />
+        </div>
+      }
+    ></Layout>
   );
 };
 

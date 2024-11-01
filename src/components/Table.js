@@ -132,7 +132,10 @@ const Table = ({ columns, data, dataFromChild }) => {
         <tbody className="border">
           {Array.isArray(sortedData) &&
             sortedData?.map((row, rowIndex) => (
-              <tr key={rowIndex} className="hover:bg-gray-600 border-b">
+              <tr
+                key={rowIndex}
+                className="hover:bg-gray-300 border-b cursor-pointer"
+              >
                 <td className="p-4">
                   <div className="flex items-center">
                     <input
@@ -150,7 +153,7 @@ const Table = ({ columns, data, dataFromChild }) => {
                 {columns?.map((col) => (
                   <td key={col.accessor} className="p-3 text-center">
                     {col.type === "actions" ? (
-                      <div className="flex justify-center gap-4 py-3">
+                      <div className="flex justify-center gap-4 ">
                         {row?.actions?.map((action) => (
                           <button
                             type="button"

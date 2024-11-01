@@ -6,6 +6,7 @@ export const compaignSlice = createSlice({
     isLoading: false,
     compaigns: [],
     compaign: {},
+    compaignAnalytics: {},
     message: "",
     error: "",
     type: "",
@@ -43,6 +44,12 @@ export const compaignSlice = createSlice({
       state.isLoading = false;
       state.message = "";
     },
+    getCompaignAnalytics: (state, action) => {
+      state.compaignAnalytics = action.payload;
+      state.error = "";
+      state.isLoading = false;
+      state.message = "";
+    },
     getCompaignDetails: (state, action) => {
       state.compaign = action.payload;
       state.isLoading = false;
@@ -58,4 +65,5 @@ export const {
   deleteCompaign,
   getCompaigns,
   getCompaignDetails,
+  getCompaignAnalytics,
 } = compaignSlice.actions;

@@ -10,6 +10,10 @@ import AddCompaign from "./pages/Dashboard/components/Compaigns/AddCompaign/AddC
 import AddEmail from "./pages/Dashboard/components/EmailAccounts/Add/Add";
 import Schedule from "./pages/Dashboard/components/Compaigns/ChildCompaign/components/Shedule/Shadule";
 import Pricing from "./pages/Pricing/Pricing";
+import Compaigns from "./pages/Dashboard/components/Compaigns/Compaigns";
+import Sequence from "./pages/Dashboard/components/Sequence/Sequence";
+import EmailAccounts from "./pages/Dashboard/components/EmailAccounts/EmailAccounts";
+import Profile from "./pages/Dashboard/components/Profile/Profile";
 const router = (isAuthenticated) => {
   const routes = [
     {
@@ -22,10 +26,40 @@ const router = (isAuthenticated) => {
       breadcrumb: "Dashboard",
     },
     {
-      path: "/email-template",
+      path: "/email-templates",
       element: (
         <PrivateRoute isAuthenticated={isAuthenticated}>
           <EmailTemplate />
+        </PrivateRoute>
+      ),
+      children: [],
+      breadcrumb: "email-template",
+    },
+    {
+      path: "/compaigns",
+      element: (
+        <PrivateRoute isAuthenticated={isAuthenticated}>
+          <Compaigns />
+        </PrivateRoute>
+      ),
+      children: [],
+      breadcrumb: "email-template",
+    },
+    {
+      path: "/sequences",
+      element: (
+        <PrivateRoute isAuthenticated={isAuthenticated}>
+          <Sequence />
+        </PrivateRoute>
+      ),
+      children: [],
+      breadcrumb: "email-template",
+    },
+    {
+      path: "/accounts",
+      element: (
+        <PrivateRoute isAuthenticated={isAuthenticated}>
+          <EmailAccounts />
         </PrivateRoute>
       ),
       children: [],
@@ -66,6 +100,16 @@ const router = (isAuthenticated) => {
       element: (
         <PrivateRoute isAuthenticated={isAuthenticated}>
           <Schedule />
+        </PrivateRoute>
+      ),
+      children: [],
+      breadcrumb: "compaign",
+    },
+    {
+      path: "/account-settings",
+      element: (
+        <PrivateRoute isAuthenticated={isAuthenticated}>
+          <Profile />
         </PrivateRoute>
       ),
       children: [],

@@ -35,7 +35,7 @@ const DarkModeSwitcher = () => {
       onClick={toggleDarkMode}
       className="p-2 text-sm bg-gray-300 dark:bg-gray-800 rounded-full "
     >
-      {isDarkMode ? <MdOutlineLightMode size={25} /> : <CiDark size={25} />}
+      {isDarkMode ? <MdOutlineLightMode size={20} /> : <CiDark size={20} />}
     </button>
   );
 };

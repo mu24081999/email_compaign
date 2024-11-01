@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import InputField from "../../../../components/FormFields/InputField/InputField";
-import Heading from "../../../../components/Heading";
 import Table from "../../../../components/Table";
 import Button from "../../../../components/Button";
 import { useNavigate, useParams } from "react-router-dom";
@@ -9,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getEmailAccountsApi } from "../../../../redux/services/email";
 import Modal from "../../../../components/Modal";
 import ModalBody from "./ModalBody/ModalBody";
+import Layout from "../../../../layout/Layout";
 const EmailAccounts = () => {
   const {
     handleSubmit,
@@ -61,40 +60,48 @@ const EmailAccounts = () => {
     dispatch(getEmailAccountsApi(token));
   }, [token, dispatch]);
   return (
-    <div>
-      <div className="flex justify-between">
-        <Button
-          onClick={() => navigateTo("/connect-email-account")}
-          size="lg"
-          className="py-1 flex"
-        >
-          Add Email Account
-        </Button>
-        <Button onClick={() => setIsOpen(true)} size="lg" className="py-1 flex">
-          Warm up Email
-        </Button>
-      </div>
-      <div className="pt-10">
-        <Table
-          columns={columns}
-          data={emails?.accountsData}
-          dataFromChild={handleChildData}
-        />
-      </div>
-      <div>
-        {/* Modal Component */}
-        <Modal
-          isOpen={isOpen}
-          onClose={handleClose}
-          title="Warm up Emails "
-          body=<ModalBody selectedEmail={selectedEmail} />
-          // onSave={handleSave}
-          saveButtonText="Save Changes"
-          closeButtonText="Dismiss"
-          size="xl"
-        />
-      </div>
-    </div>
+    <Layout
+      component={
+        <div>
+          <div className="flex justify-between">
+            <Button
+              onClick={() => navigateTo("/connect-email-account")}
+              size="lg"
+              className="py-1 flex"
+            >
+              Add Email Account
+            </Button>
+            <Button
+              onClick={() => setIsOpen(true)}
+              size="lg"
+              className="py-1 flex"
+            >
+              Warm up Email
+            </Button>
+          </div>
+          <div className="pt-10">
+            <Table
+              columns={columns}
+              data={emails?.accountsData}
+              dataFromChild={handleChildData}
+            />
+          </div>
+          <div>
+            {/* Modal Component */}
+            <Modal
+              isOpen={isOpen}
+              onClose={handleClose}
+              title="Warm up Emails "
+              body=<ModalBody selectedEmail={selectedEmail} />
+              // onSave={handleSave}
+              saveButtonText="Save Changes"
+              closeButtonText="Dismiss"
+              size="xl"
+            />
+          </div>
+        </div>
+      }
+    />
   );
 };
 

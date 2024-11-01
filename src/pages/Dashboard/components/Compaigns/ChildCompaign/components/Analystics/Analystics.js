@@ -1,16 +1,13 @@
 import React from "react";
 import DashboardCard from "../../../../../../../components/DashboardCard";
 
-const Analystics = () => {
+const Analystics = ({ data }) => {
   return (
     <div>
-      <div className="grid lg:grid-cols-6 gap-5">
-        <DashboardCard heading={"Sent"} value={"12.5k"} />
-        <DashboardCard heading={"Open"} value={"12.5k"} />
-        <DashboardCard heading={"Unsubscribe"} value={"12.5k"} />
-        <DashboardCard heading={"Sales"} value={"12.5k"} />
-        <DashboardCard heading={"Click"} value={"12.5k"} />
-        <DashboardCard heading={"Bounce"} value={"12.5k"} />
+      <div className="grid lg:grid-cols-3 gap-5">
+        <DashboardCard heading={"Sent"} value={data?.sent} />
+        <DashboardCard heading={"Open"} value={data?.opens} />
+        <DashboardCard heading={"Bounce"} value={data?.bounce} />
       </div>
     </div>
   );

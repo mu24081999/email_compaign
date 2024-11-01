@@ -13,7 +13,7 @@ const Card = ({
   overlayColor = "", // Overlay color
 }) => {
   return (
-    <div className={`mx-auto ${width} rounded-2xl `}>
+    <div className={`mx-auto ${width} rounded-lg `}>
       <div className={`relative group cursor-pointer h-fit`}>
         {imgSrc && (
           <img

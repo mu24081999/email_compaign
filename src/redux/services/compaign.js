@@ -7,6 +7,7 @@ import {
   updateCompaign,
   deleteCompaign,
   getCompaignDetails,
+  getCompaignAnalytics,
   getCompaigns,
 } from "../slices/compaign";
 import { toast } from "react-toastify";
@@ -175,6 +176,28 @@ export const readCompaign = (token, id) => async (dispatch) => {
           return dispatch(invalidRequest(response.data.message));
         }
         dispatch(getCompaignDetails(response.data.data.campaign));
+      });
+  } catch (e) {
+    dispatch(invalidRequest(e.message));
+  }
+};
+export const compaignAnalytics = (token, id) => async (dispatch) => {
+  try {
+    dispatch(compaignRequestLoading());
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        "x-access-token": token,
+      },
+    };
+    await axios
+      .get(`${backendURL}/compaign/analytics/${id}`, config)
+      .then((response) => {
+        if (response?.data?.statusCode !== 200) {
+          toast.error(response.data.message);
+          return dispatch(invalidRequest(response.data.message));
+        }
+        dispatch(getCompaignAnalytics(response.data.data));
       });
   } catch (e) {
     dispatch(invalidRequest(e.message));
