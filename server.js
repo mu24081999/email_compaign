@@ -29,6 +29,23 @@ app.use((req, res, next) => {
     res.sendFile(path.join(__dirname, "maintainance.html"));
   }
 });
+// Serve index.html for any routes not matched by static files
+app.get("*", (req, res) => {
+  const buildDir =
+    req.hostname === "localhost" ||
+    req.hostname === "127.0.0.1" ||
+    req.hostname === "146.190.175.199" ||
+    req.hostname === "app.senderside.com"
+      ? "build"
+      : req.hostname === "senderside.com" && "build2";
+  const buildPath = path.join(__dirname, buildDir, "index.html");
+
+  if (fs.existsSync(buildPath)) {
+    res.sendFile(buildPath);
+  } else {
+    res.status(404).send("Maintenance Page Not Found");
+  }
+});
 
 const sslOptionsSub = {
   key: fs.readFileSync("senderside.key"),
