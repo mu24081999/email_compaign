@@ -4,6 +4,8 @@ import InputField from "../../../../../../../components/FormFields/InputField/In
 import Button from "../../../../../../../components/Button";
 import ListItemCard from "../../../../../../../components/ListItemCard";
 import { FaRegEnvelope } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
+import { addEmailAccountApi } from "../../../../../../../redux/services/email";
 
 const MailProviderForm = ({ handleMenu }) => {
   const {
@@ -11,6 +13,21 @@ const MailProviderForm = ({ handleMenu }) => {
     control,
     formState: { errors },
   } = useForm();
+  const { token, user_id } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+
+  const formSubmit = (formData) => {
+    console.log(formData);
+    const params = {
+      user_id: user_id,
+      email: formData?.email,
+      password: formData?.password,
+      port: formData?.port,
+      mail_provider: formData?.smpt_host,
+      type: "professional",
+    };
+    dispatch(addEmailAccountApi(token, params));
+  };
   return (
     <div className="p-8 rounded-2xl border border-gray-300 shadow-xl max-w-[60%]">
       <Button
@@ -29,7 +46,10 @@ const MailProviderForm = ({ handleMenu }) => {
         title={"Connect Your Email Account"}
         description="Gmail / G-suite"
       />{" "}
-      <form className="grid lg:grid-cols-2 sm:grid-cols-1 gap-5 py-5">
+      <form
+        className="grid lg:grid-cols-2 sm:grid-cols-1 gap-5 py-5"
+        onSubmit={handleSubmit(formSubmit)}
+      >
         <div className="col-span-2">
           <InputField
             name="email"

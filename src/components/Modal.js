@@ -19,14 +19,14 @@ const Modal = ({
 
   return (
     <div
-      className={` backdrop-blur-sm fixed inset-0 flex justify-center items-start md:items-center pt-10 md:pt-0 bg-black bg-opacity-30 transition-opacity duration-1000 ${
+      className={`dark:bg-gray-800 dark:text-white backdrop-blur-sm fixed inset-0 flex justify-center items-start md:items-center pt-10 md:pt-0 bg-black bg-opacity-30 transition-opacity duration-1000 ${
         isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
       }`}
     >
       <div
         className={`relative ${
           sizeClasses[size]
-        }   bg-white rounded shadow-lg transform transition-all duration-1000 ${
+        }   bg-white dark:bg-gray-800 rounded shadow-lg transform transition-all duration-1000 ${
           isOpen ? "translate-y-0 scale-100" : "translate-y-full scale-95"
         }`}
       >

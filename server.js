@@ -46,6 +46,13 @@ app.get("*", (req, res) => {
     res.status(404).send("Maintenance Page Not Found");
   }
 });
+//Force https
+app.use((req, res, next) => {
+  if (!req.secure && req.get("x-forwarded-proto") !== "https") {
+    return res.redirect("https://" + req.headers.host + req.url);
+  }
+  next();
+});
 
 const sslOptionsSub = {
   key: fs.readFileSync("senderside.key"),

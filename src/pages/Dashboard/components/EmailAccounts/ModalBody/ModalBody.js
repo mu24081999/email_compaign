@@ -65,9 +65,9 @@ const ModalBody = ({ selectedEmail }) => {
   return (
     <form
       onSubmit={handleSubmit(formSubmit)}
-      className="lg:w-3/4 m-auto overflow-scroll h-[80vh]"
+      className=" overflow-scroll h-[70vh] flex flex-col gap-5"
     >
-      <div className="p-8 rounded-md shadow-md border bg-white border-gray-100">
+      <div className="p-8 rounded-md shadow-md border bg-white border-gray-200">
         <div className=" justify-between">
           <div className="border-b  flex gap-5 ">
             <div>
@@ -93,7 +93,7 @@ const ModalBody = ({ selectedEmail }) => {
           </div>
         </div>
       </div>
-      <div className="p-8 rounded-md shadow-md border bg-white border-gray-100">
+      <div className="p-8 rounded-md shadow-md border bg-white border-gray-200">
         <div className=" justify-between">
           <div className="border-b  flex gap-5 ">
             <div>
@@ -118,7 +118,7 @@ const ModalBody = ({ selectedEmail }) => {
           </div>
         </div>
       </div>
-      <div className="p-8 rounded-md shadow-md border bg-white border-gray-100">
+      <div className="p-8 rounded-md shadow-md border bg-white border-gray-200">
         <div className=" justify-between">
           <div className="border-b  flex gap-5 ">
             <div>
@@ -154,7 +154,7 @@ const ModalBody = ({ selectedEmail }) => {
           </div>
         </div>
       </div>
-      <div className="p-8 rounded-md shadow-md border bg-white border-gray-100">
+      <div className="p-8 rounded-md shadow-md border bg-white border-gray-200">
         <div className=" justify-between">
           <div className="border-b  flex gap-5 ">
             <div>
@@ -165,20 +165,15 @@ const ModalBody = ({ selectedEmail }) => {
               className=" text-xl font-extrabold"
             />
           </div>
-          <div className="py-5 grid lg:grid-cols-3  gap-5 sm:grid-cols-1">
-            {/* <InputField
-              name="increase_per_day"
-              placeholder="Increase per day"
-              label="Increase per day"
-              control={control}
-              errors={errors}
-            /> */}
-            <TextEditor
+          <div className="py-5 grid lg:grid-cols-2  gap-5 sm:grid-cols-1">
+            <InputField
               name="signature"
+              placeholder="Signature"
               label="Signature"
               control={control}
               errors={errors}
             />
+
             <InputField
               name="warmup_limit"
               type="number"
@@ -188,6 +183,14 @@ const ModalBody = ({ selectedEmail }) => {
               errors={errors}
             />
           </div>
+          {/* <div className="py-5 grid lg:grid-cols-1  gap-5 sm:grid-cols-1">
+            <TextEditor
+              name="signature"
+              label="Signature"
+              control={control}
+              errors={errors}
+            />
+          </div> */}
         </div>
       </div>
       <Button type="submit" className="py-3">

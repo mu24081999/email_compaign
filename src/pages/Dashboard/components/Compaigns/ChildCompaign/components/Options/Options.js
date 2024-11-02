@@ -20,6 +20,7 @@ import {
   updateCompaignRec,
 } from "../../../../../../../redux/services/compaign";
 import { getCompaignDetails } from "../../../../../../../redux/slices/compaign";
+import { getEmailAccountsApi } from "../../../../../../../redux/services/email";
 const Options = () => {
   const {
     handleSubmit,
@@ -37,7 +38,7 @@ const Options = () => {
   const { sequences } = useSelector((state) => state.sequence);
   const { schedules } = useSelector((state) => state.schedule);
   const { compaign } = useSelector((state) => state.compaign);
-  console.log("🚀 ~ Options ~ compaign:", compaign);
+  const { emails } = useSelector((state) => state.email);
   const [isOpen, setIsOpen] = useState(false);
   const [selectedContent, setSelectedContent] = useState(null);
   const [selectedSequence, setSelectedSequence] = useState(null);
@@ -72,6 +73,7 @@ const Options = () => {
     dispatch(getUserTemplateList(token, user_id));
     dispatch(getUserSequenceList(token, user_id));
     dispatch(getSchedulesApi(token, `user_id=${user_id}`));
+    dispatch(getEmailAccountsApi(token, `user_id=${user_id}`));
   }, [token, dispatch, id, user_id]);
   useEffect(() => {
     setValue("email_id", {
@@ -138,12 +140,15 @@ const Options = () => {
               placeholder="Select"
               control={control}
               errors={errors}
-              options={[
-                {
-                  label: "mu24081999@gmail.com",
-                  value: 1,
-                },
-              ]}
+              options={
+                Array.isArray(emails?.accountsData) &&
+                emails?.accountsData?.map((email) => {
+                  return {
+                    label: email?.email,
+                    value: email?.id,
+                  };
+                })
+              }
             />
           </div>
         </div>

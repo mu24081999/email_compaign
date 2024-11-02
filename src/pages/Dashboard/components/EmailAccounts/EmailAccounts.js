@@ -71,13 +71,6 @@ const EmailAccounts = () => {
             >
               Add Email Account
             </Button>
-            <Button
-              onClick={() => setIsOpen(true)}
-              size="lg"
-              className="py-1 flex"
-            >
-              Warm up Email
-            </Button>
           </div>
           <div className="pt-10">
             <Table
@@ -96,7 +89,7 @@ const EmailAccounts = () => {
               // onSave={handleSave}
               saveButtonText="Save Changes"
               closeButtonText="Dismiss"
-              size="xl"
+              size="md"
             />
           </div>
         </div>

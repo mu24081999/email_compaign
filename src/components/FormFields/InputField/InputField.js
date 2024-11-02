@@ -43,9 +43,11 @@ const InputField = React.forwardRef((props, ref) => {
           render={({ field }) => (
             <>
               <div className="relative">
-                <span class="absolute inset-y-0 right-0  px-3 my-1 rounded flex items-center bg-gray-800 mx-1  text-white">
-                  {svg}
-                </span>
+                {svg && (
+                  <span class="absolute inset-y-0 right-0  px-3 my-1 rounded flex items-center bg-gray-800 mx-1  text-white">
+                    {svg}
+                  </span>
+                )}
                 <input
                   {...props}
                   {...field}
@@ -74,8 +76,8 @@ const InputField = React.forwardRef((props, ref) => {
                     {label}
                   </label>
                 )}
-                {description && <p className="pb-5 pt-1 ps-1">{description}</p>}
               </div>
+              {description && <p className="pb-5 pt-1 ps-1">{description}</p>}
             </>
           )}
         />

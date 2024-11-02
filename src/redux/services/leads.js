@@ -27,6 +27,7 @@ export const addLeadRec = (token, data) => async (dispatch) => {
           return dispatch(invalidRequest(response.data.message));
         }
         dispatch(addLead(response.data.message));
+        dispatch(getCompaignLeads(token, data?.compaign_id));
         toast.success(response.data.message);
         return {
           done: true,
@@ -54,6 +55,8 @@ export const updateLeadRec = (token, data, id) => async (dispatch) => {
           return dispatch(invalidRequest(response.data.message));
         }
         dispatch(updateLead(response.data.message));
+        dispatch(getCompaignLeads(token, data?.compaign_id));
+
         toast.success(response.data.message);
         return {
           done: true,

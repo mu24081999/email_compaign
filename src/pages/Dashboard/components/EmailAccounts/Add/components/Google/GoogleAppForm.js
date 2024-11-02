@@ -6,6 +6,7 @@ import ListItemCard from "../../../../../../../components/ListItemCard";
 import { FcGoogle } from "react-icons/fc";
 import { useDispatch, useSelector } from "react-redux";
 import { addEmailAccountApi } from "../../../../../../../redux/services/email";
+import { FaEnvelope, FaLock } from "react-icons/fa";
 
 const GoogleAppForm = ({ handleMenu }) => {
   const {
@@ -21,12 +22,14 @@ const GoogleAppForm = ({ handleMenu }) => {
       user_id: user_id,
       email: formData?.email,
       password: formData?.password,
+      type: "gmail",
     };
     dispatch(addEmailAccountApi(token, params));
   };
   return (
     <div className="p-8 rounded-2xl border border-gray-300 shadow-xl max-w-[60%]">
       <Button
+        className="mb-2"
         onClick={() =>
           handleMenu({
             menu: true,
@@ -50,19 +53,19 @@ const GoogleAppForm = ({ handleMenu }) => {
           {" "}
           <InputField
             name="email"
+            svg={<FaEnvelope />}
             control={control}
             errors={errors}
             label="Email Account"
-            placeholder={"Email Account"}
           />
         </div>
         <div className="col-span-2">
           <InputField
-            name="account_password"
+            name="password"
             control={control}
+            svg={<FaLock />}
             errors={errors}
             label="Google App Password"
-            placeholder={"Your 16 characters google app password"}
             description={
               <>
                 <p>Enter your 16 character app password</p>

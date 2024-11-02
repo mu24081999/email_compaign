@@ -47,7 +47,7 @@ const Leads = () => {
           onSave={handleSave}
           saveButtonText="Save Changes"
           closeButtonText="Dismiss"
-          size="xl"
+          // size="xl"
         />
       </div>
     </div>
