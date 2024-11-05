@@ -13,6 +13,7 @@ import { getWarmupApi, sendWarmupEmail } from "../../redux/services/warmup";
 import { getEmailAccountsApi } from "../../redux/services/email";
 import { toast } from "react-toastify";
 import Layout from "../../layout/Layout";
+import LineChart from "../../components/Charts/LineChart";
 
 const DashboardContent = () => {
   const { user_id, token } = useSelector((state) => state.auth);
@@ -155,6 +156,7 @@ const DashboardContent = () => {
     <div>
       {/* <Tabs tabsData={tabsData} /> */}
       <Dashboard />
+      <LineChart />
     </div>
   );
 };

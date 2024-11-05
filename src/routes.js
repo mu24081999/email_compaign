@@ -116,7 +116,7 @@ const router = (isAuthenticated) => {
       breadcrumb: "compaign",
     },
     {
-      path: "/pricing",
+      path: "/subscriptions",
       element: <Pricing />,
       children: [],
       breadcrumb: "Login",

@@ -7,6 +7,7 @@ const Table = ({ columns, data, dataFromChild }) => {
   const navigateTo = useNavigate();
   const [selectedRows, setSelectedRows] = useState([]);
   const [sortDirection, setSortDirection] = useState({});
+  console.log("🚀 ~ Table ~ sortDirection:", sortDirection);
   const [statusFilter, setStatusFilter] = useState("");
 
   const getValue = (row, accessor) => {
@@ -56,7 +57,7 @@ const Table = ({ columns, data, dataFromChild }) => {
     });
 
   return (
-    <div className="py-5 relative overflow-x-auto shadow-md sm:rounded-lg font-space">
+    <div className="py-5 relative overflow-x-auto shadow-md sm:rounded-lg font-space ">
       <div className="flex justify-between mb-4">
         <div className="flex gap-2">
           <select
@@ -96,9 +97,9 @@ const Table = ({ columns, data, dataFromChild }) => {
         </div>
       </div>
       <table className="w-full text-sm text-left text-gray-500">
-        <thead className="text-xs text-gray-700 uppercase bg-gray-50 border border-gray-300">
-          <tr>
-            <th scope="col" className="p-4 w-10">
+        <thead className="text-xs text-gray-700 uppercase bg-gray-50 border border-gray-300 ">
+          <tr className="">
+            <th scope="col" className="p-4 w-10 ">
               <div className="flex items-center">
                 <input
                   id="checkbox-all-search"

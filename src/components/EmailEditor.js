@@ -97,7 +97,7 @@ const EmailEditorComponent = () => {
                   maxWidth: "100%",
                   overflow: "scroll",
                   display: "flex",
-                  height: "83vh",
+                  height: "85vh",
                 }}
               />
             </div>

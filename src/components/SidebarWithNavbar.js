@@ -9,8 +9,19 @@ import { MdOutlineAccountBalance } from "react-icons/md";
 import { logoutUser } from "../redux/services/auth";
 import { useDispatch, useSelector } from "react-redux";
 import { HiOutlineTemplate } from "react-icons/hi";
-import { FaCogs, FaRegUser, FaUserAlt } from "react-icons/fa";
+import { TbLocationShare } from "react-icons/tb";
 
+import {
+  FaCogs,
+  FaEnvelopeOpen,
+  FaRegEnvelope,
+  FaRegEnvelopeOpen,
+  FaRegUser,
+  FaShareAlt,
+  FaUserAlt,
+} from "react-icons/fa";
+import logo from "../assets/1.png";
+import logo2 from "../assets/2.png";
 const SidebarWithNavbar = ({ component }) => {
   const dispatch = useDispatch();
   const { token, user } = useSelector((state) => state.auth);
@@ -26,14 +37,14 @@ const SidebarWithNavbar = ({ component }) => {
       icon: <MdOutlineDashboard size={25} />,
     },
     {
-      name: "Inbox",
+      name: "Common Box",
       link: "/inbox",
-      icon: <HiOutlineInboxArrowDown size={25} />,
+      icon: <FaRegEnvelopeOpen size={25} />,
     },
     {
       name: "Compaigns",
       link: "/compaigns",
-      icon: <TiLocationArrowOutline size={25} />,
+      icon: <TbLocationShare size={25} />,
     },
     {
       name: "Templates",
@@ -48,7 +59,7 @@ const SidebarWithNavbar = ({ component }) => {
     {
       name: "Email Accounts",
       link: "/accounts",
-      icon: <MdOutlineAccountBalance size={25} />,
+      icon: <FaRegEnvelope size={25} />,
     },
     {
       name: "Account Settings",
@@ -91,14 +102,10 @@ const SidebarWithNavbar = ({ component }) => {
                 </svg>
               </button>
               <a href="https://flowbite.com" className="flex ms-2 md:me-24">
-                <img
-                  src="https://flowbite.com/docs/images/logo.svg"
-                  className="h-8 me-3"
-                  alt="FlowBite Logo"
-                />
-                <span className="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">
+                <img src={logo2} className="h-12" alt="FlowBite Logo" />
+                {/* <span className="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">
                   Senderside
-                </span>
+                </span> */}
               </a>
             </div>
             <div className="flex items-center">

@@ -11,6 +11,7 @@ import scheduleReducer from "./slices/schedule";
 import optionsReducer from "./slices/options";
 import warmupReducer from "./slices/warmup";
 import dashboardReducer from "./slices/dashboard";
+import subscriptionReducer from "./slices/subscriptions";
 
 export const rootReducer = combineReducers({
   auth: authReducer,
@@ -25,4 +26,5 @@ export const rootReducer = combineReducers({
   options: optionsReducer,
   warmup: warmupReducer,
   dashboard: dashboardReducer,
+  subscription: subscriptionReducer,
 });

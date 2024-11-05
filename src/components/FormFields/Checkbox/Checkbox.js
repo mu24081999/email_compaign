@@ -27,7 +27,7 @@ const Checkbox = React.forwardRef((props, ref) => {
         rules={props?.rules}
         defaultValue={defaultValue}
         render={({ field: { onChange, value } }) => (
-          <div className=" flex items-center ps-4  rounded dark:border-gray-700 ">
+          <div className=" flex items-center  rounded dark:border-gray-700 ">
             <input
               {...field}
               ref={ref}
