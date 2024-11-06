@@ -19,7 +19,7 @@ const Button = ({
   // Styles for different variants
   const variantStyles = {
     primary:
-      "sm:w-full md:w-fit rounded-lg bg-[#00b5d5] text-white hover:bg-cyan-500 focus:ring-blue-500",
+      "sm:w-full md:w-fit rounded-lg bg-[#00b5d5] text-white hover:bg-cyan-700 focus:ring-blue-500",
     secondary:
       "sm:w-full md:w-fit rounded-lg bg-gray-500 text-white hover:bg-gray-600 focus:ring-gray-500",
     danger:

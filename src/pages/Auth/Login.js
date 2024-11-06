@@ -8,6 +8,7 @@ import Button from "../../components/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../redux/services/auth";
 import { Link, useNavigate } from "react-router-dom";
+import { FaEye } from "react-icons/fa";
 const Login = () => {
   const {
     handleSubmit,
@@ -42,13 +43,13 @@ const Login = () => {
       <section className=" bg-gradient-to-r from-cyan-500 to-neutral-100 h-screen dark:bg-gray-900 flex justify-center">
         <div className="  py-8 px-4 mx-auto max-w-screen-xl lg:py-16 grid lg:grid-cols-2 gap-8 lg:gap-16 m-auto">
           <div className="flex flex-col justify-center text-center">
-            <h1 className="  mb-4 text-4xl font-extrabold tracking-tight leading-none  md:text-5xl lg:text-6xl dark:text-white text-gray-50">
-              Power Up Your Marketing{" "}
+            <h1 className="  mb-4 text-4xl font-extrabold tracking-tight leading-none  md:text-5xl lg:text-6xl dark:text-white text-gray-900">
+              Welcome back, Login
             </h1>
-            <p className="mb-6 text-lg font-normal text-gray-50 lg:text-xl dark:text-gray-400">
-              Leverage advanced analytics, personalized content, and powerful
-              automation to boost your engagement and measure your success every
-              step of the way.
+            <p className="mb-6 text-lg font-normal text-gray-700 lg:text-xl dark:text-gray-400">
+              Sign in to your account and stay connected with the latest updates
+              and insights. Access your dashboard, track progress, and manage
+              your settings all in one place
             </p>
           </div>
           <div>
@@ -82,7 +83,7 @@ const Login = () => {
                     name="password"
                     type="password"
                     control={control}
-                    svg={<MdPassword />}
+                    svg={<FaEye />}
                     errors={errors}
                     // placeholder="Enter your password"
                     label="Password"
@@ -104,12 +105,12 @@ const Login = () => {
                     />{" "}
                   </div>
 
-                  <Link
+                  {/* <Link
                     to="#"
                     className="ms-auto text-sm font-medium text-blue-600 hover:underline dark:text-blue-500"
                   >
                     Lost Password?
-                  </Link>
+                  </Link> */}
                 </div>
                 <Button
                   loading={isLoading}
@@ -118,7 +119,7 @@ const Login = () => {
                   size="lg"
                   className="py-2"
                 >
-                  Login to your account
+                  Login
                 </Button>
                 <div className="text-sm font-medium text-gray-900 dark:text-white">
                   Not registered yet?{" "}

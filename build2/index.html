@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title> SenderSide.com</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="With advanced automation, real-time analytics, and easy-to-use templates, you can reach the right people at the right time—all from a single, intuitive dashboard. Get ready to elevate your email marketing and watch your engagement soar!" name="description" />
+    <meta content="Justcall" name="author" />
+
+    <!-- Theme favicon -->
+    <link rel="shortcut icon" href="assets/images/3.png">
+
+    <!--Swiper slider css-->
+    <link href="assets/libs/swiper/swiper-bundle.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Animation on Scroll css -->
+    <link href="assets/libs/aos/aos.css" rel="stylesheet" type="text/css">
+
+    <!-- Style css -->
+    <link href="assets/css/style.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Icons css -->
+    <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css">
+</head>
+
+<body class="text-gray-800">
+
+    <!-- =========== Navbar Start =========== -->
+    <header id="navbar" class="light fixed top-0 inset-x-0 items-center z-40 w-full lg:bg-transparent bg-white transition-all py-5 flex justify-center">
+        <div>
+                <!-- Navbar Brand Logo -->
+                <a href="index.html" style="text-align: center;">
+                    <img src="assets/images/ss-logo.png" class="h-8 logo-dark" alt="Logo Dark" style="height: 70px;">
+                </a>
+        </div> 
+    </header> 
+    <!-- =========== Navbar End =========== -->
+
+    <!-- =========== Mobile Menu Start (Offcanvas) =========== -->
+    <div id="mobileMenu" class="fc-offcanvas-open:translate-x-0 translate-x-full fixed top-0 end-0 transition-all duration-200 transform h-full w-full max-w-md z-50 bg-white border-s hidden">
+        <div class="flex flex-col h-full divide-y-2 divide-gray-200">
+            <!-- Mobile Menu Topbar Logo (Header) -->
+            <div class="p-6 flex items-center justify-between">
+                <a href="index.html">
+                    <img src="assets/images/logo-dark.png" class="h-8" alt="Logo">
+                </a>
+
+                <button data-fc-dismiss class="flex items-center px-2">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+            </div>
+
+            <!-- Mobile Menu Link List -->
+            <div class="p-6 overflow-scroll h-full">
+                <ul class="navbar-nav flex flex-col gap-2" data-fc-type="accordion">
+                    <!-- Home Page Link -->
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link">Home</a>
+                    </li>
+
+                    <!-- Landing Page -->
+                    <li class="nav-item">
+                        <a href="javascript:void(0)" data-fc-type="collapse" class="nav-link">
+                            Landing <i class="fa-solid fa-angle-down ms-auto align-middle transition-all fc-collapse-open:rotate-180"></i>
+                        </a>
+
+                        <ul class="hidden overflow-hidden transition-[height] duration-300 space-y-2">
+                            <li class="nav-item mt-2">
+                                <a class="nav-link" href="home-app.html">App</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="home-saas.html">Saas Modern</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="home-saas2.html">Saas Classic</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="home-startup.html">Startup</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="home-software.html">Software</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="home-agency.html">Agency</a>
+                            </li>
+
+                            <li class="nav-item">
+
+                                <a class="nav-link" href="home-coworking.html">Coworking</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="home-crypto.html">Crypto</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="home-marketing.html">Marketing</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="home-portfolio.html">Portfolio</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <!-- Inner Page -->
+                    <li class="nav-item">
+                        <a href="javascript:void(0)" data-fc-type="collapse" class="nav-link">
+                            Pages <i class="fa-solid fa-angle-down ms-auto align-middle transition-all fc-collapse-open:rotate-180"></i>
+                        </a>
+
+                        <ul class="hidden overflow-hidden transition-[height] duration-300 space-y-2">
+                            <li class="nav-item mt-2">
+                                <a class="nav-link" href="company.html">Company</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="career.html">Career</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="pricing.html">Pricing</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="help.html">Help</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <!-- Blog Page -->
+                    <li class="nav-item">
+                        <a href="javascript:void(0)" data-fc-type="collapse" class="nav-link">
+                            Blog Page <i class="fa-solid fa-angle-down ms-auto align-middle transition-all fc-collapse-open:rotate-180"></i>
+                        </a>
+
+                        <ul class="hidden overflow-hidden transition-[height] duration-300 space-y-2">
+                            <li class="nav-item mt-2">
+                                <a class="nav-link" href="blog.html">Blog</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="blog-post.html">Blog Post</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <!-- Portfolio Page -->
+                    <li class="nav-item">
+                        <a href="javascript:void(0)" data-fc-type="collapse" class="nav-link">
+                            Portfolio <i class="fa-solid fa-angle-down ms-auto align-middle transition-all fc-collapse-open:rotate-180"></i>
+                        </a>
+
+                        <ul class="hidden overflow-hidden transition-[height] duration-300 space-y-2">
+                            <li class="nav-item mt-2">
+                                <a class="nav-link" href="portfolio-grid.html">Portfolio Grid</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="portfolio-masonry.html">Portfolio Masonry</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="portfolio-item.html">Portfolio Item</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="account-confirm.html">Confirm Account</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <!-- Auth Page -->
+                    <li class="nav-item">
+                        <a href="javascript:void(0)" data-fc-type="collapse" class="nav-link">
+                            Account <i class="fa-solid fa-angle-down ms-auto align-middle transition-all fc-collapse-open:rotate-180"></i>
+                        </a>
+
+                        <ul class="hidden overflow-hidden transition-[height] duration-300 space-y-2">
+                            <li class="nav-item mt-2">
+                                <a class="nav-link" href="account-login.html">Login</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="account-signup.html">Sign Up</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="account-forget-password.html">Forget Password</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="account-confirm.html">Confirm Account</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <!-- Contact Page Link -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact us</a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Mobile Menu Download Button (Footer) -->
+            <div class="p-6 flex items-center justify-center">
+                <a href="https://1.envato.market/prompt-tailwind" target="_blank" class="bg-primary w-full text-white p-3 rounded flex items-center justify-center text-sm">Download</a>
+            </div>
+        </div>
+    </div>
+    <!-- =========== Mobile Menu End =========== -->
+
+    <!-- =========== Hero Section Start =========== -->
+    <div class="pt-36 relative bg-gradient-to-t from-slate-500/10 flex justify-center items-center" style="padding-bottom: 10%;">
+        <div class="container" style="margin-top:5%;">
+            <div class="text-center lg:w-11/12 mx-auto">
+                <div>
+                    <h1 class="text-3xl/tight sm:text-4xl/tight lg:text-5xl/tight font-semibold mb-5">
+                        <span class="relative z-0 after:bg-green-500/50 after:-z-10 after:absolute md:after:h-6 after:h-4 after:w-full after:bottom-0 after:end-0">Exclusive Offer</span> Sign Up Early, Save Big, Get a First Full Year for Just $10.80 Originally $216/Year                     "
+                        
+                    </h1>
+                    <p class="sm:text-lg text-gray-500">
+                        "With advanced automation, analytics, and easy-to-use templates, reach the right people at the right time—all from a single, intuitive dashboard. Get ready to elevate your email marketing, launching on Nov 18th, 2024!"</p>
+                        <form id="myForm" class="flex flex-wrap items-center justify-center gap-2 mt-12">
+                            <div class="flex items-center">
+                              <input type="text" id="name-input" name="name" placeholder="Your Name" 
+                                     class="w-full rounded border-gray-300 focus:border-gray-400 focus:ring-0 bg-white py-2 px-4">
+                            </div>
+                            <div class="flex items-center">
+                              <input type="email" id="email-input" name="email" placeholder="Your Email" 
+                                     class="w-full rounded border-gray-300 focus:border-gray-400 focus:ring-0 bg-white py-2 px-4">
+                            </div>
+                            <button type="submit" class="py-2 px-4 rounded text-white bg-primary hover:shadow-lg hover:shadow-primary/50 focus:outline focus:outline-primary/50">
+                              Confirm My Spot
+                            </button>
+                          </form>
+                          
+
+                    <div class="flex flex-wrap justify-center items-center gap-5 mt-5">
+                        <div class="flex items-center gap-2">
+                            <svg class="w-5 h-5 text-green-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                            </svg>
+                            <p class="text-sm text-gray-700">Confirm Spot & Get 95% Off For First</p>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <svg class="w-5 h-5 text-green-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                            </svg>
+                            <p class="text-sm text-gray-700">From $216/Year to Straight $10.8/Year For Only First 100 Users</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+   
+    <!-- =========== Hero Section End =========== -->
+
+    <!-- =========== feature Section Start =========== -->
+
+
+        <div class="xl:py-24 py-16">
+            <div class="container" data-aos="fade-up" data-aos-duration="600">
+
+                <div class="text-center">
+                    <h1 class="text-2xl font-medium">And many more powerful features</h1>
+                </div>
+
+                <div class="py-16">
+                    <div class="grid xl:grid-cols-4 sm:grid-cols-2 grid-cols-1 gap-5">
+                        <div class="order-1">
+                            <div class="flex flex-col gap-5">
+                                <p class="flex items-center gap-3 text-base font-semibold"> <i class="fa-solid fa-check text-green-500 text-xl"></i> Hire and Retain Top Talent</p>
+                                <p class="flex items-center gap-3 text-base font-semibold"> <i class="fa-solid fa-check text-green-500 text-xl"></i> Team Management</p>
+                            </div>
+                        </div>
+
+                        <div class="order-3 xl:order-2">
+                            <div class="flex flex-col gap-5">
+                                <p class="flex items-center gap-3 text-base font-semibold"> <i class="fa-solid fa-check text-green-500 text-xl"></i> Stay Compliant</p>
+                                <p class="flex items-center gap-3 text-base font-semibold"> <i class="fa-solid fa-check text-green-500 text-xl"></i> Improve Productivity</p>
+                                <p class="flex items-center gap-3 text-base font-semibold"> <i class="fa-solid fa-check text-green-500 text-xl"></i> Improve Experience</p>
+                            </div>
+                        </div>
+
+                        <div class="order-4 xl:order-3">
+                            <div class="flex flex-col gap-5">
+                                <p class="flex items-center gap-3 text-base font-semibold"> <i class="fa-solid fa-check text-green-500 text-xl"></i> Self-service Time Tracking</p>
+                                <p class="flex items-center gap-3 text-base font-semibold"> <i class="fa-solid fa-check text-green-500 text-xl"></i> Performance Management</p>
+                                <p class="flex items-center gap-3 text-base font-semibold"> <i class="fa-solid fa-check text-green-500 text-xl"></i> Expert HR</p>
+                            </div>
+                        </div>
+
+                        <div class="order-2 xl:order-4">
+                            <div class="flex flex-col gap-5">
+                                <p class="flex items-center gap-3 text-base font-semibold"> <i class="fa-solid fa-check text-green-500 text-xl"></i> New Hire Checklist</p>
+                                <p class="flex items-center gap-3 text-base font-semibold"> <i class="fa-solid fa-check text-green-500 text-xl"></i> Tax Calculator</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="flex items-center justify-center mx-auto">
+                    <a href="#" class="bg-primary text-white rounded-lg text-sm font-semibold flex-none hover:shadow-lg  hover:shadow-primary/30 focus:shadow-none focus:outline focus:outline-primary/40 px-6 py-3">Sign Up Now <i class="fa-solid fa-arrow-right ms-2"></i> </a>
+                </button>
+
+            </div>
+        </div>
+
+    </section>
+    <!-- =========== feature Section end =========== -->
+
+    <!-- =========== clients Section Start =========== -->
+   
+    <!-- =========== clients Section end =========== -->
+
+    <!-- =========== testimonial Section Start =========== -->
+    
+    <!-- =========== testimonial Section end =========== -->
+
+    <!-- =========== pricing Section Start =========== -->
+    
+    <!-- =========== pricing Section end =========== -->
+
+    <!-- =========== faq Section start =========== -->
+    <section class="py-16 sm:py-24">
+        <div class="container" data-aos="fade-up" data-aos-duration="2000">
+
+            <div class="text-center">
+                <span class="text-sm font-medium py-1 px-3 rounded-full text-primary bg-primary/10">FAQs</span>
+                <h1 class="text-3xl/tight font-medium mt-3 mb-4">Frequently Asked Questions</h1>
+                <p class="text-gray-500">Here are some of the basic types of questions for our customers</p>
+            </div>
+
+            <div data-fc-type="accordion" class="mt-14 lg:w-3/4 lg:mx-auto 2xl:w-2/3">
+                <!-- 1 -->
+                <div class="border border-gray-300 rounded-lg">
+                    <bu p-5tton class="inline-flex p-5 items-center justify-between w-full font-semibold text-left transition" data-fc-type="collapse">
+                        How do automated campaigns save time and improve results?
+                        <span class="fa-solid fa-angle-down text-xl block transition-all fc-collapse-open:rotate-180"></span>
+                    </bu>
+                    <div class="w-full overflow-hidden transition-[height] duration-300">
+                        <p class="text-slate-500 dark:text-gray-300 pt-3 p-5">
+                            Automated campaigns allow you to schedule and send emails at specific times without manual intervention. This saves time while ensuring consistent communication with your audience. Automation also delivers timely, relevant messages that keep your audience engaged and move them through the customer journey.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 2 -->
+                <div class="border border-gray-300 rounded-lg mt-4">
+                    <button class="p-5 inline-flex items-center justify-between w-full font-semibold text-left transition" data-fc-type="collapse">
+                        How does email deliverability optimization improve campaign success?
+                        <span class="fa-solid fa-angle-down  text-xl block transition-all fc-collapse-open:rotate-180"></span>
+                    </button>
+                    <div class="hidden w-full overflow-hidden transition-[height] duration-300">
+                        <p class="text-slate-500 dark:text-gray-300 pt-3 p-5">
+                            Email deliverability optimization ensures that your emails land in your recipients' inboxes rather than their spam folders. By improving factors like sender reputation, using clean email lists, and crafting engaging subject lines, you can increase the chances of your emails being opened and read by your target audience.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 3 -->
+                <div class="border border-gray-300 rounded-lg mt-4">
+                    <button class="p-5 inline-flex items-center justify-between w-full font-semibold text-left transition" data-fc-type="collapse">
+                        How do I get help with the theme?
+                        <span class="fa-solid fa-angle-down  text-xl block transition-all fc-collapse-open:rotate-180"></span>
+                    </button>
+                    <div class="hidden w-full overflow-hidden transition-[height] duration-300">
+                        <p class="text-slate-500 dark:text-gray-300 pt-3 p-5">
+                            Use our dedicated support email (support@coderthemes.com) to send your issues or feedback. We are here to help anytime.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 4 -->
+                <div class="border border-gray-300 rounded-lg mt-4">
+                    <button class="p-5 inline-flex items-center justify-between w-full font-semibold text-left transition" data-fc-type="collapse">
+                        Can I use an unlimited email account for high-volume campaigns?
+                        <span class="fa-solid fa-angle-down  text-xl block transition-all fc-collapse-open:rotate-180"></span>
+                    </button>
+                    <div class="hidden w-full overflow-hidden transition-[height] duration-300">
+                        <p class="text-slate-500 dark:text-gray-300 pt-3 p-5">
+                            Yes, we offer unlimited email account which is perfect for high-volume campaigns. It allows you to send emails to large lists of subscribers or customers without worrying about hitting a sending cap.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- =========== faq Section end =========== -->
+
+    <!-- =========== footer Section start =========== -->
+    
+    <!-- =========== footer Section end =========== -->
+
+
+    <!-- =========== Back To Top Start =========== -->
+    <button data-toggle="back-to-top" class="fixed text-sm rounded-full z-10 bottom-5 end-5 h-9 w-9 text-center bg-primary/20 text-primary flex justify-center items-center">
+        <i class="fa-solid fa-arrow-up text-base"></i>
+    </button>
+    <!-- =========== Back To Top End =========== -->
+
+    <!-- Frost Plugin Js -->
+    <script src="assets/libs/@frostui/tailwindcss/frostui.js"></script>
+
+    <!-- Swiper Plugin Js -->
+    <script src="assets/libs/swiper/swiper-bundle.min.js"></script>
+
+    <!-- Animation on Scroll Plugin Js -->
+    <script src="assets/libs/aos/aos.js"></script>
+
+    <!-- Theme Js -->
+    <script src="assets/js/theme.min.js"></script>
+    <script>
+        document.getElementById("myForm").addEventListener("submit", async function (e) {
+            e.preventDefault(); // Prevent form from submitting traditionally
+
+            const name = document.getElementById("name-input").value;
+            const email = document.getElementById("email-input").value;
+
+            const data = { name, email };
+            
+            try {
+                const response = await fetch("https://senderside.com:3000/subscribe", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data),
+                });
+                
+                if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+
+                const result = await response.json();
+                alert(`Response received: ${JSON.stringify(result)}`);
+            } catch (error) {
+                alert(`Error: ${error.message}`);
+            }
+            });
+
+    </script>
+</body>
+
+</html>
