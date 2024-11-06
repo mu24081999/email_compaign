@@ -10,10 +10,10 @@ import {
 } from "../../redux/services/subscription";
 import Modal from "../../components/Modal";
 import moment from "moment/moment";
-import { addPaymentRec } from "../../redux/services/payment";
 import { useNavigate } from "react-router-dom";
 const Pricing = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isSubscribed, setIsSubscribed] = useState(false);
   console.log("🚀 ~ Pricing ~ isOpen:", isOpen);
   const {
     handleSubmit,
@@ -114,8 +114,9 @@ const Pricing = () => {
               calculateDiscountAmount(prev.starter.original_amount, 30) * 12
             ).toFixed(2),
             discount_amount: (
-              prev?.starter?.original_amount -
-              calculateDiscountAmount(prev.starter.original_amount, 30)
+              (prev?.starter?.original_amount -
+                calculateDiscountAmount(prev.starter.original_amount, 30)) *
+              12
             ).toFixed(),
           },
           professional: {
@@ -181,10 +182,9 @@ const Pricing = () => {
   const getPaymentIntend = async (obj) => {
     await dispatch(
       createPaymentIntendApi(token, {
-        amount:
-          typeWatcher === "yearly"
-            ? obj?.monthly_price * 100 * 12
-            : obj?.monthly_price * 100,
+        amount: typeWatcher
+          ? obj?.monthly_price * 100 * 12
+          : obj?.monthly_price * 100,
       })
     );
     setSelected(obj);
@@ -223,11 +223,13 @@ const Pricing = () => {
     console.log("🚀 ~ afterPayment ~ data:", data);
     await dispatch(createSubscriptionApi(token, data));
     setIsOpen(false);
-    const paymentData = {
-      user_id,
-    };
-    await dispatch(addPaymentRec(token));
+    setIsSubscribed(true);
   };
+  useEffect(() => {
+    if (isSubscribed) {
+      navigateTo("/");
+    }
+  }, [isSubscribed, navigateTo]);
   return (
     <div>
       <div className="relative isolate bg-white px-6 py-24 sm:py-32 lg:px-8">

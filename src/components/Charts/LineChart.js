@@ -5,7 +5,11 @@ const LineChart = () => {
   const [chartData, setChartData] = useState({
     series: [
       {
-        name: "Sales",
+        name: "Sent",
+        data: [10, 41, 35, 51, 49, 62, 69, 91, 148],
+      },
+      {
+        name: "Open",
         data: [10, 41, 35, 51, 49, 62, 69, 91, 148],
       },
     ],
@@ -46,25 +50,35 @@ const LineChart = () => {
   });
 
   return (
-    <div id="chart">
-      <ReactApexChart
-        options={chartData.options}
-        series={chartData.series}
-        type="line"
-        height={350}
-      />
-      <ReactApexChart
-        options={{ ...chartData.options, chart: { type: "bar" } }}
-        series={chartData.series}
-        type="bar"
-        height={350}
-      />
-      <ReactApexChart
-        options={{ ...chartData.options, chart: { type: "pie" } }}
-        series={[44, 55, 41, 17, 15]} // Pie charts use single series array
-        type="pie"
-        height={350}
-      />
+    <div id="chart flex flex-col gap-5">
+      <div className="p-5 bg-white dark:bg-gray-800  border border-gray-100 rounded-lg shadow-lg my-5">
+        <ReactApexChart
+          options={chartData.options}
+          series={chartData.series}
+          type="area"
+          height={350}
+        />
+      </div>
+      <div className="grid lg:grid-cols-3 sm:grid-cols-1 gap-5">
+        <div className="p-5 bg-white dark:bg-gray-800 border border-gray-100 rounded-lg shadow-lg lg:col-span-2">
+          <ReactApexChart
+            options={{ ...chartData.options, chart: { type: "bar" } }}
+            series={chartData.series}
+            type="bar"
+            height={350}
+          />
+        </div>
+        <div className="p-5 bg-white dark:bg-gray-800 border border-gray-100 rounded-lg shadow-lg">
+          <div>
+            <ReactApexChart
+              options={{ ...chartData.options, chart: { type: "pie" } }}
+              series={[44, 55, 41, 17, 15]} // Pie charts use single series array
+              type="pie"
+              height={350}
+            />
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

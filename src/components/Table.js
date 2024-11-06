@@ -57,13 +57,13 @@ const Table = ({ columns, data, dataFromChild }) => {
     });
 
   return (
-    <div className="py-5 relative overflow-x-auto shadow-md sm:rounded-lg font-space ">
+    <div className="py-5 relative overflow-x-auto shadow-md sm:rounded-lg font-space  bg-white border  dark:bg-gray-800 p-5">
       <div className="flex justify-between mb-4">
         <div className="flex gap-2">
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="border rounded-lg h-[40px]"
+            className="border rounded-lg h-[40px] dark:bg-gray-800"
           >
             <option value="">All Statuses</option>
             <option value="active">Active</option>
@@ -90,14 +90,14 @@ const Table = ({ columns, data, dataFromChild }) => {
             <input
               type="text"
               id="table-search"
-              className="block pt-2 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
+              className="block pt-2 dark:bg-gray-800 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
               placeholder="Search for items"
             />
           </div>
         </div>
       </div>
       <table className="w-full text-sm text-left text-gray-500">
-        <thead className="text-xs text-gray-700 uppercase bg-gray-50 border border-gray-300 ">
+        <thead className="text-xs text-white uppercase bg-black border border-gray-300 rounded-2xl ">
           <tr className="">
             <th scope="col" className="p-4 w-10 ">
               <div className="flex items-center">
@@ -117,7 +117,7 @@ const Table = ({ columns, data, dataFromChild }) => {
               columns?.map((col) => (
                 <th
                   key={col.accessor}
-                  className="p-4 text-gray-800 text-md text-center cursor-pointer"
+                  className="p-4  text-md text-center cursor-pointer"
                   onClick={() => handleSort(col.accessor)}
                 >
                   {col.label}

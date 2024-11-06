@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Layout from "../../layout/Layout";
 import InputField from "../../components/FormFields/InputField/InputField";
 import Checkbox from "../../components/FormFields/Checkbox/Checkbox";
@@ -7,7 +7,7 @@ import { MdDriveFileRenameOutline, MdPassword } from "react-icons/md";
 import Button from "../../components/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { registerUser } from "../../redux/services/auth";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 const Register = () => {
   const {
     handleSubmit,
@@ -16,6 +16,7 @@ const Register = () => {
     setValue,
     formState: { errors },
   } = useForm({});
+  const [isRegistered, setIsRegistered] = useState();
   const dispatch = useDispatch();
   const navigateTo = useNavigate();
   const { isAuthenticated } = useSelector((state) => state.auth);
@@ -27,14 +28,15 @@ const Register = () => {
     };
     const is_registered = await dispatch(registerUser(params));
     if (is_registered) {
-      navigateTo("/subscriptions");
+      // navigateTo("/subscriptions");
+      setIsRegistered(true);
     }
   };
-  // useEffect(() => {
-  //   if (isAuthenticated) {
-  //     navigateTo("/");
-  //   }
-  // }, [isAuthenticated, navigateTo]);
+  useEffect(() => {
+    if (isRegistered) {
+      navigateTo("/subscriptions");
+    }
+  }, [isRegistered, navigateTo]);
   return (
     // <Layout
     //   component={

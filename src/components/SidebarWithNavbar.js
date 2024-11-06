@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import DarkModeSwitcher from "./DarkmodeSwitcher";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { MdOutlineDashboard } from "react-icons/md";
 import { HiOutlineInboxArrowDown } from "react-icons/hi2";
 import { TiLocationArrowOutline } from "react-icons/ti";
@@ -23,6 +23,7 @@ import {
 import logo from "../assets/1.png";
 import logo2 from "../assets/2.png";
 const SidebarWithNavbar = ({ component }) => {
+  const location = useLocation();
   const dispatch = useDispatch();
   const { token, user } = useSelector((state) => state.auth);
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -146,24 +147,25 @@ const SidebarWithNavbar = ({ component }) => {
                     </p>
                   </div>
                   <ul className="py-1" role="none">
-                    {sidebarItems?.map((item, index) => (
-                      <li key={index}>
+                    {/* {sidebarItems?.map((item, index) => (
+                      <li key={index} className="w-full">
                         <Link
                           to={item?.link}
-                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+                          className={`w-32 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white`}
                           role="menuitem"
                         >
                           {item?.name}
                         </Link>
                       </li>
-                    ))}
+                    ))} */}
+
                     <li>
                       <button
                         onClick={logout}
                         className="flex items-center p-2 text-gray-900 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 rounded-lg w-full"
                       >
-                        <FaRegUser size={25} />
-                        <span className="ms-3">Sign out</span>
+                        <FaRegUser size={20} />
+                        <span className="ms-3 text-center">Sign out</span>
                       </button>
                     </li>
                     {/* <li>
@@ -218,10 +220,16 @@ const SidebarWithNavbar = ({ component }) => {
         <div className="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
           <ul className="space-y-2 font-medium">
             {sidebarItems?.map((item, index) => (
-              <li key={index}>
+              <li
+                key={index}
+                className={`${
+                  location?.pathname === item?.link &&
+                  "bg-gray-800 dark:bg-gray-600 text-white p-1 rounded-lg shadow-lg"
+                }`}
+              >
                 <Link
                   to={item?.link}
-                  className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                  className="flex items-center p-2  rounded-lg dark:text-white dark:hover:bg-gray-700 group"
                   role="menuitem"
                 >
                   {item?.icon}

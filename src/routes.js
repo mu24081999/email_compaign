@@ -118,8 +118,6 @@ const router = (isAuthenticated) => {
     {
       path: "/subscriptions",
       element: <Pricing />,
-      children: [],
-      breadcrumb: "Login",
     },
     {
       path: "/sign-in",
