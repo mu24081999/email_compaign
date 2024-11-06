@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    @@include("partials/title-meta.html", {"title": "Pricing Page"})
+
+    @@include('./partials/head-css.html')
+</head>
+
+<body>
+
+    @@include('./partials/navbar.html', {"link-color": "light"})
+
+    <!-- =========== Hero Section Start =========== -->
+    <section class="pt-36 pb-24 bg-slate-100">
+        <div class="container">
+            <div class="text-center max-w-2xl mx-auto">
+                <h2 class="md:text-5xl/tight text-3xl font-semibold mb-5">Flexible plans that grow with you</h2>
+                <p class="md:text-lg text-slate-500 leading-7">Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit sed consequuntur ratione voluptatem sequi nesciunt.</p>
+            </div>
+        </div>
+    </section>
+    <!-- =========== Hero Section End =========== -->
+
+    <!-- =========== pricing Section Start =========== -->
+    <section class="py-20">
+        <div class="container">
+            <div class="text-center max-w-2xl mx-auto">
+                <span class="text-sm font-medium py-1 px-3 rounded-full text-primary bg-primary/10">Plans</span>
+                <h2 class="md:text-3xl/tight text-3xl font-semibold my-4">Pricing Plans</h2>
+                <p class="md:text-lg text-slate-500 leading-7">Pricing that <span class="text-primary">works</span> for everyone.</p>
+            </div>
+
+            <div class="grid xl:grid-cols-3 lg:grid-cols-2 grid-cols-1 gap-6 items-center mt-16">
+                <div>
+                    <div class="border p-6 text-center rounded hover:shadow-lg">
+                        <h4 class="text-lg text-primary">Starter</h4>
+                        <h1 class="mt-3 mb-8">
+                            <sup class="align-super text-sm text-slate-500">$</sup>
+                            <span class="text-3xl font-semibold">49</span>
+                            <sub class="text-sm text-slate-500">/ month</sub>
+                        </h1>
+                        <hr>
+                        <div class="grid gap-y-4 mt-8">
+                            <div class="flex items-center gap-2">
+                                <svg class="w-5 h-5 text-green-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check align-middle icon-dual-success me-2 icon-xs">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                                <span>Up to 600 minutes usage time</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <svg class="w-5 h-5 text-green-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check align-middle icon-dual-success me-2 icon-xs">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                                <span>Use for personal only</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <svg class="w-5 h-5 text-green-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check align-middle icon-dual-success me-2 icon-xs">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                                <span>Add up to 10 attendees</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <svg class="w-5 h-5 text-green-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check align-middle icon-dual-success me-2 icon-xs">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                                <span>Technical support via email</span>
+                            </div>
+                        </div>
+
+                        <div class="mt-24">
+                            <a href="#" class="py-3 px-6 flex items-center justify-center rounded hover:border hover:border-primary/50 text-primary bg-primary/10 transition-all duration-500">Sign Up Now</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="border p-6  rounded hover:shadow-lg relative">
+                        <div class="absolute w-full h-[188px] -z-10 top-0 left-0 overflow-hidden">
+                            <span class="absolute transform rotate-45 bg-primary text-center text-white font-medium py-1 right-[-52px] top-[23px] w-[170px] h-5 z-[2] text-xs overflow-hidden border border-dashed leading-[8px] border-white shadow-[0_0_0_3px] shadow-primary/40">Popular</span>
+                        </div>
+                        <h4 class="text-lg text-primary text-center">Professional</h4>
+                        <h1 class="mt-3 mb-8 text-center">
+                            <sup class="align-super text-sm text-slate-500">$</sup>
+                            <span class="text-3xl font-semibold">99</span>
+                            <sub class="text-sm text-slate-500">/ month</sub>
+                        </h1>
+                        <hr>
+                        <div class="grid gap-y-4 mt-8">
+                            <div class="flex items-center gap-2">
+                                <svg class="w-5 h-5 text-green-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check align-middle icon-dual-success me-2 icon-xs">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                                <span>Up to 6000 minutes usage time</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <svg class="w-5 h-5 text-green-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check align-middle icon-dual-success me-2 icon-xs">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                                <span>Use for personal or a commercial client</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <svg class="w-5 h-5 text-green-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check align-middle icon-dual-success me-2 icon-xs">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                                <span>Add up to 100 attendees</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <svg class="w-5 h-5 text-green-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check align-middle icon-dual-success me-2 icon-xs">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                                <span>Up to 5 teams</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <svg class="w-5 h-5 text-green-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check align-middle icon-dual-success me-2 icon-xs">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                                <span>Technical support via email</span>
+                            </div>
+                        </div>
+
+                        <div class="mt-14">
+                            <a href="#" class="py-3 px-6 flex items-center justify-center rounded hover:border hover:border-primary/50 text-primary bg-primary/10 transition-all duration-500">Sign Up Now</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="border p-6  rounded hover:shadow-lg">
+                        <h4 class="text-lg text-primary text-center">Enterprise</h4>
+                        <h1 class="mt-3 mb-8 text-center">
+                            <sup class="align-super text-sm text-slate-500">$</sup>
+                            <span class="text-3xl font-semibold">599</span>
+                            <sub class="text-sm text-slate-500">/ month</sub>
+                        </h1>
+                        <hr>
+                        <div class="grid gap-y-4 mt-8">
+                            <div class="flex items-center gap-2">
+                                <svg class="w-5 h-5 text-green-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check align-middle icon-dual-success me-2 icon-xs">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                                <span>Unlimited usage time</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <svg class="w-5 h-5 text-green-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check align-middle icon-dual-success me-2 icon-xs">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                                <span>Use for personal or a commercial client</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <svg class="w-5 h-5 text-green-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check align-middle icon-dual-success me-2 icon-xs">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                                <span>Add Unlimited attendees</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <svg class="w-5 h-5 text-green-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check align-middle icon-dual-success me-2 icon-xs">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                                <span>24x7 Technical support via phone</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <svg class="w-5 h-5 text-green-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check align-middle icon-dual-success me-2 icon-xs">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                                <span>Technical support via email</span>
+                            </div>
+                        </div>
+
+                        <div class="mt-14">
+                            <a href="#" class="py-3 px-6 flex items-center justify-center rounded hover:border hover:border-primary/50 text-primary bg-primary/10 transition-all duration-500">Sign Up Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- =========== pricing Section End =========== -->
+
+    <!-- =========== benefits Section Start =========== -->
+    <section class="py-20">
+        <div class="container">
+            <div class="text-center max-w-2xl mx-auto">
+                <span class="text-sm font-medium py-1 px-3 rounded-full text-primary bg-primary/10">Benefits</span>
+                <h2 class="md:text-3xl/tight text-3xl font-semibold my-4">All plans includes these benefits</h2>
+                <p class="md:text-lg text-slate-500 leading-7">Some benefits of the monthly/yearly subscription</p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 grid-cols-1 gap-6 gap-y-10 mt-16">
+                <div>
+                    <div class="flex items-center lg:justify-center gap-6">
+                        <div>
+                            <div class="w-16 h-16 bg-primary/20 rounded-md flex items-center justify-center">
+                                <svg class="w-10 h-10 text-primary" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <rect id="bound" x="0" y="0" width="24" height="24"></rect>
+                                        <path d="M13.0799676,14.7839934 L15.2839934,12.5799676 C15.8927139,11.9712471 16.0436229,11.0413042 15.6586342,10.2713269 L15.5337539,10.0215663 C15.1487653,9.25158901 15.2996742,8.3216461 15.9083948,7.71292558 L18.6411989,4.98012149 C18.836461,4.78485934 19.1530435,4.78485934 19.3483056,4.98012149 C19.3863063,5.01812215 19.4179321,5.06200062 19.4419658,5.11006808 L20.5459415,7.31801948 C21.3904962,9.0071287 21.0594452,11.0471565 19.7240871,12.3825146 L13.7252616,18.3813401 C12.2717221,19.8348796 10.1217008,20.3424308 8.17157288,19.6923882 L5.75709327,18.8875616 C5.49512161,18.8002377 5.35354162,18.5170777 5.4408655,18.2551061 C5.46541191,18.1814669 5.50676633,18.114554 5.56165376,18.0596666 L8.21292558,15.4083948 C8.8216461,14.7996742 9.75158901,14.6487653 10.5215663,15.0337539 L10.7713269,15.1586342 C11.5413042,15.5436229 12.4712471,15.3927139 13.0799676,14.7839934 Z" id="Path-76" fill="currentcolor"></path>
+                                        <path d="M14.1480759,6.00715131 L13.9566988,7.99797396 C12.4781389,7.8558405 11.0097207,8.36895892 9.93933983,9.43933983 C8.8724631,10.5062166 8.35911588,11.9685602 8.49664195,13.4426352 L6.50528978,13.6284215 C6.31304559,11.5678496 7.03283934,9.51741319 8.52512627,8.02512627 C10.0223249,6.52792766 12.0812426,5.80846733 14.1480759,6.00715131 Z M14.4980938,2.02230302 L14.313049,4.01372424 C11.6618299,3.76737046 9.03000738,4.69181803 7.1109127,6.6109127 C5.19447112,8.52735429 4.26985715,11.1545872 4.51274152,13.802405 L2.52110319,13.985098 C2.22450978,10.7517681 3.35562581,7.53777247 5.69669914,5.19669914 C8.04101739,2.85238089 11.2606138,1.72147333 14.4980938,2.02230302 Z" id="Combined-Shape" fill="currentcolor" opacity="0.3"></path>
+                                    </g>
+                                </svg>
+                            </div>
+                        </div>
+                        <div>
+                            <h5 class="text-base">Technical Support</h5>
+                            <p class="text-slate-400 mt-2">Our professional technical support team will help you out at every step</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="flex items-center lg:justify-center gap-6">
+                        <div>
+                            <div class="w-16 h-16 bg-primary/20 rounded-md flex items-center justify-center">
+                                <svg class="w-10 h-10 text-primary" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <rect id="bound" x="0" y="0" width="24" height="24"></rect>
+                                        <path d="M12,21 C7.02943725,21 3,16.9705627 3,12 C3,7.02943725 7.02943725,3 12,3 C16.9705627,3 21,7.02943725 21,12 C21,16.9705627 16.9705627,21 12,21 Z M14.1654881,7.35483745 L9.61055177,10.3622525 C9.47921741,10.4489666 9.39637436,10.592455 9.38694497,10.7495509 L9.05991526,16.197949 C9.04337012,16.4735952 9.25341309,16.7104632 9.52905936,16.7270083 C9.63705011,16.7334903 9.74423017,16.7047714 9.83451193,16.6451626 L14.3894482,13.6377475 C14.5207826,13.5510334 14.6036256,13.407545 14.613055,13.2504491 L14.9400847,7.80205104 C14.9566299,7.52640477 14.7465869,7.28953682 14.4709406,7.27299168 C14.3629499,7.26650974 14.2557698,7.29522855 14.1654881,7.35483745 Z" id="Combined-Shape" fill="currentcolor"></path>
+                                    </g>
+                                </svg>
+                            </div>
+                        </div>
+                        <div>
+                            <h5 class="text-base">Technology</h5>
+                            <p class="text-slate-400 mt-2">A special training to get start with the platform by professionals</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="flex items-center lg:justify-center gap-6">
+                        <div>
+                            <div class="w-16 h-16 bg-primary/20 rounded-md flex items-center justify-center">
+                                <svg class="w-10 h-10 text-primary" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <rect id="bound" x="0" y="0" width="24" height="24"></rect>
+                                        <rect id="Rectangle-62-Copy" fill="currentcolor" opacity="0.3" x="13" y="4" width="3" height="16" rx="1.5"></rect>
+                                        <rect id="Rectangle-62-Copy-2" fill="currentcolor" x="8" y="9" width="3" height="11" rx="1.5"></rect>
+                                        <rect id="Rectangle-62-Copy-4" fill="currentcolor" x="18" y="11" width="3" height="9" rx="1.5"></rect>
+                                        <rect id="Rectangle-62-Copy-3" fill="currentcolor" x="3" y="13" width="3" height="7" rx="1.5"></rect>
+                                    </g>
+                                </svg>
+                            </div>
+                        </div>
+                        <div>
+                            <h5 class="text-base">Growth Analysis</h5>
+                            <p class="text-slate-400 mt-2">A dedicated team to get insights around your growth every month</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="flex items-center lg:justify-center gap-6">
+                        <div>
+                            <div class="w-16 h-16 bg-primary/20 rounded-md flex items-center justify-center">
+                                <svg class="w-10 h-10 text-primary" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <rect id="bound" x="0" y="0" width="24" height="24"></rect>
+                                        <path d="M22,7 L22,9 L19,9 C18.4477153,9 18,9.44771525 18,10 L18,13 C18,13.5522847 18.4477153,14 19,14 L22,14 L22,16 L19,16 C17.3431458,16 16,14.6568542 16,13 L16,10 C16,8.34314575 17.3431458,7 19,7 L22,7 Z" id="Path-52" fill="currentcolor" opacity="0.3" transform="translate(19.000000, 11.500000) scale(-1, 1) translate(-19.000000, -11.500000) "></path>
+                                        <path d="M4.75777452,5 C5.56503586,3.79401426 6.93979195,3 8.5,3 C10.0602081,3 11.4349641,3.79401426 12.2422255,5 L4.75777452,5 Z" id="Combined-Shape" fill="currentcolor" opacity="0.3"></path>
+                                        <path d="M7,5 C7,2.790861 8.790861,1 11,1 C13.209139,1 15,2.790861 15,5 L7,5 Z" id="Combined-Shape" fill="currentcolor" opacity="0.3"></path>
+                                        <path d="M12.0500091,5 C12.2816442,3.85887984 13.290521,3 14.5,3 C15.709479,3 16.7183558,3.85887984 16.9499909,5 L12.0500091,5 Z" id="Combined-Shape" fill="currentcolor" opacity="0.3"></path>
+                                        <path d="M8,8 L8,8 C8.55228475,8 9,8.44771525 9,9 L9,18 C9,18.5522847 8.55228475,19 8,19 L8,19 C7.44771525,19 7,18.5522847 7,18 L7,9 C7,8.44771525 7.44771525,8 8,8 Z M13,8 L13,8 C13.5522847,8 14,8.44771525 14,9 L14,18 C14,18.5522847 13.5522847,19 13,19 L13,19 C12.4477153,19 12,18.5522847 12,18 L12,9 C12,8.44771525 12.4477153,8 13,8 Z M4.06055214,5 L16.9394479,5 C17.4917326,5 17.9394479,5.44771525 17.9394479,6 C17.9394479,6.01958668 17.9388724,6.03916914 17.9377222,6.05872202 L17.1107386,20.117444 C17.0485547,21.1745693 16.1731425,22 15.1141898,22 L5.88581016,22 C4.82685754,22 3.95144525,21.1745693 3.88926141,20.117444 L3.06227777,6.05872202 C3.02984649,5.50739031 3.4504984,5.0341569 4.00183012,5.00172563 C4.021383,5.00057546 4.04096546,5 4.06055214,5 Z" id="Combined-Shape" fill="currentcolor"></path>
+                                    </g>
+                                </svg>
+                            </div>
+                        </div>
+                        <div>
+                            <h5 class="text-base">Rewards</h5>
+                            <p class="text-slate-400 mt-2">A special reward for the most performing account every month</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- =========== benefits Section End =========== -->
+
+    <!-- =========== faq Section Start =========== -->
+    <section class="py-20 bg-slate-100">
+        <div class="container">
+            <div class="text-center max-w-2xl mx-auto">
+                <span class="text-sm font-medium py-1 px-3 rounded-full text-primary bg-primary/10">FAQs</span>
+                <h2 class="md:text-3xl/tight text-3xl font-semibold my-4">Frequently Asked Questions</h2>
+                <p class="md:text-lg text-slate-500 leading-7">Here are some of the basic types of questions for our customers</p>
+            </div>
+
+            <div class="mt-16 lg:mx-32">
+                <div data-fc-type="accordion">
+                    <div class="rounded border bg-white">
+                        <button class="sm:text-base p-5 inline-flex items-center gap-x-3 w-full font-medium text-gray-800 transition hover:text-gray-500" data-fc-type="collapse">
+                            Can I use this template for my client?
+                            <span class="fa-solid fa-angle-down ms-auto transition-all fc-collapse-open:-rotate-90"></span>
+                        </button>
+                        <div class="w-full overflow-hidden transition-[height] duration-300 ">
+                            <p class="sm:text-sm font-medium text-gray-500 p-5 pt-0">
+                                Yup, the marketplace license allows you to use this theme in any end products. For more information on licenses, please refere license terms on marketplace.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="rounded border bg-white mt-2">
+                        <button class="fc-collapse-open:rounded-b-none sm:text-base p-5 inline-flex items-center gap-x-3 w-full font-medium text-left text-gray-800 transition hover:text-gray-500" data-fc-type="collapse">
+                            Can this theme work with WordPress?
+                            <span class="fa-solid fa-angle-down ms-auto transition-all fc-collapse-open:-rotate-90"></span>
+                        </button>
+                        <div class="hidden w-full overflow-hidden transition-[height] duration-300">
+                            <p class="sm:text-sm font-medium text-gray-500 p-5 pt-0">
+                                No. This is a HTML template. It won't directly with WordPress, though you can convert this into WordPress compatible theme.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="rounded border bg-white mt-2">
+                        <button class="fc-collapse-open:rounded-b-none sm:text-base p-5 inline-flex items-center gap-x-3 w-full font-medium text-left text-gray-800 transition hover:text-gray-500" data-fc-type="collapse">
+                            How do I get help with the theme?
+                            <span class="fa-solid fa-angle-down ms-auto transition-all fc-collapse-open:-rotate-90"></span>
+                        </button>
+                        <div class="hidden w-full overflow-hidden transition-[height] duration-300">
+                            <p class="sm:text-sm font-medium text-gray-500 p-5 pt-0">
+                                Use our dedicated support email (support@coderthemes.com) to send your issues or feedback. We are here to help anytime.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="rounded border bg-white mt-2">
+                        <button class="fc-collapse-open:rounded-b-none sm:text-base p-5 inline-flex items-center gap-x-3 w-full font-medium text-left text-gray-800 transition hover:text-gray-500" data-fc-type="collapse">
+                            Will you regularly give updates of Prompt ?
+                            <span class="fa-solid fa-angle-down ms-auto transition-all fc-collapse-open:-rotate-90"></span>
+                        </button>
+                        <div class="hidden w-full overflow-hidden transition-[height] duration-300">
+                            <p class="sm:text-sm font-medium text-gray-500 p-5 pt-0">
+                                Yes, We will update the Prompt regularly. All the future updates would be available without any cost.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- =========== faq Section End =========== -->
+
+    <!-- =========== Cta Section Start =========== -->
+    <section class="py-20">
+        <div class="container">
+            <div class="text-center max-w-2xl mx-auto">
+                <h2 class="md:text-3xl/tight text-3xl font-semibold my-4">Still have a question?</h2>
+                <p class="md:text-lg text-slate-500 leading-7">Explore your most suitable option below</p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 grid-cols-1 gap-6 mt-16">
+                <div class="border rounded p-6">
+                    <h3 class="text-xl">Get in touch</h3>
+                    <p class="text-slate-700 mt-3">Get in touch with our professional business development team and they'll answer your question shortly</p>
+                    <div class="mt-12 mb-3">
+                        <a href="#" class="py-3 px-6 rounded border border-primary text-primary hover:text-white hover:bg-primary hover:shadow-lg hover:shadow-primary/50 focus:outline focus:outline-primary/50 transition-all duration-500">Contact Us</a>
+                    </div>
+                </div>
+
+                <div class="border rounded p-6">
+                    <h3 class="text-xl">Explore Knowledge Base</h3>
+                    <p class="text-slate-700 mt-3">Learn more about all the features and functionality from our detailed knowledge base.</p>
+                    <div class="mt-12 mb-3">
+                        <a href="#" class="py-3 px-6 rounded border border-primary text-primary hover:text-white hover:bg-primary hover:shadow-lg hover:shadow-primary/50 focus:outline focus:outline-primary/50 transition-all duration-500">Explore</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- =========== Cta Section End =========== -->
+
+    <!-- =========== Footer Section Start =========== -->
+    <footer class="bg-gray-100">
+        <div class="container">
+            <div class="grid xl:grid-cols-5 gap-6 py-12">
+                <div class="xl:col-span-2">
+                    <a href="index.html">
+                        <img src="assets/images/logo-dark.png" class="h-8">
+                    </a>
+                    <p class="text-gray-500/80 mt-5 lg:w-4/5">Make your web application stand out with high-quality landing page</p>
+                </div>
+                <div class="xl:col-span-3 col-span-4">
+                    <div class="flex flex-col sm:flex-row gap-6 flex-wrap justify-between">
+                        <div>
+                            <div class="flex flex-col gap-3">
+                                <h5 class="mb-3 uppercase">Platform</h5>
+                                <div class="text-gray-500/80"><a href="javascript:void(0);">Demo</a></div>
+                                <div class="text-gray-500/80"><a href="javascript:void(0);">Pricing</a></div>
+                                <div class="text-gray-500/80"><a href="javascript:void(0);">Integrations</a></div>
+                                <div class="text-gray-500/80"><a href="javascript:void(0);">Status</a></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex flex-col gap-3">
+                                <h5 class="mb-3 uppercase">Knowledge Base</h5>
+                                <div class="text-gray-500/80"><a href="javascript:void(0);">Blog</a></div>
+                                <div class="text-gray-500/80"><a href="javascript:void(0);">Help Center</a></div>
+                                <div class="text-gray-500/80"><a href="javascript:void(0);">Sales Tools catalog</a></div>
+                                <div class="text-gray-500/80"><a href="javascript:void(0);">API</a></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex flex-col gap-3">
+                                <h5 class="mb-3 uppercase">Company</h5>
+                                <div class="text-gray-500/80"><a href="javascript:void(0);">About us</a></div>
+                                <div class="text-gray-500/80"><a href="javascript:void(0);">Career</a></div>
+                                <div class="text-gray-500/80"><a href="javascript:void(0);">Contact Us</a></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex flex-col gap-3">
+                                <h5 class="mb-3 uppercase">Legal</h5>
+                                <div class="text-gray-500/80"><a href="javascript:void(0);">Usage Policy</a></div>
+                                <div class="text-gray-500/80"><a href="javascript:void(0);">Privacy Policy</a></div>
+                                <div class="text-gray-500/80"><a href="javascript:void(0);">Terms of Service</a></div>
+                                <div class="text-gray-500/80"><a href="javascript:void(0);">Trust</a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t py-6">
+                <div class="grid sm:grid-cols-2 text-center sm:text-start gap-6">
+                    <div>
+                        <p class="text-gray-500/80 text-sm">
+                            <script>document.write(new Date().getFullYear())</script>© Prompt. All rights reserved. Crafted
+                            by <a href="#" class="text-gray-800 hover:text-primary transition-all">Coderthemes</a>
+                        </p>
+                    </div>
+
+                    <div class="flex justify-center sm:justify-end gap-7">
+                        <div>
+                            <a href="#">
+                                <svg class="w-5 h-5 text-gray-500 hover:text-primary transition-all" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                                </svg>
+                            </a>
+                        </div>
+                        <div>
+                            <a href="#">
+                                <svg class="w-5 h-5 text-gray-500 hover:text-primary transition-all" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+                                </svg>
+                            </a>
+                        </div>
+                        <div>
+                            <a href="#">
+                                <svg class="w-5 h-5 text-gray-500 hover:text-primary transition-all" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                                    <rect x="2" y="9" width="4" height="12"></rect>
+                                    <circle cx="4" cy="4" r="2"></circle>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- =========== Footer Section End =========== -->
+
+    @@include('./partials/back-to-top.html')
+
+    @@include('./partials/footer-scripts.html')
+
+</body>
+
+</html>

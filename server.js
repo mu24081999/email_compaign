@@ -15,12 +15,11 @@ app.use((req, res, next) => {
   console.log(req.hostname);
   const buildDir =
     req.hostname === "localhost" ||
-    req.hostname === "127.0.0.1" ||
+    // req.hostname === "127.0.0.1" ||
     req.hostname === "146.190.175.199" ||
     req.hostname === "app.senderside.com"
       ? "build"
-      : req.hostname === "senderside.com" && "build2";
-  console.log("🚀 ~ app.use ~ buildDir:", buildDir);
+      : req.hostname === "127.0.0.1" && "build2/src";
   const buildPath = path.join(__dirname, buildDir);
 
   if (fs.existsSync(buildPath)) {
@@ -37,7 +36,7 @@ app.get("*", (req, res) => {
     req.hostname === "146.190.175.199" ||
     req.hostname === "app.senderside.com"
       ? "build"
-      : req.hostname === "senderside.com" && "build2";
+      : req.hostname === "127.0.0.1" && "build2";
   const buildPath = path.join(__dirname, buildDir, "index.html");
 
   if (fs.existsSync(buildPath)) {
