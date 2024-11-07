@@ -39,7 +39,7 @@ const SidebarWithNavbar = ({ component }) => {
     },
     {
       name: "Common Box",
-      link: "/inbox",
+      link: "/common-box",
       icon: <FaRegEnvelopeOpen size={25} />,
     },
     {
@@ -62,11 +62,11 @@ const SidebarWithNavbar = ({ component }) => {
       link: "/accounts",
       icon: <FaRegEnvelope size={25} />,
     },
-    {
-      name: "Account Settings",
-      link: "/account-settings",
-      icon: <FaCogs size={24} />,
-    },
+    // {
+    //   name: "Account Settings",
+    //   link: "/account-settings",
+    //   icon: <FaCogs size={24} />,
+    // },
     // {
     //   name: "Sign out",
     //   link: "#",
@@ -102,12 +102,12 @@ const SidebarWithNavbar = ({ component }) => {
                   ></path>
                 </svg>
               </button>
-              <a href="https://flowbite.com" className="flex ms-2 md:me-24">
-                <img src={logo2} className="h-12" alt="FlowBite Logo" />
+              <Link to="/" className="flex ms-2 md:me-24">
+                <img src={logo2} className="h-12" alt="Senderside Logo" />
                 {/* <span className="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">
                   Senderside
                 </span> */}
-              </a>
+              </Link>
             </div>
             <div className="flex items-center">
               <DarkModeSwitcher />
@@ -237,7 +237,7 @@ const SidebarWithNavbar = ({ component }) => {
                 </Link>
               </li>
             ))}
-            <li>
+            {/* <li>
               <button
                 onClick={logout}
                 className="flex items-center p-2 text-gray-900 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 rounded-lg w-full"
@@ -245,7 +245,7 @@ const SidebarWithNavbar = ({ component }) => {
                 <FaRegUser size={23} />
                 <span className="ms-3">Sign out</span>
               </button>
-            </li>
+            </li> */}
           </ul>
         </div>
       </aside>

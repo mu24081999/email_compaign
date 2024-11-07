@@ -28,7 +28,6 @@ export const getAllTemplateList = (token) => async (dispatch) => {
           return dispatch(invalidRequest(response.data.message));
         }
         dispatch(getTemplates(response.data.data));
-        toast.success(response.data.message);
       });
   } catch (error) {
     return dispatch(invalidRequest(error.message));
@@ -52,7 +51,6 @@ export const getTemplateDetails = (token, id) => async (dispatch) => {
           return dispatch(invalidRequest(response.data.message));
         }
         dispatch(getTemplate(response.data.data.template));
-        toast.success(response.data.message);
       });
   } catch (error) {
     return dispatch(invalidRequest(error.message));
@@ -75,7 +73,6 @@ export const getUserTemplateList = (token, user_id) => async (dispatch) => {
           return dispatch(invalidRequest(response.data.message));
         }
         dispatch(getTemplates(response.data.data));
-        toast.success(response.data.message);
       });
   } catch (error) {
     return dispatch(invalidRequest(error.message));

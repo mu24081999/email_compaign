@@ -149,6 +149,12 @@ const Options = () => {
                   };
                 })
               }
+              rules={{
+                required: {
+                  value: true,
+                  message: "Field required!",
+                },
+              }}
             />
           </div>
         </div>
@@ -185,6 +191,12 @@ const Options = () => {
                     value: "template",
                   },
                 ]}
+                rules={{
+                  required: {
+                    value: true,
+                    message: "Field required!",
+                  },
+                }}
               />
             </div>
           </div>
@@ -280,6 +292,12 @@ const Options = () => {
                     };
                   })
                 }
+                rules={{
+                  required: {
+                    value: true,
+                    message: "Field required!",
+                  },
+                }}
               />
             </div>
           </div>
@@ -297,6 +315,12 @@ const Options = () => {
                 name="daily_limit"
                 control={control}
                 errors={errors}
+                rules={{
+                  required: {
+                    value: true,
+                    message: "Field required!",
+                  },
+                }}
               />
             </div>{" "}
           </div>
@@ -324,7 +348,7 @@ const Options = () => {
           onSave={handleSave}
           saveButtonText="Save Changes"
           closeButtonText="Dismiss"
-          size="xl"
+          size="md"
         />
       </div>
     </div>

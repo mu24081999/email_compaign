@@ -14,6 +14,7 @@ import Compaigns from "./pages/Dashboard/components/Compaigns/Compaigns";
 import Sequence from "./pages/Dashboard/components/Sequence/Sequence";
 import EmailAccounts from "./pages/Dashboard/components/EmailAccounts/EmailAccounts";
 import Profile from "./pages/Dashboard/components/Profile/Profile";
+import CommonBox from "./pages/CommonBox/CommonBox";
 const router = (isAuthenticated) => {
   const routes = [
     {
@@ -100,6 +101,16 @@ const router = (isAuthenticated) => {
       element: (
         <PrivateRoute isAuthenticated={isAuthenticated}>
           <Schedule />
+        </PrivateRoute>
+      ),
+      children: [],
+      breadcrumb: "compaign",
+    },
+    {
+      path: "/common-box",
+      element: (
+        <PrivateRoute isAuthenticated={isAuthenticated}>
+          <CommonBox />
         </PrivateRoute>
       ),
       children: [],

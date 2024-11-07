@@ -22,7 +22,7 @@ const LineChart = () => {
         curve: "smooth",
       },
       title: {
-        text: "Product Sales Over Time",
+        text: "Compaign Analytics",
         align: "left",
       },
       xaxis: {

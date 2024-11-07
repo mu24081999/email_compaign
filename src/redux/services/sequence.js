@@ -28,7 +28,6 @@ export const getAllSequenceList = (token) => async (dispatch) => {
           return dispatch(invalidRequest(response.data.message));
         }
         dispatch(getSequences(response.data.data));
-        toast.success(response.data.message);
       });
   } catch (error) {
     return dispatch(invalidRequest(error.message));
@@ -51,7 +50,6 @@ export const getSequenceDetails = (token, id) => async (dispatch) => {
           return dispatch(invalidRequest(response.data.message));
         }
         dispatch(getSequence(response.data.data.sequence));
-        toast.success(response.data.message);
       });
   } catch (error) {
     return dispatch(invalidRequest(error.message));
@@ -74,7 +72,6 @@ export const getUserSequenceList = (token, user_id) => async (dispatch) => {
           return dispatch(invalidRequest(response.data.message));
         }
         dispatch(getSequences(response.data.data));
-        toast.success(response.data.message);
       });
   } catch (error) {
     return dispatch(invalidRequest(error.message));

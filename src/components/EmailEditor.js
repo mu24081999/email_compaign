@@ -11,6 +11,7 @@ import {
   getUserTemplateList,
 } from "../redux/services/template";
 import { FaPlus } from "react-icons/fa";
+import SwiperComponent from "../components/Swiper";
 const EmailEditorComponent = () => {
   const {
     handleSubmit,
@@ -76,6 +77,69 @@ const EmailEditorComponent = () => {
   useEffect(() => {
     dispatch(getUserTemplateList(token, user_id));
   }, [token, user_id, dispatch]);
+  const slides =
+    Array?.isArray(templates?.templatesData) &&
+    templates?.templatesData?.map((template, index) => {
+      return {
+        id: index,
+        content: (
+          <>
+            <div className="flex-shrink-0 m-6 relative overflow-hidden bg-black rounded-lg max-w-full shadow-lg group">
+              <svg
+                className="absolute bottom-0 left-0 mb-8 scale-150 group-hover:scale-[1.65] transition-transform"
+                viewBox="0 0 375 283"
+                fill="none"
+                style={{ opacity: "0.1" }}
+              >
+                <rect
+                  x="159.52"
+                  y="175"
+                  width="152"
+                  height="152"
+                  rx="8"
+                  transform="rotate(-45 159.52 175)"
+                  fill="white"
+                />
+                <rect
+                  y="107.48"
+                  width="152"
+                  height="152"
+                  rx="8"
+                  transform="rotate(-45 0 107.48)"
+                  fill="white"
+                />
+              </svg>
+              <div className="relative  flex items-center justify-center group-hover:scale-110 transition-transform">
+                <div
+                  className="block absolute w-48 h-48 bottom-0 left-0 -mb-24 ml-3"
+                  style={{
+                    background: "radial-gradient(black, transparent 60%)",
+                    transform: "rotate3d(0, 0, 1, 20deg) scale3d(1, 0.6, 1)",
+                    opacity: "0.2",
+                  }}
+                ></div>
+                <iframe
+                  srcDoc={replacePlaceholdersInHtml(
+                    template.content,
+                    sampleUserData
+                  )}
+                  className="relative w-full"
+                  title={template.title}
+                ></iframe>{" "}
+              </div>
+              <div className="relative text-white px-6 pb-6 mt-6">
+                <div className="flex justify-between">
+                  <span className="block font-semibold text-xl">
+                    {template?.title}{" "}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </>
+        ),
+      };
+    });
+
   return (
     <div className="">
       {/* Email Editor Section */}
@@ -88,7 +152,10 @@ const EmailEditorComponent = () => {
         /> */}
 
         {/* Form for Adding a New Template */}
-        <form onSubmit={handleSubmit(addTemplate)} className=" space-y-6 ">
+        <form
+          onSubmit={handleSubmit(addTemplate)}
+          className=" space-y-6 bg-white border p-5 rounded-xl shadow-md"
+        >
           <div className=" overflow-hidden shadow-lg border rounded">
             <div className="h-[77vh] rounded">
               <EmailEditor
@@ -122,7 +189,7 @@ const EmailEditorComponent = () => {
           </div>
         </form>
 
-        {/* Exported HTML Preview Section */}
+        {/* Exported HTML Preview Section
         {editorHtml && (
           <div className="mt-10">
             <Heading
@@ -137,94 +204,11 @@ const EmailEditorComponent = () => {
               title="Exported HTML Preview"
             ></iframe>
           </div>
-        )}
+        )} */}
       </div>
       {/* Template List Section */}
       <div className="py-5">
-        {/* <Heading
-          text="Template List"
-          level={1}
-          align="center"
-          className="font-sans font-extrabold text-3xl mb-10"
-        /> */}
-        <div className="p-1 flex flex-wrap items-center justify-center">
-          {Array?.isArray(templates?.templatesData) &&
-            templates?.templatesData?.map((template) => (
-              <>
-                <div className="flex-shrink-0 m-6 relative overflow-hidden bg-blue-500 rounded-lg max-w-xs shadow-lg group">
-                  <svg
-                    className="absolute bottom-0 left-0 mb-8 scale-150 group-hover:scale-[1.65] transition-transform"
-                    viewBox="0 0 375 283"
-                    fill="none"
-                    style={{ opacity: "0.1" }}
-                  >
-                    <rect
-                      x="159.52"
-                      y="175"
-                      width="152"
-                      height="152"
-                      rx="8"
-                      transform="rotate(-45 159.52 175)"
-                      fill="white"
-                    />
-                    <rect
-                      y="107.48"
-                      width="152"
-                      height="152"
-                      rx="8"
-                      transform="rotate(-45 0 107.48)"
-                      fill="white"
-                    />
-                  </svg>
-                  <div className="relative  flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <div
-                      className="block absolute w-48 h-48 bottom-0 left-0 -mb-24 ml-3"
-                      style={{
-                        background: "radial-gradient(black, transparent 60%)",
-                        transform:
-                          "rotate3d(0, 0, 1, 20deg) scale3d(1, 0.6, 1)",
-                        opacity: "0.2",
-                      }}
-                    ></div>
-                    <iframe
-                      srcDoc={replacePlaceholdersInHtml(
-                        template.content,
-                        sampleUserData
-                      )}
-                      className="relative w-full"
-                      title={template.title}
-                    ></iframe>{" "}
-                  </div>
-                  <div className="relative text-white px-6 pb-6 mt-6">
-                    <div className="flex justify-between">
-                      <span className="block font-semibold text-xl">
-                        {template?.title}{" "}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-                {/* <div
-                  key={template.id}
-                  className=" bg-white rounded-2xl border border-gray-200 shadow-md overflow-hidden p-5"
-                  dangerouslySetInnerHTML={{ __html: template?.content }}
-                />
-                {/* <iframe
-                  srcDoc={replacePlaceholdersInHtml(
-                    template.content,
-                    sampleUserData
-                  )}
-                  className="w-full h-60"
-                  frameBorder="0"
-                  title={template.title}
-                ></iframe> *
-                <div className="p-4">
-                  <h5 className="text-xl font-semibold text-gray-900">
-                    {template.title}
-                  </h5>
-                </div> */}
-              </>
-            ))}
-        </div>
+        <SwiperComponent slides={slides} length={2} />
       </div>
     </div>
   );

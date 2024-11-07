@@ -83,7 +83,6 @@ export const getUserSubscriptionApi = (token, user_id) => async (dispatch) => {
           return dispatch(invalidRequest(response.data.message));
         }
         dispatch(getUserSubscription(response.data.data.subscription));
-        toast.success(response.data.message);
         return {
           done: true,
           response: response.data.data.subscription,

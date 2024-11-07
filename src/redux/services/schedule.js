@@ -85,7 +85,6 @@ export const getSchedulesApi = (token, query) => async (dispatch) => {
           return dispatch(invalidRequest(response.data.message));
         }
         dispatch(getSchedules(response.data.data));
-        toast.success(response.data.message);
       });
   } catch (e) {
     dispatch(invalidRequest(e.message));
@@ -108,7 +107,6 @@ export const getScheduleApi = (token, id) => async (dispatch) => {
           return dispatch(invalidRequest(response.data.message));
         }
         dispatch(getSchedule(response.data.data.schedule));
-        toast.success(response.data.message);
       });
     return response;
   } catch (e) {

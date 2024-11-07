@@ -4,7 +4,7 @@ const ListItemCard = ({ icon, title, description, onClick }) => {
   return (
     <div onClick={onClick}>
       {" "}
-      <div className="flex gap-3 p-5 border border-gray-300 rounded-2xl shadow-lg hover:scale-105">
+      <div className="flex gap-3 p-5 border bg-white border-gray-300 rounded-2xl shadow-lg hover:scale-105">
         <div className=" border-e border-gray-300 p-3">{icon}</div>
         <div>
           <div className="text-left font-extrabold">{title}</div>

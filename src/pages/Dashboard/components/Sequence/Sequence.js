@@ -17,7 +17,7 @@ import { getEmailAccountsApi } from "../../../../redux/services/email";
 import _ from "lodash";
 import TextEditor from "../../../../components/FormFields/TextEditor/TextEditor";
 import Layout from "../../../../layout/Layout";
-
+import SwiperComponent from "../../../../components/Swiper";
 const Sequence = () => {
   const {
     handleSubmit,
@@ -153,7 +153,39 @@ const Sequence = () => {
       console.log(design);
     });
   };
-
+  const slides =
+    Array?.isArray(sequences?.sequencesData) &&
+    sequences?.sequencesData?.map((sequence, index) => {
+      return {
+        id: index,
+        content: (
+          <>
+            <div
+              className={` mx-auto rounded-xl ${
+                sequence?.id === selectedSequence?.id &&
+                "border-2 border-blue-600"
+              } `}
+            >
+              {/* <!-- Centering wrapper --> */}
+              <div className="relative flex flex-col text-gray-700 bg-white shadow-md bg-clip-border rounded-xl ">
+                <div className="relative mx-4 mt-4 overflow-hidden text-gray-700 bg-white bg-clip-border rounded-xl h-80">
+                  <iframe
+                    srcDoc={sequence?.content}
+                    className=" h-[300px] border border-gray-300 shadow-md"
+                    title={sequence.title}
+                  ></iframe>
+                </div>
+                <div className=" py-2">
+                  <p className="block font-sans font-extrabold antialiased text-xl  leading-relaxed text-blue-gray-900 text-center">
+                    {sequence?.subject ? sequence?.subject : "No Subject"}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </>
+        ),
+      };
+    });
   return (
     <Layout
       component={
@@ -168,6 +200,12 @@ const Sequence = () => {
               label="Subject"
               errors={errors}
               svg={<MdOutlineSubject />}
+              rules={{
+                required: {
+                  value: true,
+                  message: "Field required!",
+                },
+              }}
             />
             <TextEditor
               defaultValue={
@@ -179,43 +217,19 @@ const Sequence = () => {
               name="content"
               control={control}
               errors={errors}
+              rules={{
+                required: {
+                  value: true,
+                  message: "Field required!",
+                },
+              }}
             />
             <Button type="submit" className="py-2">
               Submit
             </Button>
           </form>
           <div className="py-5">
-            <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-5 items-center min-h-screen flex-wrap">
-              {Array?.isArray(sequences?.sequencesData) &&
-                sequences?.sequencesData?.map((sequence, index) => (
-                  <>
-                    <div
-                      className={` mx-auto rounded-xl ${
-                        sequence?.id === selectedSequence?.id &&
-                        "border-2 border-blue-600"
-                      } `}
-                    >
-                      {/* <!-- Centering wrapper --> */}
-                      <div className="relative flex flex-col text-gray-700 bg-white shadow-md bg-clip-border rounded-xl ">
-                        <div className="relative mx-4 mt-4 overflow-hidden text-gray-700 bg-white bg-clip-border rounded-xl h-80">
-                          <iframe
-                            srcDoc={sequence?.content}
-                            className=" h-[300px] border border-gray-300 shadow-md"
-                            title={sequence.title}
-                          ></iframe>
-                        </div>
-                        <div className=" py-2">
-                          <p className="block font-sans font-extrabold antialiased text-xl  leading-relaxed text-blue-gray-900 text-center">
-                            {sequence?.subject
-                              ? sequence?.subject
-                              : "No Subject"}
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </>
-                ))}
-            </div>
+            <SwiperComponent slides={slides} />
           </div>
         </>
       }

@@ -44,7 +44,7 @@ const UploadManualEmail = () => {
           rows={5}
           placeholder="Enter/Paste Emails"
         />
-        <Button type="submit" className="bg-green-500 py-2 mu-5">
+        <Button type="submit" className=" py-2 mu-5 mt-5">
           Submit
         </Button>
       </form>

@@ -119,14 +119,18 @@ const Compaigns = () => {
     <Layout
       component={
         <div>
-          <Button
-            onClick={() => navigateTo("/add-compaign")}
-            size="lg"
-            className="py-1 flex"
-          >
-            Add Compaign
-          </Button>
-          <Table columns={columns} data={compaignsData} />
+          <div className="pb-5">
+            <Button
+              onClick={() => navigateTo("/add-compaign")}
+              size="lg"
+              className="py-1 flex"
+            >
+              Add Compaign
+            </Button>
+          </div>
+          <div>
+            <Table columns={columns} data={compaignsData} />
+          </div>
         </div>
       }
     ></Layout>

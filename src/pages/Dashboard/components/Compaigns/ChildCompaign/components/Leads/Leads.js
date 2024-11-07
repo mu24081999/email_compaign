@@ -30,9 +30,15 @@ const Leads = () => {
 
   return (
     <div>
-      <Button onClick={() => setIsOpen(true)} className="m-auto py-2" size="md">
-        Add Leads
-      </Button>
+      <div className="pb-5">
+        <Button
+          onClick={() => setIsOpen(true)}
+          className="m-auto py-2"
+          size="md"
+        >
+          Add Leads
+        </Button>
+      </div>
       <div>
         <List leadsData={leadsData} handleOpenModal={() => setIsOpen(true)} />
       </div>

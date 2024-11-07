@@ -73,7 +73,6 @@ export const getWarmupApi = (token, email_id) => async (dispatch) => {
           return dispatch(invalidRequest(response.data.message));
         }
         dispatch(getWarmup(response.data.data.warmup));
-        toast.success(response.data.message);
       });
   } catch (error) {
     return dispatch(invalidRequest(error.message));

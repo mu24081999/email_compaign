@@ -70,7 +70,7 @@ const Table = ({ columns, data, dataFromChild }) => {
             <option value="inactive">Inactive</option>
             {/* Add more status options as needed */}
           </select>
-          <Button
+          {/* <Button
             size="sm"
             className=""
             onClick={() => {
@@ -80,7 +80,7 @@ const Table = ({ columns, data, dataFromChild }) => {
             // disabled={selectedRows.length === 0}
           >
             <FaTrash size={15} />
-          </Button>
+          </Button> */}
         </div>
         <div className="flex ">
           <div className="">

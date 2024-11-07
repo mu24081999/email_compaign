@@ -13,21 +13,23 @@ const Instruction = ({ handleMenu }) => {
   } = useForm();
   return (
     <div className="p-8 rounded-2xl border border-gray-300 shadow-xl max-w-[60%]">
-      <Button
-        onClick={() =>
-          handleMenu({
-            menu: true,
-            instruction: false,
-            form: false,
-          })
-        }
-      >
-        Back
-      </Button>
+      <div className="pb-5">
+        <Button
+          onClick={() =>
+            handleMenu({
+              menu: true,
+              instruction: false,
+              form: false,
+            })
+          }
+        >
+          Back
+        </Button>
+      </div>
       <ListItemCard
         icon={<FaRegEnvelope size={30} color="blue" />}
         title={"Connect Your Email Account"}
-        description="Gmail / G-suite"
+        description="IMAP / SMPT"
       />{" "}
       <div className="my-5 bg-gray-100 flex items-center justify-center ">
         <div className="max-w-2xl w-full bg-white shadow-lg rounded-xl p-8">

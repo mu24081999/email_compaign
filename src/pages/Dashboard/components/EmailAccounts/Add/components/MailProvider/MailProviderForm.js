@@ -30,21 +30,23 @@ const MailProviderForm = ({ handleMenu }) => {
   };
   return (
     <div className="p-8 rounded-2xl border border-gray-300 shadow-xl max-w-[60%]">
-      <Button
-        onClick={() =>
-          handleMenu({
-            menu: true,
-            instruction: false,
-            form: false,
-          })
-        }
-      >
-        Back
-      </Button>
+      <div className="pb-5">
+        <Button
+          onClick={() =>
+            handleMenu({
+              menu: true,
+              instruction: false,
+              form: false,
+            })
+          }
+        >
+          Back
+        </Button>
+      </div>
       <ListItemCard
         icon={<FaRegEnvelope size={30} color="blue" />}
         title={"Connect Your Email Account"}
-        description="Gmail / G-suite"
+        description="IMAP / SMPT"
       />{" "}
       <form
         className="grid lg:grid-cols-2 sm:grid-cols-1 gap-5 py-5"
@@ -93,7 +95,9 @@ const MailProviderForm = ({ handleMenu }) => {
           />
         </div>
         <div>
-          <Button className="py-2 ">Submit</Button>
+          <Button type="submit" className="py-2 ">
+            Submit
+          </Button>
         </div>
       </form>
     </div>

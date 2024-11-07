@@ -82,7 +82,6 @@ export const getOptionsApi = (token, compaign_id) => async (dispatch) => {
           return dispatch(invalidRequest(response.data.message));
         }
         dispatch(getOptions(response.data.data.optionData));
-        toast.success(response.data.message);
       });
   } catch (e) {
     dispatch(invalidRequest(e.message));
