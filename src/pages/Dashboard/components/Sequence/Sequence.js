@@ -10,11 +10,8 @@ import {
   addSequenceRec,
   getUserSequenceList,
 } from "../../../../redux/services/sequence";
-import Heading from "../../../../components/Heading";
 import { sendCompaign } from "../../../../redux/services/compaign";
-import EmailEditor from "react-email-editor";
 import { getEmailAccountsApi } from "../../../../redux/services/email";
-import _ from "lodash";
 import TextEditor from "../../../../components/FormFields/TextEditor/TextEditor";
 import Layout from "../../../../layout/Layout";
 import SwiperComponent from "../../../../components/Swiper";

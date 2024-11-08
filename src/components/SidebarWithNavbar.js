@@ -17,11 +17,13 @@ import {
   FaRegEnvelope,
   FaRegEnvelopeOpen,
   FaRegUser,
+  FaRegUserCircle,
   FaShareAlt,
   FaUserAlt,
 } from "react-icons/fa";
 import logo from "../assets/1.png";
 import logo2 from "../assets/2.png";
+import Dropdown from "./Dropdown";
 const SidebarWithNavbar = ({ component }) => {
   const location = useLocation();
   const dispatch = useDispatch();
@@ -35,32 +37,32 @@ const SidebarWithNavbar = ({ component }) => {
     {
       name: "Dashboard",
       link: "/",
-      icon: <MdOutlineDashboard size={25} />,
+      icon: <MdOutlineDashboard size={25} color="gray" />,
     },
     {
       name: "Common Box",
       link: "/common-box",
-      icon: <FaRegEnvelopeOpen size={25} />,
+      icon: <FaRegEnvelopeOpen size={25} color="gray" />,
     },
     {
       name: "Compaigns",
       link: "/compaigns",
-      icon: <TbLocationShare size={25} />,
+      icon: <TbLocationShare size={25} color="gray" />,
     },
     {
       name: "Templates",
       link: "/email-templates",
-      icon: <TbTemplate size={25} />,
+      icon: <TbTemplate size={25} color="gray" />,
     },
     {
       name: "Sequences",
       link: "/sequences",
-      icon: <HiOutlineTemplate size={25} />,
+      icon: <HiOutlineTemplate size={25} color="gray" />,
     },
     {
       name: "Email Accounts",
       link: "/accounts",
-      icon: <FaRegEnvelope size={25} />,
+      icon: <FaRegEnvelope size={25} color="gray" />,
     },
     // {
     //   name: "Account Settings",
@@ -74,6 +76,25 @@ const SidebarWithNavbar = ({ component }) => {
     //   icon: <PiSignOutBold size={25} />,
     // },
   ];
+  const menuData = {
+    title: (
+      <div className="mt-1 mx-1">
+        <FaRegUserCircle size={32} />
+      </div>
+    ),
+    menuItems: [
+      {
+        name: user?.username,
+        icon: <FaRegUserCircle size={30} />,
+        description: user?.email,
+      },
+      {
+        name: "Sign out",
+        icon: <FaRegUser />,
+        onClick: logout,
+      },
+    ],
+  };
   return (
     <div>
       <nav className="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
@@ -111,8 +132,8 @@ const SidebarWithNavbar = ({ component }) => {
             </div>
             <div className="flex items-center">
               <DarkModeSwitcher />
-
-              <div className="flex items-center ms-3">
+              <Dropdown menuData={menuData} />
+              {/* <div className="flex items-center ms-3">
                 <div>
                   <button
                     type="button"
@@ -147,18 +168,6 @@ const SidebarWithNavbar = ({ component }) => {
                     </p>
                   </div>
                   <ul className="py-1" role="none">
-                    {/* {sidebarItems?.map((item, index) => (
-                      <li key={index} className="w-full">
-                        <Link
-                          to={item?.link}
-                          className={`w-32 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white`}
-                          role="menuitem"
-                        >
-                          {item?.name}
-                        </Link>
-                      </li>
-                    ))} */}
-
                     <li>
                       <button
                         onClick={logout}
@@ -168,45 +177,9 @@ const SidebarWithNavbar = ({ component }) => {
                         <span className="ms-3 text-center">Sign out</span>
                       </button>
                     </li>
-                    {/* <li>
-                      <a
-                        href="#"
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-                        role="menuitem"
-                      >
-                        Dashboard
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href="#"
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-                        role="menuitem"
-                      >
-                        Settings
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href="#"
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-                        role="menuitem"
-                      >
-                        Earnings
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href="#"
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-                        role="menuitem"
-                      >
-                        Sign out
-                      </a>
-                    </li> */}
                   </ul>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
@@ -224,7 +197,7 @@ const SidebarWithNavbar = ({ component }) => {
                 key={index}
                 className={`${
                   location?.pathname === item?.link &&
-                  "bg-gray-800 dark:bg-gray-600 text-white p-1 rounded-lg shadow-lg"
+                  "bg-black dark:bg-gray-600 text-white p-1 shadow-lg"
                 }`}
               >
                 <Link

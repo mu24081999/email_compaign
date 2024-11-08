@@ -5,6 +5,8 @@ export const dashboardSlice = createSlice({
   initialState: {
     isLoading: false,
     analytics: {},
+    email_report: {},
+    lead_report: {},
     message: "",
     error: "",
     type: "",
@@ -25,8 +27,23 @@ export const dashboardSlice = createSlice({
       state.isLoading = false;
       state.error = "";
     },
+    getEmailAnalytics: (state, action) => {
+      state.email_report = action.payload;
+      state.isLoading = false;
+      state.error = "";
+    },
+    getLeadAnalytics: (state, action) => {
+      state.lead_report = action.payload;
+      state.isLoading = false;
+      state.error = "";
+    },
   },
 });
 export default dashboardSlice.reducer;
-export const { dashboardRequestLoading, invalidRequest, getAnalytics } =
-  dashboardSlice.actions;
+export const {
+  dashboardRequestLoading,
+  invalidRequest,
+  getAnalytics,
+  getEmailAnalytics,
+  getLeadAnalytics,
+} = dashboardSlice.actions;

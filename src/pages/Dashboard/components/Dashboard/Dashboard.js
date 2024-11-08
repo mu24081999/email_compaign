@@ -5,6 +5,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getCompaignsAnalytics } from "../../../../redux/services/dashboard";
 import { getUserCompaignsApi } from "../../../../redux/services/compaign";
+import { FaRegEnvelope, FaRegEnvelopeOpen } from "react-icons/fa";
+import {
+  BsEnvelopeCheck,
+  BsEnvelopeOpenHeart,
+  BsEnvelopePlus,
+  BsEnvelopeSlash,
+} from "react-icons/bs";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
@@ -52,76 +59,42 @@ const Dashboard = () => {
     //   variant: "green",
     // },
   ];
-
-  // const data = [
-  //   {
-  //     name: "John Doe",
-  //     email: "john@example.com",
-  //     phone: {
-  //       mobile: "123-456-7890",
-  //     },
-  //     actions: [
-  //       {
-  //         color: "green",
-  //         label: "Edit",
-  //         onClick: () => alert("Edit John Doe"),
-  //       },
-  //       {
-  //         color: "red",
-  //         label: "Delete",
-  //         onClick: () => alert("Delete John Doe"),
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     name: "Jane Smith",
-  //     email: "jane@example.com",
-  //     phone: {
-  //       mobile: "987-654-3210",
-  //     },
-  //     actions: [
-  //       {
-  //         color: "green",
-  //         label: "Edit",
-  //         onClick: () => alert("Edit John Doe"),
-  //       },
-  //       {
-  //         color: "red",
-  //         label: "Delete",
-  //         onClick: () => alert("Delete John Doe"),
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     name: "Sam Wilson",
-  //     email: "sam@example.com",
-  //     phone: {
-  //       mobile: "555-555-5555",
-  //     },
-  //     actions: [
-  //       {
-  //         color: "green",
-  //         label: "Edit",
-  //         onClick: () => alert("Edit John Doe"),
-  //       },
-  //       {
-  //         color: "red",
-  //         label: "Delete",
-  //         onClick: () => alert("Delete John Doe"),
-  //       },
-  //     ],
-  //   },
-  // ];
   useEffect(() => {
     dispatch(getCompaignsAnalytics(token, id));
   }, [token, id, dispatch]);
   return (
     <div>
-      <div className="grid lg:grid-cols-4 gap-5">
-        <DashboardCard heading={"Sent"} value={analytics?.sent} />
-        <DashboardCard heading={"Open"} value={analytics?.opens} />
-        <DashboardCard heading={"Bounce"} value={analytics?.bounce} />
-        <DashboardCard heading={"Leads"} value={analytics?.bounce} />
+      <div className="grid lg:grid-cols-6 gap-5">
+        <DashboardCard
+          icon={<FaRegEnvelope color="blue" size={30} />}
+          heading={"Total Emails"}
+          value={analytics?.leads}
+        />
+        <DashboardCard
+          icon={<BsEnvelopePlus color="gold" size={30} />}
+          heading={"Email Sent"}
+          value={analytics?.sent}
+        />
+        <DashboardCard
+          icon={<BsEnvelopeCheck color="indigo" size={30} />}
+          heading={"Emails Delievered"}
+          value={analytics?.sent}
+        />
+        <DashboardCard
+          icon={<FaRegEnvelopeOpen color="cyan" size={30} />}
+          heading={"Emails Opened"}
+          value={analytics?.opens}
+        />
+        <DashboardCard
+          icon={<BsEnvelopeOpenHeart color="orange" size={30} />}
+          heading={"Emails Clicked"}
+          value={analytics?.opens}
+        />
+        <DashboardCard
+          icon={<BsEnvelopeSlash color="red" size={30} />}
+          heading={"Emails Bounce"}
+          value={analytics?.bounce}
+        />
       </div>
       <div className="pt-10">
         <Table columns={columns} data={compaignsData} />

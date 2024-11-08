@@ -1,16 +1,18 @@
 import React, { useState } from "react";
 import ReactApexChart from "react-apexcharts";
 
-const LineChart = () => {
+const LineChart = ({ emailData, leadData }) => {
   const [chartData, setChartData] = useState({
     series: [
       {
         name: "Sent",
-        data: [10, 41, 35, 51, 49, 62, 69, 91, 148],
+        // data: [10, 41, 35, 51, 49, 62, 69, 91, 148],
+        data: Array.isArray(emailData?.series) ? emailData?.series : [],
       },
       {
         name: "Open",
-        data: [10, 41, 35, 51, 49, 62, 69, 91, 148],
+        // data: [10, 41, 35, 51, 49, 62, 69, 91, 148],
+        data: Array.isArray(leadData?.series) ? leadData?.series : [],
       },
     ],
     options: {

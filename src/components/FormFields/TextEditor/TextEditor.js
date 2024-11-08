@@ -47,17 +47,15 @@ const TextEditor = React.forwardRef((props, ref) => {
         render={({ field }) => (
           <div>
             {label && <h1 className="font-extrabold pb-2">{label}</h1>}
-            <div className="h-[60vh] overflow-hidden border-b border-b-blue-500">
-              <div className=" h-[65vh]">
-                <CKEditor
-                  editor={ClassicEditor}
-                  data={htmlContent}
-                  onBlurCapture={() => setFocusState(false)}
-                  onFocus={() => setFocusState(true)}
-                  onChange={handleEditorChange}
-                  className="bg-black"
-                />
-              </div>
+            <div className=" overflow-hidden">
+              <CKEditor
+                editor={ClassicEditor}
+                data={htmlContent}
+                onBlurCapture={() => setFocusState(false)}
+                onFocus={() => setFocusState(true)}
+                onChange={handleEditorChange}
+                className="bg-black"
+              />
             </div>
 
             {error && <p className="text-red-500">{error.message}</p>}

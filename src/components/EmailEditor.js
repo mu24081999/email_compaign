@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import EmailEditor from "react-email-editor";
 import { useForm } from "react-hook-form";
-import Heading from "./Heading";
 import InputField from "./FormFields/InputField/InputField";
 import Button from "./Button";
 import { useDispatch, useSelector } from "react-redux";
@@ -45,7 +44,19 @@ const EmailEditorComponent = () => {
     });
     console.log(editorHtml);
   };
+  // const onLoad = () => {
+  //   emailEditorRef.current.editor.loadDesign(defaultDesign);
 
+  //   emailEditorRef.current.editor.loadBlank({
+  //     backgroundColor: "#fff",
+  //   });
+  //   emailEditorRef.current.editor.addEventListener("design:loaded", () => {
+  //     emailEditorRef.current.editor.setBodyValues({
+  //       backgroundColor: "#f5f5f5",
+  //       contentWidth: "100%",
+  //     });
+  //   });
+  // };
   // Handle adding a new template (can be extended)
   const addTemplate = async (formData) => {
     const unlayer = emailEditorRef.current?.editor;
@@ -61,19 +72,6 @@ const EmailEditorComponent = () => {
     });
   };
 
-  // // Template list with placeholders in content
-  // const templates = [
-  //   {
-  //     id: 1,
-  //     title: "Welcome Email",
-  //     content: "<h1>Hello {{firstname}}</h1><p>Welcome on board!</p>",
-  //   },
-  //   {
-  //     id: 2,
-  //     title: "Product Update",
-  //     content: "<h1>Hi {{firstname}}</h1><p>Check out our new features!</p>",
-  //   },
-  // ];
   useEffect(() => {
     dispatch(getUserTemplateList(token, user_id));
   }, [token, user_id, dispatch]);
@@ -119,10 +117,7 @@ const EmailEditorComponent = () => {
                   }}
                 ></div>
                 <iframe
-                  srcDoc={replacePlaceholdersInHtml(
-                    template.content,
-                    sampleUserData
-                  )}
+                  srcDoc={template.content}
                   className="relative w-full"
                   title={template.title}
                 ></iframe>{" "}
@@ -156,17 +151,18 @@ const EmailEditorComponent = () => {
           onSubmit={handleSubmit(addTemplate)}
           className=" space-y-6 bg-white border p-5 rounded-xl shadow-md"
         >
-          <div className=" overflow-hidden shadow-lg border rounded">
-            <div className="h-[77vh] rounded">
-              <EmailEditor
-                ref={emailEditorRef}
-                style={{
-                  maxWidth: "100%",
-                  overflow: "scroll",
-                  display: "flex",
-                  height: "85vh",
-                }}
-              />
+          <div className="relative overflow-hidden shadow-lg border rounded">
+            <EmailEditor
+              ref={emailEditorRef}
+              style={{
+                maxWidth: "100%",
+                overflow: "scroll",
+                display: "flex",
+                height: "75vh",
+              }}
+            />
+            <div className="h-12 w-96 bg-white absolute bottom-0 right-0">
+              {" "}
             </div>
           </div>
           <div className="flex">

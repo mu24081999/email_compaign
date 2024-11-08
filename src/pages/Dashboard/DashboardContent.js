@@ -14,11 +14,17 @@ import { getEmailAccountsApi } from "../../redux/services/email";
 import { toast } from "react-toastify";
 import Layout from "../../layout/Layout";
 import LineChart from "../../components/Charts/LineChart";
+import {
+  getCompaignsEmailAnalytics,
+  getCompaignsLeadAnalytics,
+} from "../../redux/services/dashboard";
 
 const DashboardContent = () => {
   const { user_id, token } = useSelector((state) => state.auth);
   const { emails } = useSelector((state) => state.email);
-  console.log("🚀 ~ DashboardContent ~ emails:", emails);
+  const { email_report, lead_report } = useSelector((state) => state.dashboard);
+  console.log("🚀 ~ DashboardContent ~ lead_report:", lead_report);
+  console.log("🚀 ~ DashboardContent ~ email_report:", email_report);
   const dispatch = useDispatch();
   const tabsData = [
     {
@@ -150,13 +156,16 @@ const DashboardContent = () => {
   useEffect(() => {
     const query = `user_id=${user_id}`;
     dispatch(getEmailAccountsApi(token, query));
+    dispatch(getCompaignsEmailAnalytics(token));
+    dispatch(getCompaignsLeadAnalytics(token));
+
     return () => {};
   }, [user_id, token, dispatch]);
   return (
     <div>
       {/* <Tabs tabsData={tabsData} /> */}
       <Dashboard />
-      <LineChart />
+      <LineChart emailData={email_report} leadData={lead_report} />
     </div>
   );
 };

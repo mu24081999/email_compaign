@@ -12,6 +12,8 @@ import GoogleAppForm from "./components/Google/GoogleAppForm";
 import Instruction from "./components/Google/Instruction";
 import MailInstruction from "./components/MailProvider/Instruction";
 import MailProviderForm from "./components/MailProvider/MailProviderForm";
+import { PiMicrosoftOutlookLogo } from "react-icons/pi";
+import OutlookForm from "./components/Outlook/OutlookForm";
 
 const Add = () => {
   const navigateTo = useNavigate();
@@ -20,6 +22,7 @@ const Add = () => {
     instruction: false,
     form: false,
     mail_instructions: false,
+    outlook_form: false,
     mail_form: false,
   });
 
@@ -65,6 +68,21 @@ const Add = () => {
                           })
                         }
                       />
+                      <ListItemCard
+                        icon={<PiMicrosoftOutlookLogo size={30} color="red" />}
+                        title={"Microsoft Outlook"}
+                        description={"Microsoft Outlook 360"}
+                        onClick={() =>
+                          setGoogleAppSettings({
+                            menu: false,
+                            instruction: false,
+                            form: false,
+                            mail_form: false,
+                            mail_instructions: false,
+                            outlook_form: true,
+                          })
+                        }
+                      />
                     </div>
                   }
                 />
@@ -90,6 +108,11 @@ const Add = () => {
           {googleAppSettings?.mail_instructions === true && (
             <div className="flex justify-center">
               <MailInstruction handleMenu={handleMenu} />
+            </div>
+          )}
+          {googleAppSettings?.outlook_form === true && (
+            <div className="flex justify-center">
+              <OutlookForm handleMenu={handleMenu} />
             </div>
           )}
         </div>
