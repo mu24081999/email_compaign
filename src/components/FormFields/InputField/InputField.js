@@ -193,6 +193,7 @@ const InputField = React.forwardRef((props, ref) => {
                       props.onChange(e, props?.name);
                     }
                   }}
+                  placeholder={label}
                   min={type === "number" && !props.min ? 0 : props.min}
                   disabled={props.isDisabled}
                   value={field.value}
@@ -205,7 +206,7 @@ const InputField = React.forwardRef((props, ref) => {
                 {label && (
                   <label
                     htmlFor={props.name} // Add htmlFor to associate label with input
-                    className="absolute bg-white dark:bg-gray-800 cursor-text px-1 left-2.5 top-3.5 text-slate-400 text-sm transition-all transform origin-left peer-focus:-top-2 peer-focus:left-2.5 peer-focus:text-xs peer-focus:text-slate-400 peer-focus:scale-90"
+                    className="absolute opacity-0 peer-focus:opacity-100 bg-white dark:bg-gray-800  cursor-text px-1 left-2.5 top-3.5 text-slate-400 text-sm transition-all transform origin-left peer-focus:-top-2 peer-focus:left-2.5 peer-focus:text-xs peer-focus:text-slate-400 peer-focus:scale-90"
                   >
                     {label}
                   </label>

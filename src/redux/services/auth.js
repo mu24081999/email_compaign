@@ -82,6 +82,32 @@ export const loginUser = (data) => async (dispatch) => {
     toast.error(e.message);
   }
 };
+export const verifyOTPRec = (user_id, data) => async (dispatch) => {
+  try {
+    dispatch(authRequestLoading());
+    const response = await axios
+      .post(`${backendURL}/otp/verify/${user_id}`, data, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) => {
+        if (response?.data?.statusCode !== 200) {
+          toast.error(response.data.message);
+          dispatch(invalidRequest(response.data.message));
+          return toast.error(response.data.message);
+        }
+        dispatch(verifyOtp(response.data.message));
+        // dispatch(login(response.data.data.userData));
+        toast.success(response.data.message);
+        return true;
+      });
+    return response;
+  } catch (e) {
+    dispatch(invalidRequest(e.message));
+    return toast.error(e.message);
+  }
+};
 export const logoutUser = (token) => async (dispatch) => {
   try {
     dispatch(authRequestLoading());

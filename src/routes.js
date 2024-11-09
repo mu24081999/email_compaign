@@ -15,6 +15,11 @@ import Sequence from "./pages/Dashboard/components/Sequence/Sequence";
 import EmailAccounts from "./pages/Dashboard/components/EmailAccounts/EmailAccounts";
 import Profile from "./pages/Dashboard/components/Profile/Profile";
 import CommonBox from "./pages/CommonBox/CommonBox";
+import OTP from "./pages/Auth/OTP";
+import LeadFinder from "./pages/LeadFinder/Main";
+import DripCompaign from "./pages/DripCompaign/Main";
+import Subscription from "./pages/Subscription/Main";
+import EmailValidation from "./pages/EmailValidation/Main";
 const router = (isAuthenticated) => {
   const routes = [
     {
@@ -25,6 +30,46 @@ const router = (isAuthenticated) => {
         </PrivateRoute>
       ), // Protect the Dashboard route    children: [],
       breadcrumb: "Dashboard",
+    },
+    {
+      path: "/lead-finder",
+      element: (
+        <PrivateRoute isAuthenticated={isAuthenticated}>
+          <LeadFinder />
+        </PrivateRoute>
+      ),
+      children: [],
+      breadcrumb: "email-template",
+    },
+    {
+      path: "/drip-compaign",
+      element: (
+        <PrivateRoute isAuthenticated={isAuthenticated}>
+          <DripCompaign />
+        </PrivateRoute>
+      ),
+      children: [],
+      breadcrumb: "email-template",
+    },
+    {
+      path: "/my-subscription",
+      element: (
+        <PrivateRoute isAuthenticated={isAuthenticated}>
+          <Subscription />
+        </PrivateRoute>
+      ),
+      children: [],
+      breadcrumb: "email-template",
+    },
+    {
+      path: "/email-validation",
+      element: (
+        <PrivateRoute isAuthenticated={isAuthenticated}>
+          <EmailValidation />
+        </PrivateRoute>
+      ),
+      children: [],
+      breadcrumb: "email-template",
     },
     {
       path: "/email-templates",
@@ -129,6 +174,10 @@ const router = (isAuthenticated) => {
     {
       path: "/subscriptions",
       element: <Pricing />,
+    },
+    {
+      path: "/otp",
+      element: <OTP />,
     },
     {
       path: "/sign-in",

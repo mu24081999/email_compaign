@@ -27,9 +27,41 @@ const Dashboard = () => {
     const data = [];
     Array.isArray(compaigns?.campaignsData) &&
       compaigns?.campaignsData?.map((compaign) => {
-        data?.push({
+        const progressPercentage =
+          compaign?.total_leads > 0
+            ? (compaign?.email_sent_counter / compaign?.total_leads) * 100
+            : 0;
+
+        data.push({
           ...compaign,
           url: `/compaign/${compaign?.id}`,
+          progress: (
+            <div>
+              <div className="mb-2 flex justify-between items-center">
+                <h3 className="text-sm font-semibold text-gray-800 dark:text-white">
+                  Emails Sent
+                </h3>
+                <span className="text-sm text-gray-800 dark:text-white">
+                  {compaign?.email_sent_counter || 0}
+                </span>
+              </div>
+              <div
+                className="flex w-full h-2 bg-gray-200 rounded-full overflow-hidden dark:bg-neutral-700"
+                role="progressbar"
+                aria-valuenow={compaign?.email_sent_counter}
+                aria-valuemin="0"
+                aria-valuemax={compaign?.total_leads}
+              >
+                <div
+                  className="flex flex-col justify-center rounded-full overflow-hidden bg-blue-600 text-xs text-white text-center whitespace-nowrap transition duration-500 dark:bg-blue-500"
+                  style={{ width: `${progressPercentage}%` }}
+                ></div>
+              </div>
+            </div>
+          ),
+          status: compaign?.status || "pending",
+          email_opens_counter: compaign?.email_opens_counter || 0,
+          email_sent_counter: compaign?.email_sent_counter || 0,
           actions: [
             {
               color: "green",

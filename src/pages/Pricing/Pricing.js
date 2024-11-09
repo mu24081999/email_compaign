@@ -261,8 +261,8 @@ const Pricing = () => {
           <Switcher name="type" control={control} errors={errors} />
           <p className="my-1 text-xl font-extrabold">Yearly</p>
         </div>
-        <div className=" mx-auto mt-16 grid max-w-lg grid-cols-1 items-center gap-y-6 sm:mt-20 sm:gap-y-0 lg:max-w-6xl lg:grid-cols-3">
-          <div className="rounded-3xl rounded-t-3xl bg-white/60 p-8 ring-1 ring-gray-900/10 sm:mx-8 sm:rounded-b-none sm:p-10 lg:mx-0 lg:rounded-bl-3xl lg:rounded-tr-none">
+        <div className=" mx-auto mt-5 grid max-w-lg grid-cols-1 items-center gap-y-6 sm:gap-y-0 lg:max-w-6xl lg:grid-cols-3 gap-5">
+          <div className="rounded-3xl bg-white/60 p-8 ring-1 ring-gray-900/10 sm:mx-8 sm:p-10 lg:mx-0">
             <h3
               id="tier-hobby"
               className="text-base font-semibold leading-7 text-indigo-600"

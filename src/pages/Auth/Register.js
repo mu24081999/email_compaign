@@ -19,7 +19,7 @@ const Register = () => {
   const [isRegistered, setIsRegistered] = useState();
   const dispatch = useDispatch();
   const navigateTo = useNavigate();
-  const { isAuthenticated } = useSelector((state) => state.auth);
+  const { isAuthenticated, isLoading } = useSelector((state) => state.auth);
   const handleFormSubmit = async (data) => {
     const params = {
       username: data.username,
@@ -34,7 +34,7 @@ const Register = () => {
   };
   useEffect(() => {
     if (isRegistered) {
-      navigateTo("/subscriptions");
+      navigateTo("/otp");
     }
   }, [isRegistered, navigateTo]);
   return (
@@ -108,7 +108,7 @@ const Register = () => {
                   }}
                 />
               </div>
-              <Button type="submit" className="py-3">
+              <Button type="submit" loading={isLoading} className="py-3">
                 Sign Up
               </Button>
               <div className="text-sm font-medium text-gray-900 dark:text-white">

@@ -64,6 +64,31 @@ const SidebarWithNavbar = ({ component }) => {
       link: "/accounts",
       icon: <FaRegEnvelope size={25} color="gray" />,
     },
+    {
+      name: "Email Validation",
+      link: "/email-validation",
+      icon: <FaRegEnvelope size={25} color="gray" />,
+    },
+    {
+      name: "Lead Finder",
+      link: "/lead-finder",
+      icon: <FaRegEnvelope size={25} color="gray" />,
+    },
+    {
+      name: "Drip Compaing",
+      link: "/drip-compaign",
+      icon: <FaRegEnvelope size={25} color="gray" />,
+    },
+    {
+      name: "My Subscription",
+      link: "/my-subscription",
+      icon: <FaRegEnvelope size={25} color="gray" />,
+    },
+    {
+      name: "Settings",
+      link: "/account-settings",
+      icon: <FaRegEnvelope size={25} color="gray" />,
+    },
     // {
     //   name: "Account Settings",
     //   link: "/account-settings",

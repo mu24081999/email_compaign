@@ -23,8 +23,7 @@ const DashboardContent = () => {
   const { user_id, token } = useSelector((state) => state.auth);
   const { emails } = useSelector((state) => state.email);
   const { email_report, lead_report } = useSelector((state) => state.dashboard);
-  console.log("🚀 ~ DashboardContent ~ lead_report:", lead_report);
-  console.log("🚀 ~ DashboardContent ~ email_report:", email_report);
+
   const dispatch = useDispatch();
   const tabsData = [
     {

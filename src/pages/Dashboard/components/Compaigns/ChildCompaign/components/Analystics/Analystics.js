@@ -14,32 +14,32 @@ const Analystics = ({ data }) => {
         <DashboardCard
           icon={<FaRegEnvelope color="blue" size={30} />}
           heading={"Total Emails"}
-          value={0}
+          value={data?.leads}
         />
         <DashboardCard
           icon={<BsEnvelopePlus color="gold" size={30} />}
           heading={"Email Sent"}
-          value={0}
+          value={data?.sent}
         />
         <DashboardCard
           icon={<BsEnvelopeCheck color="indigo" size={30} />}
           heading={"Emails Delievered"}
-          value={0}
+          value={data?.sent}
         />
         <DashboardCard
           icon={<FaRegEnvelopeOpen color="cyan" size={30} />}
           heading={"Emails Opened"}
-          value={0}
+          value={data?.opens}
         />
         <DashboardCard
           icon={<BsEnvelopeOpenHeart color="orange" size={30} />}
           heading={"Emails Clicked"}
-          value={0}
+          value={data?.opens}
         />
         <DashboardCard
           icon={<BsEnvelopeSlash color="red" size={30} />}
           heading={"Emails Bounce"}
-          value={0}
+          value={data?.bounce}
         />
       </div>
     </div>

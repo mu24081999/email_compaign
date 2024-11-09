@@ -14,7 +14,6 @@ const CompaignContent = () => {
   const { compaignAnalytics: analystics } = useSelector(
     (state) => state.compaign
   );
-  console.log("🚀 ~ CompaignContent ~ analystics:", analystics);
   const tabsData = [
     {
       id: "analystics",
