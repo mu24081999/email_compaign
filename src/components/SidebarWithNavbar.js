@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import DarkModeSwitcher from "./DarkmodeSwitcher";
 import { Link, useLocation } from "react-router-dom";
 import { MdOutlineDashboard } from "react-icons/md";
-import { HiOutlineInboxArrowDown } from "react-icons/hi2";
-import { TiLocationArrowOutline } from "react-icons/ti";
 import { TbTemplate } from "react-icons/tb";
-import { MdOutlineAccountBalance } from "react-icons/md";
 import { logoutUser } from "../redux/services/auth";
 import { useDispatch, useSelector } from "react-redux";
 import { HiOutlineTemplate } from "react-icons/hi";
 import { TbLocationShare } from "react-icons/tb";
+import { TbCalendarDollar } from "react-icons/tb";
+import { GrValidate } from "react-icons/gr";
+import { MdOutlineScreenSearchDesktop } from "react-icons/md";
 
 import {
   FaCogs,
@@ -67,12 +67,12 @@ const SidebarWithNavbar = ({ component }) => {
     {
       name: "Email Validation",
       link: "/email-validation",
-      icon: <FaRegEnvelope size={25} color="gray" />,
+      icon: <GrValidate size={25} color="gray" />,
     },
     {
       name: "Lead Finder",
       link: "/lead-finder",
-      icon: <FaRegEnvelope size={25} color="gray" />,
+      icon: <MdOutlineScreenSearchDesktop size={25} color="gray" />,
     },
     {
       name: "Drip Compaing",
@@ -82,12 +82,12 @@ const SidebarWithNavbar = ({ component }) => {
     {
       name: "My Subscription",
       link: "/my-subscription",
-      icon: <FaRegEnvelope size={25} color="gray" />,
+      icon: <TbCalendarDollar size={27} color="gray" />,
     },
     {
-      name: "Settings",
+      name: "Account Settings",
       link: "/account-settings",
-      icon: <FaRegEnvelope size={25} color="gray" />,
+      icon: <FaCogs size={25} color="gray" />,
     },
     // {
     //   name: "Account Settings",

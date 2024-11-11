@@ -5,7 +5,7 @@ import Button from "../../../../../../../../components/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { addLeadRec } from "../../../../../../../../redux/services/leads";
-const UploadManualEmail = () => {
+const UploadManualEmail = ({ close }) => {
   const {
     formState: { errors },
     control,
@@ -33,6 +33,7 @@ const UploadManualEmail = () => {
       });
     });
     dispatch(addLeadRec(token, { leads: data }));
+    close(true);
   };
   return (
     <div className="p-5">

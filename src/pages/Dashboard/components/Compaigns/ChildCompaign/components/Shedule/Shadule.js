@@ -10,9 +10,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import {
   addScheduleApi,
+  deleteScheduleApi,
   getSchedulesApi,
 } from "../../../../../../../redux/services/schedule";
 import moment from "moment";
+import { FaTrashAlt } from "react-icons/fa";
 const Shadule = () => {
   const {
     handleSubmit,
@@ -28,7 +30,6 @@ const Shadule = () => {
   const { schedules } = useSelector((state) => state.schedule);
   const [timezones, setTimezones] = useState([]);
   const [selectedSchedule, setSelectedSchedule] = useState({});
-  console.log("🚀 ~ Shadule ~ selectedSchedule:", selectedSchedule);
   const { id } = useParams();
   const getTimezones = useCallback(async () => {
     const response = await axios.get(
@@ -66,9 +67,10 @@ const Shadule = () => {
     dispatch(addScheduleApi(token, params));
   };
   useEffect(() => {
+    const query = `user_id=${user_id}`;
     getTimezones();
-    dispatch(getSchedulesApi(token));
-  }, [getTimezones, token, dispatch]);
+    dispatch(getSchedulesApi(token, query));
+  }, [getTimezones, token, dispatch, user_id]);
   useEffect(() => {
     setValue("name", selectedSchedule?.name);
     setValue("from", {
@@ -84,6 +86,9 @@ const Shadule = () => {
       value: selectedSchedule?.timezone,
     });
   }, [selectedSchedule, setValue]);
+  const deleteSchedule = (id) => {
+    dispatch(deleteScheduleApi(token, id, user_id));
+  };
   // const schedules = [
   //   {
   //     id: 1,
@@ -106,7 +111,13 @@ const Shadule = () => {
               key={index}
               onClick={() => setSelectedSchedule(item)}
             >
-              {item?.name}
+              <span> {item?.name} </span>
+              <button
+                className=" float-end"
+                onClick={() => deleteSchedule(item?.id)}
+              >
+                <FaTrashAlt color="red" />
+              </button>
             </div>
           ))}
       </div>

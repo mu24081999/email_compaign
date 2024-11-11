@@ -23,7 +23,8 @@ const Leads = () => {
     setIsOpen(true);
   };
 
-  const handleClose = () => {
+  const handleClose = (data) => {
+    console.log("🚀 ~ handleClose ~ data:", data);
     setIsOpen(false);
   };
   const handleSave = () => {};
@@ -49,7 +50,7 @@ const Leads = () => {
           isOpen={isOpen}
           onClose={handleClose}
           title="Add Leads"
-          body=<ModalBody />
+          body=<ModalBody close={handleClose} />
           onSave={handleSave}
           saveButtonText="Save Changes"
           closeButtonText="Dismiss"

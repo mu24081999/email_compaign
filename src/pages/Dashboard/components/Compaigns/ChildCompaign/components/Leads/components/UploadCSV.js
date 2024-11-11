@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addLeadRec } from "../../../../../../../../redux/services/leads";
 import { useParams } from "react-router-dom";
 
-const UploadCSV = () => {
+const UploadCSV = ({ close }) => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const { token, user_id } = useSelector((state) => state.auth);
@@ -31,6 +31,7 @@ const UploadCSV = () => {
         });
       });
       dispatch(addLeadRec(token, { leads: formattedData }));
+      close();
     } else {
       toast.error("There is no contacts in the list.");
     }

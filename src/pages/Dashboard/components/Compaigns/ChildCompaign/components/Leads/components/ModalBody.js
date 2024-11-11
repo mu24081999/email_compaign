@@ -3,7 +3,7 @@ import Button from "../../../../../../../../components/Button";
 import UploadCSV from "./UploadCSV";
 import { FaFileCsv, FaRegEnvelope } from "react-icons/fa";
 import UploadManualEmail from "./UploadManualEmail";
-const ModalBody = () => {
+const ModalBody = ({ close }) => {
   const [showMenu, setSHowMenu] = useState(true);
   const [showUploadCSV, setShowUploadCSV] = useState(false);
   const [showUploadManualEmail, setShowUploadManualEmail] = useState(false);
@@ -56,14 +56,14 @@ const ModalBody = () => {
         <div>
           <Button onClick={handleBack}>Back</Button>
           <div>
-            <UploadCSV />
+            <UploadCSV close={close} />
           </div>
         </div>
       )}
       {showUploadManualEmail && (
         <div>
           <Button onClick={handleBack}>Back</Button>
-          <UploadManualEmail />
+          <UploadManualEmail close={close} />
         </div>
       )}
     </div>

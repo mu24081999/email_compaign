@@ -58,7 +58,7 @@ const Table = ({ columns, data, dataFromChild }) => {
 
   return (
     <div className="py-5 relative overflow-x-auto shadow-md sm:rounded-lg font-space  bg-white border  dark:bg-gray-800 p-5">
-      <div className="flex justify-between mb-4">
+      {/* <div className="flex justify-between mb-4">
         <div className="flex gap-2">
           <select
             value={statusFilter}
@@ -68,9 +68,9 @@ const Table = ({ columns, data, dataFromChild }) => {
             <option value="">All Statuses</option>
             <option value="active">Active</option>
             <option value="inactive">Inactive</option>
-            {/* Add more status options as needed */}
+
           </select>
-          {/* <Button
+           <Button
             size="sm"
             className=""
             onClick={() => {
@@ -80,7 +80,7 @@ const Table = ({ columns, data, dataFromChild }) => {
             // disabled={selectedRows.length === 0}
           >
             <FaTrash size={15} />
-          </Button> */}
+          </Button> 
         </div>
         <div className="flex ">
           <div className="">
@@ -95,7 +95,7 @@ const Table = ({ columns, data, dataFromChild }) => {
             />
           </div>
         </div>
-      </div>
+      </div> */}
       <table className="w-full text-sm text-left text-gray-500">
         <thead className="text-xs text-white uppercase bg-black border border-gray-300 rounded-2xl ">
           <tr className="">

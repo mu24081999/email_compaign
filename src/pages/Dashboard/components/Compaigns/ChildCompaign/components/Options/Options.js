@@ -303,7 +303,7 @@ const Options = () => {
           </div>
         </div>
 
-        <div className="p-8 rounded-md shadow-md border bg-white border-gray-100">
+        {/* <div className="p-8 rounded-md shadow-md border bg-white border-gray-100">
           <div className="grid lg:grid-cols-2 sm:grid-cols-1 justify-between">
             <div>
               <Heading text={"Sequences"} className="font-extrabold" />
@@ -324,13 +324,13 @@ const Options = () => {
               />
             </div>{" "}
           </div>
-        </div>
+        </div> */}
         <div>
           {compaign?.status === null ||
           compaign?.status === undefined ||
           compaign?.status === "" ||
           compaign?.status === "pending" ? (
-            <Button type="submit" className="py-3 px-2 bg-red-400">
+            <Button type="submit" className="py-3 px-3">
               Lounch
             </Button>
           ) : (

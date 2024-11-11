@@ -26,7 +26,7 @@ const EmailAccounts = () => {
     {
       label: "Email",
       accessor: "email",
-      type: "button",
+      type: "link",
       onClick: () => handleSelectedEmail,
     },
     { label: "Emails Sent", accessor: "emails_sent" },

@@ -6,6 +6,7 @@ import {
   updatedUser,
 } from "../slices/user";
 import { toast } from "react-toastify";
+import { updatedMe } from "../slices/auth";
 const backendURL = `${process.env.REACT_APP_BACKEND_URL_PRODUCTION}`;
 
 export const updateUserRec = (token, user_id, data) => async (dispatch) => {
@@ -13,12 +14,12 @@ export const updateUserRec = (token, user_id, data) => async (dispatch) => {
     dispatch(userRequestLoading());
     const config = {
       headers: {
-        "Content-Type": "multipart/form-data",
+        "Content-Type": "application/json",
         "x-access-token": token,
       },
     };
     const is_updated = await axios
-      .put(`${backendURL}/users/update/${user_id}`, data, config)
+      .put(`${backendURL}/users/${user_id}`, data, config)
       .then((response) => {
         console.log("🚀 ~ .then ~ response:", response);
         if (response?.data?.statusCode !== 200) {
@@ -26,6 +27,7 @@ export const updateUserRec = (token, user_id, data) => async (dispatch) => {
           return dispatch(invalidRequest(response.data.message));
         }
         dispatch(updatedUser(response.data.message));
+        dispatch(updatedMe(response.data.data.userData));
         toast.success(response.data.message);
         return response?.data?.data?.userData;
       });

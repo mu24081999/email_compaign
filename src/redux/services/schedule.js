@@ -27,7 +27,7 @@ export const addScheduleApi = (token, data) => async (dispatch) => {
           return dispatch(invalidRequest(response.data.message));
         }
         dispatch(addSchedule(response.data.message));
-        dispatch(getSchedulesApi(token));
+        dispatch(getSchedulesApi(token, `user_id=${data?.user_id}`));
         toast.success(response.data.message);
 
         return {
@@ -90,7 +90,7 @@ export const getSchedulesApi = (token, query) => async (dispatch) => {
     dispatch(invalidRequest(e.message));
   }
 };
-export const getScheduleApi = (token, id) => async (dispatch) => {
+export const getScheduleApis = (token, id) => async (dispatch) => {
   try {
     dispatch(scheduleRequestLoading());
     const config = {
@@ -113,7 +113,7 @@ export const getScheduleApi = (token, id) => async (dispatch) => {
     dispatch(invalidRequest(e.message));
   }
 };
-export const deleteScheduleApi = (token, id) => async (dispatch) => {
+export const deleteScheduleApi = (token, id, user_id) => async (dispatch) => {
   try {
     dispatch(scheduleRequestLoading());
     const config = {
@@ -123,13 +123,15 @@ export const deleteScheduleApi = (token, id) => async (dispatch) => {
       },
     };
     const response = await axios
-      .post(`${backendURL}/schedules/${id}`, config)
+      .delete(`${backendURL}/schedules/${id}`, config)
       .then((response) => {
         if (response?.data?.statusCode !== 200) {
           toast.error(response.data.message);
           return dispatch(invalidRequest(response.data.message));
         }
         dispatch(deleteSchedule(response.data.message));
+        const query = `user_id=${user_id}`;
+        dispatch(getSchedulesApi(token, query));
         toast.success(response.data.message);
       });
   } catch (e) {
