@@ -18,11 +18,15 @@ import {
   getCompaignsEmailAnalytics,
   getCompaignsLeadAnalytics,
 } from "../../redux/services/dashboard";
+import Loader from "../../components/Loader/Loader";
+import Bar from "../../components/Charts/Bar";
 
 const DashboardContent = () => {
   const { user_id, token } = useSelector((state) => state.auth);
   const { emails } = useSelector((state) => state.email);
-  const { email_report, lead_report } = useSelector((state) => state.dashboard);
+  const { email_report, lead_report, isLoading } = useSelector(
+    (state) => state.dashboard
+  );
 
   const dispatch = useDispatch();
   const tabsData = [
@@ -164,7 +168,20 @@ const DashboardContent = () => {
     <div>
       {/* <Tabs tabsData={tabsData} /> */}
       <Dashboard />
-      <LineChart emailData={email_report} leadData={lead_report} />
+      <div className="p-5 bg-white border rounded-xl shadow-lg mt-5">
+        {isLoading ? (
+          <Loader />
+        ) : (
+          <LineChart emailData={email_report} mainTitle={"Emails Report"} />
+        )}
+      </div>
+      <div className="p-5 bg-white border rounded-xl shadow-lg mt-5">
+        {isLoading ? (
+          <Loader />
+        ) : (
+          <Bar leadsData={lead_report} mainTitle={"Leads Report"} />
+        )}
+      </div>
     </div>
   );
 };

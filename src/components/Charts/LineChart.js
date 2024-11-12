@@ -1,18 +1,14 @@
 import React, { useState } from "react";
 import ReactApexChart from "react-apexcharts";
 
-const LineChart = ({ emailData, leadData }) => {
+const LineChart = ({ emailData, mainTitle, sideTitle }) => {
+  console.log("🚀 ~ LineChart ~ emailData:", emailData?.series);
   const [chartData, setChartData] = useState({
     series: [
       {
         name: "Sent",
         // data: [10, 41, 35, 51, 49, 62, 69, 91, 148],
         data: Array.isArray(emailData?.series) ? emailData?.series : [],
-      },
-      {
-        name: "Open",
-        // data: [10, 41, 35, 51, 49, 62, 69, 91, 148],
-        data: Array.isArray(leadData?.series) ? leadData?.series : [],
       },
     ],
     options: {
@@ -24,25 +20,26 @@ const LineChart = ({ emailData, leadData }) => {
         curve: "smooth",
       },
       title: {
-        text: "Compaign Analytics",
+        text: mainTitle,
         align: "left",
       },
       xaxis: {
-        categories: [
-          "Jan",
-          "Feb",
-          "Mar",
-          "Apr",
-          "May",
-          "Jun",
-          "Jul",
-          "Aug",
-          "Sep",
-        ],
+        categories: Array.isArray(emailData?.months) ? emailData?.months : [],
+        // categories: [
+        //   "Jan",
+        //   "Feb",
+        //   "Mar",
+        //   "Apr",
+        //   "May",
+        //   "Jun",
+        //   "Jul",
+        //   "Aug",
+        //   "Sep",
+        // ],
       },
       yaxis: {
         title: {
-          text: "Sales (in thousands)",
+          text: sideTitle,
         },
       },
       tooltip: {
@@ -52,16 +49,14 @@ const LineChart = ({ emailData, leadData }) => {
   });
 
   return (
-    <div id="chart flex flex-col gap-5">
-      <div className="p-5 bg-white dark:bg-gray-800  border border-gray-100 rounded-lg shadow-lg my-5">
-        <ReactApexChart
-          options={chartData.options}
-          series={chartData.series}
-          type="area"
-          height={350}
-        />
-      </div>
-      <div className="grid lg:grid-cols-3 sm:grid-cols-1 gap-5">
+    <div id="chart">
+      <ReactApexChart
+        options={chartData.options}
+        series={chartData.series}
+        type="area"
+        height={350}
+      />
+      {/* <div className="grid lg:grid-cols-3 sm:grid-cols-1 gap-5">
         <div className="p-5 bg-white dark:bg-gray-800 border border-gray-100 rounded-lg shadow-lg lg:col-span-2">
           <ReactApexChart
             options={{ ...chartData.options, chart: { type: "bar" } }}
@@ -80,7 +75,7 @@ const LineChart = ({ emailData, leadData }) => {
             />
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

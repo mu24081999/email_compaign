@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import Table from "../../../../../../../../components/Table";
 import Button from "../../../../../../../../components/Button";
-
-const List = ({ leadsData, handleOpenModal }) => {
+import { FaTrashAlt } from "react-icons/fa";
+import { useDispatch } from "react-redux";
+import { deleteLeadRec } from "../../../../../../../../redux/services/leads";
+const List = ({ leadsData, handleOpenModal, compaign_id, token }) => {
+  const dispatch = useDispatch();
   const columns = [
     { label: "First Name", accessor: "firstname", type: "link" },
     { label: "Last Name", accessor: "lastname" },
@@ -16,31 +19,22 @@ const List = ({ leadsData, handleOpenModal }) => {
     //   variant: "green",
     // },
   ];
+  const deleteBulk = (ids) => {
+    dispatch(deleteLeadRec(token, ids, compaign_id));
+  };
+  const bulkActions = [
+    {
+      name: "delete",
+      bgColor: "gray",
+      icon: <FaTrashAlt color="red" size={15} />,
+      onClick: (ids) => deleteBulk(ids),
+    },
+  ];
 
-  // const data = [
-  //   {
-  //     firstname: "John Doe",
-  //     lastname: "John",
-  //     email: "john@example.com",
-  //     phone: "+923174660027",
-  //   },
-  //   {
-  //     firstname: "John Doe",
-  //     lastname: "John",
-  //     email: "john@example.com",
-  //     phone: "+923174660027",
-  //   },
-  //   {
-  //     firstname: "John Doe",
-  //     lastname: "John",
-  //     email: "john@example.com",
-  //     phone: "+923174660027",
-  //   },
-  // ];
   return (
     <div>
       {Array?.isArray(leadsData) ? (
-        <Table columns={columns} data={leadsData} />
+        <Table columns={columns} data={leadsData} bulkActions={bulkActions} />
       ) : (
         <div className="lg:h-[80vh] items-center flex justify-center">
           <div className="flex flex-col justify-around gap-5">

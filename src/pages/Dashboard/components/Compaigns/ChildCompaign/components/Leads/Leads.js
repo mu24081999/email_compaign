@@ -41,7 +41,12 @@ const Leads = () => {
         </Button>
       </div>
       <div>
-        <List leadsData={leadsData} handleOpenModal={() => setIsOpen(true)} />
+        <List
+          compaign_id={id}
+          token={token}
+          leadsData={leadsData}
+          handleOpenModal={() => setIsOpen(true)}
+        />
       </div>
 
       <div>

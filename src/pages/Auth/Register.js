@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Layout from "../../layout/Layout";
 import InputField from "../../components/FormFields/InputField/InputField";
-import Checkbox from "../../components/FormFields/Checkbox/Checkbox";
 import { useForm } from "react-hook-form";
 import { MdDriveFileRenameOutline, MdPassword } from "react-icons/md";
 import Button from "../../components/Button";

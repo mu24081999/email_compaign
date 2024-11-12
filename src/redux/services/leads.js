@@ -110,7 +110,7 @@ export const getCompaignLeads = (token, compaign_id) => async (dispatch) => {
     dispatch(invalidRequest(e.message));
   }
 };
-export const deleteLeadRec = (token, id) => async (dispatch) => {
+export const deleteLeadRec = (token, ids, compaign_id) => async (dispatch) => {
   try {
     dispatch(leadRequestLoading());
     const config = {
@@ -119,13 +119,16 @@ export const deleteLeadRec = (token, id) => async (dispatch) => {
         "x-access-token": token,
       },
     };
-    await axios.delete(`${backendURL}/lead/${id}`, config).then((response) => {
-      if (response?.data?.statusCode !== 200) {
-        toast.error(response.data.message);
-        return dispatch(invalidRequest(response.data.message));
-      }
-      dispatch(getAllLeads(response.data.data));
-    });
+    await axios
+      .post(`${backendURL}/lead/delete-bulk`, { ids }, config)
+      .then((response) => {
+        if (response?.data?.statusCode !== 200) {
+          toast.error(response.data.message);
+          return dispatch(invalidRequest(response.data.message));
+        }
+        dispatch(deleteLead(response.data.data));
+        dispatch(getCompaignLeads(token, compaign_id));
+      });
   } catch (e) {
     dispatch(invalidRequest(e.message));
   }

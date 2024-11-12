@@ -82,11 +82,62 @@ export const sendCompaignApi = (token, data, id) => async (dispatch) => {
           toast.error(response.data.message);
           return dispatch(invalidRequest(response.data.message));
         }
+        dispatch(readCompaign(token, id));
         // dispatch(getTemplates(response.data.data));
         toast.success(response.data.message);
       });
   } catch (error) {
     return dispatch(invalidRequest(error.message));
+  }
+};
+export const pauseCompaignRec = (token, data) => async (dispatch) => {
+  try {
+    dispatch(compaignRequestLoading());
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        "x-access-token": token,
+      },
+    };
+    await axios
+      .post(`${backendURL}/compaign/pause-compaign`, data, config)
+      .then((response) => {
+        console.log("🚀 ~ .then ~ response:", response);
+        if (response?.data?.statusCode !== 200) {
+          toast.error(response.data.message);
+          return dispatch(invalidRequest(response.data.message));
+        }
+        dispatch(updateCompaign(response.data.message));
+        dispatch(readCompaign(token, data.compaign_id));
+        toast.success(response.data.message);
+      });
+  } catch (e) {
+    dispatch(invalidRequest(e.message));
+  }
+};
+export const resumeCompaignRec = (token, data) => async (dispatch) => {
+  try {
+    dispatch(compaignRequestLoading());
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        "x-access-token": token,
+      },
+    };
+    await axios
+      .post(`${backendURL}/compaign/resume-compaign`, data, config)
+      .then((response) => {
+        console.log("🚀 ~ .then ~ response:", response);
+        if (response?.data?.statusCode !== 200) {
+          toast.error(response.data.message);
+          return dispatch(invalidRequest(response.data.message));
+        }
+        dispatch(updateCompaign(response.data.message));
+        dispatch(readCompaign(token, data.compaign_id));
+        toast.success(response.data.message);
+      });
+  } catch (e) {
+    dispatch(invalidRequest(e.message));
   }
 };
 export const updateCompaignRec = (token, data, id) => async (dispatch) => {

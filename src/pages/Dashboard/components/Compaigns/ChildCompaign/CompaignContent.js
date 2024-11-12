@@ -6,12 +6,20 @@ import Shadule from "./components/Shedule/Shadule";
 import Options from "./components/Options/Options";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { compaignAnalytics } from "../../../../../redux/services/compaign";
+import {
+  compaignAnalytics,
+  pauseCompaignRec,
+  resumeCompaignRec,
+} from "../../../../../redux/services/compaign";
+import Button from "../../../../../components/Button";
+import { CiPause1 } from "react-icons/ci";
+import { CiPlay1 } from "react-icons/ci";
+
 const CompaignContent = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
-  const { token } = useSelector((state) => state.auth);
-  const { compaignAnalytics: analystics } = useSelector(
+  const { token, user_id } = useSelector((state) => state.auth);
+  const { compaignAnalytics: analystics, compaign } = useSelector(
     (state) => state.compaign
   );
   const tabsData = [
@@ -37,11 +45,48 @@ const CompaignContent = () => {
       content: <Options />,
     },
   ];
+  const pauseCompaign = () => {
+    const params = {
+      compaign_id: id,
+      user_id: user_id,
+    };
+    dispatch(pauseCompaignRec(token, params));
+  };
+  const resumeCompaign = () => {
+    const params = {
+      compaign_id: id,
+      user_id: user_id,
+    };
+    dispatch(resumeCompaignRec(token, params));
+  };
   useEffect(() => {
     dispatch(compaignAnalytics(token, id));
   }, [token, id, dispatch]);
   return (
     <div>
+      <div className="float-end">
+        {compaign?.status === "paused" ? (
+          <Button
+            className="flex gap-2 py-3 bg-green-500 hover:bg-green-600"
+            onClick={resumeCompaign}
+          >
+            <span className="mt-1">
+              <CiPlay1 />
+            </span>
+            <span>Resume Compaign</span>
+          </Button>
+        ) : (
+          <Button
+            className="flex gap-2 py-3 bg-black hover:bg-gray-800"
+            onClick={pauseCompaign}
+          >
+            <span className="mt-1">
+              <CiPause1 />
+            </span>
+            <span>Pause Compaign</span>
+          </Button>
+        )}
+      </div>
       <Tabs tabsData={tabsData} />
     </div>
   );

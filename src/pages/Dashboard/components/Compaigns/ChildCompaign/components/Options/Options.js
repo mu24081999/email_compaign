@@ -2,13 +2,11 @@ import React, { useEffect, useState } from "react";
 import ReactSelectField from "../../../../../../../components/FormFields/ReactSelectField/ReactSelectField";
 import { useForm } from "react-hook-form";
 import Heading from "../../../../../../../components/Heading";
-import InputField from "../../../../../../../components/FormFields/InputField/InputField";
 import Button from "../../../../../../../components/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import Switcher from "../../../../../../../components/FormFields/Switcher/Switcher";
 import { FaRegEye } from "react-icons/fa";
-import { getOptionsApi } from "../../../../../../../redux/services/options";
 import { getUserTemplateList } from "../../../../../../../redux/services/template";
 import Modal from "../../../../../../../components/Modal";
 import ModalBody from "./components/ModalBody";
@@ -17,10 +15,9 @@ import { getSchedulesApi } from "../../../../../../../redux/services/schedule";
 import {
   readCompaign,
   sendCompaignApi,
-  updateCompaignRec,
 } from "../../../../../../../redux/services/compaign";
-import { getCompaignDetails } from "../../../../../../../redux/slices/compaign";
 import { getEmailAccountsApi } from "../../../../../../../redux/services/email";
+import { toast } from "react-toastify";
 const Options = () => {
   const {
     handleSubmit,
@@ -64,7 +61,11 @@ const Options = () => {
           ? selectedSequence?.id
           : undefined,
     };
-    console.log("🚀 ~ formSubmit ~ data:", params);
+    if (!selectedTemplate?.id) {
+      return toast.error(
+        "Please select a template or sequence to lounch the template"
+      );
+    }
     dispatch(sendCompaignApi(token, params, params?.compaign_id));
     // dispatch(addOptionsApi(token, params));
   };
