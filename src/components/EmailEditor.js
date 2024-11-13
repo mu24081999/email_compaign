@@ -11,6 +11,7 @@ import {
 } from "../redux/services/template";
 import { FaPlus } from "react-icons/fa";
 import SwiperComponent from "../components/Swiper";
+import Loader from "./Loader/Loader";
 const EmailEditorComponent = () => {
   const {
     handleSubmit,
@@ -22,6 +23,7 @@ const EmailEditorComponent = () => {
   const emailEditorRef = useRef();
   const dispatch = useDispatch();
   const [editorHtml, setEditorHtml] = useState(null);
+  const [loading, setLoading] = useState(true);
   // Placeholder Data for testing (you can use dynamic user data instead)
   const sampleUserData = {
     firstname: "John",
@@ -151,9 +153,15 @@ const EmailEditorComponent = () => {
           onSubmit={handleSubmit(addTemplate)}
           className=" space-y-6 bg-white border p-5 rounded-xl shadow-md"
         >
-          <div className="relative overflow-hidden shadow-lg border rounded">
+          {loading && <Loader />}
+          <div
+            className={`${
+              loading ? "hidden" : ""
+            } relative overflow-hidden shadow-lg border rounded`}
+          >
             <EmailEditor
               ref={emailEditorRef}
+              onReady={() => setLoading(false)}
               style={{
                 maxWidth: "100%",
                 overflow: "scroll",

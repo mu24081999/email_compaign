@@ -61,10 +61,11 @@ const Options = () => {
           ? selectedSequence?.id
           : undefined,
     };
-    if (!selectedTemplate?.id) {
-      return toast.error(
-        "Please select a template or sequence to lounch the template"
-      );
+    if (emailTypeWatcher === "template" && !selectedTemplate?.id) {
+      return toast.error("Please select a template to lounch the template");
+    }
+    if (emailTypeWatcher === "sequence" && !selectedSequence?.id) {
+      return toast.error("Please select a sequence to lounch the template");
     }
     dispatch(sendCompaignApi(token, params, params?.compaign_id));
     // dispatch(addOptionsApi(token, params));

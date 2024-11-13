@@ -1,9 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Tabs from "../../components/Tabs";
 // compornents
 import Dashboard from "./components/Dashboard/Dashboard";
-import Profile from "./components/Profile/Profile";
-import Settings from "./components/Settings/Settings";
 import EmailTemplate from "../EmailTemplate/EmailTemplate";
 import Compaigns from "./components/Compaigns/Compaigns";
 import EmailAccounts from "./components/EmailAccounts/EmailAccounts";
@@ -12,7 +10,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { getWarmupApi, sendWarmupEmail } from "../../redux/services/warmup";
 import { getEmailAccountsApi } from "../../redux/services/email";
 import { toast } from "react-toastify";
-import Layout from "../../layout/Layout";
 import LineChart from "../../components/Charts/LineChart";
 import {
   getCompaignsEmailAnalytics,
@@ -27,7 +24,8 @@ const DashboardContent = () => {
   const { email_report, lead_report, isLoading } = useSelector(
     (state) => state.dashboard
   );
-
+  const [emailsData, setEmailsData] = useState({});
+  const [leadsData, setLeadsData] = useState({});
   const dispatch = useDispatch();
   const tabsData = [
     {
@@ -164,6 +162,16 @@ const DashboardContent = () => {
 
     return () => {};
   }, [user_id, token, dispatch]);
+  useEffect(() => {
+    if (email_report) {
+      setEmailsData(email_report);
+    }
+  }, [email_report]);
+  useEffect(() => {
+    if (lead_report) {
+      setLeadsData(lead_report);
+    }
+  }, [lead_report]);
   return (
     <div>
       {/* <Tabs tabsData={tabsData} /> */}
@@ -172,14 +180,14 @@ const DashboardContent = () => {
         {isLoading ? (
           <Loader />
         ) : (
-          <LineChart emailData={email_report} mainTitle={"Emails Report"} />
+          <LineChart emailData={emailsData} mainTitle={"Emails Report"} />
         )}
       </div>
       <div className="p-5 bg-white border rounded-xl shadow-lg mt-5">
         {isLoading ? (
           <Loader />
         ) : (
-          <Bar leadsData={lead_report} mainTitle={"Leads Report"} />
+          <Bar leadsData={leadsData} mainTitle={"Leads Report"} />
         )}
       </div>
     </div>

@@ -13,15 +13,11 @@ import { MdOutlineScreenSearchDesktop } from "react-icons/md";
 
 import {
   FaCogs,
-  FaEnvelopeOpen,
   FaRegEnvelope,
   FaRegEnvelopeOpen,
   FaRegUser,
   FaRegUserCircle,
-  FaShareAlt,
-  FaUserAlt,
 } from "react-icons/fa";
-import logo from "../assets/1.png";
 import logo2 from "../assets/2.png";
 import Dropdown from "./Dropdown";
 const SidebarWithNavbar = ({ component }) => {

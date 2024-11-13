@@ -193,11 +193,14 @@ const Pricing = () => {
     if (isAuthenticated) navigateTo("/");
   }, [isAuthenticated, navigateTo]);
   const getPaymentIntend = async (obj) => {
-    await dispatch(
+    dispatch(
       createPaymentIntendApi(token, {
-        amount: typeWatcher
-          ? obj?.monthly_price * 100 * 12
-          : obj?.monthly_price * 100,
+        amount: parseInt(
+          (typeWatcher
+            ? obj?.monthly_price * 100 * 12
+            : obj?.monthly_price * 100
+          ).toFixed(2)
+        ),
       })
     );
     setSelected(obj);
@@ -216,6 +219,10 @@ const Pricing = () => {
     date.setFullYear(date.getFullYear() + 1);
     return date;
   }
+  console.log(
+    "🚀 ~ getDateAfterOneMonth ~ getDateAfterOneMonth:",
+    moment(new Date(getDateAfterOneMonth())).format("YYYY-MM-DD")
+  );
 
   const afterPayment = async () => {
     const data = {
@@ -225,12 +232,8 @@ const Pricing = () => {
       discount_percentage: selected?.discount_percentage,
       start_date: moment(Date.now()).format("YYYY-MM-DDTHH:mm:ss"),
       end_date: typeWatcher
-        ? moment(getDateAfterOneYear().toLocaleDateString()).format(
-            "YYYY-MM-DDTHH:mm:ss"
-          )
-        : moment(getDateAfterOneMonth().toLocaleDateString()).format(
-            "YYYY-MM-DDTHH:mm:ss"
-          ),
+        ? moment(new Date(getDateAfterOneYear())).format("YYYY-MM-DD")
+        : moment(new Date(getDateAfterOneMonth())).format("YYYY-MM-DD"),
       yearly_price: typeWatcher ? selected?.yearly_price : 0.0,
     };
     console.log("🚀 ~ afterPayment ~ data:", data);
