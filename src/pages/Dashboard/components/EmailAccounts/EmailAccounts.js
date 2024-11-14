@@ -16,7 +16,7 @@ const EmailAccounts = () => {
   } = useForm();
   const navigateTo = useNavigate();
   const dispatch = useDispatch();
-  const { token } = useSelector((state) => state.auth);
+  const { token, user_id } = useSelector((state) => state.auth);
   const { emails } = useSelector((state) => state.email);
   const [isOpen, setIsOpen] = useState(false);
   const [selectedEmail, setSelectedEmail] = useState(false);
@@ -57,8 +57,10 @@ const EmailAccounts = () => {
     setIsOpen(false);
   };
   useEffect(() => {
-    dispatch(getEmailAccountsApi(token));
-  }, [token, dispatch]);
+    const query = `user_id=${user_id}`;
+
+    dispatch(getEmailAccountsApi(token, query));
+  }, [token, dispatch, user_id]);
   return (
     <Layout
       component={

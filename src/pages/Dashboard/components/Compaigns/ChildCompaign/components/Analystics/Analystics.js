@@ -23,8 +23,8 @@ const Analystics = ({ data }) => {
         />
         <DashboardCard
           icon={<BsEnvelopeCheck color="indigo" size={30} />}
-          heading={"Emails Delievered"}
-          value={data?.sent}
+          heading={"Emails Remaining"}
+          value={data?.remaining}
         />
         <DashboardCard
           icon={<FaRegEnvelopeOpen color="cyan" size={30} />}

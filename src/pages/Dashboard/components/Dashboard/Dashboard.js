@@ -109,8 +109,8 @@ const Dashboard = () => {
         />
         <DashboardCard
           icon={<BsEnvelopeCheck color="indigo" size={30} />}
-          heading={"Emails Delievered"}
-          value={analytics?.sent}
+          heading={"Emails Remaining"}
+          value={analytics?.remaining}
         />
         <DashboardCard
           icon={<FaRegEnvelopeOpen color="cyan" size={30} />}

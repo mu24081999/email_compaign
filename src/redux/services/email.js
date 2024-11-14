@@ -74,6 +74,7 @@ export const updateEmailAccountApi = (token, data, id) => async (dispatch) => {
   }
 };
 export const getEmailAccountsApi = (token, query) => async (dispatch) => {
+  console.log("🚀 ~ getEmailAccountsApi ~ query:", query);
   try {
     dispatch(emailRequestLoading());
     const config = {

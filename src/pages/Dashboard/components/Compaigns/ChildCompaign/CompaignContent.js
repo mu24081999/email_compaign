@@ -76,15 +76,17 @@ const CompaignContent = () => {
             <span>Resume Compaign</span>
           </Button>
         ) : (
-          <Button
-            className="flex gap-2 py-3 bg-black hover:bg-gray-800"
-            onClick={pauseCompaign}
-          >
-            <span className="mt-1">
-              <CiPause1 />
-            </span>
-            <span>Pause Compaign</span>
-          </Button>
+          compaign?.status === "sending" && (
+            <Button
+              className="flex gap-2 py-3 bg-black hover:bg-gray-800"
+              onClick={pauseCompaign}
+            >
+              <span className="mt-1">
+                <CiPause1 />
+              </span>
+              <span>Pause Compaign</span>
+            </Button>
+          )
         )}
       </div>
       <Tabs tabsData={tabsData} />
