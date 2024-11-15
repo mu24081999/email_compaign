@@ -6,6 +6,7 @@ export const warmupSlice = createSlice({
   initialState: {
     isLoading: false,
     warmupData: {},
+    warmups: [],
     message: "",
     error: "",
     type: "",
@@ -27,6 +28,11 @@ export const warmupSlice = createSlice({
       state.isLoading = false;
       state.type = "success";
     },
+    getWarmups: (state, action) => {
+      state.warmups = action.payload;
+      state.isLoading = false;
+      state.type = "success";
+    },
     addWarmup: (state, action) => {
       state.message = action.payload;
       state.isLoading = false;
@@ -44,6 +50,7 @@ export default warmupSlice.reducer;
 export const {
   warmupRequestLoading,
   getWarmup,
+  getWarmups,
   addWarmup,
   updateWarmup,
   invalidRequest,

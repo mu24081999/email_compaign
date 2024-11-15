@@ -102,26 +102,14 @@ const Sequence = () => {
     return html.replace(/\{\{(.*?)\}\}/g, (_, key) => data[key.trim()] || "");
   };
   const addSequence = (formData) => {
-    // const unlayer = emailEditorRef?.current?.editor;
-    // const data = unlayer?.exportHtml(({ html }) => {
-    //   const params = {
-    //     user_id: user_id,
-    //     subject: formData?.subject,
-    //     template_id: currentTemplate?.id,
-    //     compaign_id: id,
-    //     content: replacePlaceholdersInHtml(html, sampleUserData),
-    //   };
-    //   console.log(params);
-    //   // dispatch(addSequenceRec(token, params));
-    // });
     const params = {
       user_id: user_id,
       subject: formData?.subject,
-      template_id: currentTemplate?.id,
-      compaign_id: id,
-      content: replacePlaceholdersInHtml(formData?.content, sampleUserData),
+      // template_id: currentTemplate?.id,
+      // compaign_id: id,
+      content: formData?.content + "</body>",
     };
-    console.log(params);
+    // console.log("params: ", params);
     dispatch(addSequenceRec(token, params));
   };
 

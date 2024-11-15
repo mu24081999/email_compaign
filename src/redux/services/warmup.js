@@ -5,6 +5,7 @@ import {
   addWarmup,
   updateWarmup,
   getWarmup,
+  getWarmups,
 } from "../slices/warmup";
 
 import { toast } from "react-toastify";
@@ -56,6 +57,29 @@ export const sendWarmupEmail = (token, data) => async (dispatch) => {
     return dispatch(invalidRequest(error.message));
   }
 };
+
+export const getUserWarmupsApi = (token, user_id) => async (dispatch) => {
+  try {
+    dispatch(warmupRequestLoading());
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        "x-access-token": token,
+      },
+    };
+    await axios
+      .get(`${backendURL}/warmup-email/user/${user_id}`, config)
+      .then((response) => {
+        if (response?.data?.statusCode !== 200) {
+          toast.error(response.data.message);
+          return dispatch(invalidRequest(response.data.message));
+        }
+        dispatch(getWarmups(response.data.data.warmups));
+      });
+  } catch (error) {
+    return dispatch(invalidRequest(error.message));
+  }
+};
 export const getWarmupApi = (token, email_id) => async (dispatch) => {
   try {
     dispatch(warmupRequestLoading());
@@ -88,7 +112,7 @@ export const updateWarmupRec = (token, data, id) => async (dispatch) => {
       },
     };
     await axios
-      .put(`${backendURL}/warmup-emai/${id}l`, data, config)
+      .put(`${backendURL}/warmup-email/${id}`, data, config)
       .then((response) => {
         if (response?.data?.statusCode !== 200) {
           toast.error(response.data.message);

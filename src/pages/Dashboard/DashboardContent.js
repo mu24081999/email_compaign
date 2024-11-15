@@ -7,7 +7,10 @@ import Compaigns from "./components/Compaigns/Compaigns";
 import EmailAccounts from "./components/EmailAccounts/EmailAccounts";
 import Sequence from "./components/Sequence/Sequence";
 import { useDispatch, useSelector } from "react-redux";
-import { getWarmupApi, sendWarmupEmail } from "../../redux/services/warmup";
+import {
+  getUserWarmupsApi,
+  sendWarmupEmail,
+} from "../../redux/services/warmup";
 import { getEmailAccountsApi } from "../../redux/services/email";
 import { toast } from "react-toastify";
 import LineChart from "../../components/Charts/LineChart";
@@ -24,6 +27,7 @@ const DashboardContent = () => {
   const { email_report, lead_report, isLoading } = useSelector(
     (state) => state.dashboard
   );
+  const { warmups } = useSelector((state) => state.warmup);
   const [emailsData, setEmailsData] = useState({});
   const [leadsData, setLeadsData] = useState({});
   const dispatch = useDispatch();
@@ -116,7 +120,7 @@ const DashboardContent = () => {
     const shuffled = emails.sort(() => 0.5 - Math.random()); // Shuffle the array
     return shuffled.slice(0, email_count); // Pick the first 2 emails
   };
-  const data = getRandomEmails(emailProposals, 2);
+  const data = getRandomEmails(emailProposals, 1);
   console.log("🚀 ~ DashboardContent ~ data:", data);
 
   // Function to send email using the backend
@@ -126,12 +130,12 @@ const DashboardContent = () => {
         email_id: 1,
         // google_app_password: "umssnlleadatrdji",
         google_app_password: fromEmail?.password,
-        email_type: "gmail",
+        email_type: fromEmail?.type,
         email_to: toEmail?.email,
-        // mail_provider,
+        mail_provider: fromEmail?.mail_provider,
         sender_first_name: "Muhammad Umar",
         sender_last_name: "Liaqat",
-        subject: "SEO & Digital Marketing Services Proposal",
+        subject: toEmail?.subject,
         // auth_type,
         body: toEmail?.html,
       };
@@ -144,22 +148,25 @@ const DashboardContent = () => {
   // Effect to trigger sending email daily
   useEffect(() => {
     const interval = setInterval(() => {
-      Array.isArray(emails?.accountsData) &&
-        emails?.accountsData?.forEach((element) => {
-          data?.map(async (email) => {
-            await sendEmail(email, element);
-          });
+      Array.isArray(warmups) &&
+        warmups?.forEach((element) => {
+          for (let i = 0; i < element?.daily_limit; i++) {
+            sendEmail(data[0], element?.email);
+          }
+          // data?.map(async (email) => {
+          //   await sendEmail(email, element);
+          // });
         });
-    }, 24 * 60 * 60 * 1000); // Run every 24 hours
+    }, 24 * 60 * 60 * 10000); // Run every 24 hours 24 * 60 * 60 *
 
     return () => clearInterval(interval); // Cleanup on unmount
-  }, [data, sendEmail, emails]);
+  }, [data, sendEmail, warmups]);
   useEffect(() => {
     const query = `user_id=${user_id}`;
     dispatch(getEmailAccountsApi(token, query));
     dispatch(getCompaignsEmailAnalytics(token));
     dispatch(getCompaignsLeadAnalytics(token));
-
+    dispatch(getUserWarmupsApi(token, user_id));
     return () => {};
   }, [user_id, token, dispatch]);
   useEffect(() => {

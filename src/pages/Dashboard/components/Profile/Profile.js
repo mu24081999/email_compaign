@@ -3,17 +3,12 @@ import Layout from "../../../../layout/Layout";
 import InputField from "../../../../components/FormFields/InputField/InputField";
 import { useForm } from "react-hook-form";
 import Heading from "../../../../components/Heading";
-import {
-  MdDriveFileRenameOutline,
-  MdEmail,
-  MdPassword,
-  MdPhone,
-} from "react-icons/md";
+import { MdDriveFileRenameOutline } from "react-icons/md";
 import Button from "../../../../components/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { updateUserRec } from "../../../../redux/services/user";
-import _ from "lodash";
+import _, { split } from "lodash";
 
 const UserProfile = () => {
   const {
@@ -32,7 +27,8 @@ const UserProfile = () => {
 
   const handleProfileUpdate = (data) => {
     const params = {
-      name: data?.fistname + " " + data.lastname,
+      firstname: data?.firstname,
+      lastname: data?.lastname,
       email: data?.email,
       phone: data?.phone,
       username: data?.username,
@@ -42,11 +38,11 @@ const UserProfile = () => {
   };
 
   useEffect(() => {
-    setValue("firstname", _(user?.name).split(" ")[0]);
-    setValue("lastname", _(user?.name).split(" ")[1]);
+    setValue("firstname", user?.firstname);
+    setValue("lastname", user?.lastname);
     setValue("email", _(user?.email));
     setValue("username", _(user?.username));
-  }, [user]);
+  }, [user, setValue]);
 
   return (
     <Layout
@@ -68,7 +64,7 @@ const UserProfile = () => {
                 >
                   <div>
                     <InputField
-                      name="fistname"
+                      name="firstname"
                       control={control}
                       svg={<MdDriveFileRenameOutline />}
                       errors={errors}
@@ -119,22 +115,6 @@ const UserProfile = () => {
                       svg={<MdDriveFileRenameOutline />}
                       errors={errors}
                       label="Email Address"
-                      rules={{
-                        required: {
-                          value: true,
-                          message: "Field required!",
-                        },
-                      }}
-                    />{" "}
-                  </div>
-                  <div>
-                    <InputField
-                      name="phone"
-                      type="number"
-                      control={control}
-                      svg={<MdDriveFileRenameOutline />}
-                      errors={errors}
-                      label="Phone Number"
                       rules={{
                         required: {
                           value: true,

@@ -12,7 +12,7 @@ const Modal = ({
 }) => {
   const sizeClasses = {
     sm: "w-10/12 md:w-1/4",
-    md: "w-10/12 md:w-1/2",
+    md: "w-10/12 md:w-1/2 mt-12",
     lg: "w-10/12 md:w-3/4",
     xl: "w-[99%]  h-[90vh] mt-20",
   };
@@ -40,7 +40,9 @@ const Modal = ({
 
         {/* Modal Header */}
         <div className="px-4 py-3 border-b border-gray-200">
-          <h2 className="text-xl font-semibold text-gray-600">{title}</h2>
+          <h2 className="text-xl font-semibold text-gray-600 dark:text-white">
+            {title}
+          </h2>
         </div>
 
         {/* Modal Body */}

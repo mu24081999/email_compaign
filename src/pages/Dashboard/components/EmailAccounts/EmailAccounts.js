@@ -20,13 +20,12 @@ const EmailAccounts = () => {
   const { emails } = useSelector((state) => state.email);
   const [isOpen, setIsOpen] = useState(false);
   const [selectedEmail, setSelectedEmail] = useState(false);
-  console.log("🚀 ~ EmailAccounts ~ selectedEmail:", selectedEmail);
   const handleSelectedEmail = () => {};
   const columns = [
     {
       label: "Email",
       accessor: "email",
-      type: "link",
+      type: "button",
       onClick: () => handleSelectedEmail,
     },
     { label: "Emails Sent", accessor: "emails_sent" },
@@ -81,12 +80,12 @@ const EmailAccounts = () => {
               dataFromChild={handleChildData}
             />
           </div>
-          <div>
+          <div className="">
             {/* Modal Component */}
             <Modal
               isOpen={isOpen}
               onClose={handleClose}
-              title="Warm up Emails "
+              title="Warm-Up "
               body=<ModalBody selectedEmail={selectedEmail} />
               // onSave={handleSave}
               saveButtonText="Save Changes"

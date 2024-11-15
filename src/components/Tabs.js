@@ -10,7 +10,7 @@ const Tabs = ({ tabsData }) => {
   };
 
   return (
-    <div className="h-screen overflow-scrol">
+    <div className="h-fit overflow-scrol">
       {/* Tabs navigation */}
       <div className="mb-4 border-b border-gray-200 dark:border-gray-700">
         <ul
@@ -44,7 +44,7 @@ const Tabs = ({ tabsData }) => {
         {tabsData.map((tab) => (
           <div
             key={tab.id}
-            className={`  p-4 rounded-lg bg-gray-50 dark:bg-gray-800 ${
+            className={`  p-4 rounded-lg bg-white dark:bg-gray-800 ${
               activeTab === tab.id ? "block" : "hidden"
             }`}
             id={tab.id}
