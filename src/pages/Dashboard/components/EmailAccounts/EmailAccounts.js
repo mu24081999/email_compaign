@@ -21,6 +21,8 @@ const EmailAccounts = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedEmail, setSelectedEmail] = useState(false);
   const handleSelectedEmail = () => {};
+  const [pagination, setPagination] = useState({});
+
   const columns = [
     {
       label: "Email",
@@ -56,10 +58,18 @@ const EmailAccounts = () => {
     setIsOpen(false);
   };
   useEffect(() => {
+    setPagination(emails?.pagination);
+  }, [emails]);
+  useEffect(() => {
     const query = `user_id=${user_id}`;
 
     dispatch(getEmailAccountsApi(token, query));
   }, [token, dispatch, user_id]);
+  const fetchData = (page) => {
+    const query = `user_id=${user_id}&&page=${page}`;
+
+    dispatch(getEmailAccountsApi(token, query));
+  };
   return (
     <Layout
       component={
@@ -78,6 +88,9 @@ const EmailAccounts = () => {
               columns={columns}
               data={emails?.accountsData}
               dataFromChild={handleChildData}
+              totalItems={pagination?.totalItems}
+              itemsPerPage={10}
+              onPageChange={(page) => fetchData(page)}
             />
           </div>
           <div className="">

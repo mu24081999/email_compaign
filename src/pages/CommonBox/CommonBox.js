@@ -1,13 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Layout from "../../layout/Layout";
-
+import { useDispatch, useSelector } from "react-redux";
+import { SidebarCom } from "./components/Sidebar";
+import { getEmailAccountsApi } from "../../redux/services/email";
+import { getUserCompaignsApi } from "../../redux/services/compaign";
 const CommonBox = () => {
+  const dispatch = useDispatch();
+  const { token, user_id } = useSelector((state) => state.auth);
+  useEffect(() => {
+    const query = `no_limit=true`;
+    dispatch(getUserCompaignsApi(token, user_id, query));
+  }, [user_id, token, dispatch]);
   return (
     <Layout
       component={
         <div className="">
           <main class="flex w-full h-full shadow-lg rounded-3xl">
-            <section class="flex flex-col w-2/12 bg-white rounded-l-3xl">
+            {/* <section class="flex flex-col w-2/12 bg-white rounded-l-3xl">
               <div class="w-16 mx-auto mt-12 mb-5 p-4 bg-gray-900 rounded-2xl text-white">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -30,122 +39,9 @@ const CommonBox = () => {
                 <div className="w-52 overflow-hidden border py-5 bg-black text-white cursor-pointer px-2 rounded-lg">
                   umarliaqat@gmail.com
                 </div>
-                {/* <a
-                  href="#"
-                  class="relative w-16 p-4 bg-purple-100 text-purple-900 rounded-2xl mb-4"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="1"
-                      d="M8 4H6a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-2m-4-1v8m0 0l3-3m-3 3L9 8m-5 5h2.586a1 1 0 01.707.293l2.414 2.414a1 1 0 00.707.293h3.172a1 1 0 00.707-.293l2.414-2.414a1 1 0 01.707-.293H20"
-                    />
-                  </svg>
-                  <span class="absolute -top-2 -right-2 bg-red-600 h-6 w-6 p-2 flex justify-center items-center text-white rounded-full">
-                    3
-                  </span>
-                </a>
-                <a
-                  href="#"
-                  class="w-16 p-4 border text-gray-700 rounded-2xl mb-4"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="1"
-                      d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"
-                    />
-                  </svg>
-                </a>
-                <a
-                  href="#"
-                  class="w-16 p-4 border text-gray-700 rounded-2xl mb-4"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="1"
-                      d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                    />
-                  </svg>
-                </a>
-                <a
-                  href="#"
-                  class="w-16 p-4 border text-gray-700 rounded-2xl mb-4"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="1"
-                      d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"
-                    />
-                  </svg>
-                </a>
-                <a
-                  href="#"
-                  class="w-16 p-4 border text-gray-700 rounded-2xl mb-24"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="1"
-                      d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-                    />
-                  </svg>
-                </a>
-                <a href="#" class="w-16 p-4 border text-gray-700 rounded-2xl">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="1"
-                      d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
-                    />
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="1"
-                      d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                    />
-                  </svg>
-                </a> */}
               </nav>
-            </section>
+            </section> */}
+            <SidebarCom />
             <section class="flex flex-col pt-3 w-4/12 bg-gray-50 h-full overflow-y-scroll">
               <label class="px-3">
                 <input

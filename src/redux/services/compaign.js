@@ -187,29 +187,33 @@ export const getAllCompaignsApi = (token) => async (dispatch) => {
     dispatch(invalidRequest(e.message));
   }
 };
-export const getUserCompaignsApi = (token, user_id) => async (dispatch) => {
-  try {
-    dispatch(compaignRequestLoading());
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-        "x-access-token": token,
-      },
-    };
-    await axios
-      .get(`${backendURL}/compaign/user-compaigns/${user_id}`, config)
-      .then((response) => {
-        console.log("🚀 ~ .then ~ response:", response);
-        if (response?.data?.statusCode !== 200) {
-          toast.error(response.data.message);
-          return dispatch(invalidRequest(response.data.message));
-        }
-        dispatch(getCompaigns(response.data.data));
-      });
-  } catch (e) {
-    dispatch(invalidRequest(e.message));
-  }
-};
+export const getUserCompaignsApi =
+  (token, user_id, query) => async (dispatch) => {
+    try {
+      dispatch(compaignRequestLoading());
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          "x-access-token": token,
+        },
+      };
+      await axios
+        .get(
+          `${backendURL}/compaign/user-compaigns/${user_id}?${query}`,
+          config
+        )
+        .then((response) => {
+          console.log("🚀 ~ .then ~ response:", response);
+          if (response?.data?.statusCode !== 200) {
+            toast.error(response.data.message);
+            return dispatch(invalidRequest(response.data.message));
+          }
+          dispatch(getCompaigns(response.data.data));
+        });
+    } catch (e) {
+      dispatch(invalidRequest(e.message));
+    }
+  };
 export const readCompaign = (token, id) => async (dispatch) => {
   try {
     dispatch(compaignRequestLoading());

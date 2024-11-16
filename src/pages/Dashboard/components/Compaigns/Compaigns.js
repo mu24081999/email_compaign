@@ -12,6 +12,8 @@ const Compaigns = () => {
   const { user_id, token } = useSelector((state) => state.auth);
   const { compaigns } = useSelector((state) => state.compaign);
   const [compaignsData, setCompaignsData] = useState([]);
+  const [pagination, setPagination] = useState({});
+
   useEffect(() => {
     dispatch(getUserCompaignsApi(token, user_id));
   }, [token, user_id, dispatch]);
@@ -69,8 +71,12 @@ const Compaigns = () => {
         });
       });
     setCompaignsData(data);
+    setPagination(compaigns?.pagination);
   }, [compaigns]);
-
+  const fetchData = (page) => {
+    const query = `page=${page}`;
+    dispatch(getUserCompaignsApi(token, user_id, query));
+  };
   const columns = [
     { label: "Title", accessor: "title", type: "link" },
     { label: "Status", accessor: "status" },
@@ -161,7 +167,13 @@ const Compaigns = () => {
             </Button>
           </div>
           <div>
-            <Table columns={columns} data={compaignsData} />
+            <Table
+              columns={columns}
+              data={compaignsData}
+              totalItems={pagination?.totalItems}
+              itemsPerPage={10}
+              onPageChange={(page) => fetchData(page)}
+            />
           </div>
         </div>
       }

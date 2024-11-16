@@ -20,6 +20,7 @@ const Dashboard = () => {
   const { analytics } = useSelector((state) => state.dashboard);
   const { compaigns } = useSelector((state) => state.compaign);
   const [compaignsData, setCompaignsData] = useState([]);
+  const [pagination, setPagination] = useState({});
   useEffect(() => {
     dispatch(getUserCompaignsApi(token, user_id));
   }, [token, user_id, dispatch]);
@@ -77,7 +78,12 @@ const Dashboard = () => {
         });
       });
     setCompaignsData(data);
+    setPagination(compaigns?.pagination);
   }, [compaigns]);
+  const fetchData = (page) => {
+    const query = `page=${page}`;
+    dispatch(getUserCompaignsApi(token, user_id, query));
+  };
   const columns = [
     { label: "Title", accessor: "title", type: "link" },
     { label: "Status", accessor: "status" },
@@ -129,7 +135,13 @@ const Dashboard = () => {
         />
       </div>
       <div className="pt-10">
-        <Table columns={columns} data={compaignsData} />
+        <Table
+          columns={columns}
+          data={compaignsData}
+          totalItems={pagination?.totalItems}
+          itemsPerPage={10}
+          onPageChange={(page) => fetchData(page)}
+        />
       </div>
     </div>
   );
