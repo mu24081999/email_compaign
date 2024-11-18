@@ -12,6 +12,7 @@ import optionsReducer from "./slices/options";
 import warmupReducer from "./slices/warmup";
 import dashboardReducer from "./slices/dashboard";
 import subscriptionReducer from "./slices/subscriptions";
+import uniboxReducer from "./slices/unibox";
 
 export const rootReducer = combineReducers({
   auth: authReducer,
@@ -27,4 +28,5 @@ export const rootReducer = combineReducers({
   warmup: warmupReducer,
   dashboard: dashboardReducer,
   subscription: subscriptionReducer,
+  unibox: uniboxReducer,
 });
