@@ -36,3 +36,26 @@ export const getCampaignRepliesApi =
       return dispatch(invalidRequest(error.message));
     }
   };
+export const sendEmailReply = (token, data) => async (dispatch) => {
+  try {
+    dispatch(uniboxRequestLoading());
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        "x-access-token": token,
+      },
+    };
+    await axios
+      .post(`${backendURL}/email/send-reply`, data, config)
+      .then((response) => {
+        if (response?.data?.statusCode !== 200) {
+          toast.error(response.data.message);
+          return dispatch(invalidRequest(response.data.message));
+        }
+        dispatch(sendSubReply(response.data.message));
+        toast.success(response.data.message);
+      });
+  } catch (error) {
+    return dispatch(invalidRequest(error.message));
+  }
+};

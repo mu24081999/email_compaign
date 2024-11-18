@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import { getCampaignRepliesApi } from "../../../redux/services/unibox.";
 import { TbLocationShare } from "react-icons/tb";
 
-export function SidebarCom() {
+export function SidebarCom({ setCampaignData }) {
   const {
     watch,
     control,
@@ -42,8 +42,9 @@ export function SidebarCom() {
     }
   }, [campaignInput, compaigns]);
 
-  const getEmailReplies = (id) => {
-    dispatch(getCampaignRepliesApi(token, id));
+  const getEmailReplies = (campaign) => {
+    setCampaignData(campaign);
+    dispatch(getCampaignRepliesApi(token, campaign?.id));
   };
 
   return (
@@ -73,7 +74,7 @@ export function SidebarCom() {
                   <li
                     className="list-item list-disc cursor-pointer hover:text-gray-300 transition-colors duration-200"
                     key={index}
-                    onClick={() => getEmailReplies(item.id)}
+                    onClick={() => getEmailReplies(item)}
                   >
                     {item.title}
                   </li>
