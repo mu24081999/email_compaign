@@ -105,12 +105,12 @@ const Login = () => {
                     />{" "}
                   </div>
 
-                  {/* <Link
-                    to="#"
+                  <Link
+                    to="/forgot-password"
                     className="ms-auto text-sm font-medium text-blue-600 hover:underline dark:text-blue-500"
                   >
                     Lost Password?
-                  </Link> */}
+                  </Link>
                 </div>
                 <Button
                   loading={isLoading}

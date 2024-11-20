@@ -8,6 +8,7 @@ import { useParams } from "react-router-dom";
 import Button from "../../../../components/Button";
 import {
   addSequenceRec,
+  deleteSequenceRec,
   getUserSequenceList,
 } from "../../../../redux/services/sequence";
 import { sendCompaign } from "../../../../redux/services/compaign";
@@ -15,6 +16,9 @@ import { getEmailAccountsApi } from "../../../../redux/services/email";
 import TextEditor from "../../../../components/FormFields/TextEditor/TextEditor";
 import Layout from "../../../../layout/Layout";
 import SwiperComponent from "../../../../components/Swiper";
+import { FaEye, FaTrashAlt } from "react-icons/fa";
+import Modal from "../../../../components/Modal";
+import ModalBody from "./components/ModalBody";
 const Sequence = () => {
   const {
     handleSubmit,
@@ -34,6 +38,10 @@ const Sequence = () => {
     },
   });
   const emailEditorRef = useRef();
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedContent, setSelectedContent] = useState({});
+
+  const [showSlides, setShowSlides] = useState(true);
   // Default design (JSON)
 
   // const onLoad = () => {
@@ -49,6 +57,16 @@ const Sequence = () => {
   //     });
   //   });
   // };
+  const handleClose = () => {
+    setIsOpen(false);
+    setShowSlides(true);
+  };
+  const handleSelected = (template) => {
+    setIsOpen(true);
+    setShowSlides(false);
+    setSelectedContent(template.content);
+  };
+  const handleSave = () => {};
   const htmlToJSON = (html) => {
     const parser = new DOMParser();
     const doc = parser.parseFromString(html, "text/html");
@@ -153,17 +171,31 @@ const Sequence = () => {
             >
               {/* <!-- Centering wrapper --> */}
               <div className="relative flex flex-col text-gray-700 bg-white shadow-md bg-clip-border rounded-xl ">
-                <div className="relative mx-4 mt-4 overflow-hidden text-gray-700 bg-white bg-clip-border rounded-xl h-80">
+                <div className=" flex justify-center relative mx-4 mt-4 overflow-hidden text-gray-700 bg-white bg-clip-border rounded-xl h-80">
                   <iframe
                     srcDoc={sequence?.content}
                     className=" h-[300px] border border-gray-300 shadow-md"
                     title={sequence.title}
                   ></iframe>
                 </div>
-                <div className=" py-2">
+                <div className="bg-black text-white py-2 flex justify-between px-5">
                   <p className="block font-sans font-extrabold antialiased text-xl  leading-relaxed text-blue-gray-900 text-center">
                     {sequence?.subject ? sequence?.subject : "No Subject"}
                   </p>
+                  <div className="flex gap-5 flex-row-reverse pt-2">
+                    <span
+                      className="cursor-pointer"
+                      onClick={() => handleSelected(sequence)}
+                    >
+                      <FaEye />
+                    </span>
+                    <span
+                      className="cursor-pointer"
+                      onClick={() => deleteSequence(sequence.id)}
+                    >
+                      <FaTrashAlt />
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -171,6 +203,9 @@ const Sequence = () => {
         ),
       };
     });
+  const deleteSequence = (seqId) => {
+    dispatch(deleteSequenceRec(token, seqId, user_id));
+  };
   return (
     <Layout
       component={
@@ -213,8 +248,24 @@ const Sequence = () => {
               Submit
             </Button>
           </form>
-          <div className="py-5">
-            <SwiperComponent slides={slides} />
+          {showSlides && (
+            <div className="py-5">
+              <SwiperComponent length={3} slides={slides} />
+            </div>
+          )}
+
+          <div>
+            {/* Modal Component */}
+            <Modal
+              isOpen={isOpen}
+              onClose={handleClose}
+              title="Template Preview "
+              body=<ModalBody htmlContent={selectedContent} />
+              onSave={handleSave}
+              saveButtonText="Save Changes"
+              closeButtonText="Dismiss"
+              size="md"
+            />
           </div>
         </>
       }

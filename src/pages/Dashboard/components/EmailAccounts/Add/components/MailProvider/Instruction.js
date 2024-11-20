@@ -29,7 +29,7 @@ const Instruction = ({ handleMenu }) => {
       <ListItemCard
         icon={<FaRegEnvelope size={30} color="blue" />}
         title={"Connect Your Email Account"}
-        description="IMAP / SMPT"
+        description="IMAP / SMTP"
       />{" "}
       <div className="my-5 bg-gray-100 flex items-center justify-center ">
         <div className="max-w-2xl w-full bg-white shadow-lg rounded-xl p-8">
@@ -53,7 +53,7 @@ const Instruction = ({ handleMenu }) => {
               Retrieve the following credentials:
               <ul class="list-disc">
                 <li className="ms-5">
-                  <strong>SMPT Server:</strong>Usually something like
+                  <strong>SMTP Server:</strong>Usually something like
                   mail.yourdomain.com
                   <li className="ms-5">Port: 465 (SSL) or 587 (TLS)</li>
                 </li>

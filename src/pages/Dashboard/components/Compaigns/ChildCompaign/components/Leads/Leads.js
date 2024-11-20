@@ -13,11 +13,13 @@ const Leads = () => {
   const { id } = useParams();
   const [isOpen, setIsOpen] = useState(false);
   const [leadsData, setLeadsData] = useState([]);
+  const [pagination, setPagination] = useState();
   useEffect(() => {
     dispatch(getCompaignLeads(token, id));
   }, [token, dispatch, id]);
   useEffect(() => {
     setLeadsData(leads?.leadsData);
+    setPagination(leads?.pagination);
   }, [leads]);
   const handleOpen = () => {
     setIsOpen(true);
@@ -46,6 +48,7 @@ const Leads = () => {
           token={token}
           leadsData={leadsData}
           handleOpenModal={() => setIsOpen(true)}
+          pagination={pagination}
         />
       </div>
 

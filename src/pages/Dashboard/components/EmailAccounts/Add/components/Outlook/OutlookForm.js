@@ -5,7 +5,7 @@ import Button from "../../../../../../../components/Button";
 import ListItemCard from "../../../../../../../components/ListItemCard";
 import { useDispatch, useSelector } from "react-redux";
 import { addEmailAccountApi } from "../../../../../../../redux/services/email";
-import { FaEnvelope, FaLock } from "react-icons/fa";
+import { FaEdit, FaEnvelope, FaLock } from "react-icons/fa";
 import { PiMicrosoftOutlookLogo } from "react-icons/pi";
 
 const OutlookForm = ({ handleMenu }) => {
@@ -15,14 +15,17 @@ const OutlookForm = ({ handleMenu }) => {
     formState: { errors },
   } = useForm();
   const dispatch = useDispatch();
+  const { isLoading } = useSelector((state) => state.email);
   const { token, user_id } = useSelector((state) => state.auth);
   const formSubmit = (formData) => {
     console.log(formData);
     const params = {
+      firstname: formData?.firstname,
+      lastname: formData?.lastname,
       user_id: user_id,
       email: formData?.email,
       password: formData?.password,
-      type: "gmail",
+      type: "outlook",
     };
     dispatch(addEmailAccountApi(token, params));
   };
@@ -52,11 +55,49 @@ const OutlookForm = ({ handleMenu }) => {
         <div className="col-span-2">
           {" "}
           <InputField
+            name="firstname"
+            svg={<FaEdit />}
+            control={control}
+            errors={errors}
+            label="First Name"
+            rules={{
+              required: {
+                value: true,
+                message: "Field required!",
+              },
+            }}
+          />
+        </div>
+        <div className="col-span-2">
+          {" "}
+          <InputField
+            name="lastname"
+            svg={<FaEdit />}
+            control={control}
+            errors={errors}
+            label="Last Name"
+            rules={{
+              required: {
+                value: true,
+                message: "Field required!",
+              },
+            }}
+          />
+        </div>
+        <div className="col-span-2">
+          {" "}
+          <InputField
             name="email"
             svg={<FaEnvelope />}
             control={control}
             errors={errors}
             label="Email Account"
+            rules={{
+              required: {
+                value: true,
+                message: "Field required!",
+              },
+            }}
           />
         </div>
         <div className="col-span-2">
@@ -65,16 +106,22 @@ const OutlookForm = ({ handleMenu }) => {
             control={control}
             svg={<FaLock />}
             errors={errors}
-            label="Google App Password"
+            label="Account Password"
             description={
               <>
                 <p>Enter your account password </p>
               </>
             }
+            rules={{
+              required: {
+                value: true,
+                message: "Field required!",
+              },
+            }}
           />
         </div>
         <div>
-          <Button type="submit" className="py-2 ">
+          <Button loading={isLoading} type="submit" className="py-2 ">
             Submit
           </Button>
         </div>

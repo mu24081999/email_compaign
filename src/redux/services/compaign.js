@@ -258,7 +258,7 @@ export const compaignAnalytics = (token, id) => async (dispatch) => {
     dispatch(invalidRequest(e.message));
   }
 };
-export const deleteCompaignApi = (token, id) => async (dispatch) => {
+export const deleteCompaignApi = (token, ids, user_id) => async (dispatch) => {
   try {
     dispatch(compaignRequestLoading());
     const config = {
@@ -268,13 +268,14 @@ export const deleteCompaignApi = (token, id) => async (dispatch) => {
       },
     };
     await axios
-      .delete(`${backendURL}/compaign/compaign/${id}`, config)
+      .post(`${backendURL}/compaign/delete-compaigns`, { ids }, config)
       .then((response) => {
         if (response?.data?.statusCode !== 200) {
           toast.error(response.data.message);
           return dispatch(invalidRequest(response.data.message));
         }
         dispatch(deleteCompaign(response.data.message));
+        dispatch(getUserCompaignsApi(token, user_id));
       });
   } catch (e) {
     dispatch(invalidRequest(e.message));

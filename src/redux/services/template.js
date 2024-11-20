@@ -146,7 +146,7 @@ export const deleteTemplateRec = (token, id, user_id) => async (dispatch) => {
       },
     };
     const response = await axios
-      .post(`${backendURL}/template/delete/${id}`, config)
+      .delete(`${backendURL}/template/delete/${id}`, config)
       .then((response) => {
         if (response?.data?.statusCode !== 200) {
           toast.error(response.data.message);

@@ -179,6 +179,7 @@ const DashboardContent = () => {
       setLeadsData(lead_report);
     }
   }, [lead_report]);
+
   return (
     <div>
       {/* <Tabs tabsData={tabsData} /> */}

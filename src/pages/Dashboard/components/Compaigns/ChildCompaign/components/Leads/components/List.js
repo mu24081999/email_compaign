@@ -3,8 +3,19 @@ import Table from "../../../../../../../../components/Table";
 import Button from "../../../../../../../../components/Button";
 import { FaTrashAlt } from "react-icons/fa";
 import { useDispatch } from "react-redux";
-import { deleteLeadRec } from "../../../../../../../../redux/services/leads";
-const List = ({ leadsData, handleOpenModal, compaign_id, token }) => {
+import {
+  deleteLeadRec,
+  getCompaignLeads,
+} from "../../../../../../../../redux/services/leads";
+const List = ({
+  leadsData,
+  handleOpenModal,
+  compaign_id,
+  token,
+  pagination,
+  user_id,
+  id,
+}) => {
   const dispatch = useDispatch();
   const columns = [
     { label: "First Name", accessor: "firstname", type: "link" },
@@ -30,11 +41,22 @@ const List = ({ leadsData, handleOpenModal, compaign_id, token }) => {
       onClick: (ids) => deleteBulk(ids),
     },
   ];
+  const fetchData = (page) => {
+    const query = `page=${page}`;
 
+    dispatch(getCompaignLeads(token, id, query));
+  };
   return (
     <div>
       {Array?.isArray(leadsData) ? (
-        <Table columns={columns} data={leadsData} bulkActions={bulkActions} />
+        <Table
+          columns={columns}
+          data={leadsData}
+          bulkActions={bulkActions}
+          totalItems={pagination?.totalItems}
+          itemsPerPage={10}
+          onPageChange={(page) => fetchData(page)}
+        />
       ) : (
         <div className="lg:h-[80vh] items-center flex justify-center">
           <div className="flex flex-col justify-around gap-5">

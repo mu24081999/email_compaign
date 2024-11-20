@@ -5,7 +5,9 @@ import { MdDriveFileRenameOutline, MdPassword } from "react-icons/md";
 import Button from "../../components/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { registerUser } from "../../redux/services/auth";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import Checkbox from "../../components/FormFields/Checkbox/Checkbox";
 const Register = () => {
   const {
     handleSubmit,
@@ -20,16 +22,21 @@ const Register = () => {
   const { isAuthenticated, isLoading } = useSelector((state) => state.auth);
   const handleFormSubmit = async (data) => {
     const params = {
-      username: data.username,
+      firstname: data.firstname,
+      lastname: data.lastname,
       email: data.email,
       password: data.password,
     };
-    const is_registered = await dispatch(registerUser(params));
-    if (is_registered) {
-      // navigateTo("/subscriptions");
-      setIsRegistered(true);
+    if (data.password === data.confirmPassword) {
+      const is_registered = await dispatch(registerUser(params));
+      if (is_registered) {
+        setIsRegistered(true);
+      }
+    } else {
+      toast.error("Confirm password is invalid!");
     }
   };
+
   useEffect(() => {
     if (isRegistered) {
       navigateTo("/otp");
@@ -51,28 +58,44 @@ const Register = () => {
         </div>
         <div>
           <div className="w-full lg:max-w-xl p-6 space-y-8 sm:p-8 bg-white rounded-lg shadow-xl dark:bg-gray-800">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
-              Sign Up
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white text-center">
+              Please sign up to continue
             </h2>
             <form
               className="mt-8 space-y-6"
               onSubmit={handleSubmit(handleFormSubmit)}
             >
-              <div>
-                <InputField
-                  name="username"
-                  type="username"
-                  control={control}
-                  svg={<MdDriveFileRenameOutline />}
-                  errors={errors}
-                  label="Username"
-                  rules={{
-                    required: {
-                      value: true,
-                      message: "Field required!",
-                    },
-                  }}
-                />{" "}
+              <div className="grid grid-cols-2 gap-5">
+                <div>
+                  <InputField
+                    name="firstname"
+                    control={control}
+                    svg={<MdDriveFileRenameOutline />}
+                    errors={errors}
+                    label="First Name"
+                    rules={{
+                      required: {
+                        value: true,
+                        message: "Field required!",
+                      },
+                    }}
+                  />{" "}
+                </div>
+                <div>
+                  <InputField
+                    name="lastname"
+                    control={control}
+                    svg={<MdDriveFileRenameOutline />}
+                    errors={errors}
+                    label="Last Name"
+                    rules={{
+                      required: {
+                        value: true,
+                        message: "Field required!",
+                      },
+                    }}
+                  />{" "}
+                </div>
               </div>
               <div>
                 <InputField
@@ -106,11 +129,35 @@ const Register = () => {
                   }}
                 />
               </div>
+              <div>
+                <InputField
+                  name="confirmPassword"
+                  type="password"
+                  control={control}
+                  svg={<MdPassword />}
+                  errors={errors}
+                  label="Confirm Password"
+                  rules={{
+                    required: {
+                      value: true,
+                      message: "Field required!",
+                    },
+                  }}
+                />
+              </div>
+              <div>
+                <Checkbox
+                  name="agree"
+                  control={control}
+                  errors={errors}
+                  label="By signing up, you agree to our Privacy Policy,Cookie Policy and Terms of Use"
+                />
+              </div>
               <Button type="submit" loading={isLoading} className="py-3">
                 Sign Up
               </Button>
               <div className="text-sm font-medium text-gray-900 dark:text-white">
-                Already have an account{" "}
+                Already have an account &nbsp;
                 <Link
                   to="/sign-in"
                   className="text-blue-600 hover:underline dark:text-blue-500"

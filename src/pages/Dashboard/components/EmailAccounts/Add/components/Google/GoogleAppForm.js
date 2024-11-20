@@ -6,7 +6,7 @@ import ListItemCard from "../../../../../../../components/ListItemCard";
 import { FcGoogle } from "react-icons/fc";
 import { useDispatch, useSelector } from "react-redux";
 import { addEmailAccountApi } from "../../../../../../../redux/services/email";
-import { FaEnvelope, FaLock } from "react-icons/fa";
+import { FaEdit, FaEnvelope, FaLock } from "react-icons/fa";
 
 const GoogleAppForm = ({ handleMenu }) => {
   const {
@@ -27,7 +27,7 @@ const GoogleAppForm = ({ handleMenu }) => {
     dispatch(addEmailAccountApi(token, params));
   };
   return (
-    <div className="p-8 rounded-2xl border border-gray-300 shadow-xl max-w-[60%]">
+    <div className="p-5 rounded-2xl border border-gray-300 shadow-xl max-w-[60%]">
       <Button
         className="mb-2"
         onClick={() =>
@@ -46,9 +46,41 @@ const GoogleAppForm = ({ handleMenu }) => {
         description="Gmail / G-suite"
       />{" "}
       <form
-        className="grid lg:grid-cols-2 sm:grid-cols-1 gap-5 py-5"
+        className="grid lg:grid-cols-2 sm:grid-cols-1 gap-5 pt-5"
         onSubmit={handleSubmit(formSubmit)}
       >
+        <div className="col-span-2">
+          {" "}
+          <InputField
+            name="firstname"
+            svg={<FaEdit />}
+            control={control}
+            errors={errors}
+            label="First Name"
+            rules={{
+              required: {
+                value: true,
+                message: "Field required!",
+              },
+            }}
+          />
+        </div>
+        <div className="col-span-2">
+          {" "}
+          <InputField
+            name="lastname"
+            svg={<FaEdit />}
+            control={control}
+            errors={errors}
+            label="Last Name"
+            rules={{
+              required: {
+                value: true,
+                message: "Field required!",
+              },
+            }}
+          />
+        </div>
         <div className="col-span-2">
           {" "}
           <InputField
@@ -57,6 +89,12 @@ const GoogleAppForm = ({ handleMenu }) => {
             control={control}
             errors={errors}
             label="Email Account"
+            rules={{
+              required: {
+                value: true,
+                message: "Field required!",
+              },
+            }}
           />
         </div>
         <div className="col-span-2">
@@ -74,6 +112,12 @@ const GoogleAppForm = ({ handleMenu }) => {
                 </p>
               </>
             }
+            rules={{
+              required: {
+                value: true,
+                message: "Field required!",
+              },
+            }}
           />
         </div>
         <div>

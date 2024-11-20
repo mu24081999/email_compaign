@@ -20,6 +20,9 @@ import LeadFinder from "./pages/LeadFinder/Main";
 import DripCompaign from "./pages/DripCompaign/Main";
 import Subscription from "./pages/Subscription/Main";
 import EmailValidation from "./pages/EmailValidation/Main";
+import ForgotPassword from "./pages/Auth/ForgotPassword";
+import VerifyEmail from "./pages/Auth/VerifyEmail";
+import ResetPassword from "./pages/Auth/ResetPassword";
 const router = (isAuthenticated) => {
   const routes = [
     {
@@ -40,6 +43,18 @@ const router = (isAuthenticated) => {
       ),
       children: [],
       breadcrumb: "email-template",
+    },
+    {
+      path: "/forgot-password",
+      element: <ForgotPassword />,
+      children: [],
+      breadcrumb: "forgot-password",
+    },
+    {
+      path: "/reset-password/:email",
+      element: <ResetPassword />,
+      children: [],
+      breadcrumb: "reset-password",
     },
     {
       path: "/drip-compaign",
@@ -170,6 +185,10 @@ const router = (isAuthenticated) => {
       ),
       children: [],
       breadcrumb: "compaign",
+    },
+    {
+      path: "/verify-email/:email",
+      element: <VerifyEmail />,
     },
     {
       path: "/subscriptions",

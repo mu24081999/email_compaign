@@ -1,5 +1,5 @@
 import React from "react";
-import EmailEditorComponent from "../../components/EmailEditor";
+import EmailEditorComponent from "./components/EmailEditor";
 import Layout from "../../layout/Layout";
 
 const EmailTemplate = () => {

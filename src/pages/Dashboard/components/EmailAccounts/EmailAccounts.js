@@ -62,12 +62,10 @@ const EmailAccounts = () => {
   }, [emails]);
   useEffect(() => {
     const query = `user_id=${user_id}`;
-
     dispatch(getEmailAccountsApi(token, query));
   }, [token, dispatch, user_id]);
   const fetchData = (page) => {
     const query = `user_id=${user_id}&&page=${page}`;
-
     dispatch(getEmailAccountsApi(token, query));
   };
   return (

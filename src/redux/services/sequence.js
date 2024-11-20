@@ -145,7 +145,7 @@ export const deleteSequenceRec = (token, id, user_id) => async (dispatch) => {
       },
     };
     const response = await axios
-      .post(`${backendURL}/sequence/delete/${id}`, config)
+      .delete(`${backendURL}/sequence/delete/${id}`, config)
       .then((response) => {
         if (response?.data?.statusCode !== 200) {
           toast.error(response.data.message);

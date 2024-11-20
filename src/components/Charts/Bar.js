@@ -7,7 +7,7 @@ const Bar = ({ leadsData, mainTitle }) => {
   const [chartData, setChartData] = useState({
     series: [
       {
-        name: "Sent",
+        name: "Leads",
         data: [],
       },
     ],
@@ -36,7 +36,27 @@ const Bar = ({ leadsData, mainTitle }) => {
       },
     },
   });
+  function getMonthNames(monthNumbers) {
+    const monthNames = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
 
+    return (
+      Array.isArray(monthNumbers) &&
+      monthNumbers?.map((month) => monthNames[month - 1])
+    );
+  }
   // Update chart data when leadsData changes
   useEffect(() => {
     if (leadsData) {
@@ -44,14 +64,16 @@ const Bar = ({ leadsData, mainTitle }) => {
         ...prevData,
         series: [
           {
-            name: "Sent",
+            name: "Leads",
             data: Array.isArray(leadsData.series) ? leadsData.series : [],
           },
         ],
         options: {
           ...prevData.options,
           xaxis: {
-            categories: Array.isArray(leadsData.months) ? leadsData.months : [],
+            categories: Array.isArray(leadsData.months)
+              ? getMonthNames(leadsData.months)
+              : [],
           },
           title: {
             text: mainTitle,

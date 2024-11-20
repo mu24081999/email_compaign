@@ -1,15 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import DarkModeSwitcher from "./DarkmodeSwitcher";
 import { Link, useLocation } from "react-router-dom";
-import { MdOutlineDashboard } from "react-icons/md";
+import { MdOutlineDashboard, MdOutlineMarkEmailRead } from "react-icons/md";
 import { TbTemplate } from "react-icons/tb";
 import { logoutUser } from "../redux/services/auth";
 import { useDispatch, useSelector } from "react-redux";
 import { HiOutlineTemplate } from "react-icons/hi";
 import { TbLocationShare } from "react-icons/tb";
 import { TbCalendarDollar } from "react-icons/tb";
-import { GrValidate } from "react-icons/gr";
-import { MdOutlineScreenSearchDesktop } from "react-icons/md";
 
 import {
   FaCogs,
@@ -19,82 +17,85 @@ import {
   FaRegUserCircle,
 } from "react-icons/fa";
 import logo2 from "../assets/2.png";
+import logo from "../assets/1.png";
 import Dropdown from "./Dropdown";
 const SidebarWithNavbar = ({ component }) => {
   const location = useLocation();
   const dispatch = useDispatch();
   const { token, user } = useSelector((state) => state.auth);
   const [sidebarOpen, setSidebarOpen] = useState(false);
-
+  const [darkMode, setDarkMode] = useState(false);
   const logout = () => dispatch(logoutUser(token));
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
-
+  const setDarkModeFunc = (data) => {
+    setDarkMode(data);
+  };
   const sidebarItems = [
     {
       name: "Dashboard",
       link: "/",
-      icon: <MdOutlineDashboard size={25} color="gray" />,
+      icon: MdOutlineDashboard,
     },
     {
       name: "Common Box",
       link: "/common-box",
-      icon: <FaRegEnvelopeOpen size={25} color="gray" />,
+      icon: FaRegEnvelopeOpen,
     },
     {
       name: "Compaigns",
       link: "/compaigns",
-      icon: <TbLocationShare size={25} color="gray" />,
+      icon: TbLocationShare,
     },
     {
       name: "Templates",
       link: "/email-templates",
-      icon: <TbTemplate size={25} color="gray" />,
+      icon: TbTemplate,
     },
     {
       name: "Sequences",
       link: "/sequences",
-      icon: <HiOutlineTemplate size={25} color="gray" />,
+      icon: HiOutlineTemplate,
     },
     {
       name: "Email Accounts",
       link: "/accounts",
-      icon: <FaRegEnvelope size={25} color="gray" />,
+      icon: FaRegEnvelope,
     },
     {
       name: "Email Validation",
       link: "/email-validation",
-      icon: <GrValidate size={25} color="gray" />,
+      icon: MdOutlineMarkEmailRead,
     },
-    {
-      name: "Lead Finder",
-      link: "/lead-finder",
-      icon: <MdOutlineScreenSearchDesktop size={25} color="gray" />,
-    },
-    {
-      name: "Drip Compaing",
-      link: "/drip-compaign",
-      icon: <FaRegEnvelope size={25} color="gray" />,
-    },
+    // {
+    //   name: "Lead Finder",
+    //   link: "/lead-finder",
+    //   icon: MdOutlineScreenSearchDesktop,
+    // },
+    // {
+    //   name: "Drip Compaing",
+    //   link: "/drip-compaign",
+    //   icon: FaRegEnvelope,
+    // },
     {
       name: "My Subscription",
       link: "/my-subscription",
-      icon: <TbCalendarDollar size={27} color="gray" />,
+      icon: TbCalendarDollar,
     },
     {
       name: "Account Settings",
       link: "/account-settings",
-      icon: <FaCogs size={25} color="gray" />,
+      icon: FaCogs,
     },
     // {
     //   name: "Account Settings",
     //   link: "/account-settings",
-    //   icon: <FaCogs size={24} />,
+    //   icon: FaCogs size={24},
     // },
     // {
     //   name: "Sign out",
     //   link: "#",
     //   onClick: () => logout,
-    //   icon: <PiSignOutBold size={25} />,
+    //   icon: PiSignOutBold size={25},
     // },
   ];
   const menuData = {
@@ -145,62 +146,19 @@ const SidebarWithNavbar = ({ component }) => {
                 </svg>
               </button>
               <Link to="/" className="flex ms-2 md:me-24">
-                <img src={logo2} className="h-12" alt="Senderside Logo" />
+                <img
+                  src={darkMode ? logo : logo2}
+                  className="h-12"
+                  alt="Senderside Logo"
+                />
                 {/* <span className="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">
                   Senderside
                 </span> */}
               </Link>
             </div>
             <div className="flex items-center">
-              <DarkModeSwitcher />
+              <DarkModeSwitcher setDarkModeFunc={setDarkModeFunc} />
               <Dropdown menuData={menuData} />
-              {/* <div className="flex items-center ms-3">
-                <div>
-                  <button
-                    type="button"
-                    className="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
-                    aria-expanded="false"
-                    data-dropdown-toggle="dropdown-user"
-                  >
-                    <span className="sr-only">Open user menu</span>
-                    <img
-                      className="w-8 h-8 rounded-full"
-                      src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
-                      alt="user photo"
-                    />
-                  </button>
-                </div>
-                <div
-                  className="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600"
-                  id="dropdown-user"
-                >
-                  <div className="px-4 py-3" role="none">
-                    <p
-                      className="text-sm text-gray-900 dark:text-white"
-                      role="none"
-                    >
-                      {user?.username}
-                    </p>
-                    <p
-                      className=" font-medium text-gray-500 truncate dark:text-gray-300 text-xs"
-                      role="none"
-                    >
-                      {user?.email}
-                    </p>
-                  </div>
-                  <ul className="py-1" role="none">
-                    <li>
-                      <button
-                        onClick={logout}
-                        className="flex items-center p-2 text-gray-900 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 rounded-lg w-full"
-                      >
-                        <FaRegUser size={20} />
-                        <span className="ms-3 text-center">Sign out</span>
-                      </button>
-                    </li>
-                  </ul>
-                </div>
-              </div> */}
             </div>
           </div>
         </div>
@@ -213,33 +171,33 @@ const SidebarWithNavbar = ({ component }) => {
       >
         <div className="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
           <ul className="space-y-2 font-medium">
-            {sidebarItems?.map((item, index) => (
-              <li
-                key={index}
-                className={`${
-                  location?.pathname === item?.link &&
-                  "bg-black dark:bg-gray-600 text-white p-1 shadow-lg"
-                }`}
-              >
-                <Link
-                  to={item?.link}
-                  className="flex items-center p-2  rounded-lg dark:text-white dark:hover:bg-gray-700 group"
-                  role="menuitem"
+            {sidebarItems?.map((item, index) => {
+              const Icon = item?.icon;
+
+              return (
+                <li
+                  key={index}
+                  className={`${
+                    location?.pathname === item?.link &&
+                    "bg-black dark:bg-gray-600 text-white p-1 shadow-lg"
+                  }`}
                 >
-                  {item?.icon}
-                  <span className="ms-3"> {item?.name}</span>
-                </Link>
-              </li>
-            ))}
-            {/* <li>
-              <button
-                onClick={logout}
-                className="flex items-center p-2 text-gray-900 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 rounded-lg w-full"
-              >
-                <FaRegUser size={23} />
-                <span className="ms-3">Sign out</span>
-              </button>
-            </li> */}
+                  <Link
+                    to={item?.link}
+                    className="flex items-center p-2  rounded-lg dark:text-white dark:hover:bg-gray-700 group"
+                    role="menuitem"
+                  >
+                    <Icon
+                      color={
+                        location?.pathname === item?.link ? "white" : "gray"
+                      }
+                      size={25}
+                    />
+                    <span className="ms-3"> {item?.name}</span>
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
         </div>
       </aside>

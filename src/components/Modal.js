@@ -19,7 +19,7 @@ const Modal = ({
 
   return (
     <div
-      className={`dark:bg-gray-800 dark:text-white backdrop-blur-sm fixed inset-0 flex justify-center items-start md:items-center pt-10 md:pt-0 bg-black bg-opacity-30 transition-opacity duration-1000 ${
+      className={`ml-64 dark:bg-gray-800 dark:text-white backdrop-blur-sm fixed inset-0 flex justify-center items-start md:items-center pt-10 md:pt-0 bg-black bg-opacity-30 transition-opacity duration-1000 ${
         isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
       }`}
     >
@@ -39,8 +39,8 @@ const Modal = ({
         </button>
 
         {/* Modal Header */}
-        <div className="px-4 py-3 border-b border-gray-200">
-          <h2 className="text-xl font-semibold text-gray-600 dark:text-white">
+        <div className="px-4 py-3 border-b bg-black border-gray-200">
+          <h2 className="text-xl font-semibold text-white dark:text-white">
             {title}
           </h2>
         </div>

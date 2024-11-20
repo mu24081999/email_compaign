@@ -78,8 +78,8 @@ const Instruction = ({ handleMenu }) => {
               and store it securely.
             </li>
             <li>
-              Use this password in your app (like in Nodemailer) to authenticate
-              and send emails via your Gmail account.
+              Use this password in your app to authenticate and send emails via
+              your Gmail account.
             </li>
           </ol>
           <div className="mt-6 text-center">

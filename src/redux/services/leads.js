@@ -88,28 +88,32 @@ export const getAllLeads = (token) => async (dispatch) => {
     dispatch(invalidRequest(e.message));
   }
 };
-export const getCompaignLeads = (token, compaign_id) => async (dispatch) => {
-  try {
-    dispatch(leadRequestLoading());
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-        "x-access-token": token,
-      },
-    };
-    await axios
-      .get(`${backendURL}/lead/compaign-leads/${compaign_id}`, config)
-      .then((response) => {
-        if (response?.data?.statusCode !== 200) {
-          toast.error(response.data.message);
-          return dispatch(invalidRequest(response.data.message));
-        }
-        dispatch(getLeads(response.data.data));
-      });
-  } catch (e) {
-    dispatch(invalidRequest(e.message));
-  }
-};
+export const getCompaignLeads =
+  (token, compaign_id, query) => async (dispatch) => {
+    try {
+      dispatch(leadRequestLoading());
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          "x-access-token": token,
+        },
+      };
+      await axios
+        .get(
+          `${backendURL}/lead/compaign-leads/${compaign_id}?${query}`,
+          config
+        )
+        .then((response) => {
+          if (response?.data?.statusCode !== 200) {
+            toast.error(response.data.message);
+            return dispatch(invalidRequest(response.data.message));
+          }
+          dispatch(getLeads(response.data.data));
+        });
+    } catch (e) {
+      dispatch(invalidRequest(e.message));
+    }
+  };
 export const deleteLeadRec = (token, ids, compaign_id) => async (dispatch) => {
   try {
     dispatch(leadRequestLoading());

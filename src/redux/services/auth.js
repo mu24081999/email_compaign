@@ -158,7 +158,11 @@ export const forgotPasswordApi = (data) => async (dispatch) => {
 
     dispatch(forgotPassword(response.data.message));
     toast.success(response.data.message);
-    return true;
+    return {
+      success: true,
+      otp: response.data.data.is_otp_added,
+      userData: response.data.data.userData,
+    };
   } catch (e) {
     dispatch(invalidRequest(e.message));
     return toast.error(e.message);
@@ -183,7 +187,10 @@ export const verifyOTPApi = (data) => async (dispatch) => {
         }
         dispatch(verifyOtp(response.data.message));
         toast.success(response.data.message);
-        return true;
+        return {
+          success: true,
+          otp: response.data.data.otp,
+        };
       });
     return verify_otp;
   } catch (e) {
@@ -238,7 +245,10 @@ export const resetPasswordApi = (data) => async (dispatch) => {
         // console.log(response);
         dispatch(resetPassword(response.data.data.userData));
         toast.success(response.data.message);
-        return true;
+        return {
+          success: true,
+          userData: response.data.data.userData,
+        };
       });
     return is_reset_password;
   } catch (e) {

@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import InputField from "../../../../../../../components/FormFields/InputField/InputField";
 import Button from "../../../../../../../components/Button";
 import ListItemCard from "../../../../../../../components/ListItemCard";
-import { FaRegEnvelope } from "react-icons/fa";
+import { FaEdit, FaEnvelope, FaRegEnvelope, FaUserLock } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { addEmailAccountApi } from "../../../../../../../redux/services/email";
 
@@ -14,6 +14,7 @@ const MailProviderForm = ({ handleMenu }) => {
     formState: { errors },
   } = useForm();
   const { token, user_id } = useSelector((state) => state.auth);
+  const { isLoading } = useSelector((state) => state.email);
   const dispatch = useDispatch();
 
   const formSubmit = (formData) => {
@@ -46,28 +47,74 @@ const MailProviderForm = ({ handleMenu }) => {
       <ListItemCard
         icon={<FaRegEnvelope size={30} color="blue" />}
         title={"Connect Your Email Account"}
-        description="IMAP / SMPT"
+        description="IMAP / SMTP"
       />{" "}
       <form
-        className="grid lg:grid-cols-2 sm:grid-cols-1 gap-5 py-5"
+        className="grid lg:grid-cols-2 sm:grid-cols-1 gap-5 pt-5"
         onSubmit={handleSubmit(formSubmit)}
       >
         <div className="col-span-2">
+          {" "}
+          <InputField
+            name="firstname"
+            svg={<FaEdit />}
+            control={control}
+            errors={errors}
+            label="First Name"
+            rules={{
+              required: {
+                value: true,
+                message: "Field required!",
+              },
+            }}
+          />
+        </div>
+        <div className="col-span-2">
+          {" "}
+          <InputField
+            name="lastname"
+            svg={<FaEdit />}
+            control={control}
+            errors={errors}
+            label="Last Name"
+            rules={{
+              required: {
+                value: true,
+                message: "Field required!",
+              },
+            }}
+          />
+        </div>
+        <div className="col-span-2">
           <InputField
             name="email"
+            svg={<FaEnvelope />}
             control={control}
             errors={errors}
             label="Email Account"
             placeholder={"Email Account"}
+            rules={{
+              required: {
+                value: true,
+                message: "Field required!",
+              },
+            }}
           />
         </div>
         <div className="col-span-2">
           <InputField
             name="password"
+            svg={<FaUserLock />}
             control={control}
             errors={errors}
             label="Password"
             placeholder={"Password"}
+            rules={{
+              required: {
+                value: true,
+                message: "Field required!",
+              },
+            }}
           />
         </div>
         <div className="col-span-1">
@@ -78,6 +125,12 @@ const MailProviderForm = ({ handleMenu }) => {
             errors={errors}
             label="Port"
             placeholder={"Port"}
+            rules={{
+              required: {
+                value: true,
+                message: "Field required!",
+              },
+            }}
           />
         </div>
         <div className="col-span-1">
@@ -85,17 +138,23 @@ const MailProviderForm = ({ handleMenu }) => {
             name="smpt_host"
             control={control}
             errors={errors}
-            label="SMPT Host"
-            placeholder={"SMPT Host"}
+            label="SMTP Host"
+            placeholder={"SMTP Host"}
             description={
               <>
                 <p>eg: mail.website.com</p>
               </>
             }
+            rules={{
+              required: {
+                value: true,
+                message: "Field required!",
+              },
+            }}
           />
         </div>
         <div>
-          <Button type="submit" className="py-2 ">
+          <Button type="submit" loading={isLoading} className="py-2 ">
             Submit
           </Button>
         </div>

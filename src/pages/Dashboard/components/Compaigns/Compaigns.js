@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from "react";
 import Table from "../../../../components/Table";
 import { useDispatch, useSelector } from "react-redux";
-import { getUserCompaignsApi } from "../../../../redux/services/compaign";
+import {
+  deleteCompaignApi,
+  getUserCompaignsApi,
+} from "../../../../redux/services/compaign";
 import { useNavigate } from "react-router-dom";
 import Button from "../../../../components/Button";
 import Layout from "../../../../layout/Layout";
+import { FaTrashAlt } from "react-icons/fa";
 
 const Compaigns = () => {
   const dispatch = useDispatch();
@@ -149,10 +153,18 @@ const Compaigns = () => {
   //     ],
   //   },
   // ];
-  const addButton = {
-    title: "Add Compaign",
-    onClick: () => navigateTo("/"),
+  const deleteBulk = (ids) => {
+    console.log("🚀 ~ deleteBulk ~ ids:", ids);
+    dispatch(deleteCompaignApi(token, ids, user_id));
   };
+  const bulkActions = [
+    {
+      name: "delete",
+      bgColor: "gray",
+      icon: <FaTrashAlt color="red" size={15} />,
+      onClick: (ids) => deleteBulk(ids),
+    },
+  ];
   return (
     <Layout
       component={
@@ -170,6 +182,7 @@ const Compaigns = () => {
             <Table
               columns={columns}
               data={compaignsData}
+              bulkActions={bulkActions}
               totalItems={pagination?.totalItems}
               itemsPerPage={10}
               onPageChange={(page) => fetchData(page)}

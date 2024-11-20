@@ -1,17 +1,18 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import InputField from "../../../../../../../components/FormFields/InputField/InputField";
 import Button from "../../../../../../../components/Button";
 import ListItemCard from "../../../../../../../components/ListItemCard";
-import { FcGoogle } from "react-icons/fc";
-const Instruction = ({ handleMenu }) => {
+import { PiMicrosoftOutlookLogoLight } from "react-icons/pi";
+
+const OutlookInstructions = ({ handleMenu }) => {
   const {
     handleSubmit,
     control,
     formState: { errors },
   } = useForm();
+
   return (
-    <div className=" rounded-2xl  max-w-[60%]">
+    <div className="rounded-2xl max-w-[60%]">
       <Button
         className="my-2"
         onClick={() =>
@@ -25,74 +26,70 @@ const Instruction = ({ handleMenu }) => {
         Back
       </Button>
       <ListItemCard
-        icon={<FcGoogle size={30} color="blue" />}
-        title={"Connect Your Google Account"}
-        description="Gmail / G-suite"
-      />{" "}
-      <div className="my-5 bg-gray-100 flex  justify-center ">
-        <div className=" h-[50vh] overflow-scroll max-w-2xl w-full bg-white shadow-lg rounded-xl p-8">
+        icon={<PiMicrosoftOutlookLogoLight size={30} color="blue" />}
+        title={"Connect Your Outlook Account"}
+        description="Microsoft Outlook / Office365"
+      />
+      <div className="my-5 bg-gray-100 flex justify-center">
+        <div className="h-[50vh] overflow-scroll max-w-2xl w-full bg-white shadow-lg rounded-xl p-8">
           <h1 className="text-2xl font-bold text-gray-800 mb-6 text-center">
-            How to Create Google App Password
+            How to Create Outlook App Password
           </h1>
           <ol className="list-decimal list-inside space-y-4 text-gray-700">
             <li>
               <span className="font-semibold">
-                Go to Google Account Security:
+                Go to Microsoft Account Security:
               </span>
               <a
-                href="https://myaccount.google.com/security"
+                href="https://account.microsoft.com/security"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-blue-500 hover:underline"
               >
-                Open Google Security Page
+                Open Security Page
               </a>
             </li>
             <li>
-              Under the <strong>"Signing in to Google"</strong> section, find
-              and enable
-              <span className="font-semibold"> 2-Step Verification.</span>
-              (If it is already enabled, skip to the next step.)
+              Under <strong>"Security basics"</strong>, click on{" "}
+              <span className="font-semibold">
+                "Advanced security options."
+              </span>
             </li>
             <li>
-              After enabling 2-Step Verification, scroll down and click on
-              <span className="font-semibold">"App passwords."</span>
+              Find the{" "}
+              <span className="font-semibold">"Two-step verification"</span>{" "}
+              section and enable it if not already enabled.
             </li>
             <li>
-              Sign in with your Google account credentials again, if prompted.
+              Scroll down and locate the{" "}
+              <span className="font-semibold">"App passwords"</span> section.
             </li>
             <li>
-              In the <span className="font-semibold">"Select app"</span>{" "}
-              dropdown, choose <strong>Mail</strong>. In the{" "}
-              <strong>"Select device"</strong> dropdown, choose your device (or
-              select “Other” and type in a custom name).
+              Click on <strong>"Create a new app password."</strong>
             </li>
             <li>
-              Click on the <strong>“Generate”</strong> button.
-            </li>
-            <li>
-              A 16-character password will be displayed.
+              A 16-character password will be generated.{" "}
               <span className="text-green-600 font-semibold">
                 Copy it carefully
               </span>{" "}
-              and store it securely.
+              and store it securely, as it will not be shown again.
             </li>
             <li>
-              Use this password in your app (like in Nodemailer) to authenticate
-              and send emails via your Gmail account.
+              Use this password in your app to authenticate and send emails via
+              Outlook.
             </li>
           </ol>
           <div className="mt-6 text-center">
             <p className="text-gray-600">
-              Need more help? Visit Google’s documentation:
+              Need additional help? Visit Microsoft’s documentation:
             </p>
             <a
-              href="https://support.google.com/accounts/answer/185833?hl=en"
+              href="https://support.microsoft.com/en-us/account-billing/how-to-create-an-app-password-45913c4b-f1c9-4f63-bd8b-8f245a14c594"
               target="_blank"
               rel="noopener noreferrer"
               className="text-blue-500 hover:underline"
             >
-              Google App Password Guide
+              Microsoft App Password Guide
             </a>
           </div>
         </div>
@@ -103,7 +100,11 @@ const Instruction = ({ handleMenu }) => {
           handleMenu({
             menu: false,
             instruction: false,
-            form: true,
+            form: false,
+            mail_form: false,
+            mail_instructions: false,
+            outlook_form: true,
+            outlook_instructions: false,
           })
         }
       >
@@ -113,4 +114,4 @@ const Instruction = ({ handleMenu }) => {
   );
 };
 
-export default Instruction;
+export default OutlookInstructions;

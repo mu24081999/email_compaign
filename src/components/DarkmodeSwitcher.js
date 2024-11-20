@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import { MdOutlineLightMode } from "react-icons/md";
 import { CiDark } from "react-icons/ci";
 
-const DarkModeSwitcher = () => {
+const DarkModeSwitcher = ({ setDarkModeFunc }) => {
   const [isDarkMode, setIsDarkMode] = useState(false);
-
+  console.log("🚀 ~ DarkModeSwitcher ~ isDarkMode:", isDarkMode);
   // Initialize dark mode based on user's system preference or previously stored preference
   useEffect(() => {
     const darkModePreference = localStorage.getItem("theme");
@@ -14,6 +14,7 @@ const DarkModeSwitcher = () => {
         window.matchMedia("(prefers-color-scheme: dark)").matches)
     ) {
       setIsDarkMode(true);
+      setDarkModeFunc(true);
       document.documentElement.classList.add("dark");
     }
   }, []);
@@ -22,9 +23,13 @@ const DarkModeSwitcher = () => {
   const toggleDarkMode = () => {
     setIsDarkMode((prevMode) => !prevMode);
     if (!isDarkMode) {
+      setDarkModeFunc(true);
+
       document.documentElement.classList.add("dark");
       localStorage.setItem("theme", "dark");
     } else {
+      setDarkModeFunc(false);
+
       document.documentElement.classList.remove("dark");
       localStorage.setItem("theme", "light");
     }

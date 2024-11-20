@@ -2,8 +2,27 @@ import React, { useState, useEffect } from "react";
 import ReactApexChart from "react-apexcharts";
 
 const LineChart = ({ emailData, mainTitle, sideTitle }) => {
-  console.log("🚀 ~ LineChart ~ emailData:", emailData?.series);
+  function getMonthNames(monthNumbers) {
+    const monthNames = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
 
+    return (
+      Array.isArray(monthNumbers) &&
+      monthNumbers?.map((month) => monthNames[month - 1])
+    );
+  }
   const [chartData, setChartData] = useState({
     series: [
       {
@@ -51,7 +70,10 @@ const LineChart = ({ emailData, mainTitle, sideTitle }) => {
         options: {
           ...prevData.options,
           xaxis: {
-            categories: Array.isArray(emailData.months) ? emailData.months : [],
+            type: "string",
+            categories: Array.isArray(emailData.months)
+              ? getMonthNames(emailData.months)
+              : [],
           },
         },
       }));
