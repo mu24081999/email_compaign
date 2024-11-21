@@ -43,7 +43,6 @@ const DashboardContent = () => {
       label: "Email Compaigns",
       content: <Compaigns />,
     },
-
     // {
     //   id: "profile",
     //   label: "Profile",

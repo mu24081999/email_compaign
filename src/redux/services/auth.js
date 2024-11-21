@@ -258,6 +258,37 @@ export const resetPasswordApi = (data) => async (dispatch) => {
     });
   }
 };
+export const resetUserPasswordApi = (data) => async (dispatch) => {
+  try {
+    dispatch(authRequestLoading());
+    const is_reset_password = await axios
+      .post(`${backendURL}/auth/reset-user-password`, data, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) => {
+        if (response?.data?.statusCode !== 200) {
+          toast.error(response.data.message);
+          dispatch(invalidRequest(response.data.message));
+          return toast.error(response.data.message);
+        }
+        // console.log(response);
+        dispatch(resetPassword(response.data.message));
+        toast.success(response.data.message);
+        return {
+          success: true,
+          userData: response.data.data.userData,
+        };
+      });
+    return is_reset_password;
+  } catch (e) {
+    dispatch(invalidRequest(e.message));
+    return toast.error(e.message, {
+      position: toast.POSITION.TOP_RIGHT,
+    });
+  }
+};
 export const getMe = (token) => async (dispatch) => {
   try {
     dispatch(authRequestLoading());

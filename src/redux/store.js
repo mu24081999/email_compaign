@@ -22,6 +22,7 @@ const persistConfig = {
     "dashboard",
     "subscription",
     "unibox",
+    "validation",
   ],
   whitelist: ["auth", "order"],
 };

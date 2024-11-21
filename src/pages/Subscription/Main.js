@@ -33,7 +33,12 @@ const CommonBox = () => {
       component={
         <div className="text-center">
           <div>
-            <Table columns={columns} data={subscriptionData} />
+            <Table
+              columns={columns}
+              data={subscriptionData}
+              pagination={false}
+              actions={false}
+            />
           </div>
         </div>
       }

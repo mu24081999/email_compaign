@@ -13,6 +13,7 @@ import warmupReducer from "./slices/warmup";
 import dashboardReducer from "./slices/dashboard";
 import subscriptionReducer from "./slices/subscriptions";
 import uniboxReducer from "./slices/unibox";
+import validationReducer from "./slices/validation";
 
 export const rootReducer = combineReducers({
   auth: authReducer,
@@ -29,4 +30,5 @@ export const rootReducer = combineReducers({
   dashboard: dashboardReducer,
   subscription: subscriptionReducer,
   unibox: uniboxReducer,
+  validation: validationReducer,
 });

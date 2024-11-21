@@ -20,6 +20,7 @@ const EmailAccounts = () => {
   const { emails } = useSelector((state) => state.email);
   const [isOpen, setIsOpen] = useState(false);
   const [selectedEmail, setSelectedEmail] = useState(false);
+  const [accountsData, setAccountsData] = useState([]);
   const handleSelectedEmail = () => {};
   const [pagination, setPagination] = useState({});
 
@@ -27,12 +28,15 @@ const EmailAccounts = () => {
     {
       label: "Email",
       accessor: "email",
-      type: "button",
-      onClick: () => handleSelectedEmail,
     },
     { label: "Emails Sent", accessor: "emails_sent" },
     { label: "Warmup Emails", accessor: "warmup_emails" }, // Example of nested accessor
-    { label: "Health Score", accessor: "health_score" },
+    {
+      label: "Actions",
+      accessor: "actions",
+      type: "actions",
+      variant: "green",
+    },
   ];
 
   const data = [
@@ -68,6 +72,24 @@ const EmailAccounts = () => {
     const query = `user_id=${user_id}&&page=${page}`;
     dispatch(getEmailAccountsApi(token, query));
   };
+  useEffect(() => {
+    const data = [];
+    Array?.isArray(emails?.accountsData) &&
+      emails?.accountsData?.map((account) => {
+        data.push({
+          ...account,
+          actions: [
+            {
+              color: "green",
+              label: "Warmup Account",
+              onClick: () => handleChildData(account),
+            },
+          ],
+        });
+      });
+    setAccountsData(data);
+    return () => {};
+  }, [emails]);
   return (
     <Layout
       component={
@@ -84,7 +106,7 @@ const EmailAccounts = () => {
           <div className="pt-10">
             <Table
               columns={columns}
-              data={emails?.accountsData}
+              data={accountsData}
               dataFromChild={handleChildData}
               totalItems={pagination?.totalItems}
               itemsPerPage={10}

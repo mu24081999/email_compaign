@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import Switcher from "../../../../../../components/FormFields/Switcher/Switcher";
 import Heading from "../../../../../../components/Heading";
@@ -26,6 +26,10 @@ const UpdateStatus = () => {
     };
     dispatch(updateWarmupRec(token, params, warmupData?.id));
   };
+  useEffect(() => {
+    setValue("status", warmupData?.enabled === 1 ? true : false);
+    return () => {};
+  }, [warmupData, setValue]);
   return (
     <form onSubmit={handleSubmit(formSubmit)}>
       <div className="grid lg:grid-cols-2 sm:grid-cols-1 justify-between py-5">

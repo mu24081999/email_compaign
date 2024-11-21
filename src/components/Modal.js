@@ -33,7 +33,7 @@ const Modal = ({
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute -top-3 -right-3 bg-red-500 hover:bg-red-600 text-2xl w-10 h-10 rounded-full focus:outline-none text-white"
+          className="absolute right-2 bg-red-500 hover:bg-red-600 text-2xl w-10 h-[52px]  focus:outline-none text-white"
         >
           &times;
         </button>
@@ -46,7 +46,7 @@ const Modal = ({
         </div>
 
         {/* Modal Body */}
-        <div className="w-full p-3">{body}</div>
+        <div className="w-full p-3  max-h-[70vh] overflow-scroll">{body}</div>
 
         {/* Modal Footer */}
         {/* <div className="absolute bottom-0 left-0 px-4 py-3 border-t border-gray-200 w-full flex justify-end items-center gap-3">
