@@ -22,7 +22,6 @@ const TextEditor = React.forwardRef((props, ref) => {
   const [htmlContent, setHtmlContent] = useState(null);
   const [focusState, setFocusState] = useState(false);
   const { field, fieldState } = useController(props);
-
   let error = _.get(errors, props.name);
 
   const handleEditorChange = (event, editor) => {
@@ -51,6 +50,32 @@ const TextEditor = React.forwardRef((props, ref) => {
               <CKEditor
                 editor={ClassicEditor}
                 data={htmlContent}
+                config={{
+                  toolbar: [
+                    "heading", // Heading levels
+                    "|",
+                    "bold", // Bold text
+                    "italic", // Italic text
+                    "underline", // Underline text
+                    "strikethrough", // Strikethrough text
+                    "|",
+                    "link", // Add links
+                    "bulletedList", // Bullet list
+                    "numberedList", // Numbered list
+                    "blockQuote", // Blockquote
+                    "|",
+                    "alignment", // Text alignment: left, center, right, justify
+                    "indent", // Increase indent
+                    "outdent", // Decrease indent
+                    "|",
+                    "fontSize", // Font size
+                    "fontColor", // Font color
+                    "fontBackgroundColor", // Background color
+                    "|",
+                    "undo", // Undo action
+                    "redo", // Redo action
+                  ],
+                }}
                 onBlurCapture={() => setFocusState(false)}
                 onFocus={() => setFocusState(true)}
                 onChange={handleEditorChange}

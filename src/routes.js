@@ -23,6 +23,7 @@ import EmailValidation from "./pages/EmailValidation/Main";
 import ForgotPassword from "./pages/Auth/ForgotPassword";
 import VerifyEmail from "./pages/Auth/VerifyEmail";
 import ResetPassword from "./pages/Auth/ResetPassword";
+import Dialpad from "./pages/Dialpad";
 const router = (isAuthenticated) => {
   const routes = [
     {
@@ -71,6 +72,16 @@ const router = (isAuthenticated) => {
       element: (
         <PrivateRoute isAuthenticated={isAuthenticated}>
           <Subscription />
+        </PrivateRoute>
+      ),
+      children: [],
+      breadcrumb: "email-template",
+    },
+    {
+      path: "/dialpad",
+      element: (
+        <PrivateRoute isAuthenticated={isAuthenticated}>
+          <Dialpad />
         </PrivateRoute>
       ),
       children: [],
