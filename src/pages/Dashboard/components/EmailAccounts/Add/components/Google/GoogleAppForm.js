@@ -19,6 +19,8 @@ const GoogleAppForm = ({ handleMenu }) => {
   const formSubmit = (formData) => {
     console.log(formData);
     const params = {
+      firstname: formData?.firstname,
+      lastname: formData?.lastname,
       user_id: user_id,
       email: formData?.email,
       password: formData?.password,

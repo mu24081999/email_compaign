@@ -98,6 +98,51 @@ const Shadule = () => {
   //     timezone: "Asia/Karachi",
   //   },
   // ];
+  // Time options for dropdown
+  const currentTime = moment(); // Get the current time
+  const selectedFromTime = watch("from")?.value;
+  const allTimes = [
+    { label: "12:00 AM", value: "00:00" },
+    { label: "01:00 AM", value: "01:00" },
+    { label: "02:00 AM", value: "02:00" },
+    { label: "03:00 AM", value: "03:00" },
+    { label: "04:00 AM", value: "04:00" },
+    { label: "05:00 AM", value: "05:00" },
+    { label: "06:00 AM", value: "06:00" },
+    { label: "07:00 AM", value: "07:00" },
+    { label: "08:00 AM", value: "08:00" },
+    { label: "09:00 AM", value: "09:00" },
+    { label: "10:00 AM", value: "10:00" },
+    { label: "11:00 AM", value: "11:00" },
+    { label: "12:00 PM", value: "12:00" },
+    { label: "01:00 PM", value: "13:00" },
+    { label: "02:00 PM", value: "14:00" },
+    { label: "03:00 PM", value: "15:00" },
+    { label: "04:00 PM", value: "16:00" },
+    { label: "05:00 PM", value: "17:00" },
+    { label: "06:00 PM", value: "18:00" },
+    { label: "07:00 PM", value: "19:00" },
+    { label: "08:00 PM", value: "20:00" },
+    { label: "09:00 PM", value: "21:00" },
+    { label: "10:00 PM", value: "22:00" },
+    { label: "11:00 PM", value: "23:00" },
+  ];
+
+  // Filter available options for the "From" field based on the current time
+  const fromOptions = allTimes.filter((time) => {
+    const optionTime = moment(time.value, "HH:mm");
+    return optionTime.isSameOrAfter(currentTime, "minute");
+  });
+
+  // Filter available options for the "To" field based on the selected "From" time
+  const toOptions = allTimes.filter((time) => {
+    const optionTime = moment(time.value, "HH:mm");
+    return (
+      selectedFromTime &&
+      optionTime.isAfter(moment(selectedFromTime, "HH:mm"), "minute")
+    );
+  });
+
   return (
     <div className="grid lg:grid-cols-3 sm:grid-cols-1 gap-5">
       <div className="flex flex-col gap-5">
@@ -141,64 +186,14 @@ const Shadule = () => {
               placeholder="From"
               control={control}
               errors={errors}
-              options={[
-                { label: "12:00 AM", value: "00:00" },
-                { label: "01:00 AM", value: "01:00" },
-                { label: "02:00 AM", value: "02:00" },
-                { label: "03:00 AM", value: "03:00" },
-                { label: "04:00 AM", value: "04:00" },
-                { label: "05:00 AM", value: "05:00" },
-                { label: "06:00 AM", value: "06:00" },
-                { label: "07:00 AM", value: "07:00" },
-                { label: "08:00 AM", value: "08:00" },
-                { label: "09:00 AM", value: "09:00" },
-                { label: "10:00 AM", value: "10:00" },
-                { label: "11:00 AM", value: "11:00" },
-                { label: "12:00 PM", value: "12:00" },
-                { label: "01:00 PM", value: "13:00" },
-                { label: "02:00 PM", value: "14:00" },
-                { label: "03:00 PM", value: "15:00" },
-                { label: "04:00 PM", value: "16:00" },
-                { label: "05:00 PM", value: "17:00" },
-                { label: "06:00 PM", value: "18:00" },
-                { label: "07:00 PM", value: "19:00" },
-                { label: "08:00 PM", value: "20:00" },
-                { label: "09:00 PM", value: "21:00" },
-                { label: "10:00 PM", value: "22:00" },
-                { label: "11:00 PM", value: "23:00" },
-              ]}
+              options={fromOptions}
             />
             <ReactSelectField
               name="to"
               placeholder="To"
               control={control}
               errors={errors}
-              options={[
-                { label: "12:00 AM", value: "00:00" },
-                { label: "01:00 AM", value: "01:00" },
-                { label: "02:00 AM", value: "02:00" },
-                { label: "03:00 AM", value: "03:00" },
-                { label: "04:00 AM", value: "04:00" },
-                { label: "05:00 AM", value: "05:00" },
-                { label: "06:00 AM", value: "06:00" },
-                { label: "07:00 AM", value: "07:00" },
-                { label: "08:00 AM", value: "08:00" },
-                { label: "09:00 AM", value: "09:00" },
-                { label: "10:00 AM", value: "10:00" },
-                { label: "11:00 AM", value: "11:00" },
-                { label: "12:00 PM", value: "12:00" },
-                { label: "01:00 PM", value: "13:00" },
-                { label: "02:00 PM", value: "14:00" },
-                { label: "03:00 PM", value: "15:00" },
-                { label: "04:00 PM", value: "16:00" },
-                { label: "05:00 PM", value: "17:00" },
-                { label: "06:00 PM", value: "18:00" },
-                { label: "07:00 PM", value: "19:00" },
-                { label: "08:00 PM", value: "20:00" },
-                { label: "09:00 PM", value: "21:00" },
-                { label: "10:00 PM", value: "22:00" },
-                { label: "11:00 PM", value: "23:00" },
-              ]}
+              options={toOptions}
             />
             <ReactSelectField
               name="timezone"

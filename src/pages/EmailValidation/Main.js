@@ -16,7 +16,7 @@ const EmailValidation = () => {
       component={
         <div className="">
           <Add />
-          <List />
+          <List user_id={user_id} token={token} dispatch={dispatch} />
         </div>
       }
     />

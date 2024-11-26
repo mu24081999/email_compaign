@@ -20,6 +20,9 @@ const MailProviderForm = ({ handleMenu }) => {
   const formSubmit = (formData) => {
     console.log(formData);
     const params = {
+      firstname: formData?.firstname,
+      lastname: formData?.lastname,
+
       user_id: user_id,
       email: formData?.email,
       password: formData?.password,
@@ -30,7 +33,7 @@ const MailProviderForm = ({ handleMenu }) => {
     dispatch(addEmailAccountApi(token, params));
   };
   return (
-    <div className="p-8 rounded-2xl border border-gray-300 shadow-xl max-w-[60%]">
+    <div className="p-5 rounded-2xl border border-gray-300 shadow-xl max-w-[60%]">
       <div className="pb-5">
         <Button
           onClick={() =>

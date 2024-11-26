@@ -30,7 +30,7 @@ const OutlookForm = ({ handleMenu }) => {
     dispatch(addEmailAccountApi(token, params));
   };
   return (
-    <div className="p-8 rounded-2xl border border-gray-300 shadow-xl max-w-[60%]">
+    <div className="p-5 rounded-2xl border border-gray-300 shadow-xl max-w-[60%]">
       <Button
         className="mb-2"
         onClick={() =>

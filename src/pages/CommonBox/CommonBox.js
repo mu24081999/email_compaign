@@ -19,7 +19,6 @@ const CommonBox = () => {
   const { replies, isLoading } = useSelector((state) => state.unibox);
   const [campaign, setCampaign] = useState({});
   const [selectedReply, setSelectedReply] = useState({});
-  console.log("🚀 ~ CommonBox ~ selectedReply:", selectedReply);
   useEffect(() => {
     const query = `no_limit=true`;
     dispatch(getUserCompaignsApi(token, user_id, query));
@@ -71,28 +70,31 @@ const CommonBox = () => {
     };
     dispatch(sendEmailReply(token, params));
   };
+  const handleOnSearchReply = (event) => {
+    const query = event.target.value;
+  };
   return (
     <Layout
       component={
         <div className="">
-          <main class="flex w-full h-full shadow-lg rounded-3xl">
+          <main className="flex w-full h-full shadow-lg rounded border">
             <SidebarCom setCampaignData={handleCampaignDataFromChild} />
-            <section class="flex flex-col pt-3 w-4/12 bg-gray-50 h-full overflow-y-scroll">
-              <label class="px-3">
+            <section className="flex flex-col pt-3 w-4/12  dark:bg-gray-900 overflow-y-scroll border border-2 h-[88vh]">
+              {/* <label className="px-3">
                 <input
-                  class="rounded-lg p-4 bg-gray-100 transition duration-200 focus:outline-none focus:ring-2 w-full"
+                  className="rounded-lg p-4 bg-gray-50 dark:bg-gray-900 transition duration-200 focus:outline-none focus:ring-2 w-full"
                   placeholder="Search..."
+                  onKeyUp={handleOnSearchReply}
                 />
-              </label>
+              </label> */}
               {isLoading ? (
                 <SidebarSkeleton />
               ) : (
-                <ul class="mt-6">
-                  {Array.isArray(replies) &&
-                    replies?.length > 0 &&
+                <ul className="mt-6">
+                  {Array.isArray(replies) && replies?.length > 0 ? (
                     replies?.map((reply, index) => (
                       <li
-                        class={`${
+                        className={`${
                           reply.body === selectedReply?.body
                             ? "bg-black text-white"
                             : ""
@@ -100,49 +102,52 @@ const CommonBox = () => {
                         key={index}
                         onClick={() => handleReplyClick(reply)}
                       >
-                        <div class="flex justify-between items-center">
-                          <h3 class="text-lg font-semibold">
+                        <div className="flex justify-between items-center">
+                          <h3 className="text-lg font-semibold">
                             {extractNameAndEmail(reply.from)?.name}
                           </h3>
-                          <p class="text-md text-gray-400">
+                          <p className="text-md text-gray-400">
                             {getRelativeTime(reply.date)}
                           </p>
                         </div>
                         <div
-                          class="text-md italic text-gray-400"
+                          className="text-md italic text-gray-400"
                           dangerouslySetInnerHTML={{
                             __html: reply.body.slice(0, 50),
                           }}
                         ></div>
                       </li>
-                    ))}
+                    ))
+                  ) : (
+                    <p className="text-center">No Replies Found</p>
+                  )}
                 </ul>
               )}
             </section>
-            <section class="w-6/12 px-4 flex flex-col bg-white rounded-r-3xl">
+            <section className="w-6/12 px-4 flex flex-col bg-gray-50 border-2 dark:bg-gray-900 rounded-r-3xl">
               {selectedReply?.from && (
                 <>
-                  <div class="flex justify-between items-center h-48 border-b-2 mb-8">
-                    <div class="flex space-x-4 items-center">
-                      <div class="h-12 w-12 rounded-full overflow-hidden">
+                  <div className="flex justify-between items-center h-48 border-b-2 mb-8">
+                    <div className="flex space-x-4 items-center">
+                      <div className="h-12 w-12 rounded-full overflow-hidden">
                         <img
                           src="https://bit.ly/2KfKgdy"
                           loading="lazy"
-                          class="h-full w-full object-cover"
+                          className="h-full w-full object-cover"
                         />
                       </div>
-                      <div class="flex flex-col">
-                        <h3 class="font-semibold text-lg">
+                      <div className="flex flex-col">
+                        <h3 className="font-semibold text-lg">
                           {extractNameAndEmail(selectedReply.from)?.name}
                         </h3>
-                        <p class="text-light text-gray-400">
+                        <p className="text-light text-gray-400">
                           {extractNameAndEmail(selectedReply.from)?.email}{" "}
                         </p>
                       </div>
                     </div>
                     <div>
-                      <ul class="flex text-gray-400 space-x-4">
-                        <li class="w-6 h-6">
+                      <ul className="flex text-gray-400 space-x-4">
+                        <li className="w-6 h-6">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
@@ -157,7 +162,7 @@ const CommonBox = () => {
                             />
                           </svg>
                         </li>
-                        <li class="w-6 h-6">
+                        <li className="w-6 h-6">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
@@ -176,15 +181,17 @@ const CommonBox = () => {
                     </div>
                   </div>
                   <section>
-                    <h1 class="font-bold text-2xl">{selectedReply?.subject}</h1>
+                    <h1 className="font-bold text-2xl">
+                      {selectedReply?.subject}
+                    </h1>
                     <article
-                      class="mt-8 text-gray-500 leading-7 tracking-wider"
+                      className="mt-8 text-gray-500 leading-7 tracking-wider"
                       dangerouslySetInnerHTML={{ __html: selectedReply?.body }}
                     ></article>
                   </section>
                   <form
                     onSubmit={handleSubmit(formSubmit)}
-                    class="mt-6 border rounded-xl bg-gray-50 mb-3"
+                    className="mt-6 border rounded-xl bg-gray-50 mb-3"
                   >
                     <TextAreaField
                       name="reply_body"
@@ -192,7 +199,7 @@ const CommonBox = () => {
                       errors={errors}
                       placeholder="Reply"
                     />
-                    <div class="flex items-center justify-end p-2">
+                    <div className="flex items-center justify-end p-2">
                       <Button
                         type="submit"
                         loading={isLoading}

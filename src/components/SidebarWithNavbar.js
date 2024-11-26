@@ -10,6 +10,9 @@ import { TbLocationShare } from "react-icons/tb";
 import { TbCalendarDollar } from "react-icons/tb";
 
 import {
+  FaArrowAltCircleRight,
+  FaArrowLeft,
+  FaArrowRight,
   FaCogs,
   FaRegEnvelope,
   FaRegEnvelopeOpen,
@@ -18,12 +21,17 @@ import {
 } from "react-icons/fa";
 import logo2 from "../assets/2.png";
 import logo from "../assets/1.png";
+import logo3 from "../assets/3.png";
+import logo4 from "../assets/4.png";
 import Dropdown from "./Dropdown";
+import { IoKeypadOutline } from "react-icons/io5";
+
 const SidebarWithNavbar = ({ component }) => {
   const location = useLocation();
   const dispatch = useDispatch();
   const { token, user } = useSelector((state) => state.auth);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [isCollapsed, setIsCollapsed] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
   const logout = () => dispatch(logoutUser(token));
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
@@ -77,6 +85,11 @@ const SidebarWithNavbar = ({ component }) => {
     //   icon: FaRegEnvelope,
     // },
     {
+      name: "Dialpad",
+      link: "/dialpad",
+      icon: IoKeypadOutline,
+    },
+    {
       name: "My Subscription",
       link: "/my-subscription",
       icon: TbCalendarDollar,
@@ -117,18 +130,25 @@ const SidebarWithNavbar = ({ component }) => {
       },
     ],
   };
+  const handleCollapsed = () => {
+    setIsCollapsed(!isCollapsed);
+  };
   return (
-    <div>
+    <div className="w-full">
       <nav className="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
         <div className="px-3 py-3 lg:px-5 lg:pl-3">
           <div className="flex items-center justify-between">
-            <div className="flex items-center justify-start rtl:justify-end">
+            <div
+              className={`${
+                isCollapsed ? "w-18" : "w-64"
+              } flex items-center justify-between rtl:justify-end`}
+            >
               <button
                 data-drawer-target="logo-sidebar"
                 data-drawer-toggle="logo-sidebar"
                 aria-controls="logo-sidebar"
                 type="button"
-                className="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                className="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600  sm:translate-x-0"
               >
                 <span className="sr-only">Open sidebar</span>
                 <svg
@@ -145,17 +165,38 @@ const SidebarWithNavbar = ({ component }) => {
                   ></path>
                 </svg>
               </button>
-              <Link to="/" className="flex ms-2 md:me-24">
-                <img
-                  src={darkMode ? logo : logo2}
-                  className="h-12"
-                  alt="Senderside Logo"
-                />
-                {/* <span className="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">
-                  Senderside
-                </span> */}
+              <Link to="/" className="flex ms-2">
+                {isCollapsed ? (
+                  <img
+                    src={darkMode ? logo4 : logo3}
+                    className="h-12"
+                    alt="Senderside Logo"
+                  />
+                ) : (
+                  <img
+                    src={darkMode ? logo : logo2}
+                    className="h-12"
+                    alt="Senderside Logo"
+                  />
+                )}
               </Link>
+              <span className="float-end border p-1 rounded border-gray-800 bg-black ms-3">
+                {isCollapsed ? (
+                  <FaArrowRight
+                    color="white"
+                    size={18}
+                    onClick={handleCollapsed}
+                  />
+                ) : (
+                  <FaArrowLeft
+                    color="white"
+                    size={18}
+                    onClick={handleCollapsed}
+                  />
+                )}
+              </span>
             </div>
+
             <div className="flex items-center">
               <DarkModeSwitcher setDarkModeFunc={setDarkModeFunc} />
               <Dropdown menuData={menuData} />
@@ -163,13 +204,14 @@ const SidebarWithNavbar = ({ component }) => {
           </div>
         </div>
       </nav>
-
       <aside
         id="logo-sidebar"
-        className={`fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700`}
+        className={`fixed top-0 left-0 z-40 ${
+          isCollapsed ? "w-18" : "w-64"
+        } h-screen pt-20 transition-all duration-500 bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700`}
         aria-label="Sidebar"
       >
-        <div className="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
+        <div className="h-full pb-4 overflow-y-auto bg-white dark:bg-gray-800">
           <ul className="space-y-2 font-medium">
             {sidebarItems?.map((item, index) => {
               const Icon = item?.icon;
@@ -180,7 +222,7 @@ const SidebarWithNavbar = ({ component }) => {
                   className={`${
                     location?.pathname === item?.link &&
                     "bg-black dark:bg-gray-600 text-white p-1 shadow-lg"
-                  }`}
+                  } px-3`}
                 >
                   <Link
                     to={item?.link}
@@ -193,7 +235,9 @@ const SidebarWithNavbar = ({ component }) => {
                       }
                       size={25}
                     />
-                    <span className="ms-3"> {item?.name}</span>
+                    {!isCollapsed && (
+                      <span className="ms-3"> {item?.name}</span>
+                    )}
                   </Link>
                 </li>
               );
@@ -202,7 +246,11 @@ const SidebarWithNavbar = ({ component }) => {
         </div>
       </aside>
 
-      <div className="p-4 sm:ml-64 h-screen overflow-scroll">
+      <div
+        className={` top-3 left-0 z-40 ${
+          !isCollapsed ? "ml-64" : "ml-20"
+        } p-3  h-screen overflow-scroll`}
+      >
         <div className="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14">
           {component}
         </div>

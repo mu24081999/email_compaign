@@ -27,7 +27,7 @@ export const getUserValidatedEmails = (token, user_id) => async (dispatch) => {
           toast.error(response.data.message);
           return dispatch(invalidRequest(response.data.message));
         }
-        dispatch(getUserEmails(response.data.data.emailsData));
+        dispatch(getUserEmails(response.data.data));
       });
   } catch (error) {
     return dispatch(invalidRequest(error.message));
@@ -50,6 +50,7 @@ export const sendValidationEmails = (token, data) => async (dispatch) => {
           return dispatch(invalidRequest(response.data.message));
         }
         dispatch(sendValidation(response.data.message));
+        dispatch(getUserValidatedEmails(token, data?.user_id));
         toast.success(response.data.message);
       });
   } catch (error) {

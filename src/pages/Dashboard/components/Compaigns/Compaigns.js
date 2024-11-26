@@ -51,7 +51,9 @@ const Compaigns = () => {
                 aria-valuemax={compaign?.total_leads}
               >
                 <div
-                  className="flex flex-col justify-center rounded-full overflow-hidden bg-blue-600 text-xs text-white text-center whitespace-nowrap transition duration-500 dark:bg-blue-500"
+                  className={`flex flex-col justify-center rounded-full overflow-hidden ${
+                    progressPercentage === 100 ? "bg-green-500" : "bg-blue-600"
+                  } text-xs text-white text-center whitespace-nowrap transition duration-500 dark:bg-blue-500`}
                   style={{ width: `${progressPercentage}%` }}
                 ></div>
               </div>
