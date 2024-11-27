@@ -12,16 +12,16 @@ const Tabs = ({ tabsData }) => {
   return (
     <div className="h-fit overflow-scrol">
       {/* Tabs navigation */}
-      <div className="mb-4 border-b border-gray-200 dark:border-gray-700">
+      <div className=" border-b border-gray-200 dark:border-gray-700">
         <ul
-          className="flex flex-wrap -mb-px text-sm font-medium text-center"
+          className="flex flex-wrap justify-center -mb-px text-sm font-medium text-center"
           role="tablist"
         >
           {tabsData.map((tab) => (
             <li key={tab.id} className="me-2" role="presentation">
               <button
                 id={tab?.id}
-                className={`inline-block p-4 border-b-2 rounded-t-lg ${
+                className={`inline-block font-extrabold p-4 border-b-2 rounded-t-lg ${
                   activeTab === tab.id
                     ? "text-blue-700 border-blue-700 dark:text-purple-500 dark:border-purple-500"
                     : "text-black hover:text-gray-600 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300"
@@ -44,7 +44,7 @@ const Tabs = ({ tabsData }) => {
         {tabsData.map((tab) => (
           <div
             key={tab.id}
-            className={`  p-4 rounded-lg bg-white dark:bg-gray-800 ${
+            className={`  p-4 rounded-lg dark:bg-gray-800 ${
               activeTab === tab.id ? "block" : "hidden"
             }`}
             id={tab.id}

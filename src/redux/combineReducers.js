@@ -14,6 +14,7 @@ import dashboardReducer from "./slices/dashboard";
 import subscriptionReducer from "./slices/subscriptions";
 import uniboxReducer from "./slices/unibox";
 import validationReducer from "./slices/validation";
+import twilioRreducer from "./slices/twilio";
 
 export const rootReducer = combineReducers({
   auth: authReducer,
@@ -31,4 +32,5 @@ export const rootReducer = combineReducers({
   subscription: subscriptionReducer,
   unibox: uniboxReducer,
   validation: validationReducer,
+  twilio: twilioRreducer,
 });

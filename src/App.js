@@ -40,7 +40,7 @@ const App = () => {
   return (
     <div className=" bg-gray-50 dark:bg-gray-900 h-screen dark:text-white">
       <ToastContainer autoClose={2000} position="bottom-right" />
-      <RouterProvider router={routes(isAuthenticated)} />
+      <RouterProvider router={routes(isAuthenticated, isValid)} />
     </div>
   );
 };

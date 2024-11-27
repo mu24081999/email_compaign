@@ -24,12 +24,12 @@ import ForgotPassword from "./pages/Auth/ForgotPassword";
 import VerifyEmail from "./pages/Auth/VerifyEmail";
 import ResetPassword from "./pages/Auth/ResetPassword";
 import Dialpad from "./pages/Dialpad";
-const router = (isAuthenticated) => {
+const router = (isAuthenticated, isValid) => {
   const routes = [
     {
       path: "/",
       element: (
-        <PrivateRoute isAuthenticated={isAuthenticated}>
+        <PrivateRoute isAuthenticated={isAuthenticated} isValid={isValid}>
           <Dashboard />
         </PrivateRoute>
       ), // Protect the Dashboard route    children: [],
@@ -38,7 +38,7 @@ const router = (isAuthenticated) => {
     {
       path: "/lead-finder",
       element: (
-        <PrivateRoute isAuthenticated={isAuthenticated}>
+        <PrivateRoute isAuthenticated={isAuthenticated} isValid={isValid}>
           <LeadFinder />
         </PrivateRoute>
       ),
@@ -60,7 +60,7 @@ const router = (isAuthenticated) => {
     {
       path: "/drip-compaign",
       element: (
-        <PrivateRoute isAuthenticated={isAuthenticated}>
+        <PrivateRoute isAuthenticated={isAuthenticated} isValid={isValid}>
           <DripCompaign />
         </PrivateRoute>
       ),
@@ -70,7 +70,7 @@ const router = (isAuthenticated) => {
     {
       path: "/my-subscription",
       element: (
-        <PrivateRoute isAuthenticated={isAuthenticated}>
+        <PrivateRoute isAuthenticated={isAuthenticated} isValid={isValid}>
           <Subscription />
         </PrivateRoute>
       ),
@@ -80,7 +80,7 @@ const router = (isAuthenticated) => {
     {
       path: "/dialpad",
       element: (
-        <PrivateRoute isAuthenticated={isAuthenticated}>
+        <PrivateRoute isAuthenticated={isAuthenticated} isValid={isValid}>
           <Dialpad />
         </PrivateRoute>
       ),
@@ -90,7 +90,7 @@ const router = (isAuthenticated) => {
     {
       path: "/email-validation",
       element: (
-        <PrivateRoute isAuthenticated={isAuthenticated}>
+        <PrivateRoute isAuthenticated={isAuthenticated} isValid={isValid}>
           <EmailValidation />
         </PrivateRoute>
       ),
@@ -100,7 +100,7 @@ const router = (isAuthenticated) => {
     {
       path: "/email-templates",
       element: (
-        <PrivateRoute isAuthenticated={isAuthenticated}>
+        <PrivateRoute isAuthenticated={isAuthenticated} isValid={isValid}>
           <EmailTemplate />
         </PrivateRoute>
       ),
@@ -110,7 +110,7 @@ const router = (isAuthenticated) => {
     {
       path: "/compaigns",
       element: (
-        <PrivateRoute isAuthenticated={isAuthenticated}>
+        <PrivateRoute isAuthenticated={isAuthenticated} isValid={isValid}>
           <Compaigns />
         </PrivateRoute>
       ),
@@ -120,7 +120,7 @@ const router = (isAuthenticated) => {
     {
       path: "/sequences",
       element: (
-        <PrivateRoute isAuthenticated={isAuthenticated}>
+        <PrivateRoute isAuthenticated={isAuthenticated} isValid={isValid}>
           <Sequence />
         </PrivateRoute>
       ),
@@ -130,7 +130,7 @@ const router = (isAuthenticated) => {
     {
       path: "/accounts",
       element: (
-        <PrivateRoute isAuthenticated={isAuthenticated}>
+        <PrivateRoute isAuthenticated={isAuthenticated} isValid={isValid}>
           <EmailAccounts />
         </PrivateRoute>
       ),
@@ -140,7 +140,7 @@ const router = (isAuthenticated) => {
     {
       path: "/compaign/:id",
       element: (
-        <PrivateRoute isAuthenticated={isAuthenticated}>
+        <PrivateRoute isAuthenticated={isAuthenticated} isValid={isValid}>
           <Compaign />
         </PrivateRoute>
       ),
@@ -150,7 +150,7 @@ const router = (isAuthenticated) => {
     {
       path: "/add-compaign",
       element: (
-        <PrivateRoute isAuthenticated={isAuthenticated}>
+        <PrivateRoute isAuthenticated={isAuthenticated} isValid={isValid}>
           <AddCompaign />
         </PrivateRoute>
       ),
@@ -160,7 +160,7 @@ const router = (isAuthenticated) => {
     {
       path: "/connect-email-account",
       element: (
-        <PrivateRoute isAuthenticated={isAuthenticated}>
+        <PrivateRoute isAuthenticated={isAuthenticated} isValid={isValid}>
           <AddEmail />
         </PrivateRoute>
       ),
@@ -170,7 +170,7 @@ const router = (isAuthenticated) => {
     {
       path: "/email-schedule",
       element: (
-        <PrivateRoute isAuthenticated={isAuthenticated}>
+        <PrivateRoute isAuthenticated={isAuthenticated} isValid={isValid}>
           <Schedule />
         </PrivateRoute>
       ),
@@ -180,7 +180,7 @@ const router = (isAuthenticated) => {
     {
       path: "/common-box",
       element: (
-        <PrivateRoute isAuthenticated={isAuthenticated}>
+        <PrivateRoute isAuthenticated={isAuthenticated} isValid={isValid}>
           <CommonBox />
         </PrivateRoute>
       ),
@@ -190,7 +190,7 @@ const router = (isAuthenticated) => {
     {
       path: "/account-settings",
       element: (
-        <PrivateRoute isAuthenticated={isAuthenticated}>
+        <PrivateRoute isAuthenticated={isAuthenticated} isValid={isValid}>
           <Profile />
         </PrivateRoute>
       ),
@@ -203,7 +203,7 @@ const router = (isAuthenticated) => {
     },
     {
       path: "/subscriptions",
-      element: <Pricing />,
+      element: <Pricing isValid={isValid} />,
     },
     {
       path: "/otp",

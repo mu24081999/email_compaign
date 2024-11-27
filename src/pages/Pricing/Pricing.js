@@ -11,7 +11,7 @@ import {
 import Modal from "../../components/Modal";
 import moment from "moment/moment";
 import { useNavigate } from "react-router-dom";
-const Pricing = () => {
+const Pricing = ({ isValid }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isSubscribed, setIsSubscribed] = useState(false);
   console.log("🚀 ~ Pricing ~ isOpen:", isOpen);
@@ -190,8 +190,8 @@ const Pricing = () => {
     }
   }, [typeWatcher]);
   useEffect(() => {
-    if (isAuthenticated) navigateTo("/");
-  }, [isAuthenticated, navigateTo]);
+    if (isAuthenticated && isValid) navigateTo("/");
+  }, [isAuthenticated, navigateTo, isValid]);
   const getPaymentIntend = async (obj) => {
     dispatch(
       createPaymentIntendApi(token, {
