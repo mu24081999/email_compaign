@@ -124,15 +124,16 @@ const Dashboard = () => {
           heading={"Emails Opened"}
           value={analytics?.opens}
         />
-        <DashboardCard
-          icon={<BsEnvelopeOpenHeart color="orange" size={30} />}
-          heading={"Emails Clicked"}
-          value={analytics?.opens}
-        />
+
         <DashboardCard
           icon={<BsEnvelopeSlash color="red" size={30} />}
           heading={"Emails Bounce"}
           value={analytics?.bounce}
+        />
+        <DashboardCard
+          icon={<BsEnvelopeOpenHeart color="orange" size={30} />}
+          heading={"Warmup Emails"}
+          value={analytics?.warmupEmails || 0}
         />
       </div>
       <div className="pt-10">

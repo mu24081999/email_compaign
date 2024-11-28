@@ -4,6 +4,7 @@ export const templateSlice = createSlice({
   initialState: {
     isLoading: false,
     callToken: {},
+    callLogs: [],
     message: "",
     error: "",
     type: "",
@@ -17,6 +18,7 @@ export const templateSlice = createSlice({
       state.message = "Error";
       state.type = "Invalid Request";
       state.callToken = {};
+      state.callLogs = [];
       state.isLoading = false;
     },
     getCallToken: (state, action) => {
@@ -24,8 +26,17 @@ export const templateSlice = createSlice({
       state.isLoading = false;
       state.error = "";
     },
+    getCallLogs: (state, action) => {
+      state.callLogs = action.payload;
+      state.isLoading = false;
+      state.error = "";
+    },
   },
 });
 export default templateSlice.reducer;
-export const { twilioRequestLoading, invalidRequest, getCallToken } =
-  templateSlice.actions;
+export const {
+  twilioRequestLoading,
+  invalidRequest,
+  getCallToken,
+  getCallLogs,
+} = templateSlice.actions;

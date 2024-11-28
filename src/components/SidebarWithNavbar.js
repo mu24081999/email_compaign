@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { HiOutlineTemplate } from "react-icons/hi";
 import { TbLocationShare } from "react-icons/tb";
 import { TbCalendarDollar } from "react-icons/tb";
+import { BsTelephone } from "react-icons/bs";
 
 import {
   FaArrowAltCircleRight,
@@ -25,13 +26,16 @@ import logo3 from "../assets/3.png";
 import logo4 from "../assets/4.png";
 import Dropdown from "./Dropdown";
 import { IoKeypadOutline } from "react-icons/io5";
+import useMain from "../context/Main/useMain";
+import Dialer from "../pages/Dialpad/components/DialpadComponents/Dialer";
+import { PiSignOutBold } from "react-icons/pi";
 
 const SidebarWithNavbar = ({ component }) => {
+  const { isCollapsed, setIsCollapsed_ } = useMain();
   const location = useLocation();
   const dispatch = useDispatch();
   const { token, user } = useSelector((state) => state.auth);
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [isCollapsed, setIsCollapsed] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
   const logout = () => dispatch(logoutUser(token));
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
@@ -124,14 +128,27 @@ const SidebarWithNavbar = ({ component }) => {
         description: user?.email,
       },
       {
-        name: "Sign out",
-        icon: <FaRegUser />,
-        onClick: logout,
+        name: "Logout",
+        onClick: () => logout,
+        icon: <PiSignOutBold size={25} />,
+      },
+    ],
+  };
+  const dialpadMenuData = {
+    title: (
+      <div className="mt-1 mx-1">
+        <BsTelephone size={25} />
+      </div>
+    ),
+    menuItems: [
+      {
+        type: "content",
+        content: <Dialer />,
       },
     ],
   };
   const handleCollapsed = () => {
-    setIsCollapsed(!isCollapsed);
+    setIsCollapsed_(!isCollapsed);
   };
   return (
     <div className="w-full">
@@ -200,6 +217,7 @@ const SidebarWithNavbar = ({ component }) => {
             <div className="flex items-center">
               <DarkModeSwitcher setDarkModeFunc={setDarkModeFunc} />
               <Dropdown menuData={menuData} />
+              <Dropdown menuData={dialpadMenuData} />
             </div>
           </div>
         </div>

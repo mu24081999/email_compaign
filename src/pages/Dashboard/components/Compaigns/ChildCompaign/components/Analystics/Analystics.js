@@ -31,15 +31,16 @@ const Analystics = ({ data }) => {
           heading={"Emails Opened"}
           value={data?.opens}
         />
-        <DashboardCard
-          icon={<BsEnvelopeOpenHeart color="orange" size={30} />}
-          heading={"Emails Clicked"}
-          value={data?.opens}
-        />
+
         <DashboardCard
           icon={<BsEnvelopeSlash color="red" size={30} />}
           heading={"Emails Bounce"}
           value={data?.bounce}
+        />
+        <DashboardCard
+          icon={<BsEnvelopeOpenHeart color="orange" size={30} />}
+          heading={"Warmup Emails"}
+          value={data?.warmupEmails || 0}
         />
       </div>
     </div>

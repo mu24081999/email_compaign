@@ -34,7 +34,6 @@ const CalllingContext = ({ children }) => {
   const init = async () => {
     if (callToken) {
       try {
-        console.log("Token connected successfully!!", callToken);
         const device = new Device(callToken, {
           logLevel: 1,
           edge: "ashburn",

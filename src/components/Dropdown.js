@@ -1,4 +1,5 @@
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
+import Content from "./DropdownComponents/Content";
 
 const Dropdown = ({ menuData }) => {
   return (
@@ -14,21 +15,7 @@ const Dropdown = ({ menuData }) => {
           {Array.isArray(menuData?.menuItems) &&
             menuData?.menuItems?.map((item, index) => (
               <MenuItem>
-                <button
-                  className=" dark:text-gray-300 text-left data-[focus]:bg-blue-100 p-3 "
-                  onClick={item?.onClick}
-                >
-                  <div className="flex gap-2">
-                    <span className="mt-1"> {item?.icon}</span>
-
-                    <div className="flex flex-col">
-                      <span> {item?.name}</span>
-                      {item?.description && (
-                        <span className="text-xs">{item?.description}</span>
-                      )}
-                    </div>
-                  </div>
-                </button>
+                <Content item={item} />
               </MenuItem>
             ))}
         </MenuItems>
