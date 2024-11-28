@@ -73,14 +73,14 @@ const express = require("express");
 const https = require("https");
 const fs = require("fs");
 const path = require("path");
-const compression = require("compression");
+// const compression = require("compression");
 // const helmet = require("helmet");
-const morgan = require("morgan");
+// const morgan = require("morgan");
 
 const app = express();
 // app.use(helmet());
-app.use(compression());
-app.use(morgan("combined"));
+// app.use(compression());
+// app.use(morgan("combined"));
 
 // HTTPS Redirection
 app.use((req, res, next) => {
