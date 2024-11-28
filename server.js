@@ -4,6 +4,9 @@ const fs = require("fs");
 const path = require("path");
 const app = express();
 const session = require("express-session");
+const compression = require("compression");
+app.use(compression());
+
 app.use(
   session({
     secret: "12345678",
@@ -23,7 +26,10 @@ app.use((req, res, next) => {
   const buildPath = path.join(__dirname, buildDir);
 
   if (fs.existsSync(buildPath)) {
-    express.static(buildPath)(req, res, next);
+    express.static(buildPath, {
+      maxAge: "1y", // Cache static files for 1 year
+      immutable: true, // Indicate files won't change
+    })(req, res, next);
   } else {
     res.sendFile(path.join(__dirname, "maintainance.html"));
   }
