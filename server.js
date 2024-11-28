@@ -74,27 +74,27 @@ const https = require("https");
 const fs = require("fs");
 const path = require("path");
 const compression = require("compression");
-const helmet = require("helmet");
+// const helmet = require("helmet");
 const morgan = require("morgan");
 
 const app = express();
-app.use(helmet());
-app.use(
-  helmet.contentSecurityPolicy({
-    useDefaults: true,
-    directives: {
-      "default-src": ["'self'"],
-      "script-src": [
-        "'self'",
-        "'unsafe-inline'",
-        "https://your-backend-url.com",
-      ],
-      "style-src": ["'self'", "'unsafe-inline'"],
-      "img-src": ["'self'", "data:"],
-      "connect-src": ["'self'", "https://your-backend-url.com"],
-    },
-  })
-);
+// app.use(helmet());
+// app.use(
+//   helmet.contentSecurityPolicy({
+//     useDefaults: true,
+//     directives: {
+//       "default-src": ["'self'"],
+//       "script-src": [
+//         "'self'",
+//         "'unsafe-inline'",
+//         "https://your-backend-url.com",
+//       ],
+//       "style-src": ["'self'", "'unsafe-inline'"],
+//       "img-src": ["'self'", "data:"],
+//       "connect-src": ["'self'", "https://your-backend-url.com"],
+//     },
+//   })
+// );
 app.use(compression());
 app.use(morgan("combined"));
 
