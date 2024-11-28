@@ -79,10 +79,25 @@ const morgan = require("morgan");
 
 const app = express();
 app.use(helmet());
+app.use(
+  helmet.contentSecurityPolicy({
+    useDefaults: true,
+    directives: {
+      "default-src": ["'self'"],
+      "script-src": [
+        "'self'",
+        "'unsafe-inline'",
+        "https://your-backend-url.com",
+      ],
+      "style-src": ["'self'", "'unsafe-inline'"],
+      "img-src": ["'self'", "data:"],
+      "connect-src": ["'self'", "https://your-backend-url.com"],
+    },
+  })
+);
 app.use(compression());
 app.use(morgan("combined"));
 
-// HTTPS Redirection
 app.use((req, res, next) => {
   if (!req.secure && req.get("x-forwarded-proto") !== "https") {
     return res.redirect("https://" + req.headers.host + req.url);
@@ -101,7 +116,6 @@ function getBuildDirectory(hostname) {
   return buildDirectories[hostname] || null;
 }
 
-// Serve static files or maintenance page
 app.use((req, res, next) => {
   const buildDir = getBuildDirectory(req.hostname);
   if (buildDir) {
@@ -117,7 +131,6 @@ app.use((req, res, next) => {
   res.sendFile(path.join(__dirname, "maintainance.html"));
 });
 
-// Fallback for SPA routes
 app.get("*", (req, res) => {
   const buildDir = getBuildDirectory(req.hostname);
   if (buildDir) {
@@ -129,7 +142,6 @@ app.get("*", (req, res) => {
   res.status(404).send("Maintenance Page Not Found");
 });
 
-// Load SSL Certificates
 let sslOptionsSub;
 try {
   sslOptionsSub = {
@@ -143,12 +155,10 @@ try {
   process.exit(1);
 }
 
-// Start HTTPS server
 https.createServer(sslOptionsSub, app).listen(443, () => {
   console.log("Server running on port 443...");
 });
 
-// Graceful Shutdown
 process.on("SIGINT", () => {
   console.log("Server shutting down gracefully...");
   process.exit(0);
