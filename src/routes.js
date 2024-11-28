@@ -1,7 +1,7 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import { createBrowserRouter } from "react-router-dom";
-import Dashboard from "./pages/Dashboard/Dashboard";
 import Login from "./pages/Auth/Login";
+import Dashboard from "./pages/Dashboard/Dashboard";
 import Register from "./pages/Auth/Register";
 import EmailTemplate from "./pages/EmailTemplate/EmailTemplate";
 import PrivateRoute from "./components/PrivateRoute";
