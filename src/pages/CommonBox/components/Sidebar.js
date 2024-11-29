@@ -7,15 +7,13 @@ import Campaigns from "./Campaigns";
 
 export function SidebarCom({ setCampaignData }) {
   return (
-    <Sidebar
-      aria-label="Sidebar with multi-level dropdown example"
-      className="min-h-[88vh] shadow-lg"
-    >
+    <Sidebar aria-label="Sidebar with multi-level dropdown example">
       <Sidebar.Items>
         <Sidebar.ItemGroup>
           <Sidebar.Collapse
             icon={TbLocationShare}
             label="Campaigns"
+            open={true}
             className="bg-white py-4 border-gray-300 shadow-lg px-2 hover:bg-gray-100"
           >
             <Campaigns setCampaignData={setCampaignData} />

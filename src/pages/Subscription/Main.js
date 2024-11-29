@@ -5,9 +5,8 @@ import Table from "../../components/Table";
 import moment from "moment";
 import _ from "lodash";
 
-const CommonBox = () => {
+const Main = () => {
   const { subscription } = useSelector((state) => state.subscription);
-  console.log("🚀 ~ CommonBox ~ subscription:", subscription);
   const [subscriptionData, setSubscriptionData] = useState([]);
 
   const columns = [
@@ -46,4 +45,4 @@ const CommonBox = () => {
   );
 };
 
-export default CommonBox;
+export default Main;

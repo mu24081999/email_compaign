@@ -166,14 +166,14 @@ const Table = ({
                     {col.type === "actions" ? (
                       <div className="flex justify-center gap-4 ">
                         {row?.actions?.map((action) => (
-                          <button
+                          <Button
                             type="button"
+                            loading={action.loading}
                             onClick={action?.onClick}
-                            style={{ color: action?.color }}
                             key={action.label}
                           >
                             {action?.label}
-                          </button>
+                          </Button>
                         ))}
                       </div>
                     ) : col.type === "button" ? (

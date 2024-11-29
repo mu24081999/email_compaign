@@ -85,7 +85,7 @@ const Compaigns = () => {
   };
   const columns = [
     { label: "Title", accessor: "title", type: "link" },
-    { label: "Status", accessor: "status" },
+    // { label: "Status", accessor: "status" },
     { label: "Progress", accessor: "progress" }, // Example of nested accessor
     { label: "Sent", accessor: "email_sent_counter" },
     { label: "Open", accessor: "email_opens_counter" },

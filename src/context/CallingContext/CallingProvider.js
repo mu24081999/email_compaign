@@ -11,6 +11,7 @@ const CalllingContext = ({ children }) => {
     READY: "Ready",
     ON_CALL: "On call",
     OFFLINE: "Offline",
+    ON_CALL_KEYPAD: "On call keypad",
   };
   const stateColor = {
     [USER_STATE.CONNECTING]: "#B7AC44",
@@ -41,6 +42,7 @@ const CalllingContext = ({ children }) => {
         device.register();
         setDevice(device);
         device.addListener("connect", (device) => {
+          setIncoming(false);
           console.log("Connect event listener added .....");
           return device;
         });
@@ -49,16 +51,19 @@ const CalllingContext = ({ children }) => {
           setUserState(USER_STATE.READY);
         });
         device.on("connect", (connection) => {
-          console.log("Call connect");
+          console.log("Call connected");
+          setIncoming(false);
           setConnection(connection);
           setUserState(USER_STATE.ON_CALL);
         });
         device.on("disconnect", () => {
           console.log("Disconnect event");
+          setIncoming(false);
           setUserState(USER_STATE.READY);
           setConnection(null);
         });
         device.on("incoming", (call) => {
+          console.log("🚀 ~ device.on ~ incoming:", call);
           setIncoming(true);
           setConnection(call);
           setUserState(USER_STATE.ON_CALL);
@@ -66,6 +71,7 @@ const CalllingContext = ({ children }) => {
 
         return () => {
           device.destroy();
+          setIncoming(false);
           setDevice(undefined);
           setUserState(USER_STATE.OFFLINE);
         };
@@ -108,7 +114,7 @@ const CalllingContext = ({ children }) => {
     return (
       <div className="badge bg-light badge-lg text-dark">
         <span>
-          <IoIosTimer size={16} style={{ marginRight: "4%" }} />
+          {/* <IoIosTimer size={16} style={{ marginRight: "4%" }} /> */}
           {`${timer.hours < 9 ? "0" + timer.hours : timer.hours} :
           ${timer.mins < 9 ? "0" + timer.mins : timer.mins} :
 
@@ -127,22 +133,26 @@ const CalllingContext = ({ children }) => {
         audio: true,
       },
     });
-    call.on("accept", () => {
-      setConnection(connection);
+    call.on("accept", (call) => {
+      setConnection(call);
+      setIncoming(false);
       setUserState(USER_STATE.ON_CALL);
-      console.log("call accepted");
+      console.log("call accepted", call);
     });
     call.on("disconnect", () => {
       console.log("The call has been disconnected.");
       setUserState(USER_STATE.READY);
+      setIncoming(false);
       setConnection(null);
     });
     call.on("reject", () => {
       setUserState(USER_STATE.READY);
+      setIncoming(false);
       console.log("The call was rejected.");
     });
     call.on("error", (error) => {
       console.log("An error has occurred: ", error);
+      setIncoming(false);
     });
     call.on("mute", (isMuted, call) => {
       isMuted ? setCallMuted(true) : setCallMuted(false);
@@ -152,14 +162,18 @@ const CalllingContext = ({ children }) => {
     });
   };
   const handleDialerClick = (type, value) => {
-    if (type === "dial") {
-      setInputValue((prevValue) => prevValue + value);
-    } else if (type === "delete") {
-      setInputValue((prevValue) =>
-        prevValue.substring(0, prevValue.length - 1)
-      );
-    } else if (type === "clear") {
-      setInputValue("");
+    if (connection && type === "dial") {
+      connection.sendDigits(value);
+    } else {
+      if (type === "dial") {
+        setInputValue((prevValue) => prevValue + value);
+      } else if (type === "delete") {
+        setInputValue((prevValue) =>
+          prevValue.substring(0, prevValue.length - 1)
+        );
+      } else if (type === "clear") {
+        setInputValue("");
+      }
     }
   };
   const handleDropCall = () => {
@@ -186,6 +200,7 @@ const CalllingContext = ({ children }) => {
   };
   const handleAcceptCall = () => {
     if (connection) {
+      setIncoming(false);
       connection.accept();
     }
   };
@@ -227,6 +242,7 @@ const CalllingContext = ({ children }) => {
       handleMakeCall,
       handleDropCall,
       handleMute,
+      handleAcceptCall,
     ]
   );
   return (

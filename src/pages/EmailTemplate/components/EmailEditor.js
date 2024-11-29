@@ -21,7 +21,7 @@ const EmailEditorComponent = () => {
     control,
     formState: { errors },
   } = useForm();
-  const { user_id, token } = useSelector((state) => state.auth);
+  const { user_id, token, user } = useSelector((state) => state.auth);
   const { templates } = useSelector((state) => state.template);
   const emailEditorRef = useRef();
   const dispatch = useDispatch();
@@ -70,7 +70,8 @@ const EmailEditorComponent = () => {
       const params = {
         title: formData?.title,
         user_id: user_id,
-        content: html,
+        // content: html,
+        content: replacePlaceholdersInHtml(html, user),
       };
       console.log(params);
       const isAdded = await dispatch(addTemplateRec(token, params));
@@ -182,8 +183,11 @@ const EmailEditorComponent = () => {
                 height: "75vh",
               }}
             />
-            <div className="h-12 w-96 bg-white absolute bottom-0 right-0">
-              {" "}
+            <div className="h-14 shadow-lg rounded-md w-[44vh] p-1 bg-white absolute bottom-0 right-0">
+              <p>
+                Add firstname,lastname and email in the format {"{{firstname}}"}{" "}
+                to include in the sequence
+              </p>{" "}
             </div>
           </div>
           <div className="flex">

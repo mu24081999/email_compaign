@@ -24,6 +24,7 @@ import ForgotPassword from "./pages/Auth/ForgotPassword";
 import VerifyEmail from "./pages/Auth/VerifyEmail";
 import ResetPassword from "./pages/Auth/ResetPassword";
 import Dialpad from "./pages/Dialpad";
+import Numbers from "./pages/Numbers/Numbers";
 const router = (isAuthenticated, isValid) => {
   const routes = [
     {
@@ -62,6 +63,16 @@ const router = (isAuthenticated, isValid) => {
       element: (
         <PrivateRoute isAuthenticated={isAuthenticated} isValid={isValid}>
           <DripCompaign />
+        </PrivateRoute>
+      ),
+      children: [],
+      breadcrumb: "email-template",
+    },
+    {
+      path: "/phone-numbers",
+      element: (
+        <PrivateRoute isAuthenticated={isAuthenticated} isValid={isValid}>
+          <Numbers />
         </PrivateRoute>
       ),
       children: [],

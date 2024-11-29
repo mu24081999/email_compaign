@@ -31,7 +31,6 @@ const Sequence = () => {
       content: `<!DOCTYPE HTML>
           <html>
             <body>
-              <h1>Hello, World!</h1>
               <p>This is the initial content of the editor.</p>
             </body>
           </html>`,
@@ -104,7 +103,7 @@ const Sequence = () => {
   };
   const { id } = useParams();
   const dispatch = useDispatch();
-  const { user_id, token } = useSelector((state) => state.auth);
+  const { user_id, token, user } = useSelector((state) => state.auth);
   const { templates } = useSelector((state) => state.template);
   const { sequences } = useSelector((state) => state.sequence);
   const { emails } = useSelector((state) => state.email);
@@ -120,12 +119,13 @@ const Sequence = () => {
     return html.replace(/\{\{(.*?)\}\}/g, (_, key) => data[key.trim()] || "");
   };
   const addSequence = (formData) => {
+    const content = formData?.content + "</body>";
     const params = {
       user_id: user_id,
       subject: formData?.subject,
       // template_id: currentTemplate?.id,
       // compaign_id: id,
-      content: formData?.content + "</body>",
+      content: replacePlaceholdersInHtml(content, user),
     };
     // console.log("params: ", params);
     dispatch(addSequenceRec(token, params));
@@ -227,23 +227,29 @@ const Sequence = () => {
                 },
               }}
             />
-            <TextEditor
-              defaultValue={
-                currentTemplate !== undefined
-                  ? currentTemplate?.content
-                  : "<p>Please Add Your Content</p>"
-              }
-              label="Sequence"
-              name="content"
-              control={control}
-              errors={errors}
-              rules={{
-                required: {
-                  value: true,
-                  message: "Field required!",
-                },
-              }}
-            />
+            <div>
+              <TextEditor
+                defaultValue={
+                  currentTemplate !== undefined
+                    ? currentTemplate?.content
+                    : "<p>Please Add Your Content</p>"
+                }
+                label="Sequence"
+                name="content"
+                control={control}
+                errors={errors}
+                rules={{
+                  required: {
+                    value: true,
+                    message: "Field required!",
+                  },
+                }}
+              />
+              <p>
+                Add firstname,lastname and email in the format {"{{firstname}}"}{" "}
+                to include in the sequence
+              </p>
+            </div>
             <Button type="submit" className="py-2">
               Submit
             </Button>

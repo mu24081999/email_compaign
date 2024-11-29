@@ -1,23 +1,23 @@
 import React, { useEffect, useState } from "react";
 import DarkModeSwitcher from "./DarkmodeSwitcher";
 import { Link, useLocation } from "react-router-dom";
-import { MdOutlineDashboard, MdOutlineMarkEmailRead } from "react-icons/md";
+import {
+  MdCall,
+  MdOutlineDashboard,
+  MdOutlineMarkEmailRead,
+} from "react-icons/md";
 import { TbTemplate } from "react-icons/tb";
 import { logoutUser } from "../redux/services/auth";
 import { useDispatch, useSelector } from "react-redux";
 import { HiOutlineTemplate } from "react-icons/hi";
 import { TbLocationShare } from "react-icons/tb";
 import { TbCalendarDollar } from "react-icons/tb";
-import { BsTelephone } from "react-icons/bs";
-
 import {
-  FaArrowAltCircleRight,
   FaArrowLeft,
   FaArrowRight,
   FaCogs,
   FaRegEnvelope,
   FaRegEnvelopeOpen,
-  FaRegUser,
   FaRegUserCircle,
 } from "react-icons/fa";
 import logo2 from "../assets/2.png";
@@ -29,6 +29,7 @@ import { IoKeypadOutline } from "react-icons/io5";
 import useMain from "../context/Main/useMain";
 import Dialer from "../pages/Dialpad/components/DialpadComponents/Dialer";
 import { PiSignOutBold } from "react-icons/pi";
+import { RiContactsBook3Line } from "react-icons/ri";
 
 const SidebarWithNavbar = ({ component }) => {
   const { isCollapsed, setIsCollapsed_ } = useMain();
@@ -94,6 +95,11 @@ const SidebarWithNavbar = ({ component }) => {
       icon: IoKeypadOutline,
     },
     {
+      name: "Phone Numbers",
+      link: "/phone-numbers",
+      icon: RiContactsBook3Line,
+    },
+    {
       name: "My Subscription",
       link: "/my-subscription",
       icon: TbCalendarDollar,
@@ -129,15 +135,16 @@ const SidebarWithNavbar = ({ component }) => {
       },
       {
         name: "Logout",
-        onClick: () => logout,
+        type: "button",
+        onClick: logout,
         icon: <PiSignOutBold size={25} />,
       },
     ],
   };
   const dialpadMenuData = {
     title: (
-      <div className="mt-1 mx-1">
-        <BsTelephone size={25} />
+      <div className="mt-1 mx-1 bg-green-500 p-2 rounded-full">
+        <MdCall size={19} color="white" />
       </div>
     ),
     menuItems: [
@@ -216,8 +223,8 @@ const SidebarWithNavbar = ({ component }) => {
 
             <div className="flex items-center">
               <DarkModeSwitcher setDarkModeFunc={setDarkModeFunc} />
-              <Dropdown menuData={menuData} />
               <Dropdown menuData={dialpadMenuData} />
+              <Dropdown menuData={menuData} />
             </div>
           </div>
         </div>

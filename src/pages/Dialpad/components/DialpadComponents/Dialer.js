@@ -4,6 +4,8 @@ import Button from "../../../../components/Button";
 import { AiOutlineAudioMuted } from "react-icons/ai";
 import { MdDialpad } from "react-icons/md";
 import _ from "lodash";
+import { FiDelete, FiPhoneCall } from "react-icons/fi";
+
 const Dialer = () => {
   const {
     Timer,
@@ -24,19 +26,28 @@ const Dialer = () => {
     handleMute,
     callMuted,
   } = useCalling();
+  console.log("🚀 ~ Dialer ~ incoming:", incoming);
+
   return (
     <div>
       <div className=" bg-white dark:bg-gray-900 mx-auto w-80  rounded-xl relative overflow-hidden  p-4 shadow-xl border ">
-        {userState === USER_STATE.READY && (
+        {(userState === USER_STATE.READY ||
+          userState === USER_STATE.ON_CALL_KEYPAD) && (
           <div>
             <div className="flex flex-col h-full justify-center text-black">
               <div className="w-full text-center">
-                <div className="">
+                <div className="relative">
                   <input
                     className="bg-transparent w-full text-center p-2 border-b border-gray-300  text-lg outline-none"
                     placeholder="Phone Number"
                     value={inputValue}
                     onChange={(e) => setInputValue_(e.target.value)}
+                  />
+                  <FiDelete
+                    color="red"
+                    size={20}
+                    onClick={() => handleDialerClick("delete")}
+                    className=" absolute cursor-pointer -mt-8 right-0"
                   />
                 </div>
                 <div className="inline-grid grid-cols-3 my-4 gap-6 mx-auto font-extrabold text-gray-dark">
@@ -125,16 +136,25 @@ const Dialer = () => {
                 <Button
                   variant="primary"
                   className="lg:w-[240px] flex justify-center mx-auto py-3 bg-black hover:bg-gray-800"
-                  onClick={handleMakeCall}
+                  onClick={
+                    userState === USER_STATE.READY
+                      ? handleMakeCall
+                      : setUserState_(USER_STATE.READY)
+                  }
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                  >
-                    <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
-                  </svg>
+                  {userState === USER_STATE.READY && (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-5 w-5"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+                    </svg>
+                  )}
+                  {userState === USER_STATE.ON_CALL_KEYPAD && (
+                    <span>Show Current Call</span>
+                  )}
                 </Button>
               </div>
             </div>
@@ -166,37 +186,37 @@ const Dialer = () => {
             </div>
             <div className="grid grid-cols-2 gap-5">
               <div
-                className={` border border-gray-700 rounded-full h-16 w-16 m-auto cursor-pointer`}
+                className={`${
+                  callMuted ? "bg-gray-300" : ""
+                } border border-gray-700 rounded-full h-16 w-16 m-auto cursor-pointer`}
                 onClick={handleMute}
               >
                 <AiOutlineAudioMuted size={27} className="m-auto mt-[17px]" />
               </div>
               <div
                 className={` border border-gray-700 rounded-full h-16 w-16 m-auto cursor-pointer`}
-                // onClick={() => setUserState_(USER_STATE.READY)}
+                onClick={() => setUserState_(USER_STATE.ON_CALL_KEYPAD)}
               >
                 <MdDialpad size={27} className="m-auto mt-[17px]" />
               </div>
             </div>
-            <div>
+            <div className="flex flex-row-reverse justify-between">
               {incoming === true && (
-                <div className="d-flex justify-content-center mt-4 mb-2 mx-1">
-                  <button
-                    className="btn btn-success rounded-circle p-3"
-                    onClick={handleAcceptCall}
+                <button
+                  className="bg-green-500 mx-auto justify-center m-5 flex hover:bg-green-400 text-white items-center h-16 cursor-pointer w-16 rounded-full  "
+                  onClick={() => handleAcceptCall()}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
                   >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-5 w-5"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                    >
-                      <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
-                    </svg>{" "}
-                  </button>
-                </div>
+                    <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+                  </svg>{" "}
+                </button>
               )}
-              <div
+              <button
                 className="bg-red-500 mx-auto justify-center m-5 flex hover:bg-red-400 text-white items-center h-16 cursor-pointer w-16 rounded-full  "
                 onClick={() => handleDropCall()}
               >
@@ -208,7 +228,7 @@ const Dialer = () => {
                 >
                   <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
                 </svg>
-              </div>
+              </button>
             </div>
           </div>
         )}

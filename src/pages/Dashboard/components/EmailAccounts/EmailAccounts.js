@@ -18,6 +18,7 @@ const EmailAccounts = () => {
   const dispatch = useDispatch();
   const { token, user_id } = useSelector((state) => state.auth);
   const { emails } = useSelector((state) => state.email);
+  console.log("🚀 ~ EmailAccounts ~ emails:", emails);
   const [isOpen, setIsOpen] = useState(false);
   const [selectedEmail, setSelectedEmail] = useState(false);
   const [accountsData, setAccountsData] = useState([]);
@@ -30,7 +31,7 @@ const EmailAccounts = () => {
       accessor: "email",
     },
     { label: "Emails Sent", accessor: "emails_sent" },
-    { label: "Warmup Emails", accessor: "warmup_emails" }, // Example of nested accessor
+    { label: "Warmup Emails", accessor: "warmups_sent" }, // Example of nested accessor
     {
       label: "Actions",
       accessor: "actions",

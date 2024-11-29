@@ -77,9 +77,9 @@ const CommonBox = () => {
     <Layout
       component={
         <div className="">
-          <main className="flex w-full h-full shadow-lg rounded border">
+          <main className=" flex w-full h-full shadow-lg rounded border">
             <SidebarCom setCampaignData={handleCampaignDataFromChild} />
-            <section className="flex flex-col pt-3 w-4/12  dark:bg-gray-900 overflow-y-scroll border border-2 h-[88vh]">
+            <section className="flex flex-col pt-3 w-4/12 bg-white  dark:bg-gray-900 overflow-y-scroll border h-[88vh]">
               {/* <label className="px-3">
                 <input
                   className="rounded-lg p-4 bg-gray-50 dark:bg-gray-900 transition duration-200 focus:outline-none focus:ring-2 w-full"
@@ -119,13 +119,20 @@ const CommonBox = () => {
                       </li>
                     ))
                   ) : (
-                    <p className="text-center">No Replies Found</p>
+                    <div className="flex flex-col items-center h-[83vh] pt-[30vh]">
+                      <img
+                        src="https://cdn-icons-png.flaticon.com/512/11696/11696623.png"
+                        alt=""
+                        width={100}
+                      />
+                      <p className="text-center">No Replies Found</p>
+                    </div>
                   )}
                 </ul>
               )}
             </section>
-            <section className="w-6/12 px-4 flex flex-col bg-gray-50 border-2 dark:bg-gray-900 rounded-r-3xl">
-              {selectedReply?.from && (
+            <section className="w-6/12 px-4 flex flex-col bg-white border-2 dark:bg-gray-900">
+              {selectedReply?.from ? (
                 <>
                   <div className="flex justify-between items-center h-48 border-b-2 mb-8">
                     <div className="flex space-x-4 items-center">
@@ -210,6 +217,15 @@ const CommonBox = () => {
                     </div>
                   </form>
                 </>
+              ) : (
+                <div className="flex flex-col items-center h-[83vh] pt-[35vh]">
+                  <img
+                    src="https://cdn-icons-png.flaticon.com/512/5058/5058385.png"
+                    alt=""
+                    width={100}
+                  />
+                  <p className="text-center">No open content</p>
+                </div>
               )}
             </section>
           </main>

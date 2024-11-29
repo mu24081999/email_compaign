@@ -45,9 +45,14 @@ const Pricing = ({ isValid }) => {
         "10,000 Emails Monthly",
         "Unlimited Emails Annually",
         "Unlimited Email Warm-ups",
-        "Unlimited Email Templates",
-        "Unlimited Email Sequences",
-        "Advance Email Analytics",
+        "5 Email Templates",
+        "5 Email Sequences",
+        "50 Email Validation Credits",
+        "1 Free Virtual Mobile Number",
+        "Free 100 Minutes Calling",
+        "Make & Recieve Calls",
+        "Free Call Logs & Recording",
+        "SMS Marketing",
         "24/7 Email Support",
       ],
     },
@@ -66,9 +71,14 @@ const Pricing = ({ isValid }) => {
         "50,000 Emails Monthly",
         "Unlimited Emails Annually",
         "Unlimited Email Warm-ups",
-        "Unlimited Email Templates",
-        "Unlimited Email Sequences",
-        "Advance Email Analytics",
+        "20 Email Templates",
+        "20 Email Sequences",
+        "250 Email Validation Credits",
+        "2 Free Virtual Mobile Number",
+        "Free 200 Minutes Calling",
+        "Make & Recieve Calls",
+        "Free Call Logs & Recording",
+        "SMS Marketing",
         "24/7 Email Support",
       ],
     },
@@ -89,7 +99,13 @@ const Pricing = ({ isValid }) => {
         "Unlimited Email Warm-ups",
         "Unlimited Email Templates",
         "Unlimited Email Sequences",
-        "Advance Email Analytics",
+        "500 Email Validation Credits",
+        "3 Free Virtual Mobile Number",
+        "Free 400 Minutes Calling",
+        "Make & Recieve Calls",
+        "Free Call Logs & Recording",
+        "SMS Marketing",
+        "24/7 Email Support",
         "24/7 Email Support",
       ],
     },
@@ -120,14 +136,14 @@ const Pricing = ({ isValid }) => {
             ...prev?.starter,
             monthly_price: calculateDiscountAmount(
               prev.starter.original_amount,
-              30
+              25
             ),
             yearly_price: (
-              calculateDiscountAmount(prev.starter.original_amount, 30) * 12
+              calculateDiscountAmount(prev.starter.original_amount, 25) * 12
             ).toFixed(2),
             discount_amount: (
               (prev?.starter?.original_amount -
-                calculateDiscountAmount(prev.starter.original_amount, 30)) *
+                calculateDiscountAmount(prev.starter.original_amount, 25)) *
               12
             ).toFixed(),
           },
@@ -135,29 +151,29 @@ const Pricing = ({ isValid }) => {
             ...prev?.professional,
             monthly_price: calculateDiscountAmount(
               prev.professional.original_amount,
-              30
+              25
             ),
             yearly_price: (
-              calculateDiscountAmount(prev.professional.original_amount, 30) *
+              calculateDiscountAmount(prev.professional.original_amount, 25) *
               12
             ).toFixed(2),
             discount_amount: (
               prev?.professional?.original_amount -
-              calculateDiscountAmount(prev.professional.original_amount, 30)
+              calculateDiscountAmount(prev.professional.original_amount, 25)
             ).toFixed(),
           },
           agency: {
             ...prev?.agency,
             monthly_price: calculateDiscountAmount(
               prev.agency.original_amount,
-              30
+              25
             ),
             yearly_price: (
-              calculateDiscountAmount(prev.agency.original_amount, 30) * 12
+              calculateDiscountAmount(prev.agency.original_amount, 25) * 12
             ).toFixed(2),
             discount_amount: (
               (prev?.agency?.original_amount -
-                calculateDiscountAmount(prev.agency.original_amount, 30)) *
+                calculateDiscountAmount(prev.agency.original_amount, 25)) *
               12
             ).toFixed(2),
           },
@@ -286,9 +302,11 @@ const Pricing = ({ isValid }) => {
               Starter
             </h3>
             <p className="mt-4 flex items-baseline gap-x-2">
-              <del className="text-xl font-semibold text-gray-900">
-                ${pricing?.starter?.original_amount}
-              </del>
+              {typeWatcher && (
+                <del className="text-xl font-semibold text-gray-900">
+                  ${pricing?.starter?.original_amount}
+                </del>
+              )}
               <span className="text-5xl font-semibold tracking-tight text-gray-900">
                 ${pricing?.starter?.monthly_price}
               </span>
@@ -339,9 +357,11 @@ const Pricing = ({ isValid }) => {
             </h3>
             <p className="mt-4 flex items-baseline gap-x-2">
               <p className="mt-4 flex items-baseline gap-x-2">
-                <del className="text-xl font-semibold text-white">
-                  ${pricing?.professional?.original_amount}
-                </del>
+                {typeWatcher && (
+                  <del className="text-xl font-semibold text-white">
+                    ${pricing?.professional?.original_amount}
+                  </del>
+                )}
                 <span className="text-5xl font-semibold tracking-tight text-white">
                   ${pricing?.professional?.monthly_price}
                 </span>
@@ -395,9 +415,11 @@ const Pricing = ({ isValid }) => {
               </>
             </h3>
             <p className="mt-4 flex items-baseline gap-x-2">
-              <del className="text-xl font-semibold text-gray-900">
-                ${pricing?.agency?.original_amount}
-              </del>
+              {typeWatcher && (
+                <del className="text-xl font-semibold text-gray-900">
+                  ${pricing?.agency?.original_amount}
+                </del>
+              )}
               <span className="text-5xl font-semibold tracking-tight text-gray-900">
                 ${pricing?.agency?.monthly_price}
               </span>
