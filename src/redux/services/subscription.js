@@ -7,6 +7,7 @@ import {
   getPaymentIntend,
 } from "../slices/subscriptions";
 import { toast } from "react-toastify";
+import { login } from "../slices/auth";
 const backendURL = `${process.env.REACT_APP_BACKEND_URL_PRODUCTION}`;
 export const createPaymentIntendApi = (token, data) => async (dispatch) => {
   console.log("🚀 ~ createPaymentIntendApi ~ token:", token);
@@ -55,6 +56,7 @@ export const createSubscriptionApi = (token, data) => async (dispatch) => {
         }
         dispatch(addSubscription(response.data.message));
         dispatch(getUserSubscriptionApi(token, data?.user_id));
+        dispatch(login(response.data.data.userData));
         toast.success(response.data.message);
         return {
           done: true,

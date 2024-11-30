@@ -1,11 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import DarkModeSwitcher from "./DarkmodeSwitcher";
 import { Link, useLocation } from "react-router-dom";
-import {
-  MdCall,
-  MdOutlineDashboard,
-  MdOutlineMarkEmailRead,
-} from "react-icons/md";
+import { MdCall, MdOutlineDashboard } from "react-icons/md";
 import { TbTemplate } from "react-icons/tb";
 import { logoutUser } from "../redux/services/auth";
 import { useDispatch, useSelector } from "react-redux";
@@ -29,9 +25,11 @@ import { IoKeypadOutline } from "react-icons/io5";
 import useMain from "../context/Main/useMain";
 import Dialer from "../pages/Dialpad/components/DialpadComponents/Dialer";
 import { PiSignOutBold } from "react-icons/pi";
-import { RiContactsBook3Line } from "react-icons/ri";
+import { RiContactsBook3Line, RiPassValidLine } from "react-icons/ri";
+import useCalling from "../context/CallingContext/useCalling";
 
 const SidebarWithNavbar = ({ component }) => {
+  const { incoming } = useCalling();
   const { isCollapsed, setIsCollapsed_ } = useMain();
   const location = useLocation();
   const dispatch = useDispatch();
@@ -77,7 +75,7 @@ const SidebarWithNavbar = ({ component }) => {
     {
       name: "Email Validation",
       link: "/email-validation",
-      icon: MdOutlineMarkEmailRead,
+      icon: RiPassValidLine,
     },
     // {
     //   name: "Lead Finder",
@@ -143,7 +141,11 @@ const SidebarWithNavbar = ({ component }) => {
   };
   const dialpadMenuData = {
     title: (
-      <div className="mt-1 mx-1 bg-green-500 p-2 rounded-full">
+      <div
+        className={`mt-1 mx-1 bg-green-500 p-2 rounded-full ${
+          incoming ? "animate-bounce" : ""
+        }`}
+      >
         <MdCall size={19} color="white" />
       </div>
     ),

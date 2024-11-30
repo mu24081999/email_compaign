@@ -25,6 +25,7 @@ module.exports = {
         poppins: ["Poppins", "sans-serif"],
         space: ["Space Grotesk", "sans-serif"],
         protest: ["Protest Strike", "sans-serif"],
+        "open-sans": ["Open Sans"],
       },
     },
   },

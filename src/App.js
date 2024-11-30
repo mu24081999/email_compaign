@@ -18,6 +18,7 @@ const App = () => {
     dispatch(getUserSubscriptionApi(token, user_id));
   }, [dispatch, token, user_id]);
   const [isValid, setIsValid] = useState(false);
+  console.log("🚀 ~ App ~ isValid:", isValid, subscription);
   useEffect(() => {
     if (subscription) {
       const checkSubscriptionValidity = () => {
@@ -27,9 +28,8 @@ const App = () => {
 
         // Check if current date is within start and end date, and if status is active
         const isValidSubscription =
-          currentDate >= startDate &&
-          currentDate <= endDate &&
-          subscription.status === "active";
+          // currentDate >= startDate &&
+          currentDate <= endDate && subscription.status === "active";
 
         setIsValid(isValidSubscription);
       };

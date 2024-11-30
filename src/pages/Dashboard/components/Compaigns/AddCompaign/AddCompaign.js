@@ -15,10 +15,10 @@ const AddCompaign = () => {
     formState: { errors },
   } = useForm();
   const { token, user_id } = useSelector((state) => state.auth);
+  const { isLoading } = useSelector((state) => state.compaign);
   const dispatch = useDispatch();
   const navigateTo = useNavigate();
   const add = async (data) => {
-    console.log("🚀 ~ add ~ data:", data);
     const params = {
       user_id: user_id,
       title: data.title,
@@ -67,7 +67,7 @@ const AddCompaign = () => {
                 >
                   Back
                 </Button>
-                <Button type="submit" className="py-3">
+                <Button loading={isLoading} type="submit" className="py-3">
                   Continue
                 </Button>
               </div>

@@ -74,7 +74,7 @@ const ForgotPassword = () => {
                     }}
                   />{" "}
                 </div>
-                <div className="flex justify-end">
+                <div className="flex flex-row-reverse gap-3 justify-end">
                   <Button
                     loading={isLoading}
                     type="submit"
@@ -82,6 +82,14 @@ const ForgotPassword = () => {
                     className="py-2"
                   >
                     Verify
+                  </Button>
+                  <Button
+                    type="submit"
+                    size="lg"
+                    onClick={() => navigateTo("/sign-in")}
+                    className="py-2 bg-gray-400 hover:bg-gray-300"
+                  >
+                    Back
                   </Button>
                 </div>
               </form>

@@ -60,7 +60,7 @@ const Compaigns = () => {
             </div>
           ),
           status: compaign?.status || "pending",
-          email_opens_counter: compaign?.email_opens_counter || 0,
+          email_open_counter: compaign?.email_open_counter || 0,
           email_sent_counter: compaign?.email_sent_counter || 0,
           actions: [
             {
@@ -88,7 +88,7 @@ const Compaigns = () => {
     // { label: "Status", accessor: "status" },
     { label: "Progress", accessor: "progress" }, // Example of nested accessor
     { label: "Sent", accessor: "email_sent_counter" },
-    { label: "Open", accessor: "email_opens_counter" },
+    { label: "Open", accessor: "email_open_counter" },
 
     // {
     //   label: "Actions",
