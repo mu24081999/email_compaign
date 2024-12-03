@@ -183,13 +183,12 @@ const EmailEditorComponent = () => {
                 height: "75vh",
               }}
             />
-            <div className="h-14 shadow-lg rounded-md w-[44vh] p-1 bg-white absolute bottom-0 right-0">
-              <p>
-                Add firstname,lastname and email in the format {"{{firstname}}"}{" "}
-                to include in the sequence
-              </p>{" "}
-            </div>
+            <div className="h-14 shadow-lg rounded-md w-[44vh] p-1 bg-white absolute bottom-0 right-0"></div>
           </div>
+          <p>
+            Add firstname,lastname and email in the format {"{{firstname}}"} to
+            include in the sequence
+          </p>{" "}
           <div className="flex">
             <InputField
               name="title"

@@ -54,7 +54,7 @@ const Contents = () => {
   return (
     <div className="">
       <div className="grid lg:grid-cols-3 sm:grid-cols-1  ">
-        <div>
+        <div className="bg-white border">
           <Sidebar
             calls={callLogs?.calls}
             isLoading={isLoading}
@@ -64,7 +64,7 @@ const Contents = () => {
             MdOutlineCallMissed={MdOutlineCallMissed}
             user={user}
           />
-          <div className="flex justify-between items-center mt-4">
+          <div className="flex justify-between items-center py-2 px-5">
             <Button
               loading={isLoading}
               onClick={() => handlePageChange(callLogs?.previousPageToken)}

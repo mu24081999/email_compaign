@@ -109,7 +109,7 @@ const ReactSelectField = React.forwardRef((props, ref) => {
               options={props?.optionData}
               placeholder={props?.placeHolder ? props?.placeHolder : ""}
               menuPlacement={menuPlacement || "auto"}
-              className={` p-0 m-0 block rounded-lg border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600  sm:text-sm sm:leading-6 ${
+              className={` p-0 m-0 block rounded-lg border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 dark:bg-gray-800 focus:ring-2 focus:ring-inset focus:ring-indigo-600  sm:text-sm sm:leading-6 ${
                 capitalize && "capitalize"
               }`}
               isClearable={true}

@@ -60,7 +60,7 @@ const Recordings = ({
   };
 
   return (
-    <div className="max-w-md mx-auto  h-[83vh] overflow-scroll bg-white rounded-lg shadow-lg p-4">
+    <div className="max-w-md mx-auto  h-[78vh] overflow-scroll rounded-lg shadow-lg p-4">
       {isLoading ? (
         <SidebarSkeleton />
       ) : (
@@ -80,7 +80,7 @@ const Recordings = ({
                     )}
                   </div>
                   <div>
-                    <h2 className="font-bold text-lg text-gray-800">
+                    <h2 className="font-bold text-lg">
                       {log?.from === user?.twilio_selected_number
                         ? log?.to
                         : log?.from}

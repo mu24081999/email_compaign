@@ -8,6 +8,7 @@ import { useForm } from "react-hook-form";
 import TextAreaField from "../../components/FormFields/TextAreaField/TextAreaField";
 import { sendEmailReply } from "../../redux/services/unibox.";
 import Button from "../../components/Button";
+import Heading from "../../components/Heading";
 const CommonBox = () => {
   const {
     handleSubmit,
@@ -87,48 +88,58 @@ const CommonBox = () => {
                   onKeyUp={handleOnSearchReply}
                 />
               </label> */}
+
               {isLoading ? (
                 <SidebarSkeleton />
               ) : (
-                <ul className="mt-6">
-                  {Array.isArray(replies) && replies?.length > 0 ? (
-                    replies?.map((reply, index) => (
-                      <li
-                        className={`${
-                          reply.body === selectedReply?.body
-                            ? "bg-black text-white"
-                            : ""
-                        } py-5 border-b px-3 transition hover:bg-indigo-100 cursor-pointer`}
-                        key={index}
-                        onClick={() => handleReplyClick(reply)}
-                      >
-                        <div className="flex justify-between items-center">
-                          <h3 className="text-lg font-semibold">
-                            {extractNameAndEmail(reply.from)?.name}
-                          </h3>
-                          <p className="text-md text-gray-400">
-                            {getRelativeTime(reply.date)}
-                          </p>
-                        </div>
-                        <div
-                          className="text-md italic text-gray-400"
-                          dangerouslySetInnerHTML={{
-                            __html: reply.body.slice(0, 50),
-                          }}
-                        ></div>
-                      </li>
-                    ))
-                  ) : (
-                    <div className="flex flex-col items-center h-[83vh] pt-[30vh]">
-                      <img
-                        src="https://cdn-icons-png.flaticon.com/512/11696/11696623.png"
-                        alt=""
-                        width={100}
-                      />
-                      <p className="text-center">No Replies Found</p>
-                    </div>
-                  )}
-                </ul>
+                <>
+                  <Heading
+                    text={replies[0]?.id ? "Sent" : "Campaign Replies"}
+                    className="text-center font-extrabold text-lg"
+                  />
+                  <ul className="mt-6">
+                    {Array.isArray(replies) && replies?.length > 0 ? (
+                      replies?.map((reply, index) => (
+                        <li
+                          className={`${
+                            reply.body === selectedReply?.body
+                              ? "bg-black text-white"
+                              : ""
+                          } py-5 border-b px-3 transition hover:bg-indigo-100 dark:hover:bg-gray-700 cursor-pointer`}
+                          key={index}
+                          onClick={() => handleReplyClick(reply)}
+                        >
+                          <div className="flex justify-between items-center">
+                            <h3 className="text-lg font-semibold">
+                              {extractNameAndEmail(reply.from)?.name ||
+                                reply.from}
+                            </h3>
+                            <p className="text-md text-gray-400">
+                              {getRelativeTime(
+                                reply?.createdAt ? reply?.createdAt : reply.date
+                              )}
+                            </p>
+                          </div>
+                          <div
+                            className="text-md italic text-gray-400"
+                            dangerouslySetInnerHTML={{
+                              __html: reply.body.slice(0, 50),
+                            }}
+                          ></div>
+                        </li>
+                      ))
+                    ) : (
+                      <div className="flex flex-col items-center h-[83vh] pt-[30vh]">
+                        <img
+                          src="https://cdn-icons-png.flaticon.com/512/11696/11696623.png"
+                          alt=""
+                          width={100}
+                        />
+                        <p className="text-center">No Replies Found</p>
+                      </div>
+                    )}
+                  </ul>
+                </>
               )}
             </section>
             <section className="w-6/12 px-4 flex flex-col bg-white border-2 dark:bg-gray-900">
@@ -145,7 +156,8 @@ const CommonBox = () => {
                       </div>
                       <div className="flex flex-col">
                         <h3 className="font-semibold text-lg">
-                          {extractNameAndEmail(selectedReply.from)?.name}
+                          {extractNameAndEmail(selectedReply.from)?.name ||
+                            selectedReply?.from}
                         </h3>
                         <p className="text-light text-gray-400">
                           {extractNameAndEmail(selectedReply.from)?.email}{" "}
@@ -188,34 +200,36 @@ const CommonBox = () => {
                     </div>
                   </div>
                   <section>
-                    <h1 className="font-bold text-2xl">
+                    <h1 className="font-bold text-2xl border bg-white dark:bg-gray-900 rounded shadow-lg p-3 text-center">
                       {selectedReply?.subject}
                     </h1>
                     <article
-                      className="mt-8 text-gray-500 leading-7 tracking-wider"
+                      className="mt-8 leading-7 tracking-wider border rounded-xl p-2 bg-gray-100 dark:bg-gray-900 dark"
                       dangerouslySetInnerHTML={{ __html: selectedReply?.body }}
                     ></article>
                   </section>
-                  <form
-                    onSubmit={handleSubmit(formSubmit)}
-                    className="mt-6 border rounded-xl bg-gray-50 mb-3"
-                  >
-                    <TextAreaField
-                      name="reply_body"
-                      control={control}
-                      errors={errors}
-                      placeholder="Reply"
-                    />
-                    <div className="flex items-center justify-end p-2">
-                      <Button
-                        type="submit"
-                        loading={isLoading}
-                        className="py-2 bg-black"
-                      >
-                        Reply
-                      </Button>
-                    </div>
-                  </form>
+                  {!selectedReply?.id && (
+                    <form
+                      onSubmit={handleSubmit(formSubmit)}
+                      className="mt-6 rounded-xl"
+                    >
+                      <TextAreaField
+                        name="reply_body"
+                        control={control}
+                        errors={errors}
+                        placeholder="Reply"
+                      />
+                      <div className="flex items-center justify-end p-2">
+                        <Button
+                          type="submit"
+                          loading={isLoading}
+                          className="py-2 bg-black"
+                        >
+                          Reply
+                        </Button>
+                      </div>
+                    </form>
+                  )}
                 </>
               ) : (
                 <div className="flex flex-col items-center h-[83vh] pt-[35vh]">

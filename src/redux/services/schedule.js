@@ -27,7 +27,7 @@ export const addScheduleApi = (token, data) => async (dispatch) => {
           return dispatch(invalidRequest(response.data.message));
         }
         dispatch(addSchedule(response.data.message));
-        dispatch(getSchedulesApi(token, `user_id=${data?.user_id}`));
+        dispatch(getSchedulesApi(token, `compaign_id=${data?.compaign_id}`));
         toast.success(response.data.message);
 
         return {

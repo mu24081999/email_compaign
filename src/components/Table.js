@@ -99,7 +99,7 @@ const Table = ({
         )}
       </div>
 
-      <table className="w-full text-sm text-left text-gray-500">
+      <table className="w-full text-sm text-left text-gray-500 dark:text-white">
         <thead className="text-xs text-white uppercase bg-black border border-gray-300 rounded-2xl ">
           <tr className="">
             {actions && (

@@ -64,7 +64,7 @@ const CompaignContent = () => {
   }, [token, id, dispatch]);
   return (
     <div>
-      <div className="float-end">
+      <div className="float-end px-8">
         {compaign?.status === "paused" ? (
           <Button
             className="flex gap-2 py-3 bg-green-500 hover:bg-green-600"

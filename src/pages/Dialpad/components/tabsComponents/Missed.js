@@ -32,7 +32,7 @@ const Missed = ({
     }
   }, [calls]);
   return (
-    <div className="w-full h-[83vh] overflow-scroll  shadow-lg">
+    <div className="w-full h-[78vh] overflow-y-scroll overflow-x-hidden">
       <ul className="p-0">
         {filteredData?.map((log) => (
           <li
@@ -44,7 +44,7 @@ const Missed = ({
                 {getIcon("missed")}{" "}
               </div>
               <div>
-                <h2 className="font-bold text-lg text-gray-800">
+                <h2 className="font-bold text-lg ">
                   {log?.from === user?.twilio_selected_number
                     ? log?.to
                     : log?.from}{" "}

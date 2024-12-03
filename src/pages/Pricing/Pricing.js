@@ -85,10 +85,10 @@ const Pricing = ({ isValid }) => {
     agency: {
       name: "Agency",
       yearly_price: 55.0,
-      monthly_price: 70.0,
+      monthly_price: 75.0,
       description: "Essentials for all small sized businesses or startups",
       yearly_discount_percentage: 0,
-      original_amount: 70.0,
+      original_amount: 75.0,
       discount_price: 0,
       discount_amount: 0,
       benefits: [

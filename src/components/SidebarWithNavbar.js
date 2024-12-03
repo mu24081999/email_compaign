@@ -25,8 +25,9 @@ import { IoKeypadOutline } from "react-icons/io5";
 import useMain from "../context/Main/useMain";
 import Dialer from "../pages/Dialpad/components/DialpadComponents/Dialer";
 import { PiSignOutBold } from "react-icons/pi";
-import { RiContactsBook3Line, RiPassValidLine } from "react-icons/ri";
+import { RiContactsBook3Line } from "react-icons/ri";
 import useCalling from "../context/CallingContext/useCalling";
+import { GrValidate } from "react-icons/gr";
 
 const SidebarWithNavbar = ({ component }) => {
   const { incoming } = useCalling();
@@ -75,7 +76,7 @@ const SidebarWithNavbar = ({ component }) => {
     {
       name: "Email Validation",
       link: "/email-validation",
-      icon: RiPassValidLine,
+      icon: GrValidate,
     },
     // {
     //   name: "Lead Finder",
@@ -121,7 +122,7 @@ const SidebarWithNavbar = ({ component }) => {
   ];
   const menuData = {
     title: (
-      <div className="mt-1 mx-1">
+      <div className="mt-1">
         <FaRegUserCircle size={32} />
       </div>
     ),

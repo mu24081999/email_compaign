@@ -36,6 +36,28 @@ export const getCampaignRepliesApi =
       return dispatch(invalidRequest(error.message));
     }
   };
+export const getUserRepliesApi = (token, user_id) => async (dispatch) => {
+  try {
+    dispatch(uniboxRequestLoading());
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        "x-access-token": token,
+      },
+    };
+    await axios
+      .get(`${backendURL}/email/get-user-replies/${user_id}`, config)
+      .then((response) => {
+        if (response?.data?.statusCode !== 200) {
+          toast.error(response.data.message);
+          return dispatch(invalidRequest(response.data.message));
+        }
+        dispatch(getCampaignReplies(response.data.data.replies));
+      });
+  } catch (error) {
+    return dispatch(invalidRequest(error.message));
+  }
+};
 export const sendEmailReply = (token, data) => async (dispatch) => {
   try {
     dispatch(uniboxRequestLoading());

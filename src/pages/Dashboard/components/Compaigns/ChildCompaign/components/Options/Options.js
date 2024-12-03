@@ -74,7 +74,7 @@ const Options = () => {
     dispatch(readCompaign(token, id));
     dispatch(getUserTemplateList(token, user_id));
     dispatch(getUserSequenceList(token, user_id));
-    dispatch(getSchedulesApi(token, `user_id=${user_id}`));
+    dispatch(getSchedulesApi(token, `compaign_id=${id}`));
     dispatch(getEmailAccountsApi(token, `user_id=${user_id}`));
   }, [token, dispatch, id, user_id]);
   useEffect(() => {
@@ -131,7 +131,7 @@ const Options = () => {
         onSubmit={handleSubmit(formSubmit)}
         className="col-span-2 flex flex-col gap-5 lg:w-[65%]"
       >
-        <div className="p-8 rounded-md shadow-md border bg-white border-gray-100">
+        <div className="p-8 rounded-md shadow-md border bg-white dark:bg-gray-800 border-gray-100">
           <div className="grid lg:grid-cols-2 sm:grid-cols-1 justify-between">
             <div>
               <Heading text={"Email Account"} className="font-extrabold" />
@@ -160,7 +160,7 @@ const Options = () => {
             />
           </div>
         </div>
-        <div className="p-8 rounded-md shadow-md border bg-white border-gray-100">
+        <div className="p-8 rounded-md shadow-md border bg-white border-gray-100 dark:bg-gray-800">
           <div className="grid lg:grid-cols-2 sm:grid-cols-1 justify-between">
             <div>
               <Heading text={"Open Tracking"} className="font-extrabold" />
@@ -171,7 +171,7 @@ const Options = () => {
             </div>{" "}
           </div>
         </div>
-        <div className="p-8 rounded-md shadow-md border bg-white border-gray-100">
+        <div className="p-8 rounded-md shadow-md border bg-white dark:bg-gray-800 border-gray-100">
           <div className="grid lg:grid-cols-2 sm:grid-cols-1 justify-between">
             <div>
               <Heading text={"Email Type"} className="font-extrabold" />
@@ -204,7 +204,7 @@ const Options = () => {
           </div>
         </div>
         {emailTypeWatcher?.value === "template" && (
-          <div className="p-8 rounded-md shadow-md border bg-white border-gray-100">
+          <div className="p-8 rounded-md shadow-md border bg-white dark:bg-gray-800 border-gray-100">
             <div className="justify-between">
               <div>
                 <Heading text={"Email Templates"} className="font-extrabold" />
@@ -238,7 +238,7 @@ const Options = () => {
           </div>
         )}
         {emailTypeWatcher?.value === "sequence" && (
-          <div className="p-8 rounded-md shadow-md border bg-white border-gray-100">
+          <div className="p-8 rounded-md shadow-md border bg-white dark:bg-gray-800 border-gray-100">
             <div className="justify-between">
               <div>
                 <Heading text={"Email Sequences"} className="font-extrabold" />
@@ -273,7 +273,7 @@ const Options = () => {
             </div>
           </div>
         )}
-        <div className="p-8 rounded-md shadow-md border bg-white border-gray-100">
+        <div className="p-8 rounded-md shadow-md border bg-white dark:bg-gray-800 border-gray-100">
           <div className="grid lg:grid-cols-2 sm:grid-cols-1 justify-between">
             <div>
               <Heading text={"Schedule"} className="font-extrabold" />

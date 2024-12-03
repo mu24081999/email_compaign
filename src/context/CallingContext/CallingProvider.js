@@ -137,10 +137,8 @@ const CalllingContext = ({ children }) => {
       setConnection(call);
       setIncoming(false);
       setUserState(USER_STATE.ON_CALL);
-      console.log("call accepted", call);
     });
     call.on("disconnect", () => {
-      console.log("The call has been disconnected.");
       setUserState(USER_STATE.READY);
       setIncoming(false);
       setConnection(null);

@@ -39,8 +39,8 @@ const Analystics = ({ data }) => {
         />
         <DashboardCard
           icon={<BsEnvelopeOpenHeart color="orange" size={30} />}
-          heading={"Warmup Emails"}
-          value={data?.warmupEmails || 0}
+          heading={"Replies"}
+          value={data?.replies_count || 0}
         />
       </div>
     </div>

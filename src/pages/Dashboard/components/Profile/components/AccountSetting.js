@@ -44,7 +44,7 @@ const AccountSettings = () => {
   }, [user, setValue]);
 
   return (
-    <div>
+    <div className="py-10">
       <div class="flex items-center justify-center">
         {/* <!-- Author: FormBold Team --> */}
         <div class="mx-auto w-full max-w-[550px]  flex items-center">

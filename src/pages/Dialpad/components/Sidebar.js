@@ -61,11 +61,11 @@ const Sidebar = ({
     },
   ];
   return (
-    <div>
+    <div className="">
       <Tabs
         noContentPadding={true}
         tabsData={tabsData}
-        className={"bg-white border"}
+        className={"bg-white"}
       />
     </div>
   );

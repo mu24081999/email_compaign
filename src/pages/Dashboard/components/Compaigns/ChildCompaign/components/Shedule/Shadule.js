@@ -65,10 +65,11 @@ const Shadule = () => {
     dispatch(addScheduleApi(token, params));
   };
   useEffect(() => {
-    const query = `user_id=${user_id}`;
+    // const query = `user_id=${user_id}`;
+    const query = `compaign_id=${id}`;
     getTimezones();
     dispatch(getSchedulesApi(token, query));
-  }, [getTimezones, token, dispatch, user_id]);
+  }, [getTimezones, token, dispatch, id]);
   useEffect(() => {
     setValue("name", selectedSchedule?.name);
     setValue("from", {
@@ -222,7 +223,7 @@ const Shadule = () => {
               className={`${
                 item?.id === selectedSchedule?.id &&
                 "border-2 border-indigo-600"
-              } cursor-pointer p-5 bg-white border border-gray-100 rounded-md shadow-md font-extrabold`}
+              } cursor-pointer p-5 bg-white dark:bg-gray-800 border border-gray-100 rounded-md shadow-md font-extrabold`}
               key={index}
               onClick={() => setSelectedSchedule(item)}
             >
@@ -240,7 +241,7 @@ const Shadule = () => {
         onSubmit={handleSubmit(formSubmit)}
         className="col-span-2 flex flex-col gap-5"
       >
-        <div className="p-8 rounded-md shadow-md border bg-white border-gray-100">
+        <div className="p-8 rounded-md shadow-md border bg-white dark:bg-gray-800 border-gray-100">
           <InputField
             name="name"
             control={control}
@@ -248,7 +249,7 @@ const Shadule = () => {
             errors={errors}
           />
         </div>
-        <div className=" p-8 rounded-md shadow-md border border-gray-100 bg-white">
+        <div className=" p-8 rounded-md shadow-md border border-gray-100 bg-white dark:bg-gray-800">
           <Heading text={"Timing"} className="font-extrabold py-3 " />
           <div className="flex gap-5">
             <ReactSelectField

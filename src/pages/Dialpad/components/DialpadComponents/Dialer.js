@@ -26,15 +26,13 @@ const Dialer = () => {
     handleMute,
     callMuted,
   } = useCalling();
-  console.log("🚀 ~ Dialer ~ incoming:", incoming);
-
   return (
     <div>
-      <div className=" bg-white dark:bg-gray-900 mx-auto w-80  rounded-xl relative overflow-hidden  p-4 shadow-xl border ">
+      <div className="  dark:bg-gray-900 mx-auto w-80  rounded-xl relative overflow-hidden  p-4 shadow-xl border bg-cyan-500 bg-opacity-10">
         {(userState === USER_STATE.READY ||
           userState === USER_STATE.ON_CALL_KEYPAD) && (
           <div>
-            <div className="flex flex-col h-full justify-center text-black">
+            <div className="flex flex-col h-full justify-center">
               <div className="w-full text-center">
                 <div className="relative">
                   <input
@@ -50,7 +48,7 @@ const Dialer = () => {
                     className=" absolute cursor-pointer -mt-8 right-0"
                   />
                 </div>
-                <div className="inline-grid grid-cols-3 my-4 gap-6 mx-auto font-extrabold text-gray-dark">
+                <div className="inline-grid grid-cols-3 my-4 gap-6 mx-auto font-extrabold ">
                   <div
                     className="hover:bg-gray-300 cursor-pointer justify-center flex flex-col items-center h-16 w-16 rounded-full"
                     onClick={() => handleDialerClick("dial", 1)}
@@ -133,16 +131,12 @@ const Dialer = () => {
                     <p className="text-xl">#</p>
                   </div>
                 </div>
-                <Button
-                  variant="primary"
-                  className="lg:w-[240px] flex justify-center mx-auto py-3 bg-black hover:bg-gray-800"
-                  onClick={
-                    userState === USER_STATE.READY
-                      ? handleMakeCall
-                      : setUserState_(USER_STATE.READY)
-                  }
-                >
-                  {userState === USER_STATE.READY && (
+                {userState === USER_STATE.READY && (
+                  <Button
+                    variant="primary"
+                    className="lg:w-[240px] flex justify-center mx-auto py-3 bg-black hover:bg-gray-800"
+                    onClick={handleMakeCall}
+                  >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       className="h-5 w-5"
@@ -151,27 +145,34 @@ const Dialer = () => {
                     >
                       <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
                     </svg>
-                  )}
-                  {userState === USER_STATE.ON_CALL_KEYPAD && (
-                    <span>Show Current Call</span>
-                  )}
-                </Button>
+                  </Button>
+                )}
+
+                {userState === USER_STATE.ON_CALL_KEYPAD && (
+                  <Button
+                    variant="primary"
+                    className="lg:w-[240px] flex justify-center mx-auto py-3 bg-black hover:bg-gray-800"
+                    onClick={() => setUserState_(USER_STATE.ON_CALL)}
+                  >
+                    Show Current Call
+                  </Button>
+                )}
               </div>
             </div>
           </div>
         )}
         {userState === USER_STATE.ON_CALL && (
-          <div className="text-center">
+          <div className="text-center " style={{ height: "400px" }}>
             <div>
               <span className="inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10">
                 {/* {call?.state} */}
               </span>
             </div>
-            <div className="w-[100px] m-auto">
+            <div className="w-[100px] m-auto py-5">
               <img
-                src="https://as1.ftcdn.net/v2/jpg/02/59/39/46/1000_F_259394679_GGA8JJAEkukYJL9XXFH2JoC3nMguBPNH.jpg"
+                src="https://w7.pngwing.com/pngs/247/564/png-transparent-computer-icons-user-profile-user-avatar-blue-heroes-electric-blue.png"
                 alt=""
-                className="mx-auto"
+                className="mx-auto rounded-full"
               />
             </div>
             {/* <p className="p-5">{inputValue}</p> */}
@@ -184,17 +185,17 @@ const Dialer = () => {
             <div className="pb-5">
               <Timer />
             </div>
-            <div className="grid grid-cols-2 gap-5">
+            <div className="flex gap-5 justify-center">
               <div
                 className={`${
                   callMuted ? "bg-gray-300" : ""
-                } border border-gray-700 rounded-full h-16 w-16 m-auto cursor-pointer`}
+                } border border-gray-700  rounded-full h-16 w-16 cursor-pointer`}
                 onClick={handleMute}
               >
                 <AiOutlineAudioMuted size={27} className="m-auto mt-[17px]" />
               </div>
               <div
-                className={` border border-gray-700 rounded-full h-16 w-16 m-auto cursor-pointer`}
+                className={` border border-gray-700 rounded-full h-16 w-16  cursor-pointer`}
                 onClick={() => setUserState_(USER_STATE.ON_CALL_KEYPAD)}
               >
                 <MdDialpad size={27} className="m-auto mt-[17px]" />

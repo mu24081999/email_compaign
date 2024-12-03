@@ -79,7 +79,6 @@ const TextEditor = React.forwardRef((props, ref) => {
                 onBlurCapture={() => setFocusState(false)}
                 onFocus={() => setFocusState(true)}
                 onChange={handleEditorChange}
-                className="bg-black"
               />
             </div>
 
