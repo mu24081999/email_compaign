@@ -25,6 +25,7 @@ import VerifyEmail from "./pages/Auth/VerifyEmail";
 import ResetPassword from "./pages/Auth/ResetPassword";
 import Dialpad from "./pages/Dialpad";
 import Numbers from "./pages/Numbers/Numbers";
+import SMS from "./pages/SMS/SMS";
 const router = (isAuthenticated, isValid) => {
   const routes = [
     {
@@ -67,6 +68,16 @@ const router = (isAuthenticated, isValid) => {
       ),
       children: [],
       breadcrumb: "email-template",
+    },
+    {
+      path: "/sms",
+      element: (
+        <PrivateRoute isAuthenticated={isAuthenticated} isValid={isValid}>
+          <SMS />
+        </PrivateRoute>
+      ),
+      children: [],
+      breadcrumb: "sms",
     },
     {
       path: "/phone-numbers",

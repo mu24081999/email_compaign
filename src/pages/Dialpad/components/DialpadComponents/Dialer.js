@@ -36,7 +36,7 @@ const Dialer = () => {
               <div className="w-full text-center">
                 <div className="relative">
                   <input
-                    className="bg-transparent w-full text-center p-2 border-b border-gray-300  text-lg outline-none"
+                    className="bg-transparent w-full text-center p-2 border-b border-gray-300  dark:text-white text-lg outline-none"
                     placeholder="Phone Number"
                     value={inputValue}
                     onChange={(e) => setInputValue_(e.target.value)}
@@ -48,7 +48,7 @@ const Dialer = () => {
                     className=" absolute cursor-pointer -mt-8 right-0"
                   />
                 </div>
-                <div className="inline-grid grid-cols-3 my-4 gap-6 mx-auto font-extrabold ">
+                <div className="inline-grid grid-cols-3 my-4 gap-6 mx-auto font-extrabold dark:text-white">
                   <div
                     className="hover:bg-gray-300 cursor-pointer justify-center flex flex-col items-center h-16 w-16 rounded-full"
                     onClick={() => handleDialerClick("dial", 1)}
@@ -134,7 +134,7 @@ const Dialer = () => {
                 {userState === USER_STATE.READY && (
                   <Button
                     variant="primary"
-                    className="lg:w-[240px] flex justify-center mx-auto py-3 bg-black hover:bg-gray-800"
+                    className="lg:w-[240px] flex justify-center mx-auto py-3 bg-black hover:bg-gray-800 dark:bg-white dark:text-black"
                     onClick={handleMakeCall}
                   >
                     <svg
@@ -151,7 +151,7 @@ const Dialer = () => {
                 {userState === USER_STATE.ON_CALL_KEYPAD && (
                   <Button
                     variant="primary"
-                    className="lg:w-[240px] flex justify-center mx-auto py-3 bg-black hover:bg-gray-800"
+                    className="lg:w-[240px] flex justify-center mx-auto py-3 bg-black hover:bg-gray-800 dark:bg-white dark:text-black"
                     onClick={() => setUserState_(USER_STATE.ON_CALL)}
                   >
                     Show Current Call
@@ -162,7 +162,10 @@ const Dialer = () => {
           </div>
         )}
         {userState === USER_STATE.ON_CALL && (
-          <div className="text-center " style={{ height: "400px" }}>
+          <div
+            className="text-center dark:text-white"
+            style={{ height: "400px" }}
+          >
             <div>
               <span className="inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10">
                 {/* {call?.state} */}
@@ -189,22 +192,22 @@ const Dialer = () => {
               <div
                 className={`${
                   callMuted ? "bg-gray-300" : ""
-                } border border-gray-700  rounded-full h-16 w-16 cursor-pointer`}
+                } border border-gray-700 dark:border-white  rounded-full h-16 w-16 cursor-pointer`}
                 onClick={handleMute}
               >
                 <AiOutlineAudioMuted size={27} className="m-auto mt-[17px]" />
               </div>
               <div
-                className={` border border-gray-700 rounded-full h-16 w-16  cursor-pointer`}
+                className={` border border-gray-700 dark:border-white  rounded-full h-16 w-16  cursor-pointer`}
                 onClick={() => setUserState_(USER_STATE.ON_CALL_KEYPAD)}
               >
                 <MdDialpad size={27} className="m-auto mt-[17px]" />
               </div>
             </div>
-            <div className="flex flex-row-reverse justify-between">
+            <div className="flex flex-row-reverse justify-center m-5 gap-5">
               {incoming === true && (
                 <button
-                  className="bg-green-500 mx-auto justify-center m-5 flex hover:bg-green-400 text-white items-center h-16 cursor-pointer w-16 rounded-full  "
+                  className="bg-green-500 justify-center flex hover:bg-green-400 text-white items-center h-16 cursor-pointer w-16 rounded-full  "
                   onClick={() => handleAcceptCall()}
                 >
                   <svg
@@ -218,7 +221,7 @@ const Dialer = () => {
                 </button>
               )}
               <button
-                className="bg-red-500 mx-auto justify-center m-5 flex hover:bg-red-400 text-white items-center h-16 cursor-pointer w-16 rounded-full  "
+                className="bg-red-500 justify-center flex hover:bg-red-400 text-white items-center h-16 cursor-pointer w-16 rounded-full  "
                 onClick={() => handleDropCall()}
               >
                 <svg

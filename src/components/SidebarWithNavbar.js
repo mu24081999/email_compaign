@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import DarkModeSwitcher from "./DarkmodeSwitcher";
 import { Link, useLocation } from "react-router-dom";
-import { MdCall, MdOutlineDashboard } from "react-icons/md";
+import { MdCall, MdOutlineDashboard, MdOutlineSms } from "react-icons/md";
 import { TbTemplate } from "react-icons/tb";
 import { logoutUser } from "../redux/services/auth";
 import { useDispatch, useSelector } from "react-redux";
@@ -92,6 +92,11 @@ const SidebarWithNavbar = ({ component }) => {
       name: "Dialpad",
       link: "/dialpad",
       icon: IoKeypadOutline,
+    },
+    {
+      name: "SMS",
+      link: "/sms",
+      icon: MdOutlineSms,
     },
     {
       name: "Phone Numbers",
@@ -226,7 +231,10 @@ const SidebarWithNavbar = ({ component }) => {
 
             <div className="flex items-center">
               <DarkModeSwitcher setDarkModeFunc={setDarkModeFunc} />
-              <Dropdown menuData={dialpadMenuData} />
+              <Dropdown
+                menuData={dialpadMenuData}
+                isOpen={incoming ? true : false}
+              />
               <Dropdown menuData={menuData} />
             </div>
           </div>

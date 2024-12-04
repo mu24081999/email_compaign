@@ -91,7 +91,7 @@ const Table = ({
           </>
         )}
         {pagination && (
-          <div className="text-gray-600">
+          <div className="text-gray-600 dark:text-white">
             Showing {(currentPage - 1) * itemsPerPage + 1} to{" "}
             {Math.min(currentPage * itemsPerPage, totalItems)} of {totalItems}{" "}
             entries
@@ -211,7 +211,7 @@ const Table = ({
           >
             Previous
           </button>
-          <span className="text-gray-700">
+          <span className="text-gray-700 dark:text-white">
             Page {currentPage} of {totalPages}
           </span>
           <button

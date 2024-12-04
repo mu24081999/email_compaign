@@ -86,14 +86,14 @@ const List = ({
       {isLoading ? (
         <Loader />
       ) : (
-        <div>
-          <div>
+        <div className="px-3">
+          <div className="">
             <Heading
               text={"Search Parameters"}
               className="font-extrabold text-xl text-center py-3"
             />
             <form onSubmit={handleSubmit(handleFormSubmit)}>
-              <div className="grid grid-cols-2 gap-5">
+              <div className="grid grid-cols-3 gap-5">
                 <div>
                   <ReactSelectField
                     name="country"
@@ -105,6 +105,25 @@ const List = ({
                       {
                         label: "United States - US",
                         value: "US",
+                      },
+                    ]}
+                  />
+                </div>
+                <div>
+                  <ReactSelectField
+                    name="number_type"
+                    placeholder="Number Type"
+                    control={control}
+                    errors={errors}
+                    label="Number Type"
+                    options={[
+                      {
+                        label: "Local",
+                        value: "local",
+                      },
+                      {
+                        label: "Toll Free",
+                        value: "tollFree",
                       },
                     ]}
                   />
@@ -135,34 +154,16 @@ const List = ({
                       errors={errors}
                       label="MMS"
                     />
-                    <Checkbox
+                    {/* <Checkbox
                       name="fax"
                       control={control}
                       errors={errors}
                       label="Fax"
-                    />
+                    /> */}
                   </div>
                 </div>
-                <div>
-                  <ReactSelectField
-                    name="number_type"
-                    placeholder="Number Type"
-                    control={control}
-                    errors={errors}
-                    label="Number Type"
-                    options={[
-                      {
-                        label: "Local",
-                        value: "local",
-                      },
-                      {
-                        label: "Toll Free",
-                        value: "tollFree",
-                      },
-                    ]}
-                  />
-                </div>
 
+                {/* 
                 <div>
                   <p className="font-extrabold pb-2">Area Code</p>
                   <InputField
@@ -172,7 +173,7 @@ const List = ({
                     placeholder="Area Code"
                     label="Area Code"
                   />
-                </div>
+                </div> */}
               </div>
               <div className="py-3">
                 <Button type="submit" className="py-3">

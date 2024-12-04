@@ -142,7 +142,7 @@ const CommonBox = () => {
                 </>
               )}
             </section>
-            <section className="w-6/12 px-4 flex flex-col bg-white border-2 dark:bg-gray-900">
+            <section className="w-6/12 px-4 flex flex-col bg-white border dark:bg-gray-900">
               {selectedReply?.from ? (
                 <>
                   <div className="flex justify-between items-center h-48 border-b-2 mb-8">

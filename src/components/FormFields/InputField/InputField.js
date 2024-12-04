@@ -197,7 +197,7 @@ const InputField = React.forwardRef((props, ref) => {
                   min={type === "number" && !props.min ? 0 : props.min}
                   disabled={props.isDisabled}
                   value={field.value}
-                  className={`bg-white dark:bg-gray-800 ps-3 py-3 peer w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow g-6 dark:text-white ${
+                  className={`bg-white ps-3 py-3 peer w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow g-6  ${
                     props.isDisabled && "bg-gray-400 cursor-not-allowed"
                   } ${isHighLight && " bg-highLight "}`}
                   style={{ fontSize: "14.5px" }}

@@ -4,7 +4,6 @@ import { CiDark } from "react-icons/ci";
 
 const DarkModeSwitcher = ({ setDarkModeFunc }) => {
   const [isDarkMode, setIsDarkMode] = useState(false);
-  console.log("🚀 ~ DarkModeSwitcher ~ isDarkMode:", isDarkMode);
   // Initialize dark mode based on user's system preference or previously stored preference
   useEffect(() => {
     const darkModePreference = localStorage.getItem("theme");
@@ -38,7 +37,7 @@ const DarkModeSwitcher = ({ setDarkModeFunc }) => {
   return (
     <button
       onClick={toggleDarkMode}
-      className="p-2 text-sm bg-gray-300 dark:bg-gray-800 rounded-full "
+      className="p-2 text-sm border bg-gray-300 dark:bg-gray-800 rounded-full "
     >
       {isDarkMode ? <MdOutlineLightMode size={20} /> : <CiDark size={20} />}
     </button>

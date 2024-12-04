@@ -43,7 +43,6 @@ const CalllingContext = ({ children }) => {
         setDevice(device);
         device.addListener("connect", (device) => {
           setIncoming(false);
-          console.log("Connect event listener added .....");
           return device;
         });
         device.on("registered", () => {
@@ -51,19 +50,16 @@ const CalllingContext = ({ children }) => {
           setUserState(USER_STATE.READY);
         });
         device.on("connect", (connection) => {
-          console.log("Call connected");
           setIncoming(false);
           setConnection(connection);
           setUserState(USER_STATE.ON_CALL);
         });
         device.on("disconnect", () => {
-          console.log("Disconnect event");
           setIncoming(false);
           setUserState(USER_STATE.READY);
           setConnection(null);
         });
         device.on("incoming", (call) => {
-          console.log("🚀 ~ device.on ~ incoming:", call);
           setIncoming(true);
           setConnection(call);
           setUserState(USER_STATE.ON_CALL);
@@ -175,11 +171,10 @@ const CalllingContext = ({ children }) => {
     }
   };
   const handleDropCall = () => {
-    console.log("🚀 ~ handleDropCall ~ connection:", connection);
     if (connection) {
       connection.disconnect(); // End the call
-      console.log("Call ended manually");
       setConnection(null);
+      setIncoming(false);
       setUserState(USER_STATE.READY);
     } else {
       console.error("No active connection to disconnect");
