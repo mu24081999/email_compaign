@@ -27,7 +27,7 @@ export const createPaymentIntendApi = (token, data) => async (dispatch) => {
           return dispatch(invalidRequest(response.data.message));
         }
         dispatch(getPaymentIntend(response.data.data.paymentData));
-        toast.success(response.data.message);
+        // toast.success(response.data.message);
         return {
           done: true,
           subscription: response.data.data.paymentData,

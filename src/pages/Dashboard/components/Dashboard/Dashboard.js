@@ -142,6 +142,7 @@ const Dashboard = () => {
           data={compaignsData}
           totalItems={pagination?.totalItems}
           itemsPerPage={10}
+          actions={false}
           onPageChange={(page) => fetchData(page)}
         />
       </div>

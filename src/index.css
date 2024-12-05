@@ -21,6 +21,9 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+::-webkit-scrollbar {
+  width: 11px;
+}
 /* The part of the scrollbar track */
 ::-webkit-scrollbar-track {
   background: transparent; /* Color of the track */
@@ -30,7 +33,7 @@ code {
 
 /* The draggable part of the scrollbar */
 ::-webkit-scrollbar-thumb {
-  background-color: #888888a0; /* Color of the thumb */
+  background-color: black; /* Color of the thumb */
   border-radius: 10px; /* Round corners */
   border: 3px solid #f1f1f1; /* Space around the thumb */
 }

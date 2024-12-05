@@ -14,7 +14,6 @@ import { useNavigate } from "react-router-dom";
 const Pricing = ({ isValid }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isSubscribed, setIsSubscribed] = useState(false);
-  console.log("🚀 ~ Pricing ~ isOpen:", isOpen);
   const {
     handleSubmit,
     watch,
@@ -33,7 +32,8 @@ const Pricing = ({ isValid }) => {
     starter: {
       name: "Starter",
       yearly_price: 9.0,
-      description: "Essentials for all small sized businesses or startups",
+      description:
+        "Essential tools to kickstart your journey with basic features for small teams.",
       monthly_price: 14.0,
       yearly_discount_percentage: 30,
       original_amount: 14.0,
@@ -61,7 +61,8 @@ const Pricing = ({ isValid }) => {
       yearly_price: 30.0,
       monthly_price: 45.0,
       yearly_discount_percentage: 0,
-      description: "Essentials for all small sized businesses or startups",
+      description:
+        "Advanced features tailored for growing businesses to optimize workflows and boost productivity.",
       original_amount: 45.0,
       discount_price: 0,
       discount_amount: 0,
@@ -86,7 +87,8 @@ const Pricing = ({ isValid }) => {
       name: "Agency",
       yearly_price: 55.0,
       monthly_price: 75.0,
-      description: "Essentials for all small sized businesses or startups",
+      description:
+        "Comprehensive solutions designed for agencies managing multiple clients and teams seamlessly",
       yearly_discount_percentage: 0,
       original_amount: 75.0,
       discount_price: 0,
@@ -235,11 +237,6 @@ const Pricing = ({ isValid }) => {
     date.setFullYear(date.getFullYear() + 1);
     return date;
   }
-  console.log(
-    "🚀 ~ getDateAfterOneMonth ~ getDateAfterOneMonth:",
-    moment(new Date(getDateAfterOneMonth())).format("YYYY-MM-DD")
-  );
-
   const afterPayment = async () => {
     const data = {
       user_id: user_id,
@@ -252,7 +249,6 @@ const Pricing = ({ isValid }) => {
         : moment(new Date(getDateAfterOneMonth())).format("YYYY-MM-DD"),
       yearly_price: typeWatcher ? selected?.yearly_price : 0.0,
     };
-    console.log("🚀 ~ afterPayment ~ data:", data);
     await dispatch(createSubscriptionApi(token, data));
     setIsOpen(false);
     setIsSubscribed(true);
@@ -289,9 +285,13 @@ const Pricing = ({ isValid }) => {
           Choose an affordable plan that’s packed with the best features for
           engaging your audience, creating customer loyalty, and driving sales.
         </p>
+
         <div className="flex justify-center gap-5 pt-5">
           <Switcher name="type" control={control} errors={errors} />
           <p className="my-1 text-xl font-extrabold">Yearly</p>
+        </div>
+        <div className="text-center font-bold">
+          Switch to yearly for getting 25% off.
         </div>
         <div className=" mx-auto mt-5 grid max-w-lg grid-cols-1 items-center gap-y-6 sm:gap-y-0 lg:max-w-6xl lg:grid-cols-3 gap-5">
           <div className="rounded-3xl bg-white/60 p-8 ring-1 ring-gray-900/10 sm:mx-8 sm:p-10 lg:mx-0">
@@ -532,6 +532,7 @@ const Pricing = ({ isValid }) => {
             clientSecret={paymentIntend?.client_secret}
             afterPayment={afterPayment}
           />
+          noStartMargin={true}
           // onSave={handleSave}
           saveButtonText="Save Changes"
           closeButtonText="Dismiss"

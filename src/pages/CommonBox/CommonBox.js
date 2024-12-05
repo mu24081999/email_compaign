@@ -77,173 +77,174 @@ const CommonBox = () => {
   return (
     <Layout
       component={
-        <div className="">
-          <main className=" flex w-full h-full shadow-lg rounded border">
+        <main className="h-[87vh] flex w-full shadow-lg rounded border">
+          <div>
+            <div className="text-center border bg-white dark:bg-gray-900 p-5 font-extrabold text-xl">
+              Common-Box
+            </div>
             <SidebarCom setCampaignData={handleCampaignDataFromChild} />
-            <section className="flex flex-col pt-3 w-4/12 bg-white  dark:bg-gray-900 overflow-y-scroll border h-[88vh]">
-              {/* <label className="px-3">
+          </div>
+          <section className="flex flex-col w-4/12 bg-white  dark:bg-gray-800 border">
+            {isLoading ? (
+              <SidebarSkeleton />
+            ) : (
+              <div>
+                {/* <label className="px-3">
                 <input
                   className="rounded-lg p-4 bg-gray-50 dark:bg-gray-900 transition duration-200 focus:outline-none focus:ring-2 w-full"
                   placeholder="Search..."
                   onKeyUp={handleOnSearchReply}
                 />
               </label> */}
-
-              {isLoading ? (
-                <SidebarSkeleton />
-              ) : (
-                <>
-                  <Heading
-                    text={replies[0]?.id ? "Sent" : "Campaign Replies"}
-                    className="text-center font-extrabold text-lg"
-                  />
-                  <ul className="mt-6">
-                    {Array.isArray(replies) && replies?.length > 0 ? (
-                      replies?.map((reply, index) => (
-                        <li
-                          className={`${
-                            reply.body === selectedReply?.body
-                              ? "bg-black text-white"
-                              : ""
-                          } py-5 border-b px-3 transition hover:bg-indigo-100 dark:hover:bg-gray-700 cursor-pointer`}
-                          key={index}
-                          onClick={() => handleReplyClick(reply)}
-                        >
-                          <div className="flex justify-between items-center">
-                            <h3 className="text-lg font-semibold">
-                              {extractNameAndEmail(reply.from)?.name ||
-                                reply.from}
-                            </h3>
-                            <p className="text-md text-gray-400">
-                              {getRelativeTime(
-                                reply?.createdAt ? reply?.createdAt : reply.date
-                              )}
-                            </p>
-                          </div>
-                          <div
-                            className="text-md italic text-gray-400"
-                            dangerouslySetInnerHTML={{
-                              __html: reply.body.slice(0, 50),
-                            }}
-                          ></div>
-                        </li>
-                      ))
-                    ) : (
-                      <div className="flex flex-col items-center h-[83vh] pt-[30vh]">
-                        <img
-                          src="https://cdn-icons-png.flaticon.com/512/11696/11696623.png"
-                          alt=""
-                          width={100}
-                        />
-                        <p className="text-center">No Replies Found</p>
-                      </div>
-                    )}
-                  </ul>
-                </>
-              )}
-            </section>
-            <section className="w-6/12 px-4 flex flex-col bg-white border dark:bg-gray-900">
-              {selectedReply?.from ? (
-                <>
-                  <div className="flex justify-between items-center h-48 border-b-2 mb-8">
-                    <div className="flex space-x-4 items-center">
-                      <div className="h-12 w-12 rounded-full overflow-hidden">
-                        <img
-                          src="https://bit.ly/2KfKgdy"
-                          loading="lazy"
-                          className="h-full w-full object-cover"
-                        />
-                      </div>
-                      <div className="flex flex-col">
-                        <h3 className="font-semibold text-lg">
-                          {extractNameAndEmail(selectedReply.from)?.name ||
-                            selectedReply?.from}
-                        </h3>
-                        <p className="text-light text-gray-400">
-                          {extractNameAndEmail(selectedReply.from)?.email}{" "}
-                        </p>
-                      </div>
+                <div className="text-center border bg-white dark:bg-gray-900 p-5 font-extrabold text-xl">
+                  Inbox
+                </div>
+                <ul className="mt-6">
+                  {Array.isArray(replies) && replies?.length > 0 ? (
+                    replies?.map((reply, index) => (
+                      <li
+                        className={`${
+                          reply.body === selectedReply?.body
+                            ? "bg-black text-white"
+                            : ""
+                        } py-5 border-b px-3 transition hover:bg-indigo-100 dark:hover:bg-gray-700 cursor-pointer`}
+                        key={index}
+                        onClick={() => handleReplyClick(reply)}
+                      >
+                        <div className="flex justify-between items-center">
+                          <h3 className="text-lg font-semibold">
+                            {extractNameAndEmail(reply.from)?.name ||
+                              reply.from}
+                          </h3>
+                          <p className="text-md text-gray-400">
+                            {getRelativeTime(
+                              reply?.createdAt ? reply?.createdAt : reply.date
+                            )}
+                          </p>
+                        </div>
+                        <div
+                          className="text-md italic text-gray-400"
+                          dangerouslySetInnerHTML={{
+                            __html: reply.body.slice(0, 50),
+                          }}
+                        ></div>
+                      </li>
+                    ))
+                  ) : (
+                    <div className="flex flex-col items-center h-[83vh] pt-[30vh]">
+                      <img
+                        src="https://cdn-icons-png.flaticon.com/512/11696/11696623.png"
+                        alt=""
+                        width={100}
+                      />
+                      <p className="text-center">No Replies Found</p>
                     </div>
-                    <div>
-                      <ul className="flex text-gray-400 space-x-4">
-                        <li className="w-6 h-6">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                          >
-                            <path
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="2"
-                              d="M11 15l-3-3m0 0l3-3m-3 3h8M3 12a9 9 0 1118 0 9 9 0 01-18 0z"
-                            />
-                          </svg>
-                        </li>
-                        <li className="w-6 h-6">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                          >
-                            <path
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="2"
-                              d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z"
-                            />
-                          </svg>
-                        </li>
-                      </ul>
+                  )}
+                </ul>
+              </div>
+            )}
+          </section>
+          <section className="w-6/12 px-4 flex flex-col bg-white border dark:bg-gray-900">
+            {selectedReply?.from ? (
+              <>
+                <div className="flex justify-between items-center h-20 border mb-8 mt-5 px-5 shadow-lg rounded-xl">
+                  <div className="flex space-x-4 items-center">
+                    <div className="h-12 w-12 rounded-full overflow-hidden">
+                      <img
+                        src="https://bit.ly/2KfKgdy"
+                        loading="lazy"
+                        className="h-full w-full object-cover"
+                      />
+                    </div>
+                    <div className="flex flex-col">
+                      <h3 className="font-semibold text-lg">
+                        {extractNameAndEmail(selectedReply.from)?.name ||
+                          selectedReply?.from}
+                      </h3>
+                      <p className="text-light text-gray-400">
+                        {extractNameAndEmail(selectedReply.from)?.email}{" "}
+                      </p>
                     </div>
                   </div>
-                  <section>
-                    <h1 className="font-bold text-2xl border bg-white dark:bg-gray-900 rounded shadow-lg p-3 text-center">
-                      {selectedReply?.subject}
-                    </h1>
-                    <article
-                      className="mt-8 leading-7 tracking-wider border rounded-xl p-2 bg-gray-100 dark:bg-gray-900 dark"
-                      dangerouslySetInnerHTML={{ __html: selectedReply?.body }}
-                    ></article>
-                  </section>
-                  {!selectedReply?.id && (
-                    <form
-                      onSubmit={handleSubmit(formSubmit)}
-                      className="mt-6 rounded-xl"
-                    >
-                      <TextAreaField
-                        name="reply_body"
-                        control={control}
-                        errors={errors}
-                        placeholder="Reply"
-                      />
-                      <div className="flex items-center justify-end p-2">
-                        <Button
-                          type="submit"
-                          loading={isLoading}
-                          className="py-2 bg-black"
+                  {/* <div>
+                    <ul className="flex text-gray-400 space-x-4">
+                      <li className="w-6 h-6">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
                         >
-                          Reply
-                        </Button>
-                      </div>
-                    </form>
-                  )}
-                </>
-              ) : (
-                <div className="flex flex-col items-center h-[83vh] pt-[35vh]">
-                  <img
-                    src="https://cdn-icons-png.flaticon.com/512/5058/5058385.png"
-                    alt=""
-                    width={100}
-                  />
-                  <p className="text-center">No open content</p>
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M11 15l-3-3m0 0l3-3m-3 3h8M3 12a9 9 0 1118 0 9 9 0 01-18 0z"
+                          />
+                        </svg>
+                      </li>
+                      <li className="w-6 h-6">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z"
+                          />
+                        </svg>
+                      </li>
+                    </ul>
+                  </div> */}
                 </div>
-              )}
-            </section>
-          </main>
-        </div>
+                <section>
+                  <h1 className="font-bold text-2xl border bg-white dark:bg-gray-800 rounded shadow-lg p-3 text-center">
+                    {selectedReply?.subject}
+                  </h1>
+                  <article
+                    className="mt-8 leading-7 rounded shadow-xl tracking-wider border p-2 bg-gray-100 dark:bg-gray-800 dark"
+                    dangerouslySetInnerHTML={{ __html: selectedReply?.body }}
+                  ></article>
+                </section>
+                {!selectedReply?.id && (
+                  <form
+                    onSubmit={handleSubmit(formSubmit)}
+                    className="mt-6 rounded-xl"
+                  >
+                    <TextAreaField
+                      name="reply_body"
+                      control={control}
+                      errors={errors}
+                      placeholder="Reply"
+                    />
+                    <div className="flex items-center justify-end p-2">
+                      <Button
+                        type="submit"
+                        loading={isLoading}
+                        className="py-2 bg-black"
+                      >
+                        Reply
+                      </Button>
+                    </div>
+                  </form>
+                )}
+              </>
+            ) : (
+              <div className="flex flex-col items-center h-[83vh] pt-[35vh]">
+                <img
+                  src="https://cdn-icons-png.flaticon.com/512/11696/11696623.png"
+                  alt=""
+                  width={100}
+                />
+                <p className="text-center">No open content</p>
+              </div>
+            )}
+          </section>
+        </main>
       }
     />
   );

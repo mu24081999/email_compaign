@@ -45,7 +45,7 @@ const Dropdown = ({ menuData, isOpen }) => {
         {menuData?.title}
       </button>
       {open && (
-        <div className="mt-4 bg-white dark:bg-gray-700 border min-w-48 gap-2 flex flex-col absolute right-0 z-10">
+        <div className="mt-4 bg-white border shadow rounded-xl dark:bg-gray-900 min-w-48 gap-2 flex flex-col absolute right-0 z-10">
           {Array.isArray(menuData?.menuItems) &&
             menuData.menuItems.map((item, index) => (
               <div key={index} className="dropdown-item">

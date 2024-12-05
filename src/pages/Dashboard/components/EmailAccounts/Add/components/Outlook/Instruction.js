@@ -30,12 +30,12 @@ const OutlookInstructions = ({ handleMenu }) => {
         title={"Connect Your Outlook Account"}
         description="Microsoft Outlook / Office365"
       />
-      <div className="my-5 bg-gray-100 flex justify-center">
-        <div className="h-[50vh] overflow-scroll max-w-2xl w-full bg-white shadow-lg rounded-xl p-8">
-          <h1 className="text-2xl font-bold text-gray-800 mb-6 text-center">
+      <div className="my-5 bg-gray-100 flex justify-center rounded-xl">
+        <div className=" h-[50vh] overflow-scroll max-w-2xl w-full bg-white border  dark:bg-gray-900 shadow-lg rounded-xl p-8">
+          <h1 className="text-2xl font-bold text-gray-800 dark:text-white mb-6 text-center">
             How to Create Outlook App Password
           </h1>
-          <ol className="list-decimal list-inside space-y-4 text-gray-700">
+          <ol className="list-decimal list-inside space-y-4 text-gray-700 dark:text-white">
             <li>
               <span className="font-semibold">
                 Go to Microsoft Account Security:
@@ -80,7 +80,7 @@ const OutlookInstructions = ({ handleMenu }) => {
             </li>
           </ol>
           <div className="mt-6 text-center">
-            <p className="text-gray-600">
+            <p className="text-gray-600 dark:text-white">
               Need additional help? Visit Microsoft’s documentation:
             </p>
             <a

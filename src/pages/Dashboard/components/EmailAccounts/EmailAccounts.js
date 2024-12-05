@@ -18,7 +18,6 @@ const EmailAccounts = () => {
   const dispatch = useDispatch();
   const { token, user_id } = useSelector((state) => state.auth);
   const { emails } = useSelector((state) => state.email);
-  console.log("🚀 ~ EmailAccounts ~ emails:", emails);
   const [isOpen, setIsOpen] = useState(false);
   const [selectedEmail, setSelectedEmail] = useState(false);
   const [accountsData, setAccountsData] = useState([]);

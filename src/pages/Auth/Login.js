@@ -23,7 +23,6 @@ const Login = () => {
   const { isAuthenticated, isLoading } = useSelector((state) => state.auth);
 
   const handleAuth = (data) => {
-    console.log("🚀 ~ handleAuth ~ data:", data);
     const params = {
       email: data?.email,
       password: data?.password,
@@ -101,7 +100,7 @@ const Login = () => {
                       name="remember"
                       control={control}
                       errors={errors}
-                      label="Remember me"
+                      label="Remember me for 30 days"
                     />{" "}
                   </div>
 

@@ -9,6 +9,7 @@ const Modal = ({
   saveButtonText = "Save",
   closeButtonText = "Close",
   size = "md", // Default size
+  noStartMargin = false,
 }) => {
   const sizeClasses = {
     sm: "w-10/12 md:w-1/4",
@@ -19,7 +20,9 @@ const Modal = ({
 
   return (
     <div
-      className={`ml-64 dark:bg-gray-800 dark:text-white backdrop-blur-sm fixed inset-0 flex justify-center items-start md:items-center pt-10 md:pt-0 bg-black bg-opacity-30 transition-opacity duration-1000 ${
+      className={`${
+        noStartMargin ? "" : "ml-64"
+      } dark:bg-gray-800 dark:text-white backdrop-blur-sm fixed inset-0 flex justify-center items-start md:items-center pt-10 md:pt-0 bg-black bg-opacity-30 transition-opacity duration-1000 ${
         isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
       }`}
     >

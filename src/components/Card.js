@@ -29,7 +29,7 @@ const Card = ({
           }   transition-opacity duration-300 flex items-center justify-center`}
         >
           <div className={`text-center px-6 ${textColor}`}>
-            <h2 className="text-2xl font-bold mb-2">{title}</h2>
+            <h2 className="text-2xl font-bold mb-2 dark:text-white">{title}</h2>
             <div className="border border-gray-300"></div>
             <div>{body}</div>
           </div>

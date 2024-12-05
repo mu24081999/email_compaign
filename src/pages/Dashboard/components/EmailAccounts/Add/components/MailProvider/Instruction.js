@@ -31,12 +31,12 @@ const Instruction = ({ handleMenu }) => {
         title={"Connect Your Email Account"}
         description="IMAP / SMTP"
       />{" "}
-      <div className="my-5 bg-gray-100 flex items-center justify-center ">
-        <div className="max-w-2xl w-full bg-white shadow-lg rounded-xl p-8">
-          <h1 className="text-2xl font-bold text-gray-800 mb-6 text-center">
+      <div className="my-5 bg-gray-100 flex  justify-center rounded-xl ">
+        <div className="max-w-2xl w-full bg-white dark:bg-gray-900 shadow-lg rounded-xl p-8">
+          <h1 className="text-2xl font-bold text-gray-800 dark:text-white mb-6 text-center">
             How to Create Google App Password
           </h1>
-          <ol className="list-decimal list-inside space-y-4 text-gray-700">
+          <ol className="list-decimal list-inside space-y-4 text-gray-700 dark:text-white">
             <li>
               <span className="font-semibold">
                 Log in to your cPanel or email control panel

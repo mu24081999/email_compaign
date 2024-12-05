@@ -328,16 +328,16 @@ const Options = () => {
           </div>
         </div> */}
         <div>
-          {compaign?.status === null ||
+          {/* {compaign?.status === null ||
           compaign?.status === undefined ||
           compaign?.status === "" ||
-          compaign?.status === "pending" ? (
-            <Button type="submit" className="py-3 px-3">
-              Lounch
-            </Button>
-          ) : (
+          compaign?.status === "pending" ? ( */}
+          <Button type="submit" className="py-3 px-3">
+            Lounch
+          </Button>
+          {/* ) : (
             "Compaing is triggerred and under process."
-          )}
+          )} */}
         </div>
       </form>
       <div>

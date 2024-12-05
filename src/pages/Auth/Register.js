@@ -151,6 +151,12 @@ const Register = () => {
                   control={control}
                   errors={errors}
                   label="By signing up, you agree to our Privacy Policy,Cookie Policy and Terms of Use"
+                  rules={{
+                    required: {
+                      value: true,
+                      message: "Field required!",
+                    },
+                  }}
                 />
               </div>
               <Button type="submit" loading={isLoading} className="py-3">

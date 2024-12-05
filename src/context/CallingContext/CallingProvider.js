@@ -1,10 +1,10 @@
 import { useState, useMemo, useEffect } from "react";
 import CallingContext from "./CallingContext";
-import { IoIosTimer } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 import { getCallTokenApi } from "../../redux/services/twilio";
 import { Device } from "@twilio/voice-sdk";
 import _ from "lodash";
+import { toast } from "react-toastify";
 const CalllingContext = ({ children }) => {
   const USER_STATE = {
     CONNECTING: "Connecting",
@@ -26,11 +26,12 @@ const CalllingContext = ({ children }) => {
   const [callMuted, setCallMuted] = useState(false);
   const [device, setDevice] = useState(null);
   const [connection, setConnection] = useState(null);
+  console.log("🚀 ~ CalllingContext ~ connection:", connection);
   const [inputValue, setInputValue] = useState("");
   const [userState, setUserState] = useState(USER_STATE.READY);
   const [incoming, setIncoming] = useState(false);
-  const [selectedPhoneNumber, setSelectedPhoneNumber] =
-    useState("+12314278305");
+  const [selectedPhoneNumber, setSelectedPhoneNumber] = useState(null);
+
   const [timer, setTimer] = useState({ hours: 0, mins: 0, sec: 0 });
   const init = async () => {
     if (callToken) {
@@ -59,6 +60,13 @@ const CalllingContext = ({ children }) => {
           setUserState(USER_STATE.READY);
           setConnection(null);
         });
+        // Add cancel event listener
+        device.on("cancel", () => {
+          console.log("Incoming call canceled by the caller");
+          setIncoming(false);
+          setConnection(null);
+          setUserState(USER_STATE.READY);
+        });
         device.on("incoming", (call) => {
           setIncoming(true);
           setConnection(call);
@@ -76,7 +84,11 @@ const CalllingContext = ({ children }) => {
       }
     }
   };
-
+  useEffect(() => {
+    if (user.twilio_selected_number) {
+      setSelectedPhoneNumber(user?.twilio_selected_number);
+    }
+  }, [user]);
   useEffect(() => {
     dispatch(
       getCallTokenApi(token, {
@@ -120,44 +132,55 @@ const CalllingContext = ({ children }) => {
     );
   };
   const handleMakeCall = async () => {
-    const params = {
-      To: inputValue, // The recipient's phone number
-    };
-    const call = await device.connect({
-      params,
-      rtcConstraints: {
-        audio: true,
-      },
-    });
-    call.on("accept", (call) => {
-      setConnection(call);
-      setIncoming(false);
-      setUserState(USER_STATE.ON_CALL);
-    });
-    call.on("disconnect", () => {
-      setUserState(USER_STATE.READY);
-      setIncoming(false);
-      setConnection(null);
-    });
-    call.on("reject", () => {
-      setUserState(USER_STATE.READY);
-      setIncoming(false);
-      console.log("The call was rejected.");
-    });
-    call.on("error", (error) => {
-      console.log("An error has occurred: ", error);
-      setIncoming(false);
-    });
-    call.on("mute", (isMuted, call) => {
-      isMuted ? setCallMuted(true) : setCallMuted(false);
-    });
-    call.on("reconnected", () => {
-      console.log("The call has regained connectivity.");
-    });
+    if (selectedPhoneNumber === null) {
+      toast.error("Please configure your phone number to make call.");
+    } else {
+      const params = {
+        To: inputValue, // The recipient's phone number
+      };
+      const call = await device.connect({
+        params,
+        rtcConstraints: {
+          audio: true,
+        },
+      });
+      call.on("accept", (call) => {
+        setConnection(call);
+        setIncoming(false);
+        setUserState(USER_STATE.ON_CALL);
+      });
+      call.on("disconnect", () => {
+        setUserState(USER_STATE.READY);
+        setIncoming(false);
+        setConnection(null);
+      });
+      // Add cancel event listener
+      call.on("cancel", () => {
+        console.log("Incoming call canceled by the caller");
+        setIncoming(false);
+        setConnection(null);
+        setUserState(USER_STATE.READY);
+      });
+      call.on("reject", () => {
+        setUserState(USER_STATE.READY);
+        setIncoming(false);
+        console.log("The call was rejected.");
+      });
+      call.on("error", (error) => {
+        console.log("An error has occurred: ", error);
+        setIncoming(false);
+      });
+      call.on("mute", (isMuted, call) => {
+        isMuted ? setCallMuted(true) : setCallMuted(false);
+      });
+      call.on("reconnected", () => {
+        console.log("The call has regained connectivity.");
+      });
+    }
   };
   const handleDialerClick = (type, value) => {
     if (connection && type === "dial") {
-      connection.sendDigits(value);
+      connection.sendDigits(_.toString(value));
     } else {
       if (type === "dial") {
         setInputValue((prevValue) => prevValue + value);
@@ -172,7 +195,8 @@ const CalllingContext = ({ children }) => {
   };
   const handleDropCall = () => {
     if (connection) {
-      connection.disconnect(); // End the call
+      if (incoming === true) connection.reject();
+      else connection.disconnect(); // End the call
       setConnection(null);
       setIncoming(false);
       setUserState(USER_STATE.READY);

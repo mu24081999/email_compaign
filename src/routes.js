@@ -26,6 +26,8 @@ import ResetPassword from "./pages/Auth/ResetPassword";
 import Dialpad from "./pages/Dialpad";
 import Numbers from "./pages/Numbers/Numbers";
 import SMS from "./pages/SMS/SMS";
+import AddSMSCampaign from "./pages/SMS/components/AddCampaign/AddCampaign";
+import ChildSMSCampaign from "./pages/SMS/components/ChildCompaign/Compaign";
 const router = (isAuthenticated, isValid) => {
   const routes = [
     {
@@ -64,6 +66,16 @@ const router = (isAuthenticated, isValid) => {
       element: (
         <PrivateRoute isAuthenticated={isAuthenticated} isValid={isValid}>
           <DripCompaign />
+        </PrivateRoute>
+      ),
+      children: [],
+      breadcrumb: "email-template",
+    },
+    {
+      path: "/sms-campaign/:id",
+      element: (
+        <PrivateRoute isAuthenticated={isAuthenticated} isValid={isValid}>
+          <ChildSMSCampaign />
         </PrivateRoute>
       ),
       children: [],
@@ -118,6 +130,16 @@ const router = (isAuthenticated, isValid) => {
       ),
       children: [],
       breadcrumb: "email-template",
+    },
+    {
+      path: "/add-sms-campaign",
+      element: (
+        <PrivateRoute isAuthenticated={isAuthenticated} isValid={isValid}>
+          <AddSMSCampaign />
+        </PrivateRoute>
+      ),
+      children: [],
+      breadcrumb: "add-sms-campaign",
     },
     {
       path: "/email-templates",
