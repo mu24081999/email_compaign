@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import DarkModeSwitcher from "./DarkmodeSwitcher";
 import { Link, useLocation } from "react-router-dom";
 import { MdCall, MdOutlineDashboard, MdOutlineSms } from "react-icons/md";
@@ -165,6 +165,10 @@ const SidebarWithNavbar = ({ component }) => {
   const handleCollapsed = () => {
     setIsCollapsed_(!isCollapsed);
   };
+  useEffect(() => {
+    if (window.innerWidth <= "650px") setIsCollapsed_(false);
+    return () => {};
+  }, []);
   return (
     <div className="w-full">
       <nav className="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
@@ -257,8 +261,8 @@ const SidebarWithNavbar = ({ component }) => {
                   key={index}
                   className={`${
                     location?.pathname === item?.link &&
-                    "bg-black dark:bg-gray-600 text-white p-1 shadow-lg"
-                  } px-3`}
+                    "bg-black  dark:bg-gray-600 text-white p-1 shadow-lg"
+                  } px-3 `}
                 >
                   <Link
                     to={item?.link}

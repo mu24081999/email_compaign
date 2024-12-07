@@ -2,14 +2,14 @@ import React, { useEffect, useState } from "react";
 import List from "./components/List";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { getCompaignLeads } from "../../../../../../redux/services/leads";
+import { getCompaignLeads } from "../../../../../../redux/services/smsLeads";
 import Modal from "../../../../../../components/Modal";
 import ModalBody from "./components/ModalBody";
 import Button from "../../../../../../components/Button";
 const Leads = () => {
   const dispatch = useDispatch();
   const { token } = useSelector((state) => state.auth);
-  const { leads } = useSelector((state) => state.lead);
+  const { leads } = useSelector((state) => state.smsLead);
   const { id } = useParams();
   const [isOpen, setIsOpen] = useState(false);
   const [leadsData, setLeadsData] = useState([]);

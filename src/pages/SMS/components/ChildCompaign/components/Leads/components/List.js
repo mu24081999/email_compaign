@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import {
   deleteLeadRec,
   getCompaignLeads,
-} from "../../../../../../../redux/services/leads";
+} from "../../../../../../../redux/services/smsLeads";
 const List = ({
   leadsData,
   handleOpenModal,
@@ -20,15 +20,7 @@ const List = ({
   const columns = [
     { label: "First Name", accessor: "firstname", type: "link" },
     { label: "Last Name", accessor: "lastname" },
-    { label: "Email", accessor: "email" }, // Example of nested accessor
     { label: "Phone", accessor: "phone" },
-
-    // {
-    //   label: "Actions",
-    //   accessor: "actions",
-    //   type: "actions",
-    //   variant: "green",
-    // },
   ];
   const deleteBulk = (ids) => {
     dispatch(deleteLeadRec(token, ids, compaign_id));

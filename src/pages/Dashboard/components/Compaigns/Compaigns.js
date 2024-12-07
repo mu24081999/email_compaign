@@ -89,72 +89,8 @@ const Compaigns = () => {
     { label: "Progress", accessor: "progress" }, // Example of nested accessor
     { label: "Sent", accessor: "email_sent_counter" },
     { label: "Open", accessor: "email_open_counter" },
-
-    // {
-    //   label: "Actions",
-    //   accessor: "actions",
-    //   type: "actions",
-    //   variant: "green",
-    // },
   ];
 
-  // const data = [
-  //   {
-  //     name: "John Doe",
-  //     progress: "john@example.com",
-
-  //     // actions: [
-  //     //   {
-  //     //     color: "green",
-  //     //     label: "Edit",
-  //     //     onClick: () => alert("Edit John Doe"),
-  //     //   },
-  //     //   {
-  //     //     color: "red",
-  //     //     label: "Delete",
-  //     //     onClick: () => alert("Delete John Doe"),
-  //     //   },
-  //     // ],
-  //   },
-  //   {
-  //     name: "Jane Smith",
-  //     email: "jane@example.com",
-  //     phone: {
-  //       mobile: "987-654-3210",
-  //     },
-  //     actions: [
-  //       {
-  //         color: "green",
-  //         label: "Edit",
-  //         onClick: () => alert("Edit John Doe"),
-  //       },
-  //       {
-  //         color: "red",
-  //         label: "Delete",
-  //         onClick: () => alert("Delete John Doe"),
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     name: "Sam Wilson",
-  //     email: "sam@example.com",
-  //     phone: {
-  //       mobile: "555-555-5555",
-  //     },
-  //     actions: [
-  //       {
-  //         color: "green",
-  //         label: "Edit",
-  //         onClick: () => alert("Edit John Doe"),
-  //       },
-  //       {
-  //         color: "red",
-  //         label: "Delete",
-  //         onClick: () => alert("Delete John Doe"),
-  //       },
-  //     ],
-  //   },
-  // ];
   const deleteBulk = (ids) => {
     console.log("🚀 ~ deleteBulk ~ ids:", ids);
     dispatch(deleteCompaignApi(token, ids, user_id));

@@ -5,18 +5,17 @@ import Heading from "../../../../../../components/Heading";
 import Button from "../../../../../../components/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import Switcher from "../../../../../../components/FormFields/Switcher/Switcher";
 import { FaRegEye } from "react-icons/fa";
-import { getUserTemplateList } from "../../../../../../redux/services/template";
 import Modal from "../../../../../../components/Modal";
 import ModalBody from "./components/ModalBody";
 import { getUserSequenceList } from "../../../../../../redux/services/sequence";
 import { getSchedulesApi } from "../../../../../../redux/services/schedule";
+import { getClaimedNumbersApi } from "../../../../../../redux/services/twilio";
 import {
   readCompaign,
   sendCompaignApi,
-} from "../../../../../../redux/services/compaign";
-import { getEmailAccountsApi } from "../../../../../../redux/services/email";
+  // sendCompaignApi,
+} from "../../../../../../redux/services/smsCampaign";
 import { toast } from "react-toastify";
 const Options = () => {
   const {
@@ -31,51 +30,44 @@ const Options = () => {
   const emailTypeWatcher = watch("email_type");
   const dispatch = useDispatch();
   const { templates } = useSelector((state) => state.template);
-  const { user_id, token } = useSelector((state) => state.auth);
+  const { user_id, token, user } = useSelector((state) => state.auth);
   const { sequences } = useSelector((state) => state.sequence);
-  const { schedules } = useSelector((state) => state.schedule);
+  const { schedules } = useSelector((state) => state.smsSchedule);
   const { compaign } = useSelector((state) => state.compaign);
   const { emails } = useSelector((state) => state.email);
   const [isOpen, setIsOpen] = useState(false);
+  const { claimedNumbers, isLoading } = useSelector((state) => state.twilio);
   const [selectedContent, setSelectedContent] = useState(null);
   const [selectedSequence, setSelectedSequence] = useState(null);
   const [selectedTemplate, setSelectedTemplate] = useState(null);
   const { id } = useParams();
   const formSubmit = (data) => {
     const params = {
-      email_id: data?.email_id?.value,
-      email: data?.email_id?.label,
-      compaign_id: parseInt(id),
+      accountSid: user.accountSid,
+      authToken: user.authToken,
+      user_id: user.id,
+      sequence_id: selectedSequence?.id,
       schedule_id: data?.schedule_id?.value,
-      user_id: user_id,
-      tracking: data?.tracking === true ? 1 : 0,
-      daily_limit: data?.daily_limit,
-      html: data?.html === true ? 1 : 0,
-      email_type: data?.email_type?.value,
-      template_id:
-        data?.email_type?.value === "template"
-          ? selectedTemplate?.id
-          : undefined,
-      sequence_id:
-        data?.email_type?.value === "sequence"
-          ? selectedSequence?.id
-          : undefined,
+      campaign_id: parseInt(id),
+      from_phone: data?.phone_number?.value,
+      from_name: user?.firstname + " " + user?.lastname,
     };
-    if (emailTypeWatcher === "template" && !selectedTemplate?.id) {
-      return toast.error("Please select a template to lounch the template");
-    }
+
     if (emailTypeWatcher === "sequence" && !selectedSequence?.id) {
       return toast.error("Please select a sequence to lounch the template");
     }
-    dispatch(sendCompaignApi(token, params, params?.compaign_id));
-    // dispatch(addOptionsApi(token, params));
+    dispatch(sendCompaignApi(token, params, params?.campaign_id));
   };
   useEffect(() => {
     dispatch(readCompaign(token, id));
-    dispatch(getUserTemplateList(token, user_id));
+    dispatch(
+      getClaimedNumbersApi(token, {
+        accountSid: user.accountSid,
+        authToken: user.authToken,
+      })
+    );
     dispatch(getUserSequenceList(token, user_id));
-    dispatch(getSchedulesApi(token, `compaign_id=${id}`));
-    dispatch(getEmailAccountsApi(token, `user_id=${user_id}`));
+    dispatch(getSchedulesApi(token, `campaign_id=${id}`));
   }, [token, dispatch, id, user_id]);
   useEffect(() => {
     setValue("email_id", {
@@ -134,20 +126,20 @@ const Options = () => {
         <div className="p-8 rounded-md shadow-md border bg-white dark:bg-gray-800 border-gray-100">
           <div className="grid lg:grid-cols-2 sm:grid-cols-1 justify-between">
             <div>
-              <Heading text={"Email Account"} className="font-extrabold" />
-              <p>Select your account to send emails from</p>
+              <Heading text={"Phone Number"} className="font-extrabold" />
+              <p>Select your number to send campaign from</p>
             </div>
             <ReactSelectField
-              name="email_id"
+              name="phone_number"
               placeholder="Select"
               control={control}
               errors={errors}
               options={
-                Array.isArray(emails?.accountsData) &&
-                emails?.accountsData?.map((email) => {
+                Array.isArray(claimedNumbers) &&
+                claimedNumbers?.map((number) => {
                   return {
-                    label: email?.email,
-                    value: email?.id,
+                    label: number?.phoneNumber,
+                    value: number?.phoneNumber,
                   };
                 })
               }
@@ -160,119 +152,38 @@ const Options = () => {
             />
           </div>
         </div>
-        <div className="p-8 rounded-md shadow-md border bg-white border-gray-100 dark:bg-gray-800">
-          <div className="grid lg:grid-cols-2 sm:grid-cols-1 justify-between">
-            <div>
-              <Heading text={"Open Tracking"} className="font-extrabold" />
-              <p>Track email opens</p>
-            </div>
-            <div className="flex justify-end">
-              <Switcher name="tracking" control={control} errors={errors} />
-            </div>{" "}
-          </div>
-        </div>
         <div className="p-8 rounded-md shadow-md border bg-white dark:bg-gray-800 border-gray-100">
-          <div className="grid lg:grid-cols-2 sm:grid-cols-1 justify-between">
+          <div className="justify-between">
             <div>
-              <Heading text={"Email Type"} className="font-extrabold" />
-              <p>Disables open tracking for sequence template</p>
+              <Heading text={"Email Sequences"} className="font-extrabold" />
             </div>
             <div>
-              <ReactSelectField
-                name="email_type"
-                placeholder="Select"
-                control={control}
-                errors={errors}
-                options={[
-                  {
-                    label: "Sequence",
-                    value: "sequence",
-                  },
-                  {
-                    label: "Template",
-                    value: "template",
-                  },
-                ]}
-                rules={{
-                  required: {
-                    value: true,
-                    message: "Field required!",
-                  },
-                }}
-              />
+              <div className="p-1 grid grid-cols-2 gap-5  items-center justify-center">
+                {Array?.isArray(sequences?.sequencesData) &&
+                  sequences?.sequencesData?.map((template) => (
+                    <>
+                      <div
+                        className={`${
+                          template?.id === selectedSequence?.id &&
+                          "border border-indigo-500"
+                        } w-full p-5 shadow-lg bg-white border border-gray-200 flex justify-between`}
+                        onClick={() => setSelectedSequence(template)}
+                      >
+                        <span>
+                          {template?.subject ? template?.subject : "No Subject"}
+                        </span>
+                        <span>
+                          <FaRegEye
+                            onClick={() => handleSelected(template?.content)}
+                          />
+                        </span>
+                      </div>
+                    </>
+                  ))}
+              </div>
             </div>
           </div>
         </div>
-        {emailTypeWatcher?.value === "template" && (
-          <div className="p-8 rounded-md shadow-md border bg-white dark:bg-gray-800 border-gray-100">
-            <div className="justify-between">
-              <div>
-                <Heading text={"Email Templates"} className="font-extrabold" />
-              </div>
-              <div>
-                <div className="p-1 grid grid-cols-2 gap-5  items-center justify-center">
-                  {Array?.isArray(templates?.templatesData) &&
-                    templates?.templatesData?.map((template) => (
-                      <>
-                        <div
-                          className={`${
-                            template?.id === selectedTemplate?.id &&
-                            "border border-indigo-500"
-                          } w-full p-5 shadow-lg bg-white border border-gray-200 flex justify-between`}
-                          onClick={() => setSelectedTemplate(template)}
-                        >
-                          <span>
-                            {template?.title ? template?.title : "No Title"}
-                          </span>
-                          <span>
-                            <FaRegEye
-                              onClick={() => handleSelected(template?.content)}
-                            />
-                          </span>
-                        </div>
-                      </>
-                    ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-        {emailTypeWatcher?.value === "sequence" && (
-          <div className="p-8 rounded-md shadow-md border bg-white dark:bg-gray-800 border-gray-100">
-            <div className="justify-between">
-              <div>
-                <Heading text={"Email Sequences"} className="font-extrabold" />
-              </div>
-              <div>
-                <div className="p-1 grid grid-cols-2 gap-5  items-center justify-center">
-                  {Array?.isArray(sequences?.sequencesData) &&
-                    sequences?.sequencesData?.map((template) => (
-                      <>
-                        <div
-                          className={`${
-                            template?.id === selectedSequence?.id &&
-                            "border border-indigo-500"
-                          } w-full p-5 shadow-lg bg-white border border-gray-200 flex justify-between`}
-                          onClick={() => setSelectedSequence(template)}
-                        >
-                          <span>
-                            {template?.subject
-                              ? template?.subject
-                              : "No Subject"}
-                          </span>
-                          <span>
-                            <FaRegEye
-                              onClick={() => handleSelected(template?.content)}
-                            />
-                          </span>
-                        </div>
-                      </>
-                    ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
         <div className="p-8 rounded-md shadow-md border bg-white dark:bg-gray-800 border-gray-100">
           <div className="grid lg:grid-cols-2 sm:grid-cols-1 justify-between">
             <div>

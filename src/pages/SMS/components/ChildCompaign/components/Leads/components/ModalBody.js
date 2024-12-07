@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import Button from "../../../../../../../components/Button";
 import UploadCSV from "./UploadCSV";
-import { FaFileCsv, FaRegEnvelope } from "react-icons/fa";
+import { FaFileCsv } from "react-icons/fa";
+import { FcBusinessContact } from "react-icons/fc";
+
 import UploadManualEmail from "./UploadManualEmail";
 const ModalBody = ({ close }) => {
   const [showMenu, setSHowMenu] = useState(true);
@@ -25,10 +27,10 @@ const ModalBody = ({ close }) => {
       },
     },
     {
-      name: "Manual Emails",
+      name: "Manual Numbers",
       description: "Enter",
       text_color: "text-gray-800",
-      icon: <FaRegEnvelope color="green" />,
+      icon: <FcBusinessContact color="green" />,
       onClick: () => {
         setSHowMenu(false);
         setShowUploadCSV(false);

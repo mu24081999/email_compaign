@@ -60,7 +60,7 @@ const Recordings = ({
   };
 
   return (
-    <div className="max-w-md mx-auto  h-[78vh] overflow-scroll rounded-lg shadow-lg p-4">
+    <div className="max-w-md mx-auto  h-[78vh] overflow-scroll rounded-lg shadow-lg">
       {isLoading ? (
         <SidebarSkeleton />
       ) : (

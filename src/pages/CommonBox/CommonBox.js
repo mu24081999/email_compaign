@@ -79,12 +79,15 @@ const CommonBox = () => {
       component={
         <main className="h-[87vh] flex w-full shadow-lg rounded border">
           <div>
-            <div className="text-center border bg-white dark:bg-gray-900 p-5 font-extrabold text-xl">
+            <div className="text-center border bg-white dark:bg-gray-800 p-[21px] font-extrabold text-xl">
               Common-Box
             </div>
             <SidebarCom setCampaignData={handleCampaignDataFromChild} />
           </div>
-          <section className="flex flex-col w-4/12 bg-white  dark:bg-gray-800 border">
+          <section className="flex flex-col w-4/12 bg-gray-50  dark:bg-gray-800 border">
+            <div className="text-center border bg-white dark:bg-gray-800 p-[20px] font-extrabold text-xl">
+              Inbox
+            </div>
             {isLoading ? (
               <SidebarSkeleton />
             ) : (
@@ -96,9 +99,7 @@ const CommonBox = () => {
                   onKeyUp={handleOnSearchReply}
                 />
               </label> */}
-                <div className="text-center border bg-white dark:bg-gray-900 p-5 font-extrabold text-xl">
-                  Inbox
-                </div>
+
                 <ul className="mt-6">
                   {Array.isArray(replies) && replies?.length > 0 ? (
                     replies?.map((reply, index) => (
@@ -144,10 +145,13 @@ const CommonBox = () => {
               </div>
             )}
           </section>
-          <section className="w-6/12 px-4 flex flex-col bg-white border dark:bg-gray-900">
+          <section className="w-6/12 flex flex-col bg-gray-50 border dark:bg-gray-800">
+            <div className="text-center border bg-white dark:bg-gray-800 p-[2vh] font-extrabold text-xl">
+              {selectedReply?.subject || "Details"}
+            </div>
             {selectedReply?.from ? (
-              <>
-                <div className="flex justify-between items-center h-20 border mb-8 mt-5 px-5 shadow-lg rounded-xl">
+              <div className="px-4">
+                <div className="flex justify-between items-center h-20 border mb-8 mt-5 px-5 shadow-lg rounded-xl ">
                   <div className="flex space-x-4 items-center">
                     <div className="h-12 w-12 rounded-full overflow-hidden">
                       <img
@@ -202,11 +206,11 @@ const CommonBox = () => {
                   </div> */}
                 </div>
                 <section>
-                  <h1 className="font-bold text-2xl border bg-white dark:bg-gray-800 rounded shadow-lg p-3 text-center">
+                  {/* <h1 className="font-bold text-2xl border bg-white dark:bg-gray-800 rounded shadow-lg p-3 text-center">
                     {selectedReply?.subject}
-                  </h1>
+                  </h1> */}
                   <article
-                    className="mt-8 leading-7 rounded shadow-xl tracking-wider border p-2 bg-gray-100 dark:bg-gray-800 dark"
+                    className="mt-8 leading-7 rounded shadow-xl tracking-wider border p-5 h-[50vh] overflow-scroll bg-gray-100 dark:bg-gray-800"
                     dangerouslySetInnerHTML={{ __html: selectedReply?.body }}
                   ></article>
                 </section>
@@ -232,9 +236,9 @@ const CommonBox = () => {
                     </div>
                   </form>
                 )}
-              </>
+              </div>
             ) : (
-              <div className="flex flex-col items-center h-[83vh] pt-[35vh]">
+              <div className="flex flex-col items-center h-[83vh] pt-[32vh]">
                 <img
                   src="https://cdn-icons-png.flaticon.com/512/11696/11696623.png"
                   alt=""

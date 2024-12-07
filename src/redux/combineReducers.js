@@ -8,6 +8,7 @@ import leadReducer from "./slices/leads";
 import sequenceReducer from "./slices/sequence";
 import emailReducer from "./slices/email";
 import scheduleReducer from "./slices/schedule";
+import smsScheduleReducer from "./slices/smsSchedule";
 import optionsReducer from "./slices/options";
 import warmupReducer from "./slices/warmup";
 import dashboardReducer from "./slices/dashboard";
@@ -15,6 +16,8 @@ import subscriptionReducer from "./slices/subscriptions";
 import uniboxReducer from "./slices/unibox";
 import validationReducer from "./slices/validation";
 import twilioRreducer from "./slices/twilio";
+import SMSCampaignReducer from "./slices/smsCampaign";
+import SMSLeadReducer from "./slices/smsLeads";
 
 export const rootReducer = combineReducers({
   auth: authReducer,
@@ -26,6 +29,7 @@ export const rootReducer = combineReducers({
   sequence: sequenceReducer,
   email: emailReducer,
   schedule: scheduleReducer,
+  smsSchedule: smsScheduleReducer,
   options: optionsReducer,
   warmup: warmupReducer,
   dashboard: dashboardReducer,
@@ -33,4 +37,6 @@ export const rootReducer = combineReducers({
   unibox: uniboxReducer,
   validation: validationReducer,
   twilio: twilioRreducer,
+  smsCampaign: SMSCampaignReducer,
+  smsLead: SMSLeadReducer,
 });

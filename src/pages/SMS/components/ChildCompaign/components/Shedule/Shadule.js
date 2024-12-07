@@ -11,7 +11,7 @@ import {
   addScheduleApi,
   deleteScheduleApi,
   getSchedulesApi,
-} from "../../../../../../redux/services/schedule";
+} from "../../../../../../redux/services/smsSchedule";
 import moment from "moment";
 import { FaTrashAlt } from "react-icons/fa";
 const Shadule = () => {
@@ -26,7 +26,7 @@ const Shadule = () => {
   });
   const dispatch = useDispatch();
   const { user_id, token } = useSelector((state) => state.auth);
-  const { schedules } = useSelector((state) => state.schedule);
+  const { schedules } = useSelector((state) => state.smsSchedule);
   const [timezones, setTimezones] = useState([]);
   const [selectedSchedule, setSelectedSchedule] = useState({});
   const { id } = useParams();
@@ -53,7 +53,7 @@ const Shadule = () => {
     const toIsoString = toParsedTime.toISOString(); // Will give you an ISO string representation
 
     const params = {
-      compaign_id: parseInt(id),
+      campaign_id: parseInt(id),
       user_id: user_id,
       name: data.name,
       from: fromIsoString,
@@ -65,7 +65,7 @@ const Shadule = () => {
   };
   useEffect(() => {
     // const query = `user_id=${user_id}`;
-    const query = `compaign_id=${id}`;
+    const query = `campaign_id=${id}`;
     getTimezones();
     dispatch(getSchedulesApi(token, query));
   }, [getTimezones, token, dispatch, id]);

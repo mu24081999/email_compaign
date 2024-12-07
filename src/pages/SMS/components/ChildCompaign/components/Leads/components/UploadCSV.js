@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import Papa from "papaparse";
 import Button from "../../../../../../../components/Button";
 import { useDispatch, useSelector } from "react-redux";
-import { addLeadRec } from "../../../../../../../redux/services/leads";
+import { addLeadRec } from "../../../../../../../redux/services/smsLeads";
 import { useParams } from "react-router-dom";
 
 const UploadCSV = ({ close }) => {
@@ -18,16 +18,15 @@ const UploadCSV = ({ close }) => {
   const handleUploadCSV = () => {
     if (data.length > 0) {
       const formattedData = [];
-      console.log("Uploading data:", data);
       data?.map((item) => {
         return formattedData?.push({
           // ...item,
           firstname: item?.firstname,
           lastname: item?.lastname,
-          email: item?.email,
           phone: item?.phone,
           user_id: user_id,
-          compaign_id: parseInt(id),
+          campaign_id: parseInt(id),
+          // company: item?.company,
         });
       });
       dispatch(addLeadRec(token, { leads: formattedData }));
@@ -114,16 +113,23 @@ const UploadCSV = ({ close }) => {
                     <tbody>
                       {Object.keys(data[0]).map((key) => (
                         <tr key={key} className="hover:bg-gray-50">
-                          <td className="border px-4 py-2 font-semibold bg-gray-100">
-                            {key}
-                          </td>
-                          <td className="border px-4 py-2">
-                            <ul className="list-disc pl-5">
-                              {data.map((row, index) => (
-                                <li key={index}>{row[key] || "N/A"}</li>
-                              ))}
-                            </ul>
-                          </td>
+                          {(key === "phone" ||
+                            key === "firstname" ||
+                            key === "company" ||
+                            key === "lastname") && (
+                            <>
+                              <td className="border px-4 py-2 font-semibold bg-gray-100">
+                                {key}
+                              </td>
+                              <td className="border px-4 py-2">
+                                <ul className="list-disc pl-5">
+                                  {data.map((row, index) => (
+                                    <li key={index}>{row[key] || "N/A"}</li>
+                                  ))}
+                                </ul>
+                              </td>
+                            </>
+                          )}
                         </tr>
                       ))}
                     </tbody>
