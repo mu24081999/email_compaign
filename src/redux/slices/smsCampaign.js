@@ -5,6 +5,7 @@ export const smsCampaignSlice = createSlice({
     isLoading: false,
     campaigns: [],
     campaign: {},
+    analytics: {},
     message: "",
     error: "",
     type: "",
@@ -19,6 +20,7 @@ export const smsCampaignSlice = createSlice({
       state.type = "Invalid Request";
       state.campaigns = [];
       state.campaign = {};
+      state.analytics = {};
       state.isLoading = false;
     },
     addCampaign: (state, action) => {
@@ -56,6 +58,11 @@ export const smsCampaignSlice = createSlice({
       state.isLoading = false;
       state.error = "";
     },
+    getAnalytics: (state, action) => {
+      state.analytics = action.payload;
+      state.isLoading = false;
+      state.error = "";
+    },
   },
 });
 export default smsCampaignSlice.reducer;
@@ -69,4 +76,5 @@ export const {
   getCampaigns,
   pauseCampaign,
   resumeCompaign,
+  getAnalytics,
 } = smsCampaignSlice.actions;

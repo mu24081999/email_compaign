@@ -4,7 +4,7 @@ import TextAreaField from "../../../../../../../components/FormFields/TextAreaFi
 import Button from "../../../../../../../components/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { addLeadRec } from "../../../../../../../redux/services/leads";
+import { addLeadRec } from "../../../../../../../redux/services/smsLeads";
 const UploadManualEmail = ({ close }) => {
   const {
     formState: { errors },
@@ -19,17 +19,13 @@ const UploadManualEmail = ({ close }) => {
     return fomatted;
   }
   const formSubmit = (fomrData) => {
-    console.log(
-      "🚀 ~ UploadManualEmail ~ fomrData:",
-      formatEmails(fomrData?.emails)
-    );
     const data = [];
-    const emails = formatEmails(fomrData?.emails);
-    emails?.map((item) => {
+    const numbers = formatEmails(fomrData?.numbers);
+    numbers?.map((item) => {
       return data.push({
         user_id: user_id,
-        compaign_id: parseInt(id),
-        email: item,
+        campaign_id: parseInt(id),
+        phone: item,
       });
     });
     dispatch(addLeadRec(token, { leads: data }));
@@ -39,7 +35,7 @@ const UploadManualEmail = ({ close }) => {
     <div className="p-5">
       <form onSubmit={handleSubmit(formSubmit)}>
         <TextAreaField
-          name="emails"
+          name="numbers"
           control={control}
           errors={errors}
           rows={5}

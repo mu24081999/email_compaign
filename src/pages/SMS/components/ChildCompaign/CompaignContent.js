@@ -10,7 +10,7 @@ import {
   compaignAnalytics,
   pauseCompaignRec,
   resumeCompaignRec,
-} from "../../../../redux/services/compaign";
+} from "../../../../redux/services/smsCampaign";
 import Button from "../../../../components/Button";
 import { CiPause1 } from "react-icons/ci";
 import { CiPlay1 } from "react-icons/ci";
@@ -19,14 +19,13 @@ const CompaignContent = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const { token, user_id } = useSelector((state) => state.auth);
-  const { compaignAnalytics: analystics, compaign } = useSelector(
-    (state) => state.compaign
-  );
+  const { analytics, campaign } = useSelector((state) => state.smsCampaign);
+  console.log("🚀 ~ CompaignContent ~ compaignAnalytics:", analytics, campaign);
   const tabsData = [
     {
       id: "analystics",
       label: "Analystics",
-      content: <Analystics data={analystics} />,
+      content: <Analystics data={analytics} />,
     },
     {
       id: "leads",
@@ -65,7 +64,7 @@ const CompaignContent = () => {
   return (
     <div>
       <div className="float-end px-8">
-        {compaign?.status === "paused" ? (
+        {campaign?.status === "paused" ? (
           <Button
             className="flex gap-2 py-3 bg-green-500 hover:bg-green-600"
             onClick={resumeCompaign}
@@ -76,7 +75,7 @@ const CompaignContent = () => {
             <span>Resume Compaign</span>
           </Button>
         ) : (
-          compaign?.status === "sending" && (
+          campaign?.status === "active" && (
             <Button
               className="flex gap-2 py-3 bg-black hover:bg-gray-800"
               onClick={pauseCompaign}

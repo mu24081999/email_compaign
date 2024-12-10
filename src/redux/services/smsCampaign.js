@@ -10,6 +10,7 @@ import {
   pauseCampaign,
   resumeCompaign,
   deleteCampaign,
+  getAnalytics,
 } from "../slices/smsCampaign";
 import { toast } from "react-toastify";
 const backendURL = `${process.env.REACT_APP_BACKEND_URL_PRODUCTION}`;
@@ -190,28 +191,28 @@ export const readCompaign = (token, id) => async (dispatch) => {
     dispatch(invalidRequest(e.message));
   }
 };
-// export const compaignAnalytics = (token, id) => async (dispatch) => {
-//   try {
-//     dispatch(campaignRequestLoading());
-//     const config = {
-//       headers: {
-//         "Content-Type": "application/json",
-//         "x-access-token": token,
-//       },
-//     };
-//     await axios
-//       .get(`${backendURL}/compaign/analytics/${id}`, config)
-//       .then((response) => {
-//         if (response?.data?.statusCode !== 200) {
-//           toast.error(response.data.message);
-//           return dispatch(invalidRequest(response.data.message));
-//         }
-//         dispatch(getCompaignAnalytics(response.data.data));
-//       });
-//   } catch (e) {
-//     dispatch(invalidRequest(e.message));
-//   }
-// };
+export const compaignAnalytics = (token, id) => async (dispatch) => {
+  try {
+    dispatch(campaignRequestLoading());
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        "x-access-token": token,
+      },
+    };
+    await axios
+      .get(`${backendURL}/sms-campaign/analytics/${id}`, config)
+      .then((response) => {
+        if (response?.data?.statusCode !== 200) {
+          toast.error(response.data.message);
+          return dispatch(invalidRequest(response.data.message));
+        }
+        dispatch(getAnalytics(response.data.data));
+      });
+  } catch (e) {
+    dispatch(invalidRequest(e.message));
+  }
+};
 export const deleteCompaignApi = (token, ids, user_id) => async (dispatch) => {
   try {
     dispatch(campaignRequestLoading());

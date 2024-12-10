@@ -21,7 +21,7 @@ import logo from "../assets/1.png";
 import logo3 from "../assets/3.png";
 import logo4 from "../assets/4.png";
 import Dropdown from "./Dropdown";
-import { IoKeypadOutline } from "react-icons/io5";
+import { IoKeypadOutline, IoWalletOutline } from "react-icons/io5";
 import useMain from "../context/Main/useMain";
 import Dialer from "../pages/Dialpad/components/DialpadComponents/Dialer";
 import { PiSignOutBold } from "react-icons/pi";
@@ -54,7 +54,7 @@ const SidebarWithNavbar = ({ component }) => {
       icon: FaRegEnvelopeOpen,
     },
     {
-      name: "Compaigns",
+      name: "Email Campaigns",
       link: "/compaigns",
       icon: TbLocationShare,
     },
@@ -94,7 +94,7 @@ const SidebarWithNavbar = ({ component }) => {
       icon: IoKeypadOutline,
     },
     {
-      name: "SMS",
+      name: "SMS Campaigns",
       link: "/sms",
       icon: MdOutlineSms,
     },
@@ -107,6 +107,11 @@ const SidebarWithNavbar = ({ component }) => {
       name: "My Subscription",
       link: "/my-subscription",
       icon: TbCalendarDollar,
+    },
+    {
+      name: "Wallet",
+      link: "/wallet",
+      icon: IoWalletOutline,
     },
     {
       name: "Account Settings",

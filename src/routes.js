@@ -28,6 +28,7 @@ import Numbers from "./pages/Numbers/Numbers";
 import SMS from "./pages/SMS/SMS";
 import AddSMSCampaign from "./pages/SMS/components/AddCampaign/AddCampaign";
 import ChildSMSCampaign from "./pages/SMS/components/ChildCompaign/Compaign";
+import Wallet from "./pages/Wallet";
 const router = (isAuthenticated, isValid) => {
   const routes = [
     {
@@ -76,6 +77,16 @@ const router = (isAuthenticated, isValid) => {
       element: (
         <PrivateRoute isAuthenticated={isAuthenticated} isValid={isValid}>
           <ChildSMSCampaign />
+        </PrivateRoute>
+      ),
+      children: [],
+      breadcrumb: "email-template",
+    },
+    {
+      path: "/wallet",
+      element: (
+        <PrivateRoute isAuthenticated={isAuthenticated} isValid={isValid}>
+          <Wallet />
         </PrivateRoute>
       ),
       children: [],

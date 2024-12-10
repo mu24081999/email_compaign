@@ -9,9 +9,8 @@ const Content = () => {
   const dispatch = useDispatch();
   useEffect(() => {}, []);
   const { user_id, token } = useSelector((state) => state.auth);
-  const { campaigns } = useSelector((state) => state.smsCampaign);
+  const { campaigns, analytics } = useSelector((state) => state.smsCampaign);
   const [compaignsData, setCompaignsData] = useState([]);
-  console.log("🚀 ~ Content ~ compaignsData:", compaignsData);
   const [pagination, setPagination] = useState({});
   const navigateTo = useNavigate();
   const columns = [
@@ -30,7 +29,7 @@ const Content = () => {
       campaigns?.campaignsData?.map((compaign) => {
         const progressPercentage =
           compaign?.total_leads > 0
-            ? (compaign?.email_sent_counter / compaign?.total_leads) * 100
+            ? (compaign?.sms_sent / compaign?.total_leads) * 100
             : 0;
 
         data.push({
@@ -43,13 +42,13 @@ const Content = () => {
                   SMS Sent
                 </h3>
                 <span className="text-sm text-gray-800 dark:text-white">
-                  {compaign?.email_sent_counter || 0}
+                  {compaign?.sms_sent || 0}
                 </span>
               </div>
               <div
                 className="flex w-full h-2 bg-gray-200 rounded-full overflow-hidden dark:bg-neutral-700"
                 role="progressbar"
-                aria-valuenow={compaign?.email_sent_counter}
+                aria-valuenow={compaign?.sms_sent}
                 aria-valuemin="0"
                 aria-valuemax={compaign?.total_leads}
               >
