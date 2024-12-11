@@ -19,6 +19,7 @@ import SwiperComponent from "../../../../components/Swiper";
 import { FaEye, FaTrashAlt } from "react-icons/fa";
 import Modal from "../../../../components/Modal";
 import ModalBody from "./components/ModalBody";
+import useMain from "../../../../context/Main/useMain";
 const Sequence = () => {
   const {
     handleSubmit,
@@ -36,6 +37,7 @@ const Sequence = () => {
           </html>`,
     },
   });
+  const { isCollapsed } = useMain();
   const emailEditorRef = useRef();
   const [isOpen, setIsOpen] = useState(false);
   const [selectedContent, setSelectedContent] = useState({});
@@ -271,6 +273,7 @@ const Sequence = () => {
               saveButtonText="Save Changes"
               closeButtonText="Dismiss"
               size="md"
+              noStartMargin={isCollapsed}
             />
           </div>
         </>

@@ -4,7 +4,7 @@ import Table from "../../components/Table";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserCompaignsApi } from "../../redux/services/smsCampaign";
-
+import Chatbot from "./components/Chatbot";
 const Content = () => {
   const dispatch = useDispatch();
   useEffect(() => {}, []);
@@ -102,6 +102,7 @@ const Content = () => {
           // onPageChange={(page) => fetchData(page)}
         />
       </div>
+      {/* <Chatbot /> */}
     </div>
   );
 };

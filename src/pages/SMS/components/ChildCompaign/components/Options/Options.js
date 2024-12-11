@@ -17,6 +17,7 @@ import {
   // sendCompaignApi,
 } from "../../../../../../redux/services/smsCampaign";
 import { toast } from "react-toastify";
+import useMain from "../../../../../../context/Main/useMain";
 const Options = () => {
   const {
     handleSubmit,
@@ -27,6 +28,8 @@ const Options = () => {
   } = useForm({
     defaultValues: {},
   });
+  const { isCollapsed } = useMain();
+  console.log("🚀 ~ Options ~ isCollapsed:", isCollapsed);
   const emailTypeWatcher = watch("email_type");
   const dispatch = useDispatch();
   const { templates } = useSelector((state) => state.template);
@@ -155,7 +158,7 @@ const Options = () => {
         <div className="p-8 rounded-md shadow-md border bg-white dark:bg-gray-800 border-gray-100">
           <div className="justify-between">
             <div>
-              <Heading text={"Email Sequences"} className="font-extrabold" />
+              <Heading text={"Sequences"} className="font-extrabold" />
             </div>
             <div>
               <div className="p-1 grid grid-cols-2 gap-5  items-center justify-center">
@@ -262,6 +265,7 @@ const Options = () => {
           saveButtonText="Save Changes"
           closeButtonText="Dismiss"
           size="md"
+          noStartMargin={isCollapsed}
         />
       </div>
     </div>

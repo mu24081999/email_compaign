@@ -8,6 +8,7 @@ import { getEmailAccountsApi } from "../../../../redux/services/email";
 import Modal from "../../../../components/Modal";
 import ModalBody from "./ModalBody/ModalBody";
 import Layout from "../../../../layout/Layout";
+import useMain from "../../../../context/Main/useMain";
 const EmailAccounts = () => {
   const {
     handleSubmit,
@@ -15,6 +16,7 @@ const EmailAccounts = () => {
     formState: { errors },
   } = useForm();
   const navigateTo = useNavigate();
+  const { isCollapsed } = useMain();
   const dispatch = useDispatch();
   const { token, user_id } = useSelector((state) => state.auth);
   const { emails } = useSelector((state) => state.email);
@@ -124,6 +126,7 @@ const EmailAccounts = () => {
               saveButtonText="Save Changes"
               closeButtonText="Dismiss"
               size="md"
+              noStartMargin={isCollapsed}
             />
           </div>
         </div>

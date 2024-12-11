@@ -6,7 +6,9 @@ import { getCompaignLeads } from "../../../../../../../redux/services/leads";
 import Modal from "../../../../../../../components/Modal";
 import ModalBody from "./components/ModalBody";
 import Button from "../../../../../../../components/Button";
+import useMain from "../../../../../../../context/Main/useMain";
 const Leads = () => {
+  const { isCollapsed } = useMain();
   const dispatch = useDispatch();
   const { token } = useSelector((state) => state.auth);
   const { leads } = useSelector((state) => state.lead);
@@ -62,6 +64,7 @@ const Leads = () => {
           onSave={handleSave}
           saveButtonText="Save Changes"
           closeButtonText="Dismiss"
+          noStartMargin={isCollapsed}
           // size="xl"
         />
       </div>

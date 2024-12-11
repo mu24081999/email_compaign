@@ -15,19 +15,29 @@ import SwiperComponent from "../../../components/Swiper";
 import Loader from "../../../components/Loader/Loader";
 import Modal from "../../../components/Modal";
 import ModalBody from "./ModalBody";
+import useMain from "../../../context/Main/useMain";
 const EmailEditorComponent = () => {
   const {
     handleSubmit,
     control,
     formState: { errors },
   } = useForm();
+  const {
+    emailEditorRef,
+    exportHtml,
+    isCollapsed,
+    loading,
+    setLoading,
+    editorStyle,
+  } = useMain(); // Using context here
+
   const { user_id, token, user } = useSelector((state) => state.auth);
   const { templates } = useSelector((state) => state.template);
-  const emailEditorRef = useRef();
+  // const emailEditorRef = useRef();
   const dispatch = useDispatch();
   const [editorHtml, setEditorHtml] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
   const [selectedContent, setSelectedContent] = useState({});
   const [showSlides, setShowSlides] = useState(true);
   // Placeholder Data for testing (you can use dynamic user data instead)
@@ -39,18 +49,6 @@ const EmailEditorComponent = () => {
   // Function to replace placeholders in exported HTML
   const replacePlaceholdersInHtml = (html, data) => {
     return html.replace(/\{\{(.*?)\}\}/g, (_, key) => data[key.trim()] || "");
-  };
-
-  // Export HTML from the email editor and store it
-  const exportHtml = () => {
-    const unlayer = emailEditorRef.current?.editor;
-    const data = unlayer?.exportHtml((data) => {
-      const { html } = data;
-      setEditorHtml((prevValue) => {
-        return html;
-      }); // Save the exported HTML
-    });
-    console.log(editorHtml);
   };
   const handleClose = () => {
     setIsOpen(false);
@@ -183,7 +181,7 @@ const EmailEditorComponent = () => {
                 height: "75vh",
               }}
             />
-            <div className="h-14 shadow-lg rounded-md w-[44vh] p-1 bg-white absolute bottom-0 right-0"></div>
+            <div className="h-16 w-[45.5vh] p-1 bg-white absolute bottom-0 right-0"></div>
           </div>
           <p>
             Add firstname,lastname and email in the format {"{{firstname}}"} to
@@ -227,6 +225,7 @@ const EmailEditorComponent = () => {
           saveButtonText="Save Changes"
           closeButtonText="Dismiss"
           size="md"
+          noStartMargin={isCollapsed}
         />
       </div>
     </div>

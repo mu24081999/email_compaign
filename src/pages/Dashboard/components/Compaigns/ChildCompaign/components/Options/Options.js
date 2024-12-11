@@ -18,6 +18,7 @@ import {
 } from "../../../../../../../redux/services/compaign";
 import { getEmailAccountsApi } from "../../../../../../../redux/services/email";
 import { toast } from "react-toastify";
+import useMain from "../../../../../../../context/Main/useMain";
 const Options = () => {
   const {
     handleSubmit,
@@ -28,6 +29,7 @@ const Options = () => {
   } = useForm({
     defaultValues: {},
   });
+  const { isCollapsed } = useMain();
   const emailTypeWatcher = watch("email_type");
   const dispatch = useDispatch();
   const { templates } = useSelector((state) => state.template);
@@ -351,6 +353,7 @@ const Options = () => {
           saveButtonText="Save Changes"
           closeButtonText="Dismiss"
           size="md"
+          noStartMargin={isCollapsed}
         />
       </div>
     </div>

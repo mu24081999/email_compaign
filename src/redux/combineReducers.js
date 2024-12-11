@@ -18,6 +18,8 @@ import validationReducer from "./slices/validation";
 import twilioRreducer from "./slices/twilio";
 import SMSCampaignReducer from "./slices/smsCampaign";
 import SMSLeadReducer from "./slices/smsLeads";
+import walletReducer from "./slices/wallet";
+import walletLogsReducer from "./slices/walletLogs";
 
 export const rootReducer = combineReducers({
   auth: authReducer,
@@ -39,4 +41,6 @@ export const rootReducer = combineReducers({
   twilio: twilioRreducer,
   smsCampaign: SMSCampaignReducer,
   smsLead: SMSLeadReducer,
+  logs: walletLogsReducer,
+  wallet: walletReducer,
 });
