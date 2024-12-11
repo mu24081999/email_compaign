@@ -196,11 +196,11 @@ const Content = () => {
               <ul className=" list-disc px-5">
                 <li className="flex gap-5">
                   <span className="font-bold">Inbound:</span>
-                  <span>${0 || 0.0}</span>
+                  <span>${1.0 || 0.0} credit/min</span>
                 </li>
                 <li className="flex gap-5">
                   <span className="font-bold">Outbound:</span>
-                  <span>${1.2 || 0.0}</span>
+                  <span>${1.0 || 0.0}credit/min</span>
                 </li>
               </ul>
             </div>
@@ -209,11 +209,11 @@ const Content = () => {
               <ul className=" list-disc px-5">
                 <li className="flex gap-5">
                   <span className="font-bold">Inbound:</span>
-                  <span>${"1.2" || 0.0}</span>
+                  <span>${"1.0" || 0.0} credit/sms</span>
                 </li>
                 <li className="flex gap-5">
                   <span className="font-bold">Outbound:</span>
-                  <span>${"1.2" || 0.0}</span>
+                  <span>${"1.0" || 0.0} credit/sms</span>
                 </li>
               </ul>
             </div>
