@@ -8,13 +8,15 @@ import ReactSelectField from "../../components/FormFields/ReactSelectField/React
 import Modal from "../../components/Modal";
 import StripePayment from "../../components/payment/PaymentForm";
 import { createPaymentIntendApi } from "../../redux/services/subscription";
-import { updateWalletApi } from "../../redux/services/wallet";
+import { addWalletApi, updateWalletApi } from "../../redux/services/wallet";
 import { useDispatch, useSelector } from "react-redux";
 import _ from "lodash";
 import { getWalletApi } from "../../redux/services/wallet";
 import { getLogsApi } from "../../redux/services/walletLogs";
 const Content = () => {
   const {
+    reset,
+    watch,
     handleSubmit,
     control,
     formState: { errors },
@@ -28,7 +30,7 @@ const Content = () => {
   const handleClose = () => {
     setIsOpen(false);
   };
-
+  const amountWatcher = watch("amount");
   // const logs = [
   //   {
   //     id: 1,
@@ -90,9 +92,10 @@ const Content = () => {
   };
   const afterPayment = async () => {
     const data = {
-      credit: 20.0,
+      credit: parseFloat(amountWatcher),
+      user_id: user_id,
     };
-    await dispatch(updateWalletApi(token, data, user_id));
+    await dispatch(addWalletApi(token, data));
     setIsOpen(false);
   };
   useEffect(() => {
@@ -112,7 +115,7 @@ const Content = () => {
               <div>
                 <Heading
                   className="font-extrabold font-mono text-3xl"
-                  text={"$30.00"}
+                  text={wallet?.credit + " Credits"}
                 />
                 <p className="text-sm">You can add more credit .</p>
               </div>
@@ -142,7 +145,7 @@ const Content = () => {
                   </div>
                   <div className="">
                     <Button type="submit" className="py-3">
-                      Add Transaction
+                      Add Credits
                     </Button>
                   </div>
                 </div>
@@ -190,17 +193,17 @@ const Content = () => {
               />
             </div>
           </div>
-          <div className="grid lg:grid-cols-2 p-5">
+          <div className="grid lg:grid-cols-2 p-5 ">
             <div className="">
               <div className="font-bold text-xl">SMS</div>
               <ul className=" list-disc px-5">
                 <li className="flex gap-5">
                   <span className="font-bold">Inbound:</span>
-                  <span>${1.0 || 0.0} credit/min</span>
+                  <span>{"1"} credit/min</span>
                 </li>
                 <li className="flex gap-5">
                   <span className="font-bold">Outbound:</span>
-                  <span>${1.0 || 0.0}credit/min</span>
+                  <span>{"1"} credit/min</span>
                 </li>
               </ul>
             </div>
@@ -209,11 +212,11 @@ const Content = () => {
               <ul className=" list-disc px-5">
                 <li className="flex gap-5">
                   <span className="font-bold">Inbound:</span>
-                  <span>${"1.0" || 0.0} credit/sms</span>
+                  <span>{"1"} credit/sms</span>
                 </li>
                 <li className="flex gap-5">
                   <span className="font-bold">Outbound:</span>
-                  <span>${"1.0" || 0.0} credit/sms</span>
+                  <span>{"1"} credit/sms</span>
                 </li>
               </ul>
             </div>

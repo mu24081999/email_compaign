@@ -28,7 +28,7 @@ export const addPaymentRec = (token, data) => async (dispatch) => {
           return dispatch(invalidRequest(response.data.message));
         }
         dispatch(addPayment(response.data.message));
-        toast.success(response.data.message);
+        toast.success("Payment Success");
         dispatch(login(response.data.data.userData));
       });
     return response;

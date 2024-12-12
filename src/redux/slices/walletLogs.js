@@ -25,7 +25,7 @@ export const logsSchema = createSlice({
       state.error = "";
     },
     getLogs: (state, action) => {
-      state.message = action.payload;
+      state.logs = action.payload;
       state.isLoading = false;
       state.error = "";
     },

@@ -5,6 +5,7 @@ import { getCallTokenApi } from "../../redux/services/twilio";
 import { Device } from "@twilio/voice-sdk";
 import _ from "lodash";
 import { toast } from "react-toastify";
+import { getWalletApi } from "../../redux/services/wallet";
 const CalllingContext = ({ children }) => {
   const USER_STATE = {
     CONNECTING: "Connecting",
@@ -21,12 +22,12 @@ const CalllingContext = ({ children }) => {
   };
   const dispatch = useDispatch();
   //Events
-  const { user, token } = useSelector((state) => state.auth);
+  const { user, token, user_id } = useSelector((state) => state.auth);
   const { callToken } = useSelector((state) => state.twilio);
+  const { wallet } = useSelector((state) => state.wallet);
   const [callMuted, setCallMuted] = useState(false);
   const [device, setDevice] = useState(null);
   const [connection, setConnection] = useState(null);
-  console.log("🚀 ~ CalllingContext ~ connection:", connection);
   const [inputValue, setInputValue] = useState("");
   const [userState, setUserState] = useState(USER_STATE.READY);
   const [incoming, setIncoming] = useState(false);
@@ -101,8 +102,9 @@ const CalllingContext = ({ children }) => {
         twiml_app_sid: user.twiml_app_sid,
       })
     );
+    dispatch(getWalletApi(token, user_id));
     return () => {};
-  }, [token, user, dispatch]);
+  }, [token, user, dispatch, selectedPhoneNumber, user_id]);
   //Callback
   useEffect(() => {
     init();
@@ -134,6 +136,10 @@ const CalllingContext = ({ children }) => {
   const handleMakeCall = async () => {
     if (selectedPhoneNumber === null) {
       toast.error("Please configure your phone number to make call.");
+    } else if (wallet?.credit < 3) {
+      return toast.error(
+        "You have insufficient credit to make this call. Please update your wallet and try again."
+      );
     } else {
       const params = {
         To: inputValue, // The recipient's phone number
