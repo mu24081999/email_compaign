@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from "react";
 import DarkModeSwitcher from "./DarkmodeSwitcher";
 import { Link, useLocation } from "react-router-dom";
-import { MdCall, MdOutlineDashboard, MdOutlineSms } from "react-icons/md";
+import {
+  MdCall,
+  MdOutlineDashboard,
+  MdOutlineSms,
+  MdOutlineVerifiedUser,
+} from "react-icons/md";
 import { TbTemplate } from "react-icons/tb";
 import { logoutUser } from "../redux/services/auth";
 import { useDispatch, useSelector } from "react-redux";
@@ -97,6 +102,11 @@ const SidebarWithNavbar = ({ component }) => {
       name: "SMS Campaigns",
       link: "/sms",
       icon: MdOutlineSms,
+    },
+    {
+      name: "A2P Verification",
+      link: "/a2p-verification",
+      icon: MdOutlineVerifiedUser,
     },
     {
       name: "Phone Numbers",

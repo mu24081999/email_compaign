@@ -115,7 +115,7 @@ const Content = () => {
               <div>
                 <Heading
                   className="font-extrabold font-mono text-3xl"
-                  text={wallet?.credit + " Credits"}
+                  text={(wallet?.credit || 0) + " Credits"}
                 />
                 <p className="text-sm">You can add more credit .</p>
               </div>

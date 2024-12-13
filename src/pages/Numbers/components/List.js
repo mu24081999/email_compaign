@@ -121,10 +121,10 @@ const List = ({
                         label: "Local",
                         value: "local",
                       },
-                      {
-                        label: "Toll Free",
-                        value: "tollFree",
-                      },
+                      // {
+                      //   label: "Toll Free",
+                      //   value: "tollFree",
+                      // },
                     ]}
                   />
                 </div>

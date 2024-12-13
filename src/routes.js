@@ -29,6 +29,7 @@ import SMS from "./pages/SMS/SMS";
 import AddSMSCampaign from "./pages/SMS/components/AddCampaign/AddCampaign";
 import ChildSMSCampaign from "./pages/SMS/components/ChildCompaign/Compaign";
 import Wallet from "./pages/Wallet";
+import A2P from "./pages/A2P";
 const router = (isAuthenticated, isValid) => {
   const routes = [
     {
@@ -67,6 +68,16 @@ const router = (isAuthenticated, isValid) => {
       element: (
         <PrivateRoute isAuthenticated={isAuthenticated} isValid={isValid}>
           <DripCompaign />
+        </PrivateRoute>
+      ),
+      children: [],
+      breadcrumb: "email-template",
+    },
+    {
+      path: "/a2p-verification",
+      element: (
+        <PrivateRoute isAuthenticated={isAuthenticated} isValid={isValid}>
+          <A2P />
         </PrivateRoute>
       ),
       children: [],

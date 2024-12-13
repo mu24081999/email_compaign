@@ -22,22 +22,15 @@ const EmailEditorComponent = () => {
     control,
     formState: { errors },
   } = useForm();
-  const {
-    emailEditorRef,
-    exportHtml,
-    isCollapsed,
-    loading,
-    setLoading,
-    editorStyle,
-  } = useMain(); // Using context here
+  const { isCollapsed } = useMain(); // Using context here
 
   const { user_id, token, user } = useSelector((state) => state.auth);
   const { templates } = useSelector((state) => state.template);
-  // const emailEditorRef = useRef();
+  const emailEditorRef = useRef();
   const dispatch = useDispatch();
   const [editorHtml, setEditorHtml] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
-  // const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
   const [selectedContent, setSelectedContent] = useState({});
   const [showSlides, setShowSlides] = useState(true);
   // Placeholder Data for testing (you can use dynamic user data instead)

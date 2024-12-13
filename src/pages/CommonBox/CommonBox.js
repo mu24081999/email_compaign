@@ -79,15 +79,17 @@ const CommonBox = () => {
       component={
         <main className="h-[87vh] flex w-full shadow-lg rounded border">
           <div>
-            <div className="text-center border bg-white dark:bg-gray-800 p-[21px] font-extrabold text-xl">
-              Common-Box
-            </div>
+            <Heading
+              text={"Common-Box"}
+              className="bg-white p-5 border text dark:bg-gray-800 font-extrabold"
+            />
             <SidebarCom setCampaignData={handleCampaignDataFromChild} />
           </div>
           <section className="flex flex-col w-4/12 bg-gray-50  dark:bg-gray-800 border">
-            <div className="text-center border bg-white dark:bg-gray-800 p-[20px] font-extrabold text-xl">
-              Inbox
-            </div>
+            <Heading
+              text={"Inbox"}
+              className="bg-white p-5 border text dark:bg-gray-800 font-extrabold"
+            />
             {isLoading ? (
               <SidebarSkeleton />
             ) : (
@@ -146,9 +148,10 @@ const CommonBox = () => {
             )}
           </section>
           <section className="w-6/12 flex flex-col bg-gray-50 border dark:bg-gray-800">
-            <div className="text-center border bg-white dark:bg-gray-800 p-[2vh] font-extrabold text-xl">
-              {selectedReply?.subject || "Details"}
-            </div>
+            <Heading
+              text={selectedReply?.subject || "Details"}
+              className="bg-white p-5 border text dark:bg-gray-800 font-extrabold"
+            />
             {selectedReply?.from ? (
               <div className="px-4">
                 <div className="flex justify-between items-center h-20 border mb-8 mt-5 px-5 shadow-lg rounded-xl ">
