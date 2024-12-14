@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import InputField from "../../components/FormFields/InputField/InputField";
 import ReactSelectField from "../../components/FormFields/ReactSelectField/ReactSelectField";
 import Heading from "../../components/Heading";
 import Button from "../../components/Button";
+import Modal from "../../components/Modal";
+import StripePayment from "../../components/payment/PaymentForm";
+import { useSelector } from "react-redux";
 
 const A2P = () => {
   const {
@@ -11,7 +14,42 @@ const A2P = () => {
     control,
     formState: { errors },
   } = useForm();
-  const a2pverification = () => {};
+  const a2pverification = (formData) => {
+    const data = {
+      user_id: user_id,
+      username: user?.firstname + " " + user?.lastname,
+      legal_business_name: formData?.legal_business_name,
+      business_type: formData?.business_type?.value,
+      business_registration_id_type:
+        formData?.business_registration_id_type?.value,
+      business_reg_no: formData?.business_reg_no,
+      business_industry: formData?.business_industry?.value,
+      website_url: formData?.website_url,
+      rigion: formData?.rigion,
+      street: formData?.street,
+      city: formData?.city,
+      postal_code: formData?.postal_code,
+      country: formData?.country?.value,
+      name: "John Doe",
+      email: user?.email,
+      // phone_number: "+1234567890",
+      brand_type: formData?.brand_type?.label,
+      amount_paid: "100.00",
+      status: "pending",
+      payment_status: "pending",
+    };
+    console.log("A2P: ", data);
+  };
+  const [isOpen, setIsOpen] = useState(false);
+  const { paymentIntend } = useSelector((state) => state.subscription);
+  const { token, user_id, user } = useSelector((state) => state.auth);
+  const handleClose = () => {
+    setIsOpen(false);
+  };
+  const afterPayment = async () => {
+    const data = {};
+    setIsOpen(false);
+  };
   return (
     <div>
       <div className="w-1/2 m-auto">
@@ -402,14 +440,16 @@ const A2P = () => {
                 options={[
                   {
                     label:
-                      "Low Volume Standard Brand $10 one time fee. 600 sms per day",
-                    value: "standard",
+                      "Low Volume Standard Brand $25 one time fee. 600 sms per day",
+                    value:
+                      "Low Volume Standard Brand $25 one time fee. 600 sms per day",
                   },
-                  // {
-                  //   label:
-                  //     "Standard $44 one type fee. 2000-20000 sms per day.",
-                  //   value: "enterprice",
-                  // },
+                  {
+                    label:
+                      "Standard $120 one type fee. 2000-20000 sms per day.",
+                    value:
+                      "Standard $120 one type fee. 2000-20000 sms per day.",
+                  },
                 ]}
                 rules={{
                   required: {
@@ -427,6 +467,26 @@ const A2P = () => {
             </Button>
           </div>
         </form>
+      </div>
+      <div>
+        {/* Modal Component */}
+        <Modal
+          isOpen={isOpen}
+          onClose={handleClose}
+          title="Payment Form"
+          body=<StripePayment
+            userId={user_id}
+            amount={paymentIntend?.amount}
+            currency={"usd"}
+            clientSecret={paymentIntend?.client_secret}
+            afterPayment={afterPayment}
+          />
+          noStartMargin={true}
+          // onSave={handleSave}
+          saveButtonText="Save Changes"
+          closeButtonText="Dismiss"
+          size="md"
+        />
       </div>
     </div>
   );

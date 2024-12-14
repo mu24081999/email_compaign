@@ -21,7 +21,7 @@ app.use((req, res, next) => {
     req.hostname === "127.0.0.1" ||
     req.hostname === "146.190.175.199" ||
     req.hostname === "app.senderside.com"
-      ? "build"
+      ? "build2"
       : req.hostname === "senderside.com" && "build2";
   const buildPath = path.join(__dirname, buildDir);
 

@@ -107,28 +107,28 @@ const Dashboard = () => {
         <DashboardCard
           icon={<FaRegEnvelope color="blue" size={30} />}
           heading={"Total Emails"}
-          value={analytics?.leads}
+          value={analytics?.leads || "0"}
         />
         <DashboardCard
           icon={<BsEnvelopePlus color="gold" size={30} />}
           heading={"Email Sent"}
-          value={analytics?.sent}
+          value={analytics?.sent || "0"}
         />
         <DashboardCard
           icon={<BsEnvelopeCheck color="indigo" size={30} />}
           heading={"Emails Remaining"}
-          value={analytics?.remaining}
+          value={analytics?.remaining || 0}
         />
         <DashboardCard
           icon={<FaRegEnvelopeOpen color="cyan" size={30} />}
           heading={"Emails Opened"}
-          value={analytics?.opens}
+          value={analytics?.opens || 0}
         />
 
         <DashboardCard
           icon={<BsEnvelopeSlash color="red" size={30} />}
           heading={"Emails Bounce"}
-          value={analytics?.bounce}
+          value={analytics?.bounce || 0}
         />
         <DashboardCard
           icon={<BsEnvelopeOpenHeart color="orange" size={30} />}

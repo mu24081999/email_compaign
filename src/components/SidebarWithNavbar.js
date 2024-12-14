@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import DarkModeSwitcher from "./DarkmodeSwitcher";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   MdCall,
   MdOutlineDashboard,
@@ -33,9 +33,11 @@ import { PiSignOutBold } from "react-icons/pi";
 import { RiContactsBook3Line } from "react-icons/ri";
 import useCalling from "../context/CallingContext/useCalling";
 import { GrValidate } from "react-icons/gr";
+import { GiSecretBook } from "react-icons/gi";
 
 const SidebarWithNavbar = ({ component }) => {
   const { incoming } = useCalling();
+  const navigateTo = useNavigate();
   const { isCollapsed, setIsCollapsed_ } = useMain();
   const location = useLocation();
   const dispatch = useDispatch();
@@ -46,6 +48,9 @@ const SidebarWithNavbar = ({ component }) => {
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
   const setDarkModeFunc = (data) => {
     setDarkMode(data);
+  };
+  const navigate = (link) => {
+    navigateTo(link);
   };
   const sidebarItems = [
     {
@@ -128,6 +133,7 @@ const SidebarWithNavbar = ({ component }) => {
       link: "/account-settings",
       icon: FaCogs,
     },
+
     // {
     //   name: "Account Settings",
     //   link: "/account-settings",
@@ -151,6 +157,12 @@ const SidebarWithNavbar = ({ component }) => {
         name: user?.username,
         icon: <FaRegUserCircle size={30} />,
         description: user?.email,
+      },
+      {
+        name: "Privacy Policy",
+        type: "button",
+        onClick: () => navigateTo("/privacy-policy"),
+        icon: <GiSecretBook size={25} />,
       },
       {
         name: "Logout",

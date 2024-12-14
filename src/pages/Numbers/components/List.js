@@ -83,87 +83,84 @@ const List = ({
   };
   return (
     <div>
-      {isLoading ? (
+      {/* {isLoading ? (
         <Loader />
-      ) : (
-        <div className="px-3">
-          <div className="">
-            <Heading
-              text={"Search Parameters"}
-              className="font-extrabold text-xl text-center py-3"
-            />
-            <form onSubmit={handleSubmit(handleFormSubmit)}>
-              <div className="grid grid-cols-3 gap-5">
+      ) : ( */}
+      <div className="px-3">
+        <div className="">
+          <Heading
+            text={"Search Parameters"}
+            className="font-extrabold text-xl text-center py-3"
+          />
+          <form onSubmit={handleSubmit(handleFormSubmit)}>
+            <div className="grid grid-cols-3 gap-5">
+              <div>
+                <ReactSelectField
+                  name="country"
+                  placeholder="Country"
+                  control={control}
+                  errors={errors}
+                  label="Country"
+                  options={[
+                    {
+                      label: "United States - US",
+                      value: "US",
+                    },
+                  ]}
+                />
+              </div>
+              <div>
+                <ReactSelectField
+                  name="number_type"
+                  placeholder="Number Type"
+                  control={control}
+                  errors={errors}
+                  label="Number Type"
+                  options={[
+                    {
+                      label: "Local",
+                      value: "local",
+                    },
+                    // {
+                    //   label: "Toll Free",
+                    //   value: "tollFree",
+                    // },
+                  ]}
+                />
+              </div>
+              <div>
                 <div>
-                  <ReactSelectField
-                    name="country"
-                    placeholder="Country"
+                  <Heading text={"Campabilities"} className="font-extrabold" />
+                </div>
+                <div className=" items-center h-5 grid grid-cols-4">
+                  <Checkbox
+                    name="voice"
                     control={control}
                     errors={errors}
-                    label="Country"
-                    options={[
-                      {
-                        label: "United States - US",
-                        value: "US",
-                      },
-                    ]}
+                    label="Voice"
                   />
-                </div>
-                <div>
-                  <ReactSelectField
-                    name="number_type"
-                    placeholder="Number Type"
+                  <Checkbox
+                    name="sms"
                     control={control}
                     errors={errors}
-                    label="Number Type"
-                    options={[
-                      {
-                        label: "Local",
-                        value: "local",
-                      },
-                      // {
-                      //   label: "Toll Free",
-                      //   value: "tollFree",
-                      // },
-                    ]}
+                    label="SMS"
                   />
-                </div>
-                <div>
-                  <div>
-                    <Heading
-                      text={"Campabilities"}
-                      className="font-extrabold"
-                    />
-                  </div>
-                  <div className=" items-center h-5 grid grid-cols-4">
-                    <Checkbox
-                      name="voice"
-                      control={control}
-                      errors={errors}
-                      label="Voice"
-                    />
-                    <Checkbox
-                      name="sms"
-                      control={control}
-                      errors={errors}
-                      label="SMS"
-                    />
-                    <Checkbox
-                      name="mms"
-                      control={control}
-                      errors={errors}
-                      label="MMS"
-                    />
-                    {/* <Checkbox
+                  <Checkbox
+                    name="mms"
+                    control={control}
+                    errors={errors}
+                    label="MMS"
+                  />
+                  {/* <Checkbox
                       name="fax"
                       control={control}
                       errors={errors}
                       label="Fax"
                     /> */}
-                  </div>
                 </div>
+              </div>
 
-                {/* 
+              {/* 
                 <div>
                   <p className="font-extrabold pb-2">Area Code</p>
                   <InputField
@@ -174,28 +171,28 @@ const List = ({
                     label="Area Code"
                   />
                 </div> */}
-              </div>
-              <div className="py-3">
-                <Button type="submit" className="py-3">
-                  Search
-                </Button>
-              </div>
-            </form>
-          </div>
-          <div>
-            {tableData?.length > 0 ? (
-              <Table
-                columns={columns}
-                pagination={false}
-                data={tableData}
-                actions={false}
-              />
-            ) : (
-              <div className="text-center bg-white py-5">No Numbers Found</div>
-            )}
-          </div>
+            </div>
+            <div className="py-3">
+              <Button type="submit" className="py-3">
+                Search
+              </Button>
+            </div>
+          </form>
         </div>
-      )}
+        <div>
+          {tableData?.length > 0 ? (
+            <Table
+              columns={columns}
+              pagination={false}
+              data={tableData}
+              actions={false}
+            />
+          ) : (
+            <div className="text-center bg-white py-5">No Numbers Found</div>
+          )}
+        </div>
+      </div>
+      {/* )} */}
     </div>
   );
 };

@@ -30,6 +30,7 @@ import AddSMSCampaign from "./pages/SMS/components/AddCampaign/AddCampaign";
 import ChildSMSCampaign from "./pages/SMS/components/ChildCompaign/Compaign";
 import Wallet from "./pages/Wallet";
 import A2P from "./pages/A2P";
+import Privacy from "./pages/Privacy";
 const router = (isAuthenticated, isValid) => {
   const routes = [
     {
@@ -39,6 +40,11 @@ const router = (isAuthenticated, isValid) => {
           <Dashboard />
         </PrivateRoute>
       ), // Protect the Dashboard route    children: [],
+      breadcrumb: "Dashboard",
+    },
+    {
+      path: "/privacy-policy",
+      element: <Privacy />, // Protect the Dashboard route    children: [],
       breadcrumb: "Dashboard",
     },
     {

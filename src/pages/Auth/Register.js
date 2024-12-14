@@ -150,7 +150,7 @@ const Register = () => {
                   name="agree"
                   control={control}
                   errors={errors}
-                  label="By signing up, you agree to our Privacy Policy,Cookie Policy and Terms of Use"
+                  // label="By signing up, you agree to our Privacy Policy,Cookie Policy and Terms of Use"
                   rules={{
                     required: {
                       value: true,
@@ -158,6 +158,13 @@ const Register = () => {
                     },
                   }}
                 />
+                <div>
+                  By signing up, you agree to our{" "}
+                  <Link className="text-blue-500" to={"/privacy-policy"}>
+                    Privacy Policy
+                  </Link>
+                  ,Cookie Policy and Terms of Use
+                </div>
               </div>
               <Button type="submit" loading={isLoading} className="py-3">
                 Sign Up

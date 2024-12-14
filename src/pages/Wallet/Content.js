@@ -23,6 +23,7 @@ const Content = () => {
   } = useForm();
   const dispatch = useDispatch();
   const { paymentIntend } = useSelector((state) => state.subscription);
+  console.log("🚀 ~ Content ~ paymentIntend:", paymentIntend);
   const { token, user_id } = useSelector((state) => state.auth);
   const { logs } = useSelector((state) => state.logs);
   const { wallet } = useSelector((state) => state.wallet);
@@ -31,57 +32,7 @@ const Content = () => {
     setIsOpen(false);
   };
   const amountWatcher = watch("amount");
-  // const logs = [
-  //   {
-  //     id: 1,
-  //     description: "Amount added to Wallet.",
-  //     amount: 100.0,
-  //     type: "plus",
-  //     date: "January 1, 2016",
-  //   },
-  //   {
-  //     id: 2,
-  //     description: "Amount deducted for Call.",
-  //     amount: 100.0,
-  //     type: "minus",
-  //     date: "January 1, 2016",
-  //   },
-  //   {
-  //     id: 2,
-  //     description: "Amount deducted for Call.",
-  //     amount: 100.0,
-  //     type: "minus",
-  //     date: "January 1, 2016",
-  //   },
-  //   {
-  //     id: 2,
-  //     description: "Amount deducted for Call.",
-  //     amount: 100.0,
-  //     type: "minus",
-  //     date: "January 1, 2016",
-  //   },
-  //   {
-  //     id: 2,
-  //     description: "Amount deducted for Call.",
-  //     amount: 100.0,
-  //     type: "minus",
-  //     date: "January 1, 2016",
-  //   },
-  //   {
-  //     id: 2,
-  //     description: "Amount deducted for Call.",
-  //     amount: 100.0,
-  //     type: "minus",
-  //     date: "January 1, 2016",
-  //   },
-  //   {
-  //     id: 2,
-  //     description: "Amount deducted for Call.",
-  //     amount: 100.0,
-  //     type: "minus",
-  //     date: "January 1, 2016",
-  //   },
-  // ];
+  const topups = [5, 10, 20, 50, 100];
   const handleAddTransaction = async (formData) => {
     dispatch(
       createPaymentIntendApi(token, {
@@ -91,8 +42,9 @@ const Content = () => {
     setIsOpen(true);
   };
   const afterPayment = async () => {
+    const credit = paymentIntend?.amount / 100;
     const data = {
-      credit: parseFloat(amountWatcher),
+      credit: credit,
       user_id: user_id,
     };
     await dispatch(addWalletApi(token, data));
@@ -104,7 +56,7 @@ const Content = () => {
   }, [user_id, token, dispatch]);
   return (
     <>
-      <div className="flex justify-center">
+      <div className="flex justify-center flex-wrap gap-5">
         <div className="flex flex-col gap-5">
           {/*  */}
           <div>
@@ -115,16 +67,16 @@ const Content = () => {
               <div>
                 <Heading
                   className="font-extrabold font-mono text-3xl"
-                  text={(wallet?.credit || 0) + " Credits"}
+                  text={"$" + (wallet?.credit || 0)}
                 />
-                <p className="text-sm">You can add more credit .</p>
+                <p className="text-sm">You can add more balance .</p>
               </div>
             </div>
           </div>
           <div>
-            <div className="flex gap-5 border rounded-xl p-5 bg-white dark:bg-gray-900 shadow">
+            <div className="flex gap-5 border flex-wrap rounded-xl p-5 bg-white dark:bg-gray-900 shadow">
               <form onSubmit={handleSubmit(handleAddTransaction)}>
-                <div className="grid grid-cols-3 gap-5  ">
+                <div className="flex flex-wrap justify-center gap-5  ">
                   <div className="col-span-2">
                     <InputField
                       name="amount"
@@ -145,7 +97,7 @@ const Content = () => {
                   </div>
                   <div className="">
                     <Button type="submit" className="py-3">
-                      Add Credits
+                      Add Balance
                     </Button>
                   </div>
                 </div>
@@ -153,22 +105,43 @@ const Content = () => {
             </div>
           </div>
         </div>
+        <div className="border rounded-xl p-5 bg-white dark:bg-gray-900">
+          <Heading
+            text={"Add Topup"}
+            className="text-center font-extrabold text-xl mb-5"
+          ></Heading>
+          <div className="flex gap-5 flex-wrap justify-center">
+            {topups?.map((amount, index) => (
+              <div
+                onClick={() => handleAddTransaction({ amount: amount })}
+                key={index}
+                className="text-center border bg-gray-100 p-8 text-xl font-extrabold  hover:bg-gray-50 dark:bg-gray-900 rounded-xl cursor-pointer"
+              >
+                {amount} Dollar
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
       <div className="pt-5 grid lg:grid-cols-2 sm:grid-cols-1 gap-5">
         <div>
-          <div className="flex flex-col gap-5 border rounded-xl p-5 bg-white dark:bg-gray-900 shadow">
+          <div className="flex flex-col gap-5 border rounded-xl p-5 bg-white dark:bg-gray-900 shadow h-[53vh]">
             <div className="font-extrabold text-xl">Credit Logs</div>
             <div className="overflow-scroll max-h-[55vh] dark:bg-gray-900">
-              {logs?.map((log, index) => (
-                <div key={index} className="px-5 py-8 border relative">
-                  <div className="font-bold">{log.description}</div>
-                  <div className="text-sm font-gray">{log?.date}</div>
-                  <div className="absolute right-5 top-10 font-extrabold text-xl ">
-                    <span>{log?.type === "plus" ? "+" : "-"}</span>$
-                    {log?.amount}
+              {logs?.length < 0 ? (
+                logs?.map((log, index) => (
+                  <div key={index} className="px-5 py-8 border relative">
+                    <div className="font-bold">{log.description}</div>
+                    <div className="text-sm font-gray">{log?.date}</div>
+                    <div className="absolute right-5 top-10 font-extrabold text-xl ">
+                      <span>{log?.type === "plus" ? "+" : "-"}</span>$
+                      {log?.amount}
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))
+              ) : (
+                <p>No Logs yet.</p>
+              )}
             </div>
           </div>
         </div>
@@ -193,31 +166,50 @@ const Content = () => {
               />
             </div>
           </div>
-          <div className="grid lg:grid-cols-2 p-5 ">
-            <div className="">
-              <div className="font-bold text-xl">SMS</div>
-              <ul className=" list-disc px-5">
-                <li className="flex gap-5">
+          <div className=" p-5 ">
+            <div className="border">
+              <div className="font-bold text-xl text-center bg-black dark:bg-gray-300 text-white dark:text-black p-2">
+                SMS
+              </div>
+              <ul className=" list-disc px-5 grid lg:grid-cols-2 sm:grid-cols-1 md:grid-cols-2 p-3 bg-gray-100">
+                <li className="flex gap-5 ">
                   <span className="font-bold">Inbound:</span>
-                  <span>{"1"} credit/min</span>
+                  <span>{"$0.02"}/sms</span>
                 </li>
-                <li className="flex gap-5">
+                <li className="flex gap-5 ">
                   <span className="font-bold">Outbound:</span>
-                  <span>{"1"} credit/min</span>
+                  <span>{"$0.03"}/sms</span>
                 </li>
               </ul>
             </div>
-            <div className="">
-              <div className="font-bold text-xl">Call</div>
-              <ul className=" list-disc px-5">
-                <li className="flex gap-5">
+            <div className="border">
+              <div className="font-bold text-xl text-center bg-black dark:bg-gray-300 text-white dark:text-black p-2">
+                Voice
+              </div>
+              <ul className=" list-disc px-5 grid lg:grid-cols-2 sm:grid-cols-1 md:grid-cols-2 p-3 bg-gray-100">
+                <li className="flex gap-5 ">
                   <span className="font-bold">Inbound:</span>
-                  <span>{"1"} credit/sms</span>
+                  <span>{"0,028"}/min</span>
                 </li>
-                <li className="flex gap-5">
+                <li className="flex gap-5 ">
                   <span className="font-bold">Outbound:</span>
-                  <span>{"1"} credit/sms</span>
+                  <span>{"0.028"}/min</span>
                 </li>
+              </ul>
+            </div>
+            <div className="border">
+              <div className="font-bold text-xl text-center bg-black dark:bg-gray-300 text-white dark:text-black p-2">
+                Phone Number
+              </div>
+              <ul className=" list-disc px-5 grid lg:grid-cols-2 sm:grid-cols-1 md:grid-cols-2 p-3 bg-gray-100">
+                <li className="flex gap-5 ">
+                  <span className="font-bold">Local Number:</span>
+                  <span>{"$3.5"}</span>
+                </li>
+                {/* <li className="flex gap-5 ">
+                  <span className="font-bold">Toll Free:</span>
+                  <span>{"1"} credit/min</span>
+                </li> */}
               </ul>
             </div>
           </div>

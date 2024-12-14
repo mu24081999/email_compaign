@@ -108,7 +108,6 @@ const Pricing = ({ isValid }) => {
         "Free Call Logs & Recording",
         "SMS Marketing",
         "24/7 Email Support",
-        "24/7 Email Support",
       ],
     },
     advance: {
