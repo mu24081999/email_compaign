@@ -8,7 +8,7 @@ import ReactSelectField from "../../components/FormFields/ReactSelectField/React
 import Modal from "../../components/Modal";
 import StripePayment from "../../components/payment/PaymentForm";
 import { createPaymentIntendApi } from "../../redux/services/subscription";
-import { addWalletApi, updateWalletApi } from "../../redux/services/wallet";
+import { addWalletApi } from "../../redux/services/wallet";
 import { useDispatch, useSelector } from "react-redux";
 import _ from "lodash";
 import { getWalletApi } from "../../redux/services/wallet";
@@ -32,7 +32,7 @@ const Content = () => {
     setIsOpen(false);
   };
   const amountWatcher = watch("amount");
-  const topups = [5, 10, 20, 50, 100];
+  const topups = [10, 20, 50, 100];
   const handleAddTransaction = async (formData) => {
     dispatch(
       createPaymentIntendApi(token, {
@@ -56,8 +56,8 @@ const Content = () => {
   }, [user_id, token, dispatch]);
   return (
     <>
-      <div className="flex justify-center flex-wrap gap-5">
-        <div className="flex flex-col gap-5">
+      <div className="flex justify-center gap-5">
+        <div className="flex flex-wrap flex-col gap-5">
           {/*  */}
           <div>
             <div className="flex gap-5 border rounded-xl p-5 bg-white dark:bg-gray-900 shadow ">
@@ -117,7 +117,7 @@ const Content = () => {
                 key={index}
                 className="text-center border bg-gray-100 p-8 text-xl font-extrabold  hover:bg-gray-50 dark:bg-gray-900 rounded-xl cursor-pointer"
               >
-                {amount} Dollar
+                ${amount}
               </div>
             ))}
           </div>

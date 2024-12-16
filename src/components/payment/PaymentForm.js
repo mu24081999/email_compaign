@@ -7,15 +7,11 @@ import {
   useStripe,
   useElements,
 } from "@stripe/react-stripe-js";
-import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { addPaymentRec } from "../../redux/services/payment";
-
-const stripePromise = loadStripe(
-  process.env.REACT_APP_STRIPE_PUBLISH_KEY_SANDBOX
-);
+const stripe_public_key = process.env.REACT_APP_STRIPE_PUBLISH_KEY_SANDBOX;
+const stripePromise = loadStripe(stripe_public_key);
 const PaymentForm = ({ clientSecret, afterPayment }) => {
-  console.log("🚀 ~ PaymentForm ~ clientSecret:", clientSecret);
   const { token, user_id } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const stripe = useStripe();
