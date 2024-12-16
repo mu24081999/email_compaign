@@ -145,7 +145,7 @@ const Register = () => {
                   }}
                 />
               </div>
-              <div>
+              <div className="flex">
                 <Checkbox
                   name="agree"
                   control={control}
@@ -163,7 +163,7 @@ const Register = () => {
                   <Link className="text-blue-500" to={"/privacy-policy"}>
                     Privacy Policy
                   </Link>
-                  ,Cookie Policy and Terms of Use
+                  , Cookie Policy and Terms of Use
                 </div>
               </div>
               <Button type="submit" loading={isLoading} className="py-3">

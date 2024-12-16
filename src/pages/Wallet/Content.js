@@ -171,7 +171,7 @@ const Content = () => {
               <div className="font-bold text-xl text-center bg-black dark:bg-gray-300 text-white dark:text-black p-2">
                 SMS
               </div>
-              <ul className=" list-disc px-5 grid lg:grid-cols-2 sm:grid-cols-1 md:grid-cols-2 p-3 bg-gray-100">
+              <ul className=" list-disc px-5 grid lg:grid-cols-2 sm:grid-cols-1 md:grid-cols-2 p-3 bg-gray-100 dark:bg-gray-900">
                 <li className="flex gap-5 ">
                   <span className="font-bold">Inbound:</span>
                   <span>{"$0.02"}/sms</span>
@@ -186,7 +186,7 @@ const Content = () => {
               <div className="font-bold text-xl text-center bg-black dark:bg-gray-300 text-white dark:text-black p-2">
                 Voice
               </div>
-              <ul className=" list-disc px-5 grid lg:grid-cols-2 sm:grid-cols-1 md:grid-cols-2 p-3 bg-gray-100">
+              <ul className=" list-disc px-5 grid lg:grid-cols-2 sm:grid-cols-1 md:grid-cols-2 p-3 bg-gray-100 dark:bg-gray-900">
                 <li className="flex gap-5 ">
                   <span className="font-bold">Inbound:</span>
                   <span>{"0,028"}/min</span>
@@ -201,7 +201,7 @@ const Content = () => {
               <div className="font-bold text-xl text-center bg-black dark:bg-gray-300 text-white dark:text-black p-2">
                 Phone Number
               </div>
-              <ul className=" list-disc px-5 grid lg:grid-cols-2 sm:grid-cols-1 md:grid-cols-2 p-3 bg-gray-100">
+              <ul className=" list-disc px-5 grid lg:grid-cols-2 sm:grid-cols-1 md:grid-cols-2 p-3 bg-gray-100 dark:bg-gray-900">
                 <li className="flex gap-5 ">
                   <span className="font-bold">Local Number:</span>
                   <span>{"$3.5"}</span>
