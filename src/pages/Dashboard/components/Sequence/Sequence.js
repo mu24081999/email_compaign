@@ -20,6 +20,7 @@ import { FaEye, FaTrashAlt } from "react-icons/fa";
 import Modal from "../../../../components/Modal";
 import ModalBody from "./components/ModalBody";
 import useMain from "../../../../context/Main/useMain";
+import Tabs from "../../../../components/Tabs";
 const Sequence = () => {
   const {
     handleSubmit,
@@ -90,18 +91,6 @@ const Sequence = () => {
       return jsonNode;
     };
     return parseNode(doc.body);
-  };
-
-  // Function to set HTML value
-  const setEditorValueWithHTML = (html) => {
-    const design = htmlToJSON(html?.content);
-    console.log("🚀 ~ setEditorValueWithHTML ~ design:", design);
-
-    emailEditorRef.current.editor.loadDesign(design);
-    // if (emailEditorRef.current && emailEditorRef.current.editor) {
-    // } else {
-    //   console.error("Editor instance not ready");
-    // }
   };
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -208,20 +197,39 @@ const Sequence = () => {
   const deleteSequence = (seqId) => {
     dispatch(deleteSequenceRec(token, seqId, user_id));
   };
-  return (
-    <Layout
-      component={
-        <>
-          <form
-            onSubmit={handleSubmit(addSequence)}
-            className="flex flex-col gap-5"
-          >
-            <InputField
-              name="subject"
+  const tabsData = [
+    {
+      id: "add_sequence",
+      label: "Add Sequence",
+      content: (
+        <form
+          onSubmit={handleSubmit(addSequence)}
+          className="flex flex-col gap-5"
+        >
+          <InputField
+            name="subject"
+            control={control}
+            label="Subject"
+            errors={errors}
+            svg={<MdOutlineSubject />}
+            rules={{
+              required: {
+                value: true,
+                message: "Field required!",
+              },
+            }}
+          />
+          <div>
+            <TextEditor
+              defaultValue={
+                currentTemplate !== undefined
+                  ? currentTemplate?.content
+                  : "<p>Please Add Your Content</p>"
+              }
+              label="Sequence"
+              name="content"
               control={control}
-              label="Subject"
               errors={errors}
-              svg={<MdOutlineSubject />}
               rules={{
                 required: {
                   value: true,
@@ -229,33 +237,22 @@ const Sequence = () => {
                 },
               }}
             />
-            <div>
-              <TextEditor
-                defaultValue={
-                  currentTemplate !== undefined
-                    ? currentTemplate?.content
-                    : "<p>Please Add Your Content</p>"
-                }
-                label="Sequence"
-                name="content"
-                control={control}
-                errors={errors}
-                rules={{
-                  required: {
-                    value: true,
-                    message: "Field required!",
-                  },
-                }}
-              />
-              <p>
-                Add firstname,lastname and email in the format {"{{firstname}}"}{" "}
-                to include in the sequence
-              </p>
-            </div>
-            <Button type="submit" className="py-2">
-              Submit
-            </Button>
-          </form>
+            <p>
+              Add firstname,lastname and email in the format {"{{firstname}}"}{" "}
+              to include in the sequence
+            </p>
+          </div>
+          <Button type="submit" className="py-2">
+            Submit
+          </Button>
+        </form>
+      ),
+    },
+    {
+      id: "sequence_list",
+      label: "Sequence List",
+      content: (
+        <>
           {showSlides && (
             <div className="py-5">
               <SwiperComponent length={3} slides={slides} />
@@ -276,6 +273,15 @@ const Sequence = () => {
               noStartMargin={isCollapsed}
             />
           </div>
+        </>
+      ),
+    },
+  ];
+  return (
+    <Layout
+      component={
+        <>
+          <Tabs tabsData={tabsData} />
         </>
       }
     />

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import InputField from "../../components/FormFields/InputField/InputField";
 import ReactSelectField from "../../components/FormFields/ReactSelectField/ReactSelectField";
@@ -6,14 +6,25 @@ import Heading from "../../components/Heading";
 import Button from "../../components/Button";
 import Modal from "../../components/Modal";
 import StripePayment from "../../components/payment/PaymentForm";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addVerificationApi,
+  getUserVerificationApi,
+  updateVerificationApi,
+} from "../../redux/services/verification";
+import { createPaymentIntendApi } from "../../redux/services/subscription";
 
 const A2P = () => {
   const {
     handleSubmit,
     control,
+    setValue,
     formState: { errors },
   } = useForm();
+  const { verification } = useSelector((state) => state.verification);
+  console.log("🚀 ~ A2P ~ verification:", verification);
+
+  const dispatch = useDispatch();
   const a2pverification = (formData) => {
     const data = {
       user_id: user_id,
@@ -30,15 +41,21 @@ const A2P = () => {
       city: formData?.city,
       postal_code: formData?.postal_code,
       country: formData?.country?.value,
-      name: "John Doe",
+      name: user?.firstname + " " + user?.lastname,
       email: user?.email,
       // phone_number: "+1234567890",
       brand_type: formData?.brand_type?.label,
-      amount_paid: "100.00",
+      amount_paid: "0.00",
       status: "pending",
       payment_status: "pending",
     };
-    console.log("A2P: ", data);
+    dispatch(addVerificationApi(token, data));
+    dispatch(
+      createPaymentIntendApi(token, {
+        amount: formData.brand_type.value * 100,
+      })
+    );
+    setIsOpen(true);
   };
   const [isOpen, setIsOpen] = useState(false);
   const { paymentIntend } = useSelector((state) => state.subscription);
@@ -47,8 +64,53 @@ const A2P = () => {
     setIsOpen(false);
   };
   const afterPayment = async () => {
-    const data = {};
+    const data = {
+      payment_status: "paid",
+      amount_paid: parseInt(paymentIntend?.amount) / 100,
+    };
+    dispatch(updateVerificationApi(token, data, user_id));
     setIsOpen(false);
+  };
+  useEffect(() => {
+    dispatch(getUserVerificationApi(token, user_id));
+  }, [token, user_id, dispatch]);
+
+  useEffect(() => {
+    if (verification) {
+      setValue("brand_type", {
+        label: verification.brand_type,
+      });
+      setValue("legal_business_name", verification.legal_business_name);
+      setValue("business_type", verification.business_type);
+      setValue("business_type", verification.business_type);
+      setValue("business_registration_id_type", {
+        label: verification.business_registration_id_type,
+      });
+      setValue("business_reg_no", verification.business_reg_no);
+      setValue("business_industry", {
+        label: verification.business_industry,
+      });
+      setValue("website_url", verification.website_url);
+      setValue("rigion", verification.rigion);
+      setValue("street", verification.street);
+      setValue("city", verification.city);
+      setValue("postal_code", verification.postal_code);
+      setValue("country", {
+        label: verification.country,
+      });
+    }
+  }, [verification, setValue]);
+  const verificationPayment = () => {
+    dispatch(
+      createPaymentIntendApi(token, {
+        amount:
+          verification.brand_type ===
+          "Low Volume Standard Brand $25 one time fee. 600 sms per day"
+            ? 2500
+            : 12000,
+      })
+    );
+    setIsOpen(true);
   };
   return (
     <div>
@@ -58,6 +120,18 @@ const A2P = () => {
             className="text-center font-extrabold text-2xl pt-3 pb-10"
             text={"US A2P 10DLC Registration"}
           />
+          {verification && verification?.payment_status === "pending" && (
+            <p className="px-3 py-2 bg-red-300 mb-2">
+              Please pay your A2P verification charges to confirm your
+              verifcation{" "}
+              <span
+                onClick={verificationPayment}
+                className="text-blue-500 cursor-pointer"
+              >
+                Pay
+              </span>
+            </p>
+          )}
         </div>
         <form onSubmit={handleSubmit(a2pverification)}>
           <div class="modal-body row">
@@ -441,14 +515,12 @@ const A2P = () => {
                   {
                     label:
                       "Low Volume Standard Brand $25 one time fee. 600 sms per day",
-                    value:
-                      "Low Volume Standard Brand $25 one time fee. 600 sms per day",
+                    value: 25,
                   },
                   {
                     label:
                       "Standard $120 one type fee. 2000-20000 sms per day.",
-                    value:
-                      "Standard $120 one type fee. 2000-20000 sms per day.",
+                    value: 120,
                   },
                 ]}
                 rules={{

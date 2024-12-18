@@ -31,6 +31,11 @@ export const verificationSlice = createSlice({
       state.isLoading = false;
       state.error = "";
     },
+    updateVerification: (state, action) => {
+      state.message = action.payload;
+      state.isLoading = false;
+      state.error = "";
+    },
   },
 });
 export default verificationSlice.reducer;
@@ -39,4 +44,5 @@ export const {
   invalidRequest,
   addVerification,
   getUserVerification,
+  updateVerification,
 } = verificationSlice.actions;

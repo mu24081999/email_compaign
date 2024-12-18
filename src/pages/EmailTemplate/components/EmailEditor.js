@@ -16,12 +16,14 @@ import Loader from "../../../components/Loader/Loader";
 import Modal from "../../../components/Modal";
 import ModalBody from "./ModalBody";
 import useMain from "../../../context/Main/useMain";
+import Tabs from "../../../components/Tabs";
 const EmailEditorComponent = () => {
   const {
     handleSubmit,
     control,
     formState: { errors },
   } = useForm();
+
   const { isCollapsed } = useMain(); // Using context here
 
   const { user_id, token, user } = useSelector((state) => state.auth);
@@ -148,79 +150,99 @@ const EmailEditorComponent = () => {
   const deleteTemplate = (tempId) => {
     dispatch(deleteTemplateRec(token, tempId, user_id));
   };
+  const tabsData = [
+    {
+      id: "add_template",
+      label: "Add New Template",
+      content: (
+        <div>
+          <div className="">
+            {/* Form for Adding a New Template */}
+            <form
+              onSubmit={handleSubmit(addTemplate)}
+              className=" space-y-6 bg-white border p-5 rounded-xl shadow-md"
+            >
+              {loading && <Loader />}
+              <div
+                className={`${
+                  loading ? "hidden" : ""
+                } relative overflow-hidden shadow-lg h-fit rounded`}
+              >
+                <EmailEditor
+                  ref={emailEditorRef}
+                  onReady={() => setLoading(false)}
+                  style={{
+                    maxWidth: "100%",
+                    overflow: "scroll",
+                    display: "flex",
+                    height: "65vh",
+                    margin: "0px",
+                  }}
+                />
+                <div className="h-16 w-[45.5vh] p-1 bg-white absolute bottom-0 right-0"></div>
+              </div>
+              <p>
+                Add firstname, lastname and email in the format{" "}
+                {"{{firstname}}"} to include in the sequence
+              </p>{" "}
+              <div className="flex">
+                <InputField
+                  name="title"
+                  label="Title"
+                  svg={<FaPlus />}
+                  control={control}
+                  errors={errors}
+                  rules={{
+                    required: {
+                      value: true,
+                      message: "Title is required!",
+                    },
+                  }}
+                />
+                <Button type="submit" className="py-3 min-w-[200px]">
+                  Add Template
+                </Button>
+              </div>
+            </form>
+          </div>
+        </div>
+      ),
+    },
 
+    {
+      id: "template_list",
+      label: "Template List",
+      content: (
+        <div>
+          {/* Template List Section */}
+          {showSlides && (
+            <div className="py-5">
+              <SwiperComponent slides={slides} length={2} />
+            </div>
+          )}
+
+          <div>
+            {/* Modal Component */}
+            <Modal
+              isOpen={isOpen}
+              onClose={handleClose}
+              title="Template Preview "
+              body=<ModalBody htmlContent={selectedContent} />
+              onSave={handleSave}
+              saveButtonText="Save Changes"
+              closeButtonText="Dismiss"
+              size="md"
+              noStartMargin={isCollapsed}
+            />
+          </div>
+        </div>
+      ),
+    },
+  ];
   return (
     <div className="">
       {/* Email Editor Section */}
-      <div className="">
-        {/* Form for Adding a New Template */}
-        <form
-          onSubmit={handleSubmit(addTemplate)}
-          className=" space-y-6 bg-white border p-5 rounded-xl shadow-md"
-        >
-          {loading && <Loader />}
-          <div
-            className={`${
-              loading ? "hidden" : ""
-            } relative overflow-hidden shadow-lg border rounded`}
-          >
-            <EmailEditor
-              ref={emailEditorRef}
-              onReady={() => setLoading(false)}
-              style={{
-                maxWidth: "100%",
-                overflow: "scroll",
-                display: "flex",
-                height: "75vh",
-              }}
-            />
-            <div className="h-16 w-[45.5vh] p-1 bg-white absolute bottom-0 right-0"></div>
-          </div>
-          <p>
-            Add firstname,lastname and email in the format {"{{firstname}}"} to
-            include in the sequence
-          </p>{" "}
-          <div className="flex">
-            <InputField
-              name="title"
-              label="Title"
-              svg={<FaPlus />}
-              control={control}
-              errors={errors}
-              rules={{
-                required: {
-                  value: true,
-                  message: "Title is required!",
-                },
-              }}
-            />
-            <Button type="submit" className="py-3 min-w-[200px]">
-              Add Template
-            </Button>
-          </div>
-        </form>
-      </div>
-      {/* Template List Section */}
-      {showSlides && (
-        <div className="py-5">
-          <SwiperComponent slides={slides} length={2} />
-        </div>
-      )}
-
-      <div>
-        {/* Modal Component */}
-        <Modal
-          isOpen={isOpen}
-          onClose={handleClose}
-          title="Template Preview "
-          body=<ModalBody htmlContent={selectedContent} />
-          onSave={handleSave}
-          saveButtonText="Save Changes"
-          closeButtonText="Dismiss"
-          size="md"
-          noStartMargin={isCollapsed}
-        />
-      </div>
+      <Tabs tabsData={tabsData} />
     </div>
   );
 };

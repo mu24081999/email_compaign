@@ -89,8 +89,7 @@ const Dashboard = () => {
   const columns = [
     { label: "Title", accessor: "title", type: "link" },
     { label: "Progress", accessor: "progress" }, // Example of nested accessor
-    { label: "Sent", accessor: "email_sent_counter" },
-    { label: "Open", accessor: "email_open_counter" },
+    { label: "Open", accessor: "openEmailCount" },
     // {
     //   label: "Actions",
     //   accessor: "actions",

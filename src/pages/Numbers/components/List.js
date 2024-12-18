@@ -53,7 +53,7 @@ const List = ({
           actions: [
             {
               color: "green",
-              loading: isLoading,
+              // loading: isLoading,
               label: "Claim Number",
               onClick: () => dispatch(claimPhoneNumberApi(token, params)),
             },
@@ -63,7 +63,7 @@ const List = ({
 
     setTableData(data);
     return () => {};
-  }, [availableNumbers, isLoading]);
+  }, [availableNumbers, isLoading, dispatch, token, user]);
   const handleFormSubmit = (data) => {
     const params = {
       accountSid: user.accountSid,

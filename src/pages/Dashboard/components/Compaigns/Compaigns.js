@@ -60,7 +60,7 @@ const Compaigns = () => {
             </div>
           ),
           status: compaign?.status || "pending",
-          email_open_counter: compaign?.email_open_counter || 0,
+          email_open_counter: compaign?.openEmailCount || 0,
           email_sent_counter: compaign?.email_sent_counter || 0,
           actions: [
             {
@@ -87,8 +87,8 @@ const Compaigns = () => {
     { label: "Title", accessor: "title", type: "link" },
     // { label: "Status", accessor: "status" },
     { label: "Progress", accessor: "progress" }, // Example of nested accessor
-    { label: "Sent", accessor: "email_sent_counter" },
-    { label: "Open", accessor: "email_open_counter" },
+    // { label: "Sent", accessor: "email_sent_counter" },
+    { label: "Open", accessor: "openEmailCount" },
   ];
 
   const deleteBulk = (ids) => {
@@ -107,13 +107,13 @@ const Compaigns = () => {
     <Layout
       component={
         <div>
-          <div className="pb-5">
+          <div className="pb-5 flex justify-end ">
             <Button
               onClick={() => navigateTo("/add-compaign")}
               size="lg"
-              className="py-1 flex"
+              className="py-3 flex"
             >
-              Add Compaign
+              Add New Compaign
             </Button>
           </div>
           <div>

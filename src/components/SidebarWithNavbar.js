@@ -39,6 +39,7 @@ const SidebarWithNavbar = ({ component }) => {
   const { incoming } = useCalling();
   const navigateTo = useNavigate();
   const { isCollapsed, setIsCollapsed_ } = useMain();
+
   const location = useLocation();
   const dispatch = useDispatch();
   const { token, user } = useSelector((state) => state.auth);
@@ -193,8 +194,9 @@ const SidebarWithNavbar = ({ component }) => {
     setIsCollapsed_(!isCollapsed);
   };
   useEffect(() => {
-    if (window.innerWidth <= "650px") setIsCollapsed_(false);
-    return () => {};
+    if (window.innerWidth <= 650) {
+      setIsCollapsed_(true);
+    }
   }, []);
   return (
     <div className="w-full">
@@ -202,9 +204,10 @@ const SidebarWithNavbar = ({ component }) => {
         <div className="px-3 py-3 lg:px-5 lg:pl-3">
           <div className="flex items-center justify-between">
             <div
-              className={`${
-                isCollapsed ? "w-18" : "w-64"
-              } flex items-center justify-between rtl:justify-end`}
+              className={`flex items-center justify-between rtl:justify-end transition-all duration-500 ease-in-out sm:translate-x-0`}
+              style={{
+                width: isCollapsed ? "6rem" : "16rem", // Dynamic width for smooth transitions
+              }}
             >
               <button
                 data-drawer-target="logo-sidebar"
@@ -228,6 +231,7 @@ const SidebarWithNavbar = ({ component }) => {
                   ></path>
                 </svg>
               </button>
+
               <Link to="/" className="flex ms-2">
                 {isCollapsed ? (
                   <img
@@ -243,21 +247,23 @@ const SidebarWithNavbar = ({ component }) => {
                   />
                 )}
               </Link>
-              <span className="float-end border p-1 rounded border-gray-800 bg-black ms-3">
-                {isCollapsed ? (
-                  <FaArrowRight
-                    color="white"
-                    size={18}
-                    onClick={handleCollapsed}
-                  />
-                ) : (
-                  <FaArrowLeft
-                    color="white"
-                    size={18}
-                    onClick={handleCollapsed}
-                  />
-                )}
-              </span>
+              {window.innerWidth >= 650 && (
+                <span className="float-end border p-1 rounded border-gray-800 bg-black ms-3">
+                  {isCollapsed ? (
+                    <FaArrowRight
+                      color="white"
+                      size={18}
+                      onClick={handleCollapsed}
+                    />
+                  ) : (
+                    <FaArrowLeft
+                      color="white"
+                      size={18}
+                      onClick={handleCollapsed}
+                    />
+                  )}
+                </span>
+              )}
             </div>
 
             <div className="flex items-center">
@@ -273,9 +279,12 @@ const SidebarWithNavbar = ({ component }) => {
       </nav>
       <aside
         id="logo-sidebar"
+        style={{
+          width: isCollapsed ? "4.5rem" : "16rem", // Dynamic width for smooth transitions
+        }}
         className={`fixed top-0 left-0 z-40 ${
           isCollapsed ? "w-18" : "w-64"
-        } h-screen pt-20 transition-all duration-500 bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700`}
+        } h-screen pt-20 transition-all duration-500 ease-in-out sm:translate-x-0 bg-white border-r border-gray-200  dark:bg-gray-800 dark:border-gray-700`}
         aria-label="Sidebar"
       >
         <div className="h-full pb-4 overflow-y-auto bg-white dark:bg-gray-800">
@@ -318,9 +327,7 @@ const SidebarWithNavbar = ({ component }) => {
           !isCollapsed ? "ml-64" : "ml-20"
         } p-3  h-screen overflow-scroll`}
       >
-        <div className="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14">
-          {component}
-        </div>
+        <div className="p-4 rounded-lg  mt-14">{component}</div>
       </div>
     </div>
   );

@@ -9,6 +9,7 @@ import {
   resetUserPasswordApi,
 } from "../../../../../redux/services/auth";
 import { useNavigate } from "react-router-dom";
+import Heading from "../../../../../components/Heading";
 const PasswordReset = () => {
   const {
     handleSubmit,
@@ -30,54 +31,54 @@ const PasswordReset = () => {
   };
 
   return (
-    <form
-      className="mt-8 gap-5 grid grid-cols-2"
-      onSubmit={handleSubmit(handleFormSubmit)}
-    >
-      <div>
-        <InputField
-          name="password"
-          type="password"
-          control={control}
-          svg={<MdPassword />}
-          errors={errors}
-          label="Password"
-          rules={{
-            required: {
-              value: true,
-              message: "Field required!",
-            },
-          }}
-        />
-      </div>
-      <div>
-        <InputField
-          name="confirmPassword"
-          type="password"
-          control={control}
-          svg={<MdPassword />}
-          errors={errors}
-          label="Confirm Password"
-          rules={{
-            required: {
-              value: true,
-              message: "Field required!",
-            },
-          }}
-        />
-      </div>
-      <div className="flex gap-2">
-        <Button
-          onClick={() => navigateTo("/sign-in")}
-          className="py-3 bg-slate-400"
-        >
-          Back
-        </Button>
-        <Button loading={isLoading} type="submit" className="py-3">
-          Submit
-        </Button>
-      </div>
-    </form>
+    <div className="pt-10">
+      <Heading
+        text={"Update Your Password"}
+        className="text-center font-extrabold text-3xl"
+      />
+      <form
+        className="mt-8 w-4/12 m-auto flex gap-5 flex-col"
+        onSubmit={handleSubmit(handleFormSubmit)}
+      >
+        <div>
+          <InputField
+            name="password"
+            type="password"
+            control={control}
+            svg={<MdPassword />}
+            errors={errors}
+            label="Password"
+            rules={{
+              required: {
+                value: true,
+                message: "Field required!",
+              },
+            }}
+          />
+        </div>
+        <div>
+          <InputField
+            name="confirmPassword"
+            type="password"
+            control={control}
+            svg={<MdPassword />}
+            errors={errors}
+            label="Confirm Password"
+            rules={{
+              required: {
+                value: true,
+                message: "Field required!",
+              },
+            }}
+          />
+        </div>
+        <div className="flex gap-2">
+          <Button loading={isLoading} type="submit" className="py-3">
+            Submit
+          </Button>
+        </div>
+      </form>
+    </div>
   );
 };
 

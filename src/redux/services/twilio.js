@@ -120,6 +120,12 @@ export const claimPhoneNumberApi = (token, formData) => async (dispatch) => {
           return dispatch(invalidRequest(response.data.message));
         }
         dispatch(claimPhoneNumber(response.data.message));
+        dispatch(
+          getClaimedNumbersApi(token, {
+            accountSid: formData.accountSid,
+            authToken: formData.authToken,
+          })
+        );
         toast.success(response.data.message);
       });
   } catch (error) {

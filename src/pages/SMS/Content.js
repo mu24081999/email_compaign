@@ -85,14 +85,16 @@ const Content = () => {
   return (
     <div>
       <div className="pb-5">
-        <Button
-          // onClick={() => navigateTo("/add-sms-campaign")}
-          onClick={() => setShowA2PToast(true)}
-          size="lg"
-          className="py-1 flex"
-        >
-          Add Compaign
-        </Button>
+        <div className="flex justify-end">
+          <Button
+            // onClick={() => navigateTo("/add-sms-campaign")}
+            onClick={() => setShowA2PToast(true)}
+            size="lg"
+            className="py-3 flex"
+          >
+            Add Compaign
+          </Button>
+        </div>
         {showA2PToast && (
           <div
             class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mt-5"

@@ -22,8 +22,11 @@ export default ({ slides, length }) => {
       onSwiper={(swiper) => console.log(swiper)}
       onSlideChange={() => console.log("slide change")}
     >
-      {Array.isArray(slides) &&
-        slides?.map((slide) => <SwiperSlide>{slide?.content}</SwiperSlide>)}
+      {Array.isArray(slides) && slides?.length > 0 ? (
+        slides?.map((slide) => <SwiperSlide>{slide?.content}</SwiperSlide>)
+      ) : (
+        <p>No Data</p>
+      )}
       {/* <SwiperSlide>Slide 2</SwiperSlide>
       <SwiperSlide>Slide 3</SwiperSlide>
       <SwiperSlide>Slide 4</SwiperSlide> */}

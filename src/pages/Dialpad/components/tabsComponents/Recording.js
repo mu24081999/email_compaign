@@ -60,7 +60,7 @@ const Recordings = ({
   };
 
   return (
-    <div className="max-w-md mx-auto  h-[78vh] overflow-scroll rounded-lg shadow-lg">
+    <div className="w-full  h-[78vh] overflow-scroll rounded-lg shadow-lg">
       {isLoading ? (
         <SidebarSkeleton />
       ) : (
@@ -68,7 +68,7 @@ const Recordings = ({
           {calls?.map((log) => (
             <li
               key={log.id}
-              className=" items-center justify-between border-b hover:bg-gray-50 px-1 py-2"
+              className=" items-center justify-between border-b hover:bg-gray-50 px-5 py-3"
             >
               <div className="flex justify-between">
                 <div className="flex items-center space-x-4">
