@@ -25,6 +25,7 @@ const CalllingContext = ({ children }) => {
   const { user, token, user_id } = useSelector((state) => state.auth);
   const { callToken } = useSelector((state) => state.twilio);
   const { wallet } = useSelector((state) => state.wallet);
+  console.log("🚀 ~ CalllingContext ~ wallet:", wallet);
   const [callMuted, setCallMuted] = useState(false);
   const [device, setDevice] = useState(null);
   const [connection, setConnection] = useState(null);

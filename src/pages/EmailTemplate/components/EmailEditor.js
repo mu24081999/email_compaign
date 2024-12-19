@@ -166,7 +166,8 @@ const EmailEditorComponent = () => {
               <div
                 className={`${
                   loading ? "hidden" : ""
-                } relative overflow-hidden shadow-lg h-fit rounded`}
+                } relative overflow-hidden shadow-lg h-fit rounded border`}
+                style={{ minHeight: "0px" }}
               >
                 <EmailEditor
                   ref={emailEditorRef}
@@ -179,7 +180,7 @@ const EmailEditorComponent = () => {
                     margin: "0px",
                   }}
                 />
-                <div className="h-16 w-[45.5vh] p-1 bg-white absolute bottom-0 right-0"></div>
+                <div className=" p-5 h-[50px] w-full bg-white absolute bottom-4 right-0"></div>
               </div>
               <p>
                 Add firstname, lastname and email in the format{" "}
