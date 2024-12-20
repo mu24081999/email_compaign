@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addEmailAccountApi } from "../../../../../../../redux/services/email";
 import { FaEdit, FaEnvelope, FaLock } from "react-icons/fa";
 import { PiMicrosoftOutlookLogo } from "react-icons/pi";
+import { useNavigate } from "react-router-dom";
 
 const OutlookForm = ({ handleMenu }) => {
   const {
@@ -14,10 +15,11 @@ const OutlookForm = ({ handleMenu }) => {
     control,
     formState: { errors },
   } = useForm();
+  const navigateTo = useNavigate();
   const dispatch = useDispatch();
   const { isLoading } = useSelector((state) => state.email);
   const { token, user_id } = useSelector((state) => state.auth);
-  const formSubmit = (formData) => {
+  const formSubmit = async (formData) => {
     console.log(formData);
     const params = {
       firstname: formData?.firstname,
@@ -27,7 +29,10 @@ const OutlookForm = ({ handleMenu }) => {
       password: formData?.password,
       type: "outlook",
     };
-    dispatch(addEmailAccountApi(token, params));
+    const response = await dispatch(addEmailAccountApi(token, params));
+    if (response.done === true) {
+      navigateTo("/accounts");
+    }
   };
   return (
     <div className="p-5 rounded-2xl border border-gray-300 shadow-xl max-w-[60%]">

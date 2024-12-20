@@ -7,6 +7,7 @@ import { FcGoogle } from "react-icons/fc";
 import { useDispatch, useSelector } from "react-redux";
 import { addEmailAccountApi } from "../../../../../../../redux/services/email";
 import { FaEdit, FaEnvelope, FaLock } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const GoogleAppForm = ({ handleMenu }) => {
   const {
@@ -15,8 +16,9 @@ const GoogleAppForm = ({ handleMenu }) => {
     formState: { errors },
   } = useForm();
   const dispatch = useDispatch();
+  const navigateTo = useNavigate();
   const { token, user_id } = useSelector((state) => state.auth);
-  const formSubmit = (formData) => {
+  const formSubmit = async (formData) => {
     console.log(formData);
     const params = {
       firstname: formData?.firstname,
@@ -26,7 +28,10 @@ const GoogleAppForm = ({ handleMenu }) => {
       password: formData?.password,
       type: "gmail",
     };
-    dispatch(addEmailAccountApi(token, params));
+    const response = await dispatch(addEmailAccountApi(token, params));
+    if (response.done === true) {
+      navigateTo("/accounts");
+    }
   };
   return (
     <div className="p-5 rounded-2xl border border-gray-300 shadow-xl max-w-[60%]">

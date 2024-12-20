@@ -18,20 +18,23 @@ const UploadCSV = ({ close }) => {
   const handleUploadCSV = () => {
     if (data.length > 0) {
       const formattedData = [];
-      console.log("Uploading data:", data);
-      data?.map((item) => {
-        return formattedData?.push({
-          // ...item,
-          firstname: item?.firstname,
-          lastname: item?.lastname,
-          email: item?.email,
-          phone: item?.phone,
-          user_id: user_id,
-          compaign_id: parseInt(id),
+      if (data.length > 500) {
+        return toast.error("You can only upload 500 contacts in a campaign.");
+      } else {
+        data?.map((item) => {
+          return formattedData?.push({
+            // ...item,
+            firstname: item?.firstname,
+            lastname: item?.lastname,
+            email: item?.email,
+            phone: item?.phone,
+            user_id: user_id,
+            compaign_id: parseInt(id),
+          });
         });
-      });
-      dispatch(addLeadRec(token, { leads: formattedData }));
-      close();
+        dispatch(addLeadRec(token, { leads: formattedData }));
+        close();
+      }
     } else {
       toast.error("There is no contacts in the list.");
     }

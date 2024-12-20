@@ -20,7 +20,18 @@ const Leads = () => {
     dispatch(getCompaignLeads(token, id));
   }, [token, dispatch, id]);
   useEffect(() => {
-    setLeadsData(leads?.leadsData);
+    const data = [];
+    leads?.leadsData?.map((lead) => {
+      data.push({
+        firstname: lead.firstname,
+        lastname: lead.lastname,
+        opened_at: lead.opened_at || "Not opended yet.",
+        open_count: lead.open_count,
+        email: lead?.email,
+        open: lead?.open === true ? "TRUE" : "FALSE",
+      });
+    });
+    setLeadsData(data);
     setPagination(leads?.pagination);
   }, [leads]);
   const handleOpen = () => {

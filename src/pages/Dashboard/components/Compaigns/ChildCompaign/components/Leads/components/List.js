@@ -21,7 +21,9 @@ const List = ({
     { label: "First Name", accessor: "firstname", type: "link" },
     { label: "Last Name", accessor: "lastname" },
     { label: "Email", accessor: "email" }, // Example of nested accessor
-    { label: "Phone", accessor: "phone" },
+    { label: "Open", accessor: "open" },
+    { label: "Open Count", accessor: "open_count" },
+    { label: "Opened At", accessor: "opened_at" },
 
     // {
     //   label: "Actions",

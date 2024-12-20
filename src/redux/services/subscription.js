@@ -81,7 +81,7 @@ export const getUserSubscriptionApi = (token, user_id) => async (dispatch) => {
       .get(`${backendURL}/subscriptions/${user_id}`, config)
       .then((response) => {
         if (response?.data?.statusCode !== 200) {
-          toast.error(response.data.message);
+          // toast.error(response.data.message);
           return dispatch(invalidRequest(response.data.message));
         }
         dispatch(getUserSubscription(response.data.data.subscription));

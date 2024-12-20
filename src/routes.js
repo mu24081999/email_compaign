@@ -31,6 +31,7 @@ import ChildSMSCampaign from "./pages/SMS/components/ChildCompaign/Compaign";
 import Wallet from "./pages/Wallet";
 import A2P from "./pages/A2P";
 import Privacy from "./pages/Privacy";
+import Chat from "./pages/Chat";
 const router = (isAuthenticated, isValid) => {
   const routes = [
     {
@@ -52,6 +53,16 @@ const router = (isAuthenticated, isValid) => {
       element: (
         <PrivateRoute isAuthenticated={isAuthenticated} isValid={isValid}>
           <LeadFinder />
+        </PrivateRoute>
+      ),
+      children: [],
+      breadcrumb: "email-template",
+    },
+    {
+      path: "/sms-conversation",
+      element: (
+        <PrivateRoute isAuthenticated={isAuthenticated} isValid={isValid}>
+          <Chat />
         </PrivateRoute>
       ),
       children: [],

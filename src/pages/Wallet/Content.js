@@ -23,9 +23,9 @@ const Content = () => {
   } = useForm();
   const dispatch = useDispatch();
   const { paymentIntend } = useSelector((state) => state.subscription);
-  console.log("🚀 ~ Content ~ paymentIntend:", paymentIntend);
   const { token, user_id } = useSelector((state) => state.auth);
   const { logs } = useSelector((state) => state.logs);
+  console.log("🚀 ~ Content ~ logs:", logs);
   const { wallet } = useSelector((state) => state.wallet);
   const [isOpen, setIsOpen] = useState(false);
   const handleClose = () => {
@@ -128,14 +128,18 @@ const Content = () => {
           <div className="flex flex-col gap-5 border rounded-xl p-5 bg-white dark:bg-gray-900 shadow h-[53vh]">
             <div className="font-extrabold text-xl">Credit Logs</div>
             <div className="overflow-scroll max-h-[55vh] dark:bg-gray-900">
-              {logs?.length < 0 ? (
+              {logs?.length > 0 ? (
                 logs?.map((log, index) => (
                   <div key={index} className="px-5 py-8 border relative">
                     <div className="font-bold">{log.description}</div>
                     <div className="text-sm font-gray">{log?.date}</div>
                     <div className="absolute right-5 top-10 font-extrabold text-xl ">
-                      <span>{log?.type === "plus" ? "+" : "-"}</span>$
-                      {log?.amount}
+                      <span>
+                        {log?.type === "plus"
+                          ? "+"
+                          : log?.type === "minus" && "-"}
+                      </span>
+                      ${log?.amount}
                     </div>
                   </div>
                 ))

@@ -6,6 +6,7 @@ import ListItemCard from "../../../../../../../components/ListItemCard";
 import { FaEdit, FaEnvelope, FaRegEnvelope, FaUserLock } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { addEmailAccountApi } from "../../../../../../../redux/services/email";
+import { useNavigate } from "react-router-dom";
 
 const MailProviderForm = ({ handleMenu }) => {
   const {
@@ -13,11 +14,12 @@ const MailProviderForm = ({ handleMenu }) => {
     control,
     formState: { errors },
   } = useForm();
+  const navigateTo = useNavigate();
   const { token, user_id } = useSelector((state) => state.auth);
   const { isLoading } = useSelector((state) => state.email);
   const dispatch = useDispatch();
 
-  const formSubmit = (formData) => {
+  const formSubmit = async (formData) => {
     console.log(formData);
     const params = {
       firstname: formData?.firstname,
@@ -30,7 +32,10 @@ const MailProviderForm = ({ handleMenu }) => {
       mail_provider: formData?.smpt_host,
       type: "professional",
     };
-    dispatch(addEmailAccountApi(token, params));
+    const response = await dispatch(addEmailAccountApi(token, params));
+    if (response.done === true) {
+      navigateTo("/accounts");
+    }
   };
   return (
     <div className="p-5 rounded-2xl border border-gray-300 shadow-xl max-w-[60%]">

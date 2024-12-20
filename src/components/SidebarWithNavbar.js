@@ -20,6 +20,7 @@ import {
   FaRegEnvelope,
   FaRegEnvelopeOpen,
   FaRegUserCircle,
+  FaRocketchat,
 } from "react-icons/fa";
 import logo2 from "../assets/2.png";
 import logo from "../assets/1.png";
@@ -108,6 +109,11 @@ const SidebarWithNavbar = ({ component }) => {
       name: "SMS Campaigns",
       link: "/sms",
       icon: MdOutlineSms,
+    },
+    {
+      name: "Conversations",
+      link: "/sms-conversation",
+      icon: FaRocketchat,
     },
     {
       name: "A2P Verification",

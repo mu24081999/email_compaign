@@ -5,6 +5,7 @@ import Button from "../../../../../../../../components/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { addLeadRec } from "../../../../../../../../redux/services/leads";
+import { toast } from "react-toastify";
 const UploadManualEmail = ({ close }) => {
   const {
     formState: { errors },
@@ -25,6 +26,7 @@ const UploadManualEmail = ({ close }) => {
     );
     const data = [];
     const emails = formatEmails(fomrData?.emails);
+
     emails?.map((item) => {
       return data.push({
         user_id: user_id,
@@ -32,8 +34,12 @@ const UploadManualEmail = ({ close }) => {
         email: item,
       });
     });
-    dispatch(addLeadRec(token, { leads: data }));
-    close(true);
+    if (data.length > 500) {
+      return toast.error("You can only upload 500 contacts in a campaign.");
+    } else {
+      dispatch(addLeadRec(token, { leads: data }));
+      close(true);
+    }
   };
   return (
     <div className="p-5">
