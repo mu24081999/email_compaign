@@ -7,6 +7,7 @@ import Modal from "../../../../../../../components/Modal";
 import ModalBody from "./components/ModalBody";
 import Button from "../../../../../../../components/Button";
 import useMain from "../../../../../../../context/Main/useMain";
+import moment from "moment/moment";
 const Leads = () => {
   const { isCollapsed } = useMain();
   const dispatch = useDispatch();
@@ -26,7 +27,9 @@ const Leads = () => {
         firstname: lead.firstname,
         lastname: lead.lastname,
         opened_at: lead.opened_at || "Not opended yet.",
-        open_count: lead.open_count,
+        open_count: lead.open_count
+          ? moment(lead.open_count).format("HH:MM:SS DD MMM YYYY")
+          : "Not open yet",
         email: lead?.email,
         open: lead?.open === true ? "TRUE" : "FALSE",
       });
