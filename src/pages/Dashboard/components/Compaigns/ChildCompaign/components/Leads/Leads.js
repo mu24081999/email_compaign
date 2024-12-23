@@ -26,10 +26,10 @@ const Leads = () => {
       data.push({
         firstname: lead.firstname,
         lastname: lead.lastname,
-        opened_at: lead.opened_at || "Not opended yet.",
-        open_count: lead.open_count
+        opened_at: lead.open_count
           ? moment(lead.open_count).format("HH:MM:SS DD MMM YYYY")
           : "Not open yet",
+        open_count: lead.open_count,
         email: lead?.email,
         open: lead?.open === true ? "TRUE" : "FALSE",
       });
