@@ -1,7 +1,26 @@
 import moment from "moment/moment";
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 const messagesData = [
+  {
+    body: "<p>This is the initial content of the editor.</p></body>",
+    direction: "outbound-api",
+    from: "+14155992510",
+    to: "+923174660027",
+  },
+  {
+    body: "<p>This is the initial content of the editor.</p></body>",
+    direction: "outbound-api",
+    from: "+14155992510",
+    to: "+923174660027",
+  },
+  {
+    body: "<p>This is the initial content of the editor.</p></body>",
+    direction: "outbound-api",
+    from: "+923174660027",
+    to: "+14155992510",
+  },
+
   {
     body: "<p>This is the initial content of the editor.</p></body>",
     direction: "outbound-api",
@@ -10,9 +29,10 @@ const messagesData = [
   },
 ];
 const Content = () => {
+  const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
   const [filteredData, setFilteredData] = useState([]);
-  const [currentMessages, setCurrentMessages] = useState([]);
+  const [currentMessages, setCurrentMessages] = useState(messagesData);
   useEffect(() => {
     const uniqueMessages = messagesData.reduce((acc, message) => {
       const key = `${message.from}-${message.to}`;
@@ -29,7 +49,12 @@ const Content = () => {
       (msg) =>
         msg.from === selectedMessage?.from || msg.to === selectedMessage?.to
     );
+    setCurrentMessages(filteredMessages);
   };
+  useEffect(() => {
+    return () => {};
+  }, []);
+
   return (
     <div>
       <div className="h-[90vh] overflow-hidden">
@@ -60,6 +85,7 @@ const Content = () => {
                   <div
                     className="flex flex-row py-4 px-2 justify-center items-center border-b-2 hover:bg-gray-600 hover:bg-opacity-25 cursor-pointer"
                     key={index}
+                    onClick={() => handleCurrentMessages(msg)}
                   >
                     <div className="w-full px-2">
                       <div className="text-lg font-semibold">{msg?.from}</div>
@@ -80,65 +106,45 @@ const Content = () => {
               </div>
 
               <div className="w-full px-5 flex flex-col justify-between">
-                <div className="flex flex-col mt-5">
-                  <div className="flex justify-end mb-4">
-                    <div className="mr-2 py-3 px-4 bg-blue-400 rounded-bl-3xl rounded-tl-3xl rounded-tr-xl text-white">
-                      Welcome to group everyone !
-                    </div>
-                    <img
-                      src="https://source.unsplash.com/vpOeXr5wmR4/600x600"
-                      className="object-cover h-8 w-8 rounded-full"
-                      alt=""
-                    />
-                  </div>
-                  <div className="flex justify-start mb-4">
-                    <img
-                      src="https://source.unsplash.com/vpOeXr5wmR4/600x600"
-                      className="object-cover h-8 w-8 rounded-full"
-                      alt=""
-                    />
-                    <div className="ml-2 py-3 px-4 bg-gray-400 rounded-br-3xl rounded-tr-3xl rounded-tl-xl text-white">
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Quaerat at praesentium, aut ullam delectus odio error sit
-                      rem. Architecto nulla doloribus laborum illo rem enim
-                      dolor odio saepe, consequatur quas?
-                    </div>
-                  </div>
-                  <div className="flex justify-end mb-4">
-                    <div>
-                      <div className="mr-2 py-3 px-4 bg-blue-400 rounded-bl-3xl rounded-tl-3xl rounded-tr-xl text-white">
-                        Lorem ipsum dolor, sit amet consectetur adipisicing
-                        elit. Magnam, repudiandae.
+                <div className=" h-[65vh] overflow-scroll">
+                  {Array.isArray(currentMessages) ? (
+                    currentMessages?.map((msg, index) => (
+                      <div className="">
+                        <div className="flex flex-col mt-5">
+                          <div className="flex justify-end mb-4">
+                            <div
+                              className="mr-2 py-3 px-4 bg-blue-400 rounded-bl-3xl rounded-tl-3xl rounded-tr-xl text-white"
+                              dangerouslySetInnerHTML={{ __html: msg.body }}
+                            ></div>
+                            <span>{msg?.from}</span>
+                          </div>
+                          <div className="flex justify-start mb-4">
+                            <img
+                              src="https://source.unsplash.com/vpOeXr5wmR4/600x600"
+                              className="object-cover h-8 w-8 rounded-full"
+                              alt=""
+                            />
+                            <div className="ml-2 py-3 px-4 bg-gray-400 rounded-br-3xl rounded-tr-3xl rounded-tl-xl text-white">
+                              Lorem ipsum dolor sit amet consectetur adipisicing
+                              elit. Quaerat at praesentium, aut ullam delectus
+                              odio error sit rem. Architecto nulla doloribus
+                              laborum illo rem enim dolor odio saepe,
+                              consequatur quas?
+                            </div>
+                          </div>
+                        </div>
+                        <div className="py-5 absolute bottom-5 w-[100vh]">
+                          <input
+                            className="w-full bg-gray-300 py-5 px-3 rounded-xl"
+                            type="text"
+                            placeholder="type your message here..."
+                          />
+                        </div>
                       </div>
-
-                      <div className="mt-4 mr-2 py-3 px-4 bg-blue-400 rounded-bl-3xl rounded-tl-3xl rounded-tr-xl text-white">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Debitis, reiciendis!
-                      </div>
-                    </div>
-                    <img
-                      src="https://source.unsplash.com/vpOeXr5wmR4/600x600"
-                      className="object-cover h-8 w-8 rounded-full"
-                      alt=""
-                    />
-                  </div>
-                  <div className="flex justify-start mb-4">
-                    <img
-                      src="https://source.unsplash.com/vpOeXr5wmR4/600x600"
-                      className="object-cover h-8 w-8 rounded-full"
-                      alt=""
-                    />
-                    <div className="ml-2 py-3 px-4 bg-gray-400 rounded-br-3xl rounded-tr-3xl rounded-tl-xl text-white">
-                      happy holiday guys!
-                    </div>
-                  </div>
-                </div>
-                <div className="py-5">
-                  <input
-                    className="w-full bg-gray-300 py-5 px-3 rounded-xl"
-                    type="text"
-                    placeholder="type your message here..."
-                  />
+                    ))
+                  ) : (
+                    <div></div>
+                  )}
                 </div>
               </div>
             </div>

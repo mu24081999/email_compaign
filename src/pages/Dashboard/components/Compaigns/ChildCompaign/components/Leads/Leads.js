@@ -24,6 +24,7 @@ const Leads = () => {
     const data = [];
     leads?.leadsData?.map((lead) => {
       data.push({
+        id: lead?.id,
         firstname: lead.firstname,
         lastname: lead.lastname,
         opened_at: lead.open_count

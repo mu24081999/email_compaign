@@ -116,7 +116,8 @@ const Sequence = () => {
       subject: formData?.subject,
       // template_id: currentTemplate?.id,
       // compaign_id: id,
-      content: replacePlaceholdersInHtml(content, user),
+      // content: replacePlaceholdersInHtml(content, user),
+      content: content,
     };
     // console.log("params: ", params);
     dispatch(addSequenceRec(token, params));

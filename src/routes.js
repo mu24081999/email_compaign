@@ -32,12 +32,24 @@ import Wallet from "./pages/Wallet";
 import A2P from "./pages/A2P";
 import Privacy from "./pages/Privacy";
 import Chat from "./pages/Chat";
-const router = (isAuthenticated, isValid) => {
+const router = (
+  isAuthenticated,
+  isValid,
+  authLoading,
+  subscriptionLoading,
+  startingAuth
+) => {
   const routes = [
     {
       path: "/",
       element: (
-        <PrivateRoute isAuthenticated={isAuthenticated} isValid={isValid}>
+        <PrivateRoute
+          isAuthenticated={isAuthenticated}
+          authLoading={authLoading}
+          subscriptionLoading={subscriptionLoading}
+          startingAuth={startingAuth}
+          isValid={isValid}
+        >
           <Dashboard />
         </PrivateRoute>
       ), // Protect the Dashboard route    children: [],
@@ -51,7 +63,13 @@ const router = (isAuthenticated, isValid) => {
     {
       path: "/lead-finder",
       element: (
-        <PrivateRoute isAuthenticated={isAuthenticated} isValid={isValid}>
+        <PrivateRoute
+          isAuthenticated={isAuthenticated}
+          authLoading={authLoading}
+          subscriptionLoading={subscriptionLoading}
+          startingAuth={startingAuth}
+          isValid={isValid}
+        >
           <LeadFinder />
         </PrivateRoute>
       ),
@@ -61,7 +79,13 @@ const router = (isAuthenticated, isValid) => {
     {
       path: "/sms-conversation",
       element: (
-        <PrivateRoute isAuthenticated={isAuthenticated} isValid={isValid}>
+        <PrivateRoute
+          isAuthenticated={isAuthenticated}
+          authLoading={authLoading}
+          subscriptionLoading={subscriptionLoading}
+          startingAuth={startingAuth}
+          isValid={isValid}
+        >
           <Chat />
         </PrivateRoute>
       ),
@@ -83,7 +107,13 @@ const router = (isAuthenticated, isValid) => {
     {
       path: "/drip-compaign",
       element: (
-        <PrivateRoute isAuthenticated={isAuthenticated} isValid={isValid}>
+        <PrivateRoute
+          isAuthenticated={isAuthenticated}
+          authLoading={authLoading}
+          subscriptionLoading={subscriptionLoading}
+          startingAuth={startingAuth}
+          isValid={isValid}
+        >
           <DripCompaign />
         </PrivateRoute>
       ),
@@ -93,7 +123,13 @@ const router = (isAuthenticated, isValid) => {
     {
       path: "/a2p-verification",
       element: (
-        <PrivateRoute isAuthenticated={isAuthenticated} isValid={isValid}>
+        <PrivateRoute
+          isAuthenticated={isAuthenticated}
+          authLoading={authLoading}
+          subscriptionLoading={subscriptionLoading}
+          startingAuth={startingAuth}
+          isValid={isValid}
+        >
           <A2P />
         </PrivateRoute>
       ),
@@ -103,7 +139,13 @@ const router = (isAuthenticated, isValid) => {
     {
       path: "/sms-campaign/:id",
       element: (
-        <PrivateRoute isAuthenticated={isAuthenticated} isValid={isValid}>
+        <PrivateRoute
+          isAuthenticated={isAuthenticated}
+          authLoading={authLoading}
+          subscriptionLoading={subscriptionLoading}
+          startingAuth={startingAuth}
+          isValid={isValid}
+        >
           <ChildSMSCampaign />
         </PrivateRoute>
       ),
@@ -113,7 +155,13 @@ const router = (isAuthenticated, isValid) => {
     {
       path: "/wallet",
       element: (
-        <PrivateRoute isAuthenticated={isAuthenticated} isValid={isValid}>
+        <PrivateRoute
+          isAuthenticated={isAuthenticated}
+          authLoading={authLoading}
+          subscriptionLoading={subscriptionLoading}
+          startingAuth={startingAuth}
+          isValid={isValid}
+        >
           <Wallet />
         </PrivateRoute>
       ),
@@ -123,7 +171,13 @@ const router = (isAuthenticated, isValid) => {
     {
       path: "/sms",
       element: (
-        <PrivateRoute isAuthenticated={isAuthenticated} isValid={isValid}>
+        <PrivateRoute
+          isAuthenticated={isAuthenticated}
+          authLoading={authLoading}
+          subscriptionLoading={subscriptionLoading}
+          startingAuth={startingAuth}
+          isValid={isValid}
+        >
           <SMS />
         </PrivateRoute>
       ),
@@ -133,7 +187,13 @@ const router = (isAuthenticated, isValid) => {
     {
       path: "/phone-numbers",
       element: (
-        <PrivateRoute isAuthenticated={isAuthenticated} isValid={isValid}>
+        <PrivateRoute
+          isAuthenticated={isAuthenticated}
+          authLoading={authLoading}
+          subscriptionLoading={subscriptionLoading}
+          startingAuth={startingAuth}
+          isValid={isValid}
+        >
           <Numbers />
         </PrivateRoute>
       ),
@@ -143,7 +203,13 @@ const router = (isAuthenticated, isValid) => {
     {
       path: "/my-subscription",
       element: (
-        <PrivateRoute isAuthenticated={isAuthenticated} isValid={isValid}>
+        <PrivateRoute
+          isAuthenticated={isAuthenticated}
+          authLoading={authLoading}
+          subscriptionLoading={subscriptionLoading}
+          startingAuth={startingAuth}
+          isValid={isValid}
+        >
           <Subscription />
         </PrivateRoute>
       ),
@@ -153,7 +219,13 @@ const router = (isAuthenticated, isValid) => {
     {
       path: "/dialpad",
       element: (
-        <PrivateRoute isAuthenticated={isAuthenticated} isValid={isValid}>
+        <PrivateRoute
+          isAuthenticated={isAuthenticated}
+          authLoading={authLoading}
+          subscriptionLoading={subscriptionLoading}
+          startingAuth={startingAuth}
+          isValid={isValid}
+        >
           <Dialpad />
         </PrivateRoute>
       ),
@@ -163,7 +235,13 @@ const router = (isAuthenticated, isValid) => {
     {
       path: "/email-validation",
       element: (
-        <PrivateRoute isAuthenticated={isAuthenticated} isValid={isValid}>
+        <PrivateRoute
+          isAuthenticated={isAuthenticated}
+          authLoading={authLoading}
+          subscriptionLoading={subscriptionLoading}
+          startingAuth={startingAuth}
+          isValid={isValid}
+        >
           <EmailValidation />
         </PrivateRoute>
       ),
@@ -173,7 +251,13 @@ const router = (isAuthenticated, isValid) => {
     {
       path: "/add-sms-campaign",
       element: (
-        <PrivateRoute isAuthenticated={isAuthenticated} isValid={isValid}>
+        <PrivateRoute
+          isAuthenticated={isAuthenticated}
+          authLoading={authLoading}
+          subscriptionLoading={subscriptionLoading}
+          startingAuth={startingAuth}
+          isValid={isValid}
+        >
           <AddSMSCampaign />
         </PrivateRoute>
       ),
@@ -183,7 +267,13 @@ const router = (isAuthenticated, isValid) => {
     {
       path: "/email-templates",
       element: (
-        <PrivateRoute isAuthenticated={isAuthenticated} isValid={isValid}>
+        <PrivateRoute
+          isAuthenticated={isAuthenticated}
+          authLoading={authLoading}
+          subscriptionLoading={subscriptionLoading}
+          startingAuth={startingAuth}
+          isValid={isValid}
+        >
           <EmailTemplate />
         </PrivateRoute>
       ),
@@ -193,7 +283,13 @@ const router = (isAuthenticated, isValid) => {
     {
       path: "/compaigns",
       element: (
-        <PrivateRoute isAuthenticated={isAuthenticated} isValid={isValid}>
+        <PrivateRoute
+          isAuthenticated={isAuthenticated}
+          authLoading={authLoading}
+          subscriptionLoading={subscriptionLoading}
+          startingAuth={startingAuth}
+          isValid={isValid}
+        >
           <Compaigns />
         </PrivateRoute>
       ),
@@ -203,7 +299,13 @@ const router = (isAuthenticated, isValid) => {
     {
       path: "/sequences",
       element: (
-        <PrivateRoute isAuthenticated={isAuthenticated} isValid={isValid}>
+        <PrivateRoute
+          isAuthenticated={isAuthenticated}
+          authLoading={authLoading}
+          subscriptionLoading={subscriptionLoading}
+          startingAuth={startingAuth}
+          isValid={isValid}
+        >
           <Sequence />
         </PrivateRoute>
       ),
@@ -213,7 +315,13 @@ const router = (isAuthenticated, isValid) => {
     {
       path: "/accounts",
       element: (
-        <PrivateRoute isAuthenticated={isAuthenticated} isValid={isValid}>
+        <PrivateRoute
+          isAuthenticated={isAuthenticated}
+          authLoading={authLoading}
+          subscriptionLoading={subscriptionLoading}
+          startingAuth={startingAuth}
+          isValid={isValid}
+        >
           <EmailAccounts />
         </PrivateRoute>
       ),
@@ -223,7 +331,13 @@ const router = (isAuthenticated, isValid) => {
     {
       path: "/compaign/:id",
       element: (
-        <PrivateRoute isAuthenticated={isAuthenticated} isValid={isValid}>
+        <PrivateRoute
+          isAuthenticated={isAuthenticated}
+          authLoading={authLoading}
+          subscriptionLoading={subscriptionLoading}
+          startingAuth={startingAuth}
+          isValid={isValid}
+        >
           <Compaign />
         </PrivateRoute>
       ),
@@ -233,7 +347,13 @@ const router = (isAuthenticated, isValid) => {
     {
       path: "/add-compaign",
       element: (
-        <PrivateRoute isAuthenticated={isAuthenticated} isValid={isValid}>
+        <PrivateRoute
+          isAuthenticated={isAuthenticated}
+          authLoading={authLoading}
+          subscriptionLoading={subscriptionLoading}
+          startingAuth={startingAuth}
+          isValid={isValid}
+        >
           <AddCompaign />
         </PrivateRoute>
       ),
@@ -243,7 +363,13 @@ const router = (isAuthenticated, isValid) => {
     {
       path: "/connect-email-account",
       element: (
-        <PrivateRoute isAuthenticated={isAuthenticated} isValid={isValid}>
+        <PrivateRoute
+          isAuthenticated={isAuthenticated}
+          authLoading={authLoading}
+          subscriptionLoading={subscriptionLoading}
+          startingAuth={startingAuth}
+          isValid={isValid}
+        >
           <AddEmail />
         </PrivateRoute>
       ),
@@ -253,7 +379,13 @@ const router = (isAuthenticated, isValid) => {
     {
       path: "/email-schedule",
       element: (
-        <PrivateRoute isAuthenticated={isAuthenticated} isValid={isValid}>
+        <PrivateRoute
+          isAuthenticated={isAuthenticated}
+          authLoading={authLoading}
+          subscriptionLoading={subscriptionLoading}
+          startingAuth={startingAuth}
+          isValid={isValid}
+        >
           <Schedule />
         </PrivateRoute>
       ),
@@ -263,7 +395,13 @@ const router = (isAuthenticated, isValid) => {
     {
       path: "/common-box",
       element: (
-        <PrivateRoute isAuthenticated={isAuthenticated} isValid={isValid}>
+        <PrivateRoute
+          isAuthenticated={isAuthenticated}
+          authLoading={authLoading}
+          subscriptionLoading={subscriptionLoading}
+          startingAuth={startingAuth}
+          isValid={isValid}
+        >
           <CommonBox />
         </PrivateRoute>
       ),
@@ -273,7 +411,13 @@ const router = (isAuthenticated, isValid) => {
     {
       path: "/account-settings",
       element: (
-        <PrivateRoute isAuthenticated={isAuthenticated} isValid={isValid}>
+        <PrivateRoute
+          isAuthenticated={isAuthenticated}
+          authLoading={authLoading}
+          subscriptionLoading={subscriptionLoading}
+          startingAuth={startingAuth}
+          isValid={isValid}
+        >
           <Profile />
         </PrivateRoute>
       ),

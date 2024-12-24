@@ -63,6 +63,7 @@ const Table = ({
       }
       return 0;
     });
+  console.log("🚀 ~ sortedData:", sortedData);
 
   const totalPages = Math.ceil(totalItems / itemsPerPage);
 

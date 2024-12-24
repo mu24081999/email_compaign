@@ -7,6 +7,7 @@ export const templateSlice = createSlice({
     callLogs: [],
     availableNumbers: [],
     claimedNumbers: [],
+    sms: [],
     message: "",
     error: "",
     type: "",
@@ -41,6 +42,11 @@ export const templateSlice = createSlice({
     },
     getClaimedNumbers: (state, action) => {
       state.claimedNumbers = action.payload;
+      state.isLoading = false;
+      state.error = "";
+    },
+    getMessages: (state, action) => {
+      state.sms = action.payload;
       state.isLoading = false;
       state.error = "";
     },

@@ -64,7 +64,8 @@ const EmailEditorComponent = () => {
         title: formData?.title,
         user_id: user_id,
         // content: html,
-        content: replacePlaceholdersInHtml(html, user),
+        // content: replacePlaceholdersInHtml(html, user),
+        content: html,
       };
       console.log(params);
       const isAdded = await dispatch(addTemplateRec(token, params));
@@ -180,7 +181,7 @@ const EmailEditorComponent = () => {
                     margin: "0px",
                   }}
                 />
-                <div className=" p-5 h-[50px] w-full bg-white absolute bottom-4 right-0"></div>
+                <div className=" p-5 h-[60px] w-full bg-white absolute bottom-4 right-0"></div>
               </div>
               <p>
                 Add firstname, lastname and email in the format{" "}
