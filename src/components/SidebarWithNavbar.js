@@ -35,6 +35,7 @@ import { RiContactsBook3Line } from "react-icons/ri";
 import useCalling from "../context/CallingContext/useCalling";
 import { GrValidate } from "react-icons/gr";
 import { GiSecretBook } from "react-icons/gi";
+import Button from "./Button";
 
 const SidebarWithNavbar = ({ component }) => {
   const { incoming } = useCalling();
@@ -43,10 +44,16 @@ const SidebarWithNavbar = ({ component }) => {
 
   const location = useLocation();
   const dispatch = useDispatch();
-  const { token, user } = useSelector((state) => state.auth);
+  const { token, user, isAuthenticated } = useSelector((state) => state.auth);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
-  const logout = () => dispatch(logoutUser(token));
+  const logout = async () => {
+    const is_done = await dispatch(logoutUser(token));
+    if (is_done) {
+      console.log("🚀 ~ logout ~ is_done:", is_done);
+      navigateTo("/sign-in");
+    }
+  };
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
   const setDarkModeFunc = (data) => {
     setDarkMode(data);
@@ -272,13 +279,26 @@ const SidebarWithNavbar = ({ component }) => {
               )}
             </div>
 
-            <div className="flex items-center">
-              <DarkModeSwitcher setDarkModeFunc={setDarkModeFunc} />
-              <Dropdown
-                menuData={dialpadMenuData}
-                isOpen={incoming ? true : false}
-              />
-              <Dropdown menuData={menuData} />
+            <div className="">
+              {isAuthenticated ? (
+                <div className="flex items-center">
+                  <DarkModeSwitcher setDarkModeFunc={setDarkModeFunc} />
+                  <Dropdown
+                    menuData={dialpadMenuData}
+                    isOpen={incoming ? true : false}
+                  />
+                  <Dropdown menuData={menuData} />
+                </div>
+              ) : (
+                <div>
+                  <Button
+                    className="py-2 bg-black"
+                    onClick={() => navigateTo("/sign-in")}
+                  >
+                    Login Again
+                  </Button>
+                </div>
+              )}
             </div>
           </div>
         </div>

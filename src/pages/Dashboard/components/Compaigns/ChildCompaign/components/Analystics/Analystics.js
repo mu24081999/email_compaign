@@ -7,9 +7,23 @@ import {
   BsEnvelopePlus,
   BsEnvelopeSlash,
 } from "react-icons/bs";
-const Analystics = ({ data }) => {
+import Button from "../../../../../../../components/Button";
+import { IoIosRefresh } from "react-icons/io";
+import { compaignAnalytics } from "../../../../../../../redux/services/compaign";
+
+const Analystics = ({ data, loading, dispatch, token, id }) => {
+  const refresh = () => {
+    dispatch(compaignAnalytics(token, id));
+  };
   return (
     <div>
+      <Button
+        loading={loading}
+        className="bg-black px-1 mb-2"
+        onClick={refresh}
+      >
+        <IoIosRefresh size={15} />
+      </Button>
       <div className="grid lg:grid-cols-6 gap-5">
         <DashboardCard
           icon={<FaRegEnvelope color="blue" size={30} />}

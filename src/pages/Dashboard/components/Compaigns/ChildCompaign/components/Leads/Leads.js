@@ -27,8 +27,8 @@ const Leads = () => {
         id: lead?.id,
         firstname: lead.firstname,
         lastname: lead.lastname,
-        opened_at: lead.open_count
-          ? moment(lead.open_count).format("HH:MM:SS DD MMM YYYY")
+        opened_at: lead.opened_at
+          ? moment(lead.opened_at).format("HH:MM:SS DD MMM YYYY")
           : "Not open yet",
         open_count: lead.open_count,
         email: lead?.email,

@@ -29,7 +29,7 @@ const Register = () => {
     };
     if (data.password === data.confirmPassword) {
       const is_registered = await dispatch(registerUser(params));
-      if (is_registered) {
+      if (is_registered?.data?.userData) {
         setIsRegistered(true);
       }
     } else {

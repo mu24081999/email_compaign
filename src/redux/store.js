@@ -23,6 +23,12 @@ const persistConfig = {
     "subscription",
     "unibox",
     "validation",
+    "twilio",
+    "smsCampaign",
+    "smsLead",
+    "logs",
+    "wallet",
+    "verification",
   ],
   whitelist: ["auth", "order"],
 };

@@ -37,7 +37,7 @@ export const registerUser = (registerData) => async (dispatch) => {
     }
     toast.success(response.data.message);
     dispatch(register(response.data.data.userData));
-    return true;
+    return response.data;
     // .then((response) => {
     //   console.log("🚀 ~ .then ~ response:", response);
     //   if (response?.data?.statusCode !== 200) {
@@ -111,7 +111,7 @@ export const verifyOTPRec = (user_id, data) => async (dispatch) => {
 export const logoutUser = (token) => async (dispatch) => {
   try {
     dispatch(authRequestLoading());
-    await axios
+    const response = await axios
       .post(
         `${backendURL}/auth/logout`,
         {},
@@ -129,8 +129,10 @@ export const logoutUser = (token) => async (dispatch) => {
           return toast.error(response.data.message);
         }
         dispatch(logout(response.data.message));
-        return toast.success(response.data.message);
+        toast.success(response.data.message);
+        return true;
       });
+    return response;
   } catch (e) {
     dispatch(invalidRequest(e.message));
     return toast.error(e.message);

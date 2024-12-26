@@ -66,4 +66,5 @@ export const {
   getAvailableNumbers,
   getClaimedNumbers,
   claimPhoneNumber,
+  getMessages,
 } = templateSlice.actions;

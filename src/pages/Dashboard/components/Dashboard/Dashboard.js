@@ -5,19 +5,22 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getCompaignsAnalytics } from "../../../../redux/services/dashboard";
 import { getUserCompaignsApi } from "../../../../redux/services/compaign";
-import { FaRegEnvelope, FaRegEnvelopeOpen } from "react-icons/fa";
+import { FaRecycle, FaRegEnvelope, FaRegEnvelopeOpen } from "react-icons/fa";
 import {
   BsEnvelopeCheck,
   BsEnvelopeOpenHeart,
   BsEnvelopePlus,
   BsEnvelopeSlash,
 } from "react-icons/bs";
+import { IoIosRefresh } from "react-icons/io";
+
+import Button from "../../../../components/Button";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const { token, user_id } = useSelector((state) => state.auth);
-  const { analytics } = useSelector((state) => state.dashboard);
+  const { analytics, isLoading } = useSelector((state) => state.dashboard);
   const { compaigns } = useSelector((state) => state.compaign);
   const [compaignsData, setCompaignsData] = useState([]);
   const [pagination, setPagination] = useState({});
@@ -100,8 +103,14 @@ const Dashboard = () => {
   useEffect(() => {
     dispatch(getCompaignsAnalytics(token, id));
   }, [token, id, dispatch]);
+  const refresh = () => {
+    dispatch(getCompaignsAnalytics(token, id));
+  };
   return (
     <div>
+      <Button loading={isLoading} className="bg-black px-1" onClick={refresh}>
+        <IoIosRefresh size={15} />
+      </Button>
       <div className="grid lg:grid-cols-6 gap-5">
         <DashboardCard
           icon={<FaRegEnvelope color="blue" size={30} />}

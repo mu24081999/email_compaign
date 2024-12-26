@@ -1,10 +1,13 @@
 import CallingProvider from "./CallingContext/CallingProvider";
 import MainProvider from "./Main/MainProvider";
+import SocketProvider from "./SocketContext/SocketProvider";
 
 const AppProviders = ({ children }) => {
   return (
     <MainProvider>
-      <CallingProvider>{children}</CallingProvider>
+      <CallingProvider>
+        <SocketProvider>{children}</SocketProvider>
+      </CallingProvider>
     </MainProvider>
   );
 };

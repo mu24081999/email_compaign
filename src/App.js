@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import routes from "./routes";
-import { RouterProvider } from "react-router-dom";
+import { RouterProvider, useLocation, useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
@@ -15,10 +15,12 @@ const App = () => {
     user_id,
     isLoading: authLoading,
   } = useSelector((state) => state.auth);
+
   const { subscription, isLoading: subscriptionLoading } = useSelector(
     (state) => state.subscription
   );
   const [startingAuth, setStartingAuth] = useState(false);
+
   useEffect(() => {
     if (token && user_id) dispatch(getUserSubscriptionApi(token, user_id));
   }, [dispatch, token, user_id]);

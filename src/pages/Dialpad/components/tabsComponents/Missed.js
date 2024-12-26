@@ -26,39 +26,45 @@ const Missed = ({
   };
   useEffect(() => {
     if (calls?.length > 0) {
-      const data = calls?.filter((call) => call.status === "no-answer");
+      const data = calls?.filter(
+        (call) => call.status === "no-answer" || call.status === "busy"
+      );
       console.log("🚀 ~ useEffect ~ data:", data);
       setFilterData(data);
     }
   }, [calls]);
   return (
     <div className="w-full h-[78vh] overflow-y-scroll overflow-x-hidden">
-      <ul className="p-0">
-        {filteredData?.map((log) => (
-          <li
-            key={log.id}
-            className="flex items-center justify-between border-b hover:bg-gray-50 p-5"
-          >
-            <div className="flex items-center space-x-4">
-              <div className="text-2xl bg-gray-200 rounded-full p-3">
-                {getIcon("missed")}{" "}
+      {isLoading ? (
+        <SidebarSkeleton />
+      ) : (
+        <ul className="p-0">
+          {filteredData?.map((log) => (
+            <li
+              key={log.id}
+              className="flex items-center justify-between border-b hover:bg-gray-50 p-5"
+            >
+              <div className="flex items-center space-x-4">
+                <div className="text-2xl bg-gray-200 rounded-full p-3">
+                  {getIcon("missed")}{" "}
+                </div>
+                <div>
+                  <h2 className="font-bold text-lg ">
+                    {log?.from === user?.twilio_selected_number
+                      ? log?.to
+                      : log?.from}{" "}
+                  </h2>
+                  <p className="text-sm text-gray-500">{log.duration}</p>
+                </div>
               </div>
-              <div>
-                <h2 className="font-bold text-lg ">
-                  {log?.from === user?.twilio_selected_number
-                    ? log?.to
-                    : log?.from}{" "}
-                </h2>
-                <p className="text-sm text-gray-500">{log.duration}</p>
-              </div>
-            </div>
-            <p className="text-sm text-gray-500">
-              {" "}
-              {getRelativeTime(log.startTime)}
-            </p>
-          </li>
-        ))}
-      </ul>
+              <p className="text-sm text-gray-500">
+                {" "}
+                {getRelativeTime(log.startTime)}
+              </p>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };

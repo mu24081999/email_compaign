@@ -19,14 +19,24 @@ const CompaignContent = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const { token, user_id } = useSelector((state) => state.auth);
-  const { compaignAnalytics: analystics, compaign } = useSelector(
-    (state) => state.compaign
-  );
+  const {
+    compaignAnalytics: analystics,
+    compaign,
+    isLoading,
+  } = useSelector((state) => state.compaign);
   const tabsData = [
     {
       id: "analystics",
       label: "Analystics",
-      content: <Analystics data={analystics} />,
+      content: (
+        <Analystics
+          data={analystics}
+          loading={isLoading}
+          token={token}
+          id={id}
+          dispatch={dispatch}
+        />
+      ),
     },
     {
       id: "leads",
@@ -67,7 +77,7 @@ const CompaignContent = () => {
       <div className="float-end px-8">
         {compaign?.status === "paused" ? (
           <Button
-            className="flex gap-2 py-3 bg-green-500 hover:bg-green-600"
+            className="flex gap-2 py-3 mt-1  bg-green-500 hover:bg-green-600"
             onClick={resumeCompaign}
           >
             <span className="mt-1">
@@ -78,7 +88,7 @@ const CompaignContent = () => {
         ) : (
           compaign?.status === "sending" && (
             <Button
-              className="flex gap-2 py-3 bg-black hover:bg-gray-800"
+              className="flex gap-2 py-3 mt-1 bg-black hover:bg-gray-800"
               onClick={pauseCompaign}
             >
               <span className="mt-1">
