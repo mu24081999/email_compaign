@@ -10,7 +10,7 @@ const SocketProvider = ({ children }) => {
     process.env.REACT_APP_BACKEND_SOCKET_URL_PRODUCTION_ ||
     "https://localhost:8080";
   const dispatch = useDispatch();
-  const socket = useMemo(() => io("https://localhost:8080"), []);
+  const socket = useMemo(() => io("https://senderside.com:3000"), []);
   const [me, setMe] = useState("");
   const [messagesArray, setMessagesArray] = useState([]);
 
