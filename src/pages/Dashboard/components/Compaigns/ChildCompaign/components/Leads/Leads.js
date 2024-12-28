@@ -23,12 +23,16 @@ const Leads = () => {
   useEffect(() => {
     const data = [];
     leads?.leadsData?.map((lead) => {
+      console.log(
+        "🚀 ~ leads?.leadsData?.map ~ lead:",
+        moment(lead.opened_at).format("HH:mm:ss a")
+      );
       data.push({
         id: lead?.id,
         firstname: lead.firstname,
         lastname: lead.lastname,
         opened_at: lead.opened_at
-          ? moment(lead.opened_at).format("HH:MM:SS DD MMM YYYY")
+          ? moment(lead.opened_at).format("DD MMM YYYY, hh:mm:ss a")
           : "Not open yet",
         open_count: lead.open_count,
         email: lead?.email,
