@@ -65,7 +65,7 @@ const Leads = () => {
       </div>
       <div>
         <List
-          compaign_id={id}
+          id={id}
           token={token}
           leadsData={leadsData}
           handleOpenModal={() => setIsOpen(true)}

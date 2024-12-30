@@ -26,8 +26,8 @@ const CompaignContent = () => {
   } = useSelector((state) => state.compaign);
   const tabsData = [
     {
-      id: "analystics",
-      label: "Analystics",
+      id: "analytics",
+      label: "Analytics",
       content: (
         <Analystics
           data={analystics}
@@ -51,7 +51,7 @@ const CompaignContent = () => {
     },
     {
       id: "trigger",
-      label: "Trigger Compaign",
+      label: "Trigger Campaign",
       content: <Options />,
     },
   ];

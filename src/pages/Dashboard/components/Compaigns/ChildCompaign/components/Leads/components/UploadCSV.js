@@ -53,7 +53,7 @@ const UploadCSV = ({ close }) => {
         const validData = results.data.filter((row) =>
           Object.values(row).some(Boolean)
         );
-        setData(validData.slice(0, 100)); // Limit to 100 rows
+        setData(validData.slice(0, 500)); // Limit to 100 rows
       },
       error: (error) => {
         console.error("Error parsing CSV file:", error);

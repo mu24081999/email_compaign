@@ -48,11 +48,11 @@ const Pricing = ({ isValid }) => {
         "Unlimited Email Warm-ups",
         "5 Email Templates",
         "5 Email Sequences",
-        "Free Email Validation Credits",
-        "Free Virtual Mobile Number",
-        "Free Calling Minutes",
+        "Email Validation Credits",
+        "Virtual Mobile Number",
+        "Calling Minutes",
         "Make & Recieve Calls",
-        "Free Call Logs & Recording",
+        "Call Logs & Recording",
         "SMS Marketing",
         "24/7 Email Support",
       ],
@@ -76,11 +76,11 @@ const Pricing = ({ isValid }) => {
         "Unlimited Email Warm-ups",
         "20 Email Templates",
         "20 Email Sequences",
-        "Free Email Validation Credits",
-        "Free Virtual Mobile Number",
-        "Free Calling Minutes ",
+        "Email Validation Credits",
+        "Virtual Mobile Number",
+        "Calling Minutes ",
         "Make & Recieve Calls",
-        "Free Call Logs & Recording",
+        "Call Logs & Recording",
         "SMS Marketing",
         "24/7 Email Support",
       ],
@@ -104,11 +104,11 @@ const Pricing = ({ isValid }) => {
         "Unlimited Email Warm-ups",
         "Unlimited Email Templates",
         "Unlimited Email Sequences",
-        "Free Email Validation Credits",
-        "Free Virtual Mobile Number",
-        "Free Calling Minutes ",
+        "Email Validation Credits",
+        "Virtual Mobile Number",
+        "Calling Minutes ",
         "Make & Recieve Calls",
-        "Free Call Logs & Recording",
+        "Call Logs & Recording",
         "SMS Marketing",
         "24/7 Email Support",
       ],
@@ -162,8 +162,12 @@ const Pricing = ({ isValid }) => {
               12
             ).toFixed(2),
             discount_amount: (
-              prev?.professional?.original_amount -
-              calculateDiscountAmount(prev.professional.original_amount, 25)
+              (prev?.professional?.original_amount -
+                calculateDiscountAmount(
+                  prev.professional.original_amount,
+                  25
+                )) *
+              12
             ).toFixed(),
           },
           agency: {
@@ -371,7 +375,7 @@ const Pricing = ({ isValid }) => {
               </p>
             </p>
             <span className="text-sm font-semibold text-white">
-              You'll save ${pricing?.starter?.discount_amount} annually
+              You'll save ${pricing?.professional?.discount_amount} annually
             </span>
             <p className="mt-6 text-base leading-7 text-white">
               {pricing?.professional?.description}

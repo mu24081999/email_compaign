@@ -4,7 +4,16 @@
   display: flex;
 }
 .react-datepicker__header {
-  background-color: #79acf8;
+  background-color: #000000;
+}
+.react-datepicker__current-month {
+  color: white;
+}
+.react-datepicker-time__header {
+  color: white;
+}
+.react-datepicker__day-name {
+  color: white;
 }
 .react-datepicker__current {
   color: white;
