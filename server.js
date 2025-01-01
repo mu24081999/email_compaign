@@ -40,6 +40,7 @@ app.get("*", (req, res) => {
     req.hostname === "localhost" ||
     req.hostname === "127.0.0.1" ||
     req.hostname === "146.190.175.199" ||
+    req.hostname === "162.0.234.23" ||
     req.hostname === "app.senderside.com"
       ? "build"
       : req.hostname === "127.0.0.1" && "build2";

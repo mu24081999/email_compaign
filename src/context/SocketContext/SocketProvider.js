@@ -11,6 +11,7 @@ const SocketProvider = ({ children }) => {
     "https://localhost:8080";
   const dispatch = useDispatch();
   const socket = useMemo(() => io("https://senderside.com:3000"), []);
+  // const socket = null;
   const [me, setMe] = useState("");
   const [messagesArray, setMessagesArray] = useState([]);
 
@@ -24,7 +25,7 @@ const SocketProvider = ({ children }) => {
         console.log("🚀 ~ socket.on ~ messages:", messages);
         setMessagesArray(messages);
       });
-      socket.on("message_recieved", (messages) => {
+      socket.on("sms-recieved", (messages) => {
         setMessagesArray(messages);
       });
       socket.emit("user-connected", user_id);
