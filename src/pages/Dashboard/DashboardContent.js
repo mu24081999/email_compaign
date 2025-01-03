@@ -185,14 +185,14 @@ const DashboardContent = () => {
     <div>
       {/* <Tabs tabsData={tabsData} /> */}
       <Dashboard />
-      <div className="p-5 bg-white border rounded-xl shadow-lg mt-5">
+      <div className="p-5 dark:bg-gray-800 border rounded-xl shadow-lg mt-5">
         {isLoading ? (
           <Loader />
         ) : (
           <LineChart emailData={emailsData} mainTitle={"Emails Report"} />
         )}
       </div>
-      <div className="p-5 bg-white border rounded-xl shadow-lg mt-5">
+      <div className="p-5 dark:bg-gray-800  dark:text-white border rounded-xl shadow-lg mt-5">
         {isLoading ? (
           <Loader />
         ) : (

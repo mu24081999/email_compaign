@@ -78,6 +78,9 @@ const Bar = ({ leadsData, mainTitle }) => {
           title: {
             text: mainTitle,
             align: "left",
+            style: {
+              color: "inherit", // Tailwind will manage text color
+            },
           },
         },
       }));

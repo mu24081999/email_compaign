@@ -53,7 +53,7 @@ const DatePickerFeild = React.forwardRef((props, ref) => {
           }
           return (
             <div className="flex flex-col">
-              {label && <div className="font-extrabold">{label}</div>}
+              {label && <div className="font-extrabold pb-2">{label}</div>}
               <DatePicker
                 {...field}
                 ref={ref}
@@ -76,9 +76,7 @@ const DatePickerFeild = React.forwardRef((props, ref) => {
                   setFocusState(false);
                 }}
                 dateFormat={showYearPicker ? "yyyy" : "yyyy-MM-DD HH:mm:ss"}
-                className={`form-control text-lg  ${
-                  isDisabled ? "opacity-50" : ""
-                }
+                className={` text-lg  ${isDisabled ? "opacity-50" : ""}
                                    ${isHighLight && " focus:bg-dark   "}`}
                 placeholder={props.placeholder ? props.placeholder : ""}
                 disabled={isDisabled}

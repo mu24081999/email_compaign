@@ -40,16 +40,16 @@ const Shadule = () => {
     setTimezones(response.data);
   }, []);
   const formSubmit = (data) => {
-    const from = data?.from; // Your time string
-    const to = data?.to; // Your time string
+    const from = moment(data?.from).format("YYYY-MM-DD hh:mm:ss"); // Your time string
+    const to = moment(data?.to).format("YYYY-MM-DD hh:mm:ss"); // Your time string
 
     const params = {
       compaign_id: parseInt(id),
       user_id: user_id,
       name: data.name,
       from: from,
-      to: to,
-      // timezone: data?.timezone?.value,
+      // to: null,
+      timezone: data?.timezone?.value,
     };
     console.log(params);
     dispatch(addScheduleApi(token, params));
@@ -276,16 +276,32 @@ const Shadule = () => {
             <DatePickerFeild
               name="from"
               placeHolder="From"
-              // defaultValue={moment(new Date()).format("YYYY-MM-DD")}
               label="Start Date/Time"
               minDate={Date.now()}
+              errors={errors}
+              control={control}
+              // defaultValue={moment(new Date()).format("YYYY-MM-DD")}
               // showYearPicker={true}
               // minTime={moment(new Date().getTime()).format("hh:mm:ss")}
               // maxTime={moment("23:59:00").format("hh:mm:ss")}
-              errors={errors}
-              control={control}
             />
-            <DatePickerFeild
+            <ReactSelectField
+              name="timezone"
+              placeholder="Timezone"
+              control={control}
+              errors={errors}
+              label={"Timezone"}
+              options={
+                Array.isArray(timezones) &&
+                timezones?.map((zone, index) => {
+                  return {
+                    label: zone,
+                    value: zone,
+                  };
+                })
+              }
+            />
+            {/* <DatePickerFeild
               name="to"
               placeHolder="To"
               // defaultValue={moment(new Date()).format("YYYY-MM-DD")}
@@ -296,7 +312,7 @@ const Shadule = () => {
               // maxTime={moment("23:59:00").format("hh:mm:ss")}
               errors={errors}
               control={control}
-            />
+            /> */}
           </div>
         </div>
         <div>
