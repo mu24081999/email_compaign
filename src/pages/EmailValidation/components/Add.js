@@ -68,7 +68,7 @@ const Add = () => {
     <form onSubmit={handleSubmit(formSubmit)}>
       <div>
         <Heading
-          text={"Add your emails for validation process"}
+          text={"Add only google email accounts for validation process"}
           className="text-center text-2xl font-extrabold my-5"
         />
       </div>
