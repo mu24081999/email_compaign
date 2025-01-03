@@ -9,7 +9,8 @@ const EmailValidation = () => {
   const dispatch = useDispatch();
   const { token, user_id } = useSelector((state) => state.auth);
   useEffect(() => {
-    dispatch(getUserValidatedEmails(token, user_id));
+    const query = `page=1`;
+    dispatch(getUserValidatedEmails(token, user_id, query));
   }, [token, user_id, dispatch]);
   return (
     <Layout

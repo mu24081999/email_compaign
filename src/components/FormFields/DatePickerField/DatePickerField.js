@@ -61,7 +61,7 @@ const DatePickerFeild = React.forwardRef((props, ref) => {
                 autoFocus={false}
                 placeholderText={placeHolder ? placeHolder : "Select Date"}
                 onChange={(e) => {
-                  field.onChange(moment(e).format("yyyy-MM-DD HH:mm:ss"));
+                  field.onChange(moment(e).format("YYYY-MM-DD hh:mm:ss"));
                   if (onChange) {
                     onChange(e, props?.name);
                   }
@@ -75,7 +75,7 @@ const DatePickerFeild = React.forwardRef((props, ref) => {
                   field.onBlur();
                   setFocusState(false);
                 }}
-                dateFormat={showYearPicker ? "yyyy" : "yyyy-MM-DD HH:mm:ss"}
+                dateFormat={showYearPicker ? "yyyy" : "YYYY-MM-DD hh:mm:ss"}
                 className={` text-lg  ${isDisabled ? "opacity-50" : ""}
                                    ${isHighLight && " focus:bg-dark   "}`}
                 placeholder={props.placeholder ? props.placeholder : ""}
@@ -86,7 +86,7 @@ const DatePickerFeild = React.forwardRef((props, ref) => {
                 minTime={props?.minTime}
                 showTimeSelect
                 isClearable
-                timeFormat="HH:mm:ss"
+                timeFormat="hh:mm:ss"
                 timeIntervals={15}
                 showYearPicker={showYearPicker ? showYearPicker : false}
                 {...others}

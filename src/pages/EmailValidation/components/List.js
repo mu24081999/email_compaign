@@ -16,6 +16,7 @@ const List = ({ user_id, token, dispatch }) => {
   const fetchData = (page) => {
     const query = `page=${page}`;
     dispatch(getUserValidatedEmails(token, user_id, query));
+    console.log("🚀 ~ fetchData ~ query:", query);
   };
   useEffect(() => {
     const data = [];

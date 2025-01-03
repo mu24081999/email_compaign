@@ -277,7 +277,7 @@ const Shadule = () => {
               name="from"
               placeHolder="From"
               label="Start Date/Time"
-              minDate={Date.now()}
+              minDate={new Date()}
               errors={errors}
               control={control}
               // defaultValue={moment(new Date()).format("YYYY-MM-DD")}
