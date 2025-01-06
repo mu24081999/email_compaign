@@ -17,6 +17,7 @@ import moment from "moment";
 import { FaTrashAlt } from "react-icons/fa";
 import DatePickerFeild from "../../../../../../../components/FormFields/DatePickerField/DatePickerField";
 import { now } from "lodash";
+
 const Shadule = () => {
   const {
     handleSubmit,
@@ -27,6 +28,9 @@ const Shadule = () => {
   } = useForm({
     defaultValues: {},
   });
+  const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone; // Get user's timezone
+  console.log("🚀 ~ Shadule ~ userTimezone:", userTimezone);
+
   const dispatch = useDispatch();
   const { user_id, token } = useSelector((state) => state.auth);
   const { schedules } = useSelector((state) => state.schedule);
@@ -61,11 +65,6 @@ const Shadule = () => {
     dispatch(getSchedulesApi(token, query));
   }, [getTimezones, token, dispatch, user_id]);
   useEffect(() => {
-    console.log(
-      selectedSchedule?.from,
-      new Date(selectedSchedule?.from),
-      "date"
-    );
     setValue("name", selectedSchedule?.name);
     // setValue("from", {
     //   label: moment(selectedSchedule?.from).format("HH:mm a"),
@@ -77,10 +76,7 @@ const Shadule = () => {
       // new Date(selectedSchedule?.from)
     );
     setValue("to", moment(selectedSchedule?.to).format("DD-MM-YYYY hh:mm:ss"));
-    setValue("timezone", {
-      label: selectedSchedule?.timezone,
-      value: selectedSchedule?.timezone,
-    });
+    setValue("timezone", selectedSchedule?.timezone);
   }, [selectedSchedule, setValue]);
   const deleteSchedule = (id) => {
     dispatch(deleteScheduleApi(token, id, user_id));
@@ -291,7 +287,21 @@ const Shadule = () => {
               // minTime={moment(new Date().getTime()).format("hh:mm:ss")}
               // maxTime={moment("23:59:00").format("hh:mm:ss")}
             />
-            <ReactSelectField
+            <div className="w-full">
+              <Heading
+                className="font-extrabold pb-2"
+                text={"Timezone"}
+              ></Heading>
+              <InputField
+                disabled={true}
+                defaultValue={userTimezone}
+                name="timezone"
+                control={control}
+                label="Timezone"
+                errors={errors}
+              />
+            </div>
+            {/* <ReactSelectField
               name="timezone"
               placeholder="Timezone"
               control={control}
@@ -306,7 +316,7 @@ const Shadule = () => {
                   };
                 })
               }
-            />
+            /> */}
             {/* <DatePickerFeild
               name="to"
               placeHolder="To"

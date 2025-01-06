@@ -56,9 +56,9 @@ const WarmupForm = ({ selectedEmail }) => {
     <div>
       <form
         onSubmit={handleSubmit(formSubmit)}
-        className=" overflow-scroll h-[70vh] flex flex-col gap-5"
+        className=" overflow-scroll flex flex-col gap-5"
       >
-        <div className="p-8 rounded-md shadow-md border bg-white dark:bg-gray-800 border-gray-200">
+        <div className="pt-3 px-3 rounded-md shadow-md border bg-white dark:bg-gray-800 border-gray-200">
           <div className=" justify-between">
             <div className="border-b  flex gap-5 ">
               <div>
@@ -69,7 +69,7 @@ const WarmupForm = ({ selectedEmail }) => {
                 className=" text-xl font-extrabold"
               />
             </div>
-            <div className="py-5 grid lg:grid-cols-2 gap-5 sm:grid-cols-1">
+            <div className="py-3 grid lg:grid-cols-2 gap-5 sm:grid-cols-1">
               <InputField
                 name="firstname"
                 placeholder="First Name"
@@ -87,7 +87,7 @@ const WarmupForm = ({ selectedEmail }) => {
             </div>
           </div>
         </div>
-        <div className="p-8 rounded-md shadow-md border bg-white dark:bg-gray-800 border-gray-200">
+        {/* <div className="p-8 rounded-md shadow-md border bg-white dark:bg-gray-800 border-gray-200">
           <div className=" justify-between">
             <div className="border-b  flex gap-5 ">
               <div>
@@ -111,8 +111,8 @@ const WarmupForm = ({ selectedEmail }) => {
               />
             </div>
           </div>
-        </div>
-        <div className="p-8 rounded-md shadow-md border bg-white dark:bg-gray-800 border-gray-200">
+        </div> */}
+        <div className="px-3 pt-3 rounded-md shadow-md border bg-white dark:bg-gray-800 border-gray-200">
           <div className=" justify-between">
             <div className="border-b  flex gap-5 ">
               <div>
@@ -148,7 +148,7 @@ const WarmupForm = ({ selectedEmail }) => {
             </div>
           </div>
         </div>
-        <div className="p-8 rounded-md shadow-md border bg-white dark:bg-gray-800 border-gray-200">
+        {/* <div className="p-8 rounded-md shadow-md border bg-white dark:bg-gray-800 border-gray-200">
           <div className=" justify-between">
             <div className="border-b  flex gap-5 ">
               <div>
@@ -178,10 +178,12 @@ const WarmupForm = ({ selectedEmail }) => {
               />
             </div>
           </div>
+        </div> */}
+        <div className="flex justify-end">
+          <Button type="submit" className="py-3 ">
+            Submit
+          </Button>
         </div>
-        <Button type="submit" className="py-3">
-          Submit
-        </Button>
       </form>
     </div>
   );
