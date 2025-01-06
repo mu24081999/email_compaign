@@ -73,8 +73,8 @@ const Shadule = () => {
     // });
     setValue(
       "from",
-      // selectedSchedule?.from
-      new Date(selectedSchedule?.from)
+      selectedSchedule?.from
+      // new Date(selectedSchedule?.from)
     );
     setValue("to", moment(selectedSchedule?.to).format("DD-MM-YYYY hh:mm:ss"));
     setValue("timezone", {
