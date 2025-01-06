@@ -31,6 +31,8 @@ const Options = () => {
   });
   const { isCollapsed } = useMain();
   const emailTypeWatcher = watch("email_type");
+  const scheduleWatcher = watch("schedule_id");
+  console.log("🚀 ~ Options ~ scheduleWatcher:", scheduleWatcher);
   const dispatch = useDispatch();
   const { templates } = useSelector((state) => state.template);
   const { user_id, token } = useSelector((state) => state.auth);

@@ -61,6 +61,11 @@ const Shadule = () => {
     dispatch(getSchedulesApi(token, query));
   }, [getTimezones, token, dispatch, user_id]);
   useEffect(() => {
+    console.log(
+      selectedSchedule?.from,
+      new Date(selectedSchedule?.from),
+      "date"
+    );
     setValue("name", selectedSchedule?.name);
     // setValue("from", {
     //   label: moment(selectedSchedule?.from).format("HH:mm a"),
@@ -68,7 +73,8 @@ const Shadule = () => {
     // });
     setValue(
       "from",
-      moment(selectedSchedule?.from).format("DD-MM-YYYY hh:mm:ss")
+      // selectedSchedule?.from
+      new Date(selectedSchedule?.from)
     );
     setValue("to", moment(selectedSchedule?.to).format("DD-MM-YYYY hh:mm:ss"));
     setValue("timezone", {
