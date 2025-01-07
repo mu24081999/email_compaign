@@ -113,16 +113,23 @@ const Pricing = ({ isValid }) => {
         "24/7 Email Support",
       ],
     },
-    advance: {
+    free: {
+      name: "Free Trial",
+      monthly_price: 0.0,
+      description:
+        "Enjoy access to our full suite of tools and services for 30 days without any commitment. No credit card required to sign up.",
       benefits: [
         "Common-Box",
-        "Unlimited Contacts Uploads",
-        "Unlimited Emails Monthly",
-        "Unlimited Emails Annually",
+        "500 Contacts Uploads",
+        "500 Emails",
         "Unlimited Email Warm-ups",
-        "Unlimited Email Templates",
-        "Unlimited Email Sequences",
-        "Advance Email Analytics",
+        "2 Email Templates",
+        "2 Email Sequences",
+        "Email Validationd",
+        "Virtual Mobile Number",
+        "Make & Recieve Calls",
+        "Call Logs & Recording",
+        "SMS Marketing",
         "24/7 Email Support",
       ],
     },
@@ -259,6 +266,19 @@ const Pricing = ({ isValid }) => {
     setIsOpen(false);
     setIsSubscribed(true);
   };
+  const handleFreeTrial = async () => {
+    const data = {
+      user_id: user_id,
+      plan_name: "FreeTier",
+      monthly_price: 0.0,
+      discount_percentage: 0,
+      start_date: moment(Date.now()).format("YYYY-MM-DDTHH:mm:ss"),
+      end_date: moment(new Date(getDateAfterOneMonth())).format("YYYY-MM-DD"),
+      yearly_price: 0.0,
+    };
+    await dispatch(createSubscriptionApi(token, data));
+    setIsSubscribed(true);
+  };
   useEffect(() => {
     if (isSubscribed) {
       navigateTo("/");
@@ -299,7 +319,55 @@ const Pricing = ({ isValid }) => {
         <div className="text-center font-bold">
           Switch to yearly for getting 25% off.
         </div>
-        <div className=" mx-auto mt-5 grid max-w-lg grid-cols-1 items-center gap-y-6 sm:gap-y-0 lg:max-w-6xl lg:grid-cols-3 gap-5">
+        <div className=" mx-auto mt-5 grid w-full grid-cols-1 items-center gap-y-6 sm:gap-y-0 px-5 lg:grid-cols-4 gap-5">
+          <div className="rounded-3xl bg-white/60 p-8 ring-1 ring-gray-900/10 sm:mx-8 sm:p-10 lg:mx-0">
+            <h3
+              id="tier-hobby"
+              className="text-base font-semibold leading-7 text-indigo-600"
+            >
+              Free Trial
+            </h3>
+            <p className="mt-4 flex items-baseline gap-x-2">
+              <del className="text-xl font-semibold text-gray-900">
+                ${pricing?.free?.monthly_price}
+              </del>
+              <span className="text-5xl font-semibold tracking-tight text-gray-900">
+                ${pricing?.free?.monthly_price}
+              </span>
+            </p>
+            <p className="mt-6 text-base leading-7 text-gray-600">
+              {pricing?.free?.description}
+            </p>
+            <ul
+              role="list"
+              className="mt-8 space-y-3 text-sm leading-6 text-gray-600 sm:mt-10"
+            >
+              {pricing?.free?.benefits?.map((item, index) => (
+                <li className="flex gap-x-3" key={index}>
+                  <svg
+                    className="h-6 w-5 flex-none text-indigo-600"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                    aria-hidden="true"
+                    data-slot="icon"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                  {item}
+                </li>
+              ))}
+            </ul>
+            <button
+              onClick={() => handleFreeTrial()}
+              className="w-full mt-8 block rounded-md px-3.5 py-2.5 text-center text-sm font-semibold text-indigo-600 ring-1 ring-inset ring-indigo-200 hover:ring-indigo-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 sm:mt-10"
+            >
+              Get started today
+            </button>
+          </div>
           <div className="rounded-3xl bg-white/60 p-8 ring-1 ring-gray-900/10 sm:mx-8 sm:p-10 lg:mx-0">
             <h3
               id="tier-hobby"
@@ -467,61 +535,6 @@ const Pricing = ({ isValid }) => {
               Get started today
             </button>
           </div>
-          {/* <div className="rounded-3xl bg-white/60 p-8 ring-1 ring-gray-900/10 sm:mx-8 sm:p-10 lg:mx-0 border-2 border-yellow-400">
-            <h3
-              id="tier-hobby"
-              className="text-base font-semibold leading-7 text-yellow-400 flex justify-between"
-            >
-              Agency
-              <>
-                <LuCrown size={40} />
-              </>
-            </h3>
-            <p className="mt-4 flex items-baseline gap-x-2">
-              <del className="text-xl font-semibold text-gray-900">
-                ${pricing?.agency?.original_amount}
-              </del>
-              <span className="text-5xl font-semibold tracking-tight text-gray-900">
-                ${pricing?.agency?.monthly_price}
-              </span>
-              <span className="text-base text-gray-500">/month</span>
-            </p>
-            <span className="text-sm font-semibold text-gray-900">
-              You'll save ${pricing?.agency?.discount_amount} annually
-            </span>
-            <p className="mt-6 text-base leading-7 text-gray-600">
-              {pricing?.agency?.description}
-            </p>
-            <ul
-              role="list"
-              className="mt-8 space-y-3 text-sm leading-6 text-gray-600 sm:mt-10"
-            >
-              {pricing?.agency?.benefits?.map((item, index) => (
-                <li className="flex gap-x-3" key={index}>
-                  <svg
-                    className="h-6 w-5 flex-none text-indigo-600"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    aria-hidden="true"
-                    data-slot="icon"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z"
-                      clip-rule="evenodd"
-                    />
-                  </svg>
-                  {item}
-                </li>
-              ))}
-            </ul>
-            <button
-              onClick={() => getPaymentIntend(pricing?.agency)}
-              className="w-full mt-8 block rounded-md px-3.5 py-2.5 text-center text-sm font-semibold text-indigo-600 ring-1 ring-inset ring-indigo-200 hover:ring-indigo-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 sm:mt-10"
-            >
-              Get started today
-            </button>
-          </div> */}
         </div>
       </div>
       <div>

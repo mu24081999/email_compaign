@@ -5,7 +5,7 @@ import WarmupForm from "./components/WarmupForm";
 import UpdateStatus from "./components/UpdateStatus";
 import { getWarmupApi } from "../../../../../redux/services/warmup";
 import { useDispatch, useSelector } from "react-redux";
-const ModalBody = ({ selectedEmail }) => {
+const ModalBody = ({ selectedEmail, handleClose }) => {
   const dispatch = useDispatch();
   const { user_id, token } = useSelector((state) => state.auth);
 
@@ -16,12 +16,14 @@ const ModalBody = ({ selectedEmail }) => {
     {
       id: "status",
       label: "Status",
-      content: <UpdateStatus />,
+      content: <UpdateStatus handleClose={handleClose} />,
     },
     {
       id: "settings",
       label: "Settings",
-      content: <WarmupForm selectedEmail={selectedEmail} />,
+      content: (
+        <WarmupForm selectedEmail={selectedEmail} handleClose={handleClose} />
+      ),
     },
   ];
 

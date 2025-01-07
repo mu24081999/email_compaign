@@ -1,11 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Analystics from "./components/Analystics/Analystics";
 import Leads from "./components/Leads/Leads";
 import Tabs from "../../../../../components/Tabs";
 import Shadule from "./components/Shedule/Shadule";
 import Options from "./components/Options/Options";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import {
   compaignAnalytics,
   pauseCompaignRec,
@@ -18,12 +18,22 @@ import { CiPlay1 } from "react-icons/ci";
 const CompaignContent = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
+  const [activeTabId, setActiveTabId] = useState(null);
+  const location = useLocation(); // Access the current location object
+
+  // Extract query parameters
+  const searchParams = new URLSearchParams(location.search);
+  const redirected = searchParams.get("redirected"); // Get "redirected" from "?redirected=true"
+
   const { token, user_id } = useSelector((state) => state.auth);
   const {
     compaignAnalytics: analystics,
     compaign,
     isLoading,
   } = useSelector((state) => state.compaign);
+  const setActiveTabId_ = (id) => {
+    setActiveTabId(id);
+  };
   const tabsData = [
     {
       id: "analytics",
@@ -52,7 +62,7 @@ const CompaignContent = () => {
     {
       id: "trigger",
       label: "Trigger Campaign",
-      content: <Options />,
+      content: <Options setActiveTabId_={setActiveTabId_} />,
     },
   ];
   const pauseCompaign = () => {
@@ -72,6 +82,11 @@ const CompaignContent = () => {
   useEffect(() => {
     dispatch(compaignAnalytics(token, id));
   }, [token, id, dispatch]);
+  useEffect(() => {
+    if (redirected) {
+      setActiveTabId("leads");
+    }
+  }, [redirected]);
   return (
     <div>
       <div className="float-end px-8">
@@ -99,7 +114,7 @@ const CompaignContent = () => {
           )
         )}
       </div>
-      <Tabs tabsData={tabsData} />
+      <Tabs tabsData={tabsData} activeTabId={activeTabId} />
     </div>
   );
 };

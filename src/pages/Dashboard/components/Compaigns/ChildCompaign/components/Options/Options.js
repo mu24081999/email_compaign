@@ -19,7 +19,7 @@ import {
 import { getEmailAccountsApi } from "../../../../../../../redux/services/email";
 import { toast } from "react-toastify";
 import useMain from "../../../../../../../context/Main/useMain";
-const Options = () => {
+const Options = ({ setActiveTabId_ }) => {
   const {
     handleSubmit,
     control,
@@ -72,6 +72,7 @@ const Options = () => {
       return toast.error("Please select a sequence to lounch the template");
     }
     dispatch(sendCompaignApi(token, params, params?.compaign_id));
+    setActiveTabId_("analytics");
     // dispatch(addOptionsApi(token, params));
   };
   useEffect(() => {

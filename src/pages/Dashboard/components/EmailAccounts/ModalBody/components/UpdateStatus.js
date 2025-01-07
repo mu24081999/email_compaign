@@ -6,7 +6,7 @@ import Button from "../../../../../../components/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { updateWarmupRec } from "../../../../../../redux/services/warmup";
 
-const UpdateStatus = () => {
+const UpdateStatus = ({ handleClose }) => {
   const {
     handleSubmit,
     control,
@@ -25,6 +25,7 @@ const UpdateStatus = () => {
       enabled: data?.status,
     };
     dispatch(updateWarmupRec(token, params, warmupData?.id));
+    handleClose();
   };
   useEffect(() => {
     setValue("status", warmupData?.enabled === 1 ? true : false);

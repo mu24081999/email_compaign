@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Button from "./Button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Table = ({
   columns,
@@ -13,6 +13,7 @@ const Table = ({
   pagination = true,
   actions = true,
 }) => {
+  const navigateTo = useNavigate();
   const [selectedRows, setSelectedRows] = useState([]);
   const [sortDirection, setSortDirection] = useState({});
   const [statusFilter, setStatusFilter] = useState("");
@@ -163,7 +164,11 @@ const Table = ({
                   </td>
                 )}
                 {columns?.map((col) => (
-                  <td key={col.accessor} className="p-3 text-center">
+                  <td
+                    key={col.accessor}
+                    onClick={() => col.type === "link" && navigateTo(row?.url)}
+                    className="p-3 text-center"
+                  >
                     {col.type === "actions" ? (
                       <div className="flex justify-center gap-4 ">
                         {row?.actions?.map((action) => (

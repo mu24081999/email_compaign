@@ -35,6 +35,8 @@ const EmailEditorComponent = () => {
   const [loading, setLoading] = useState(true);
   const [selectedContent, setSelectedContent] = useState({});
   const [showSlides, setShowSlides] = useState(true);
+  const [activeTabId, setActiveTabId] = useState(null);
+
   // Placeholder Data for testing (you can use dynamic user data instead)
   const sampleUserData = {
     firstname: "John",
@@ -69,6 +71,7 @@ const EmailEditorComponent = () => {
       };
       console.log(params);
       const isAdded = await dispatch(addTemplateRec(token, params));
+      setActiveTabId("template_list");
     });
   };
 
@@ -244,7 +247,7 @@ const EmailEditorComponent = () => {
   return (
     <div className="">
       {/* Email Editor Section */}
-      <Tabs tabsData={tabsData} />
+      <Tabs tabsData={tabsData} activeTabId={activeTabId} />
     </div>
   );
 };

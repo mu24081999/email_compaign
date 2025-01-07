@@ -121,7 +121,10 @@ const EmailAccounts = () => {
               isOpen={isOpen}
               onClose={handleClose}
               title="Warm-Up "
-              body=<ModalBody selectedEmail={selectedEmail} />
+              body=<ModalBody
+                handleClose={handleClose}
+                selectedEmail={selectedEmail}
+              />
               // onSave={handleSave}
               saveButtonText="Save Changes"
               closeButtonText="Dismiss"

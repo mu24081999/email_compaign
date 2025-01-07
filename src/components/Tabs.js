@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-const Tabs = ({ tabsData, className, noContentPadding }) => {
+const Tabs = ({ tabsData, className, noContentPadding, activeTabId }) => {
   // State to track the currently active tab
   const [activeTab, setActiveTab] = useState(tabsData[0]?.id || "");
 
@@ -8,7 +8,12 @@ const Tabs = ({ tabsData, className, noContentPadding }) => {
   const handleTabClick = (tabId) => {
     setActiveTab(tabId);
   };
-
+  useEffect(() => {
+    if (activeTabId) {
+      setActiveTab(activeTabId);
+    }
+    return () => {};
+  }, [activeTabId]);
   return (
     <div className={`${className} h-fit overflow-scrol`}>
       {/* Tabs navigation */}

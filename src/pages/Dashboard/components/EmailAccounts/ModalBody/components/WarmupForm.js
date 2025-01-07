@@ -8,7 +8,7 @@ import { TbLocation } from "react-icons/tb";
 import Button from "../../../../../../components/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { addWarmupRec } from "../../../../../../redux/services/warmup";
-const WarmupForm = ({ selectedEmail }) => {
+const WarmupForm = ({ selectedEmail, handleClose }) => {
   const {
     handleSubmit,
     control,
@@ -39,6 +39,7 @@ const WarmupForm = ({ selectedEmail }) => {
     };
     console.log("🚀 ~ formSubmit ~ params:", params);
     dispatch(addWarmupRec(token, params));
+    handleClose();
     return {};
   };
 

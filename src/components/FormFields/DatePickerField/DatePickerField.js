@@ -61,7 +61,8 @@ const DatePickerFeild = React.forwardRef((props, ref) => {
                 autoFocus={false}
                 placeholderText={placeHolder ? placeHolder : "Select Date"}
                 onChange={(e) => {
-                  field.onChange(moment(e).format("YYYY-MM-DD hh:mm:ss"));
+                  // field.onChange(moment(e).format("YYYY-MM-DD hh:mm:ss"));
+                  field.onChange(e);
                   if (onChange) {
                     onChange(e, props?.name);
                   }

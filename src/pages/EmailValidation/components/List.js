@@ -8,6 +8,7 @@ import { FaDownload } from "react-icons/fa";
 const List = ({ user_id, token, dispatch }) => {
   const { emails } = useSelector((state) => state.validation);
   const [data, setData] = useState([]);
+  console.log("🚀 ~ List ~ data:", data);
   const [pagination, setPagination] = useState({});
   const columns = [
     { label: "Email", accessor: "email" },
@@ -37,7 +38,7 @@ const List = ({ user_id, token, dispatch }) => {
     const invalidEmails = [];
 
     array.forEach((item) => {
-      if (item.valid === true) {
+      if (item.valid === "VALID") {
         validEmails.push(item.email);
       } else {
         invalidEmails.push(item.email);
@@ -69,10 +70,14 @@ const List = ({ user_id, token, dispatch }) => {
   }
 
   return (
-    <div className="bg-white ">
+    <div className=" flex flex-col gap-5 ">
       <div className="flex justify-end">
-        <Button className="py-3 bg-black" onClick={() => downloadCSV(data)}>
-          <FaDownload />
+        <Button
+          className="py-3 flex gap-2 bg-black"
+          onClick={() => downloadCSV(data)}
+        >
+          <FaDownload className="mt-1" />
+          <span> Export Emails</span>
         </Button>
       </div>
       <Table

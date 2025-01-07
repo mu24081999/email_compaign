@@ -25,7 +25,6 @@ const Content = () => {
   const { paymentIntend } = useSelector((state) => state.subscription);
   const { token, user_id } = useSelector((state) => state.auth);
   const { logs } = useSelector((state) => state.logs);
-  console.log("🚀 ~ Content ~ logs:", logs);
   const { wallet } = useSelector((state) => state.wallet);
   const [isOpen, setIsOpen] = useState(false);
   const handleClose = () => {
@@ -193,7 +192,7 @@ const Content = () => {
               <ul className=" list-disc px-5 grid lg:grid-cols-2 sm:grid-cols-1 md:grid-cols-2 p-3 bg-gray-100 dark:bg-gray-900">
                 <li className="flex gap-5 ">
                   <span className="font-bold">Inbound:</span>
-                  <span>{"0,028"}/min</span>
+                  <span>{"0.028"}/min</span>
                 </li>
                 <li className="flex gap-5 ">
                   <span className="font-bold">Outbound:</span>

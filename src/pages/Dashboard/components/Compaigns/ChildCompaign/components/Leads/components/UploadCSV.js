@@ -91,11 +91,17 @@ const UploadCSV = ({ close }) => {
                       />
                     </svg>
                   )}
-                  <p className="mb-2 text-sm text-gray-500">
+                  <p className="mb-2 text-sm text-gray-500 text-center">
                     <span className="font-semibold">
                       Click to upload CSV file
                     </span>{" "}
                     or drag and drop
+                    <p>
+                      {" "}
+                      Please make sure you've added columns exactly named
+                      firstname, lastname, email in small letters. Otherwise,
+                      you'll face uploading contacts.
+                    </p>
                   </p>
                 </div>
                 <input

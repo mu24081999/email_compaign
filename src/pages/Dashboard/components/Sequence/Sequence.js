@@ -101,10 +101,7 @@ const Sequence = () => {
   const [currentTemplate, setCurrentTemplate] = useState(null);
   const [selectedSequence, setSelectedSequence] = useState(null);
   const [selectedEmail, setSelectedEmail] = useState(null);
-  const sampleUserData = {
-    firstname: "John",
-    email: "john.doe@example.com",
-  };
+  const [activeTabId, setActiveTabId] = useState(null);
   // Function to replace placeholders in exported HTML
   const replacePlaceholdersInHtml = (html, data) => {
     return html.replace(/\{\{(.*?)\}\}/g, (_, key) => data[key.trim()] || "");
@@ -121,6 +118,7 @@ const Sequence = () => {
     };
     // console.log("params: ", params);
     dispatch(addSequenceRec(token, params));
+    setActiveTabId("sequence_list");
   };
 
   useEffect(() => {
@@ -239,7 +237,7 @@ const Sequence = () => {
               }}
             />
             <p>
-              Add firstname,lastname and email in the format {"{{firstname}}"}{" "}
+              Add firstname, lastname and email in the format {"{{firstname}}"}{" "}
               to include in the sequence
             </p>
           </div>
@@ -282,7 +280,7 @@ const Sequence = () => {
     <Layout
       component={
         <>
-          <Tabs tabsData={tabsData} />
+          <Tabs tabsData={tabsData} activeTabId={activeTabId} />
         </>
       }
     />

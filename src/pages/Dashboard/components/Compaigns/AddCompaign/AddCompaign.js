@@ -25,7 +25,7 @@ const AddCompaign = () => {
     };
     const is_added = await dispatch(addCompaignRec(token, params));
     if (is_added?.done) {
-      navigateTo(`/compaign/${is_added?.id}`);
+      navigateTo(`/compaign/${is_added?.id}?redirected=true`);
     }
   };
   return (
