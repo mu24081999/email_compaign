@@ -50,7 +50,6 @@ const Pricing = ({ isValid }) => {
         "5 Email Sequences",
         "Email Validation Credits",
         "Virtual Mobile Number",
-        "Calling Minutes",
         "Make & Recieve Calls",
         "Call Logs & Recording",
         "SMS Marketing",
@@ -78,7 +77,6 @@ const Pricing = ({ isValid }) => {
         "20 Email Sequences",
         "Email Validation Credits",
         "Virtual Mobile Number",
-        "Calling Minutes ",
         "Make & Recieve Calls",
         "Call Logs & Recording",
         "SMS Marketing",
@@ -106,7 +104,6 @@ const Pricing = ({ isValid }) => {
         "Unlimited Email Sequences",
         "Email Validation Credits",
         "Virtual Mobile Number",
-        "Calling Minutes ",
         "Make & Recieve Calls",
         "Call Logs & Recording",
         "SMS Marketing",
@@ -116,8 +113,7 @@ const Pricing = ({ isValid }) => {
     free: {
       name: "Free Trial",
       monthly_price: 0.0,
-      description:
-        "Enjoy access to our full suite of tools and services for 30 days without any commitment. No credit card required to sign up.",
+      description: "Enjoy 14-days free trial",
       benefits: [
         "Common-Box",
         "100 Contacts Uploads",
@@ -261,6 +257,11 @@ const Pricing = ({ isValid }) => {
     setIsOpen(false);
     setIsSubscribed(true);
   };
+  function getDateAfter14Days() {
+    const today = new Date(); // Get the current date
+    today.setDate(today.getDate() + 14); // Add 14 days
+    return today;
+  }
   const handleFreeTrial = async () => {
     const data = {
       user_id: user_id,
@@ -268,7 +269,7 @@ const Pricing = ({ isValid }) => {
       monthly_price: 0.0,
       discount_percentage: 0,
       start_date: moment(Date.now()).format("YYYY-MM-DDTHH:mm:ss"),
-      end_date: moment(new Date(getDateAfterOneMonth())).format("YYYY-MM-DD"),
+      end_date: moment(new Date(getDateAfter14Days())).format("YYYY-MM-DD"),
       yearly_price: 0.0,
     };
     await dispatch(createSubscriptionApi(token, data));

@@ -34,6 +34,24 @@ export const getUserValidatedEmails =
       return dispatch(invalidRequest(error.message));
     }
   };
+export const getValidationCSVList = (token, user_id) => async (dispatch) => {
+  try {
+    dispatch(validationRequestLoading());
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        "x-access-token": token,
+      },
+    };
+    const response = await axios.get(
+      `${backendURL}/validation/emails-csv-data/${user_id}`,
+      config
+    );
+    return response.data.data.emailsData;
+  } catch (error) {
+    return dispatch(invalidRequest(error.message));
+  }
+};
 export const sendValidationEmails = (token, data) => async (dispatch) => {
   try {
     dispatch(validationRequestLoading());

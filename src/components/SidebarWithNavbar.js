@@ -113,6 +113,11 @@ const SidebarWithNavbar = ({ component }) => {
       icon: IoKeypadOutline,
     },
     {
+      name: "Phone Numbers",
+      link: "/phone-numbers",
+      icon: RiContactsBook3Line,
+    },
+    {
       name: "SMS Campaigns",
       link: "/sms",
       icon: MdOutlineSms,
@@ -123,25 +128,22 @@ const SidebarWithNavbar = ({ component }) => {
       icon: FaRocketchat,
     },
     {
+      name: "Wallet",
+      link: "/wallet",
+      icon: IoWalletOutline,
+    },
+
+    {
       name: "A2P Verification",
       link: "/a2p-verification",
       icon: MdOutlineVerifiedUser,
-    },
-    {
-      name: "Phone Numbers",
-      link: "/phone-numbers",
-      icon: RiContactsBook3Line,
     },
     {
       name: "My Subscription",
       link: "/my-subscription",
       icon: TbCalendarDollar,
     },
-    {
-      name: "Wallet",
-      link: "/wallet",
-      icon: IoWalletOutline,
-    },
+
     {
       name: "Account Settings",
       link: "/account-settings",

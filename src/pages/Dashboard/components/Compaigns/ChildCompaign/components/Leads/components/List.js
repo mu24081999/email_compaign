@@ -1,12 +1,20 @@
 import React, { useState } from "react";
 import Table from "../../../../../../../../components/Table";
 import Button from "../../../../../../../../components/Button";
-import { FaTrashAlt } from "react-icons/fa";
+import { FaDownload, FaSearch, FaTrashAlt } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import {
   deleteLeadRec,
   getCompaignLeads,
+  getLeadsCSVData,
 } from "../../../../../../../../redux/services/leads";
+import { IoMdRefresh } from "react-icons/io";
+import InputField from "../../../../../../../../components/FormFields/InputField/InputField";
+import { useForm } from "react-hook-form";
+import { MdDriveFileRenameOutline } from "react-icons/md";
+import DatePickerFeild from "../../../../../../../../components/FormFields/DatePickerField/DatePickerField";
+import Checkbox from "../../../../../../../../components/FormFields/Checkbox/Checkbox";
+import Heading from "../../../../../../../../components/Heading";
 const List = ({
   leadsData,
   handleOpenModal,
@@ -16,6 +24,15 @@ const List = ({
   user_id,
   id,
 }) => {
+  const {
+    handleSubmit,
+    watch,
+    control,
+    setValue,
+    formState: { errors },
+  } = useForm({});
+
+  const [showSearch, setShowSearch] = useState(false);
   const dispatch = useDispatch();
   const columns = [
     { label: "First Name", accessor: "firstname", type: "link" },
@@ -23,7 +40,7 @@ const List = ({
     { label: "Email", accessor: "email" }, // Example of nested accessor
     { label: "Open", accessor: "open" },
     { label: "Open Count", accessor: "open_count" },
-    { label: "Opened At", accessor: "opened_at" },
+    { label: "Last Opened At", accessor: "opened_at" },
 
     // {
     //   label: "Actions",
@@ -48,8 +65,114 @@ const List = ({
 
     dispatch(getCompaignLeads(token, id, query));
   };
+  function exportToCSV(data, filename = "data.csv") {
+    // Extract column names (keys of the first object)
+    const headers = Object.keys(data[0]);
+
+    // Create CSV content
+    const rows = data.map(
+      (row) => headers.map((header) => `"${row[header] ?? ""}"`).join(",") // Escape values and handle nulls
+    );
+
+    // Combine headers and rows
+    const csvContent = [headers.join(","), ...rows].join("\n");
+
+    // Create a Blob and download the file
+    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = filename;
+
+    // Trigger the download
+    link.style.display = "none";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+
+  async function downloadCSV(array) {
+    const list = await dispatch(getLeadsCSVData(token, compaign_id));
+    console.log("🚀 ~ downloadCSV ~ list:", list);
+    exportToCSV(list);
+  }
+  const handleSearch = () => {};
   return (
     <div>
+      <div className="flex gap-3 justify-end pb-3">
+        <Button
+          className="py-3 flex gap-2 bg-black"
+          onClick={() => downloadCSV()}
+        >
+          <FaDownload className="mt-1" />
+          <span> Export Emails</span>
+        </Button>
+        <Button
+          className="py-3 flex gap-2 bg-black"
+          onClick={() => fetchData(1)}
+        >
+          <IoMdRefresh className="mt-1" />
+        </Button>
+        <Button
+          className="py-3 flex gap-2 bg-black"
+          onClick={() => setShowSearch(!showSearch)}
+        >
+          <FaSearch className="mt-1" />
+        </Button>
+      </div>
+      {showSearch && (
+        <div>
+          <form
+            onSubmit={handleSubmit(handleSearch)}
+            className="flex gap-5 py-3"
+          >
+            <div>
+              <DatePickerFeild
+                name="from"
+                noShowTime={true}
+                placeHolder="From"
+                label="Start Date/Time"
+                minDate={new Date()}
+                errors={errors}
+                control={control}
+              />
+            </div>
+            <div className="w-full">
+              <Heading text={"Email Address"} className="font-extrabold pb-2" />
+              <InputField
+                name="email"
+                type="email"
+                control={control}
+                svg={<MdDriveFileRenameOutline />}
+                errors={errors}
+                // placeholder="Enter your email address"
+                label="Email Address"
+                rules={{
+                  required: {
+                    value: true,
+                    message: "Field required!",
+                  },
+                }}
+              />
+            </div>
+
+            <div className="px-5 pt-6">
+              <Checkbox
+                name="from"
+                placeHolder="From"
+                label="Open"
+                minDate={new Date()}
+                errors={errors}
+                control={control}
+              />
+            </div>
+            <div className="pt-7">
+              <Button type="submit" className="py-3 px-2 bg-black">
+                Search
+              </Button>
+            </div>
+          </form>
+        </div>
+      )}
       {Array?.isArray(leadsData) ? (
         <Table
           columns={columns}

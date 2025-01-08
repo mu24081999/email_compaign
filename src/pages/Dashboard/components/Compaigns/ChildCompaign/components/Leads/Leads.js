@@ -54,10 +54,10 @@ const Leads = () => {
 
   return (
     <div>
-      <div className="pb-5">
+      <div className="">
         <Button
           onClick={() => setIsOpen(true)}
-          className="m-auto py-2"
+          className=" py-2 float-start"
           size="md"
         >
           Add Leads
@@ -66,6 +66,7 @@ const Leads = () => {
       <div>
         <List
           id={id}
+          compaign_id={id}
           token={token}
           leadsData={leadsData}
           handleOpenModal={() => setIsOpen(true)}

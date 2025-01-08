@@ -196,7 +196,7 @@ const Content = () => {
                 </li>
                 <li className="flex gap-5 ">
                   <span className="font-bold">Outbound:</span>
-                  <span>{"$0.028"}/min</span>
+                  <span>{"$0.017"}/min</span>
                 </li>
               </ul>
             </div>

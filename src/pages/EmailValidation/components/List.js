@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
 import Table from "../../../components/Table";
 import { useSelector } from "react-redux";
-import { getUserValidatedEmails } from "../../../redux/services/validation";
+import {
+  getUserValidatedEmails,
+  getValidationCSVList,
+} from "../../../redux/services/validation";
 import Button from "../../../components/Button";
-import { FaDownload } from "react-icons/fa";
+import { FaDownload, FaRecycle } from "react-icons/fa";
+import { IoMdRefresh } from "react-icons/io";
 
 const List = ({ user_id, token, dispatch }) => {
   const { emails } = useSelector((state) => state.validation);
@@ -12,13 +16,14 @@ const List = ({ user_id, token, dispatch }) => {
   const [pagination, setPagination] = useState({});
   const columns = [
     { label: "Email", accessor: "email" },
-    { label: "Valid", accessor: "valid" },
+    { label: "Status", accessor: "valid" },
   ];
   const fetchData = (page) => {
     const query = `page=${page}`;
     dispatch(getUserValidatedEmails(token, user_id, query));
     console.log("🚀 ~ fetchData ~ query:", query);
   };
+
   useEffect(() => {
     const data = [];
     Array.isArray(emails?.emailsData) &&
@@ -32,19 +37,19 @@ const List = ({ user_id, token, dispatch }) => {
     setPagination(emails?.pagination);
     setData(data);
   }, [emails]);
-  function downloadCSV(array) {
-    // Separate valid and invalid emails
+  async function downloadCSV(array) {
+    const list = await dispatch(getValidationCSVList(token, user_id));
+    // // Separate valid and invalid emails
     const validEmails = [];
     const invalidEmails = [];
 
-    array.forEach((item) => {
-      if (item.valid === "VALID") {
+    list.forEach((item) => {
+      if (item.valid === true) {
         validEmails.push(item.email);
       } else {
         invalidEmails.push(item.email);
       }
     });
-
     // Prepare CSV data
     let csvContent = "Valid Emails,Invalid Emails\n";
     const maxRows = Math.max(validEmails.length, invalidEmails.length);
@@ -71,13 +76,19 @@ const List = ({ user_id, token, dispatch }) => {
 
   return (
     <div className=" flex flex-col gap-5 ">
-      <div className="flex justify-end">
+      <div className="flex gap-3 justify-end">
         <Button
           className="py-3 flex gap-2 bg-black"
           onClick={() => downloadCSV(data)}
         >
           <FaDownload className="mt-1" />
           <span> Export Emails</span>
+        </Button>
+        <Button
+          className="py-3 flex gap-2 bg-black"
+          onClick={() => fetchData(1)}
+        >
+          <IoMdRefresh className="mt-1" />
         </Button>
       </div>
       <Table

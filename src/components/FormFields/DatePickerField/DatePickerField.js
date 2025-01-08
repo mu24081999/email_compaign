@@ -18,6 +18,7 @@ const DatePickerFeild = React.forwardRef((props, ref) => {
     errors,
     defaultValue,
     isDisabled,
+    noShowTime,
     dateTime = true,
     customStyles,
     onChange,
@@ -85,7 +86,7 @@ const DatePickerFeild = React.forwardRef((props, ref) => {
                 minDate={props?.minDate}
                 maxTime={props?.maxTime}
                 minTime={props?.minTime}
-                showTimeSelect
+                showTimeSelect={noShowTime ? false : true}
                 isClearable
                 timeFormat="hh:mm:ss"
                 timeIntervals={15}

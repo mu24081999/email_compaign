@@ -114,6 +114,24 @@ export const getCompaignLeads =
       dispatch(invalidRequest(e.message));
     }
   };
+export const getLeadsCSVData = (token, compaign_id) => async (dispatch) => {
+  try {
+    dispatch(leadRequestLoading());
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        "x-access-token": token,
+      },
+    };
+    const response = await axios.get(
+      `${backendURL}/lead/compaign-leads-csv-data/${compaign_id}`,
+      config
+    );
+    return response.data.data.leadsData;
+  } catch (e) {
+    dispatch(invalidRequest(e.message));
+  }
+};
 export const deleteLeadRec = (token, ids, compaign_id) => async (dispatch) => {
   try {
     dispatch(leadRequestLoading());
