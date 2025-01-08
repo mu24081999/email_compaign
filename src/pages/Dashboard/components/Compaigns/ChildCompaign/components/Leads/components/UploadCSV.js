@@ -100,7 +100,7 @@ const UploadCSV = ({ close }) => {
                       {" "}
                       Please make sure you've added columns exactly named
                       firstname, lastname, email in small letters. Otherwise,
-                      you'll face uploading contacts.
+                      you'll face problem in uploading leads.
                     </p>
                   </p>
                 </div>

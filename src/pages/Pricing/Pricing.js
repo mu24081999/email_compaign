@@ -120,17 +120,12 @@ const Pricing = ({ isValid }) => {
         "Enjoy access to our full suite of tools and services for 30 days without any commitment. No credit card required to sign up.",
       benefits: [
         "Common-Box",
-        "500 Contacts Uploads",
+        "100 Contacts Uploads",
         "500 Emails",
         "Unlimited Email Warm-ups",
-        "2 Email Templates",
-        "2 Email Sequences",
-        "Email Validationd",
-        "Virtual Mobile Number",
-        "Make & Recieve Calls",
-        "Call Logs & Recording",
-        "SMS Marketing",
-        "24/7 Email Support",
+        "1 Email Templates",
+        "1 Email Sequences",
+        "Standard Email Support",
       ],
     },
   });
@@ -320,7 +315,7 @@ const Pricing = ({ isValid }) => {
           Switch to yearly for getting 25% off.
         </div>
         <div className=" mx-auto mt-5 grid w-full grid-cols-1 items-center gap-y-6 sm:gap-y-0 px-5 lg:grid-cols-4 gap-5">
-          <div className="rounded-3xl bg-white/60 p-8 ring-1 ring-gray-900/10 sm:mx-8 sm:p-10 lg:mx-0">
+          <div className="rounded-3xl border bg-white/60 p-8 ring-1 ring-gray-900/10 sm:mx-8 sm:p-10 lg:mx-0">
             <h3
               id="tier-hobby"
               className="text-base font-semibold leading-7 text-indigo-600"
@@ -368,7 +363,7 @@ const Pricing = ({ isValid }) => {
               Get started today
             </button>
           </div>
-          <div className="rounded-3xl bg-white/60 p-8 ring-1 ring-gray-900/10 sm:mx-8 sm:p-10 lg:mx-0">
+          <div className="rounded-3xl border-2 border-black  bg-white/60 p-8 ring-1 ring-gray-900/10 sm:mx-8 sm:p-10 lg:mx-0">
             <h3
               id="tier-hobby"
               className="text-base font-semibold leading-7 text-indigo-600"
@@ -422,7 +417,7 @@ const Pricing = ({ isValid }) => {
               Get started today
             </button>
           </div>
-          <div className="relative rounded-3xl bg-gray-900 p-8 shadow-2xl ring-1 ring-gray-900/10 sm:p-10">
+          <div className="relative rounded-3xl border-2 border-yellow-500 bg-gray-900 p-8 shadow-2xl ring-1 ring-gray-900/10 sm:p-10">
             <h3
               id="tier-enterprise"
               className="text-base font-semibold leading-7 text-indigo-400"
@@ -478,7 +473,7 @@ const Pricing = ({ isValid }) => {
               Get started today
             </button>
           </div>
-          <div className="rounded-3xl bg-white/60 p-8 ring-1 ring-gray-900/10 sm:mx-8 sm:p-10 lg:mx-0 border-2 border-yellow-400">
+          <div className="rounded-3xl bg-white/60 p-8 ring-1 bg-yellow-400 bg-opacity-5 ring-gray-900/10 sm:mx-8 sm:p-10 lg:mx-0 border-2 border-yellow-400">
             <h3
               id="tier-hobby"
               className="text-base font-semibold leading-7 text-yellow-400 flex justify-between"
