@@ -25,7 +25,6 @@ const CalllingContext = ({ children }) => {
   const { user, token, user_id } = useSelector((state) => state.auth);
   const { callToken } = useSelector((state) => state.twilio);
   const { wallet } = useSelector((state) => state.wallet);
-  console.log("🚀 ~ CalllingContext ~ wallet:", wallet);
   const [callMuted, setCallMuted] = useState(false);
   const [device, setDevice] = useState(null);
   const [connection, setConnection] = useState(null);
@@ -79,6 +78,7 @@ const CalllingContext = ({ children }) => {
           device.destroy();
           setIncoming(false);
           setDevice(undefined);
+          setTimer({ hours: 0, mins: 0, sec: 0 });
           setUserState(USER_STATE.OFFLINE);
         };
       } catch (error) {
@@ -160,6 +160,7 @@ const CalllingContext = ({ children }) => {
         setUserState(USER_STATE.READY);
         setIncoming(false);
         setConnection(null);
+        setTimer({ hours: 0, mins: 0, sec: 0 });
       });
       // Add cancel event listener
       call.on("cancel", () => {
@@ -167,15 +168,18 @@ const CalllingContext = ({ children }) => {
         setIncoming(false);
         setConnection(null);
         setUserState(USER_STATE.READY);
+        setTimer({ hours: 0, mins: 0, sec: 0 });
       });
       call.on("reject", () => {
         setUserState(USER_STATE.READY);
         setIncoming(false);
         console.log("The call was rejected.");
+        setTimer({ hours: 0, mins: 0, sec: 0 });
       });
       call.on("error", (error) => {
         console.log("An error has occurred: ", error);
         setIncoming(false);
+        setTimer({ hours: 0, mins: 0, sec: 0 });
       });
       call.on("mute", (isMuted, call) => {
         isMuted ? setCallMuted(true) : setCallMuted(false);
@@ -207,6 +211,7 @@ const CalllingContext = ({ children }) => {
       setConnection(null);
       setIncoming(false);
       setUserState(USER_STATE.READY);
+      setTimer({ hours: 0, mins: 0, sec: 0 });
     } else {
       console.error("No active connection to disconnect");
     }
@@ -220,6 +225,7 @@ const CalllingContext = ({ children }) => {
   const handleMute = () => {
     if (connection) {
       connection.mute(!callMuted);
+      setCallMuted(!callMuted);
     }
   };
   const handleAcceptCall = () => {

@@ -77,7 +77,13 @@ const DatePickerFeild = React.forwardRef((props, ref) => {
                   field.onBlur();
                   setFocusState(false);
                 }}
-                dateFormat={showYearPicker ? "yyyy" : "YYYY-MM-DD hh:mm:ss"}
+                dateFormat={
+                  showYearPicker
+                    ? "yyyy"
+                    : noShowTime
+                    ? "YYYY-MM-dd"
+                    : "YYYY-MM-dd hh:mm:ss"
+                }
                 className={` text-lg  ${isDisabled ? "opacity-50" : ""}
                                    ${isHighLight && " focus:bg-dark   "}`}
                 placeholder={props.placeholder ? props.placeholder : ""}

@@ -21,6 +21,7 @@ const Add = () => {
   const dispatch = useDispatch();
   const [data, setData] = useState([]);
   const [file, setFile] = useState(null);
+  const [showFilteredData, setShowFilteredData] = useState(false);
   function formatEmails(text) {
     const fomatted = text?.split("\n");
     setData(fomatted);
@@ -62,6 +63,13 @@ const Add = () => {
       emails: validateEmails,
     };
     dispatch(sendValidationEmails(token, params));
+  };
+  const handleFilterData = () => {
+    const filteredData = data.filter(
+      (email, index, self) => self.indexOf(email) === index
+    );
+    setData(filteredData);
+    setShowFilteredData(true);
   };
 
   return (
@@ -138,33 +146,45 @@ const Add = () => {
             <div>Upload CSV file including column exactly named "email"</div>
           </div>
         ) : (
-          <div className=" max-h-[500px] overflow-scroll">
-            {data.length > 0 && (
-              <div className="mt-5 overflow-auto">
-                <h3 className="text-lg font-semibold mb-3">
-                  CSV Data Grouped by Keys:
-                </h3>
-                <table className="table-auto w-full border-collapse border border-gray-300">
-                  <tbody>
-                    <tr className="hover:bg-gray-50">
-                      <td className="border px-4 py-2 font-semibold bg-gray-100">
-                        Emails
-                      </td>
-                      <td className="border px-4 py-2">
-                        <ul className="list-disc pl-5">
-                          {data.map((row, index) => (
-                            <li key={index}>{row || "N/A"}</li>
-                          ))}
-                        </ul>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            )}
-          </div>
+          <></>
+        )}
+        {(showFilteredData || data.length > 0) && (
+          <>
+            <div className=" max-h-[500px] overflow-scroll">
+              {data.length > 0 && (
+                <div className="mt-5 overflow-auto">
+                  <h3 className="text-lg font-semibold mb-3">
+                    Data Grouped by Keys:
+                  </h3>
+                  <table className="table-auto w-full border-collapse border border-gray-300">
+                    <tbody>
+                      <tr className="hover:bg-gray-50">
+                        <td className="border px-4 py-2 font-semibold bg-gray-100">
+                          Emails
+                        </td>
+                        <td className="border px-4 py-2">
+                          <ul className="list-disc pl-5">
+                            {data.map((row, index) => (
+                              <li key={index}>{row || "N/A"}</li>
+                            ))}
+                          </ul>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              )}
+            </div>
+          </>
         )}
         <div className="flex gap-2 py-5">
+          <Button
+            type="button"
+            onClick={handleFilterData}
+            className="bg-gray-700 py-2 mt-5"
+          >
+            Filter Duplicate Emails
+          </Button>
           <Button loading={isLoading} type="submit" className=" py-2 mt-5">
             Submit
           </Button>

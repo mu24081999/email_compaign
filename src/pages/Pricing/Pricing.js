@@ -11,6 +11,8 @@ import {
 import Modal from "../../components/Modal";
 import moment from "moment/moment";
 import { useNavigate } from "react-router-dom";
+import { RxCross1 } from "react-icons/rx";
+
 const Pricing = ({ isValid }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isSubscribed, setIsSubscribed] = useState(false);
@@ -96,8 +98,8 @@ const Pricing = ({ isValid }) => {
       benefits: [
         "$33 Free Credits",
         "Common-Box",
-        "100,000 Contacts Uploads",
-        "20,000 Emails Monthly",
+        "20,000 Contacts Uploads",
+        "100,000 Emails Monthly",
         "Unlimited Emails Annually",
         "Unlimited Email Warm-ups",
         "Unlimited Email Templates",
@@ -115,13 +117,170 @@ const Pricing = ({ isValid }) => {
       monthly_price: 0.0,
       description: "Enjoy 14-days free trial",
       benefits: [
-        "Common-Box",
-        "100 Contacts Uploads",
-        "500 Emails",
-        "Unlimited Email Warm-ups",
-        "1 Email Templates",
-        "1 Email Sequences",
-        "Standard Email Support",
+        {
+          key: "Free Credits",
+          icon: <RxCross1 size={20} className="text-red-600" />,
+        },
+        {
+          key: "Common-Box",
+          icon: (
+            <svg
+              className="h-6 w-5 flex-none text-indigo-600"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              aria-hidden="true"
+              data-slot="icon"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          ),
+        },
+        {
+          key: "100 Contacts Uploads",
+          icon: (
+            <svg
+              className="h-6 w-5 flex-none text-indigo-600"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              aria-hidden="true"
+              data-slot="icon"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          ),
+        },
+        {
+          key: "1000 Emails Sends",
+          icon: (
+            <svg
+              className="h-6 w-5 flex-none text-indigo-600"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              aria-hidden="true"
+              data-slot="icon"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          ),
+        },
+        {
+          key: "10 Email Accounts",
+          icon: (
+            <svg
+              className="h-6 w-5 flex-none text-indigo-600"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              aria-hidden="true"
+              data-slot="icon"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          ),
+        },
+        {
+          key: "1 Email Sequence",
+          icon: (
+            <svg
+              className="h-6 w-5 flex-none text-indigo-600"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              aria-hidden="true"
+              data-slot="icon"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          ),
+        },
+        {
+          key: "1 Email Template",
+          icon: (
+            <svg
+              className="h-6 w-5 flex-none text-indigo-600"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              aria-hidden="true"
+              data-slot="icon"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          ),
+        },
+        {
+          key: "Advance Email Analytics",
+          icon: (
+            <svg
+              className="h-6 w-5 flex-none text-indigo-600"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              aria-hidden="true"
+              data-slot="icon"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          ),
+        },
+        {
+          key: "Virtual Mobile Numbers",
+          icon: <RxCross1 size={20} className="text-red-600" />,
+        },
+        {
+          key: "Make And Recieve Calls",
+          icon: <RxCross1 size={20} className="text-red-600" />,
+        },
+        {
+          key: "Call Logs And Recordings",
+          icon: <RxCross1 size={20} className="text-red-600" />,
+        },
+        {
+          key: "SMS Marketing",
+          icon: <RxCross1 size={20} className="text-red-600" />,
+        },
+        {
+          key: "Standard Email Support",
+          icon: (
+            <svg
+              className="h-6 w-5 flex-none text-indigo-600"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              aria-hidden="true"
+              data-slot="icon"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          ),
+        },
       ],
     },
   });
@@ -340,20 +499,8 @@ const Pricing = ({ isValid }) => {
             >
               {pricing?.free?.benefits?.map((item, index) => (
                 <li className="flex gap-x-3" key={index}>
-                  <svg
-                    className="h-6 w-5 flex-none text-indigo-600"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    aria-hidden="true"
-                    data-slot="icon"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z"
-                      clip-rule="evenodd"
-                    />
-                  </svg>
-                  {item}
+                  {item.icon}
+                  {item?.key}
                 </li>
               ))}
             </ul>

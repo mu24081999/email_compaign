@@ -15,6 +15,7 @@ import { MdDriveFileRenameOutline } from "react-icons/md";
 import DatePickerFeild from "../../../../../../../../components/FormFields/DatePickerField/DatePickerField";
 import Checkbox from "../../../../../../../../components/FormFields/Checkbox/Checkbox";
 import Heading from "../../../../../../../../components/Heading";
+import moment from "moment";
 const List = ({
   leadsData,
   handleOpenModal,
@@ -60,8 +61,11 @@ const List = ({
       onClick: (ids) => deleteBulk(ids),
     },
   ];
-  const fetchData = (page) => {
-    const query = `page=${page}`;
+  const fetchData = (page, firstname, lastname, open, opened_at, email) => {
+    const date = opened_at
+      ? moment(opened_at).format("YYYY-MM-DD")
+      : "undefined";
+    const query = `page=${page}&fistname=${firstname}&lastname=${lastname}&open=${open}&opened_at=${date}&email=${email}`;
 
     dispatch(getCompaignLeads(token, id, query));
   };
@@ -95,7 +99,10 @@ const List = ({
     console.log("🚀 ~ downloadCSV ~ list:", list);
     exportToCSV(list);
   }
-  const handleSearch = () => {};
+  const handleSearch = (data) => {
+    const { firstname, lastname, email, opened_at, open } = data;
+    fetchData(1, firstname, lastname, open, opened_at, email);
+  };
   return (
     <div>
       <div className="flex gap-3 justify-end pb-3">
@@ -125,15 +132,26 @@ const List = ({
             onSubmit={handleSubmit(handleSearch)}
             className="flex gap-5 py-3"
           >
-            <div>
-              <DatePickerFeild
-                name="from"
-                noShowTime={true}
-                placeHolder="From"
-                label="Start Date/Time"
-                minDate={new Date()}
-                errors={errors}
+            <div className="w-full">
+              <Heading text={"First Name"} className="font-extrabold pb-2" />
+              <InputField
+                name="firstname"
                 control={control}
+                svg={<MdDriveFileRenameOutline />}
+                errors={errors}
+                // placeholder="Enter your email address"
+                label="First Name"
+              />
+            </div>
+            <div className="w-full">
+              <Heading text={"Last Name"} className="font-extrabold pb-2" />
+              <InputField
+                name="lastname"
+                control={control}
+                svg={<MdDriveFileRenameOutline />}
+                errors={errors}
+                // placeholder="Enter your email address"
+                label="Last Name"
               />
             </div>
             <div className="w-full">
@@ -146,21 +164,23 @@ const List = ({
                 errors={errors}
                 // placeholder="Enter your email address"
                 label="Email Address"
-                rules={{
-                  required: {
-                    value: true,
-                    message: "Field required!",
-                  },
-                }}
+              />
+            </div>
+            <div>
+              <DatePickerFeild
+                name="opened_at"
+                noShowTime={true}
+                placeHolder="Last Opened At"
+                label="Last Opened At"
+                errors={errors}
+                control={control}
               />
             </div>
 
             <div className="px-5 pt-6">
               <Checkbox
-                name="from"
-                placeHolder="From"
+                name="open"
                 label="Open"
-                minDate={new Date()}
                 errors={errors}
                 control={control}
               />
