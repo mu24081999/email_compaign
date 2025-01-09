@@ -22,8 +22,8 @@ app.use((req, res, next) => {
     req.hostname === "146.190.175.199" ||
     req.hostname === "162.0.234.23" ||
     req.hostname === "app.senderside.com"
-      ? "build"
-      : req.hostname === "senderside.com" && "build2";
+      ? "sub_build"
+      : req.hostname === "senderside.com" && "main_build";
   const buildPath = path.join(__dirname, buildDir);
 
   if (fs.existsSync(buildPath)) {
