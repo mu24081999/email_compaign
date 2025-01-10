@@ -30,12 +30,60 @@ const Sequence = () => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      content: `<!DOCTYPE HTML>
-          <html>
-            <body>
-              <p>This is the initial content of the editor.</p>
-            </body>
-          </html>`,
+      content: `<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      color: #333;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+    .header {
+      text-align: center;
+      color: #0073e6;
+    }
+    .button {
+      display: inline-block;
+      background-color: #0073e6;
+      color: #fff;
+      text-decoration: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      margin-top: 20px;
+    }
+    .footer {
+      text-align: center;
+      margin-top: 20px;
+      color: #888;
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="header">Welcome to SenderSide.com!</h1>
+    <p>Hi [First Name],</p>
+    <p>We're thrilled to have you on board. SenderSide.com is your trusted partner for reliable email notifications and communication services.</p>
+    <a href="[Insert Link]" class="button">Get Started Now</a>
+    <p>If you have any questions, feel free to reply to this email or contact us at <a href="mailto:support@senderside.com">support@senderside.com</a>.</p>
+    <div class="footer">
+      Best regards,<br>
+      [Your Name] <br>
+      [Your Job Title] <br>
+      SenderSide.com
+    </div>
+  </div>
+</body>
+</html>
+`,
     },
   });
   const { isCollapsed } = useMain();

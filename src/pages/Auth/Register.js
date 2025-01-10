@@ -26,6 +26,7 @@ const Register = () => {
       lastname: data.lastname,
       email: data.email,
       password: data.password,
+      username: data.username,
     };
     if (data.password === data.confirmPassword) {
       const is_registered = await dispatch(registerUser(params));
@@ -96,6 +97,21 @@ const Register = () => {
                     }}
                   />{" "}
                 </div>
+              </div>
+              <div>
+                <InputField
+                  name="username"
+                  control={control}
+                  svg={<MdDriveFileRenameOutline />}
+                  errors={errors}
+                  label="Username"
+                  rules={{
+                    required: {
+                      value: true,
+                      message: "Field required!",
+                    },
+                  }}
+                />{" "}
               </div>
               <div>
                 <InputField

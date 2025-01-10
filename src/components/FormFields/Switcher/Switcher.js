@@ -6,22 +6,15 @@ const Switcher = React.forwardRef((props, ref) => {
     field,
     // fieldState
   } = useController(props);
-  const {
-    label,
-    style,
-    // type,
-    // errors,
-    defaultValue,
-    // labelClass,
-    disabled,
-    // ...others
-  } = props;
+  const { defaultValue, onChange } = props;
   const [isChecked, setIsChecked] = useState(false);
 
   const handleCheckboxChange = (e) => {
     setIsChecked(!isChecked);
     field.onChange(e.target.checked);
+    onChange(e);
   };
+
   useEffect(() => {
     if (field?.value === true) {
       setIsChecked(true);

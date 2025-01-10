@@ -6,6 +6,7 @@ import PasswordReset from "./components/PasswordReset";
 import ConfigureNumber from "./components/ConfigureNumber";
 import { useDispatch, useSelector } from "react-redux";
 import { getClaimedNumbersApi } from "../../../../redux/services/twilio";
+import TwoFA from "./components/TwoFA";
 const Profile = () => {
   const dispatch = useDispatch();
   const { claimedNumbers, isLoading } = useSelector((state) => state.twilio);
