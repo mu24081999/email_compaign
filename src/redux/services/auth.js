@@ -73,9 +73,8 @@ export const loginUser = (data) => async (dispatch) => {
           return toast.error(response.data.message);
         }
         toast.success(response.data.message);
-
         dispatch(login(response.data.data.userData));
-        return true;
+        return response.data.data.userData;
       });
     return is_login;
   } catch (e) {
@@ -98,12 +97,17 @@ export const verifyOTPRec = (user_id, data) => async (dispatch) => {
           dispatch(invalidRequest(response.data.message));
           return toast.error(response.data.message);
         }
-        dispatch(updateMe(response.data.data.userData));
+        console.log(
+          "🚀 ~ .then ~ response.data.data.userData:",
+          response.data.data.userData
+        );
+        // dispatch(updateMe(response.data.data.userData));
         dispatch(verifyOtp(response.data.message));
         // dispatch(login(response.data.data.userData));
         toast.success(response.data.message);
         return response.data.data.userData;
       });
+
     return response;
   } catch (e) {
     dispatch(invalidRequest(e.message));
@@ -194,6 +198,7 @@ export const verifyOTPApi = (data) => async (dispatch) => {
         return {
           success: true,
           otp: response.data.data.otp,
+          userData: response.data.data.userData,
         };
       });
     return verify_otp;

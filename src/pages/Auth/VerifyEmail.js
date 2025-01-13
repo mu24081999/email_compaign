@@ -6,6 +6,7 @@ import Button from "../../components/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { verifyOTPApi } from "../../redux/services/auth";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { login } from "../../redux/slices/auth";
 const VerifyEmail = () => {
   const {
     handleSubmit,
@@ -14,6 +15,10 @@ const VerifyEmail = () => {
     setValue,
     formState: { errors },
   } = useForm({});
+  const location = useLocation();
+  const is_two_fa_enabled = new URLSearchParams(location.search).get(
+    "two_fa_enabled"
+  );
   const { email } = useParams();
   const [isVerified, setIsVerified] = useState();
   const dispatch = useDispatch();
@@ -25,15 +30,18 @@ const VerifyEmail = () => {
       email: email,
     };
     const is_verified = await dispatch(verifyOTPApi(params));
+    console.log("🚀 ~ handleFormSubmit ~ is_verified:", is_verified);
     if (is_verified.success) {
+      // dispatch(login(is_verified.userData));
       setIsVerified(true);
     }
   };
   useEffect(() => {
-    if (isVerified) {
+    if (isVerified && is_two_fa_enabled === "true") {
+      navigateTo("/");
+    } else if (isVerified && !is_two_fa_enabled)
       navigateTo(`/reset-password/${email}`);
-    }
-  }, [isVerified, navigateTo, email]);
+  }, [is_two_fa_enabled, isVerified, navigateTo, email]);
 
   return (
     <section className=" bg-gradient-to-r from-cyan-500 to-neutral-100 h-screen flex justify-center">

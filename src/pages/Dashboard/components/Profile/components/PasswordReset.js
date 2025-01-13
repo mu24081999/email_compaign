@@ -58,6 +58,7 @@ const PasswordReset = () => {
                 </div>
                 <div className="flex justify-end ps-5">
                   <Switcher
+                    defaultValue={user.is_two_fa_enabled}
                     onChange={handleTwoFa}
                     name="is_two_fa_enabled"
                     control={control}

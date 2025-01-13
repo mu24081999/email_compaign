@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Layout from "../../layout/Layout";
 import InputField from "../../components/FormFields/InputField/InputField";
 import Checkbox from "../../components/FormFields/Checkbox/Checkbox";
@@ -19,22 +19,32 @@ const Login = () => {
   } = useForm({});
   const dispatch = useDispatch();
   const navigateTo = useNavigate();
-
+  const [isTwoFa, setIsTwoFa] = useState([]);
   const { isAuthenticated, isLoading } = useSelector((state) => state.auth);
-
-  const handleAuth = (data) => {
+  const [userData, setUserData] = useState({});
+  console.log(
+    "🚀 ~ Login ~ userData:",
+    userData,
+    isAuthenticated && userData.id && userData.is_two_fa_enabled
+  );
+  const handleAuth = async (data) => {
     const params = {
       email: data?.email,
       password: data?.password,
     };
-    dispatch(loginUser(params));
-    return {};
+    const response = await dispatch(loginUser(params));
+    setUserData(response);
   };
   useEffect(() => {
-    if (isAuthenticated) {
+    if (userData && userData.is_two_fa_enabled) {
+      navigateTo(`/verify-email/${userData.email}?two_fa_enabled=true`);
+    }
+  }, [userData, navigateTo]);
+  useEffect(() => {
+    if (userData && userData.is_two_fa_enabled === false) {
       navigateTo("/");
     }
-  }, [isAuthenticated, navigateTo]);
+  }, [isAuthenticated, userData, navigateTo]);
   return (
     // <Layout
     //   component={

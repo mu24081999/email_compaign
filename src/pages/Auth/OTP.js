@@ -34,7 +34,6 @@ const OTP = () => {
     const response = await dispatch(verifyOTPRec(user_id, params));
     console.log("🚀 ~ handleFormSubmit ~ is_verified:", response);
     if (response) {
-      // navigateTo("/subscriptions");
       setIsVerified(true);
     }
   };
