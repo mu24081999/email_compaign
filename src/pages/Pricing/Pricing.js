@@ -42,7 +42,7 @@ const Pricing = ({ isValid }) => {
       discount_price: 0,
       discount_amount: 0,
       benefits: [
-        "$7 Free Credits",
+        "$5 Free Credits",
         "Common-Box",
         "1500 Contact Uploads",
         "10,000 Emails Monthly",
@@ -69,7 +69,7 @@ const Pricing = ({ isValid }) => {
       discount_price: 0,
       discount_amount: 0,
       benefits: [
-        "$17 Free Credits",
+        "$10 Free Credits",
         "Common-Box",
         "10,000 Contacts Uploads",
         "50,000 Emails Monthly",
@@ -96,7 +96,7 @@ const Pricing = ({ isValid }) => {
       discount_price: 0,
       discount_amount: 0,
       benefits: [
-        "$33 Free Credits",
+        "$20 Free Credits",
         "Common-Box",
         "20,000 Contacts Uploads",
         "100,000 Emails Monthly",

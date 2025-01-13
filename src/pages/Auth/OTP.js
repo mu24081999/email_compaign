@@ -4,8 +4,12 @@ import { useForm } from "react-hook-form";
 import { MdDriveFileRenameOutline } from "react-icons/md";
 import Button from "../../components/Button";
 import { useDispatch, useSelector } from "react-redux";
-import { registerUser, verifyOTPRec } from "../../redux/services/auth";
-import { useNavigate } from "react-router-dom";
+import {
+  forgotPasswordApi,
+  registerUser,
+  verifyOTPRec,
+} from "../../redux/services/auth";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 const OTP = () => {
   const {
     handleSubmit,
@@ -14,6 +18,9 @@ const OTP = () => {
     setValue,
     formState: { errors },
   } = useForm({});
+  const location = useLocation();
+  const email = new URLSearchParams(location.search).get("email");
+
   const [isVerified, setIsVerified] = useState();
   const dispatch = useDispatch();
   const navigateTo = useNavigate();
@@ -24,17 +31,26 @@ const OTP = () => {
     const params = {
       code: data.code,
     };
-    const is_verified = await dispatch(verifyOTPRec(user_id, params));
-    if (is_verified) {
+    const response = await dispatch(verifyOTPRec(user_id, params));
+    console.log("🚀 ~ handleFormSubmit ~ is_verified:", response);
+    if (response) {
       // navigateTo("/subscriptions");
       setIsVerified(true);
     }
   };
   useEffect(() => {
-    if (isVerified) {
+    if (email && isVerified) {
+      navigateTo("/");
+    } else if (isVerified && !email) {
       navigateTo("/subscriptions");
     }
-  }, [isVerified, navigateTo]);
+  }, [isVerified, navigateTo, email]);
+  const handleResendVerification = () => {
+    const params = {
+      email: email,
+    };
+    dispatch(forgotPasswordApi(params));
+  };
   return (
     // <Layout
     //   component={
@@ -72,6 +88,14 @@ const OTP = () => {
                     },
                   }}
                 />{" "}
+                <div className="float-end">
+                  <Link
+                    onClick={handleResendVerification}
+                    className="py-3 text-blue-400"
+                  >
+                    Resend Verification OTP
+                  </Link>
+                </div>
               </div>
               <div className="flex gap-2">
                 <Button

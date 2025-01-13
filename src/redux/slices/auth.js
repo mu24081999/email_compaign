@@ -48,7 +48,7 @@ export const authSlice = createSlice({
       state.message = "Login Success";
       state.type = "Success";
     },
-    updatedMe: (state, action) => {
+    updateMe: (state, action) => {
       state.user = action.payload;
     },
     contactUs: (state, action) => {
@@ -75,12 +75,12 @@ export const authSlice = createSlice({
       state.type = "Success";
     },
     forgotPassword: (state, action) => {
-      state.user = "";
-      state.token = "";
-      state.user_id = "";
-      state.isAuthenticated = false;
+      // state.user = "";
+      // state.token = "";
+      // state.user_id = "";
+      // state.isAuthenticated = false;
       state.isLoading = false;
-      state.error = "";
+      // state.error = "";
       state.message = action.payload;
       state.type = "Success";
     },
@@ -126,7 +126,7 @@ export const {
   forgotPassword,
   resetPassword,
   reloadPage,
-  updatedMe,
+  updateMe,
   verifyOtp,
   setAccount,
   twoFa,

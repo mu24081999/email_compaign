@@ -95,9 +95,24 @@ const List = ({
   }
 
   async function downloadCSV(array) {
-    const list = await dispatch(getLeadsCSVData(token, compaign_id));
-    console.log("🚀 ~ downloadCSV ~ list:", list);
-    // exportToCSV(list);
+    const response = await dispatch(getLeadsCSVData(token, compaign_id));
+    const list =
+      Array.isArray(response) &&
+      response?.map((item) => {
+        return {
+          firstname: item.firstname,
+          lastname: item.lastname,
+          email: item.email,
+          open: item.open,
+          open_count: item.open_count,
+          opened_at: item.opened_at,
+        };
+      });
+    // console.log(list);
+    const open_list = list?.filter((item) => item.open === true);
+    const not_open_list = list?.filter((item) => item.open === false);
+    exportToCSV(open_list, "open_leads.csv");
+    exportToCSV(not_open_list, "not_open_leads.csv");
   }
   const handleSearch = (data) => {
     const { firstname, lastname, email, opened_at, open } = data;

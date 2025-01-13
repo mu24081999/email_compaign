@@ -12,6 +12,7 @@ import {
   verifyOtp,
   twoFa,
   contactUs,
+  updateMe,
 } from "../slices/auth";
 // import { createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
@@ -97,10 +98,11 @@ export const verifyOTPRec = (user_id, data) => async (dispatch) => {
           dispatch(invalidRequest(response.data.message));
           return toast.error(response.data.message);
         }
+        dispatch(updateMe(response.data.data.userData));
         dispatch(verifyOtp(response.data.message));
         // dispatch(login(response.data.data.userData));
         toast.success(response.data.message);
-        return true;
+        return response.data.data.userData;
       });
     return response;
   } catch (e) {

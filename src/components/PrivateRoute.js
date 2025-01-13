@@ -8,11 +8,11 @@ const PrivateRoute = ({
   authLoading,
   subscriptionLoading,
   startingAuth,
+  email_verified,
+  user,
 }) => {
   const location = useLocation();
-  const [lastLocation, setLastLocation] = useState(null);
   const navigate = useNavigate();
-  console.log(localStorage.getItem("lastLocation"), "google");
   window.onbeforeunload = function (event) {
     // Display a confirmation dialog
     event.returnValue =
@@ -28,23 +28,21 @@ const PrivateRoute = ({
       localStorage.removeItem("lastLocation");
     }
   }, []);
-  if (
-    !subscriptionLoading &&
-    !authLoading &&
-    !isAuthenticated
-    // && startingAuth
-  ) {
+  if (!email_verified && isAuthenticated) {
+    return (
+      <Navigate
+        to={`/otp?email=${user.email}&verified=false`}
+        replace
+        state={{ from: location }}
+      />
+    );
+  }
+  if (!subscriptionLoading && !authLoading && !isAuthenticated) {
     // Redirect to sign-in if not authenticated
     return <Navigate to="/sign-in" replace state={{ from: location }} />;
   }
 
-  if (
-    !authLoading &&
-    !subscriptionLoading &&
-    isAuthenticated &&
-    !isValid
-    // && startingAuth
-  ) {
+  if (!authLoading && !subscriptionLoading && isAuthenticated && !isValid) {
     // Redirect to subscriptions if authenticated but not valid
     return <Navigate to="/subscriptions" replace state={{ from: location }} />;
   }

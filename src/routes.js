@@ -37,13 +37,17 @@ const router = (
   isValid,
   authLoading,
   subscriptionLoading,
-  startingAuth
+  startingAuth,
+  email_verified,
+  user
 ) => {
   const routes = [
     {
       path: "/",
       element: (
         <PrivateRoute
+          user={user}
+          email_verified={email_verified}
           isAuthenticated={isAuthenticated}
           authLoading={authLoading}
           subscriptionLoading={subscriptionLoading}
@@ -64,6 +68,8 @@ const router = (
       path: "/lead-finder",
       element: (
         <PrivateRoute
+          user={user}
+          email_verified={email_verified}
           isAuthenticated={isAuthenticated}
           authLoading={authLoading}
           subscriptionLoading={subscriptionLoading}
@@ -80,6 +86,8 @@ const router = (
       path: "/sms-conversation",
       element: (
         <PrivateRoute
+          user={user}
+          email_verified={email_verified}
           isAuthenticated={isAuthenticated}
           authLoading={authLoading}
           subscriptionLoading={subscriptionLoading}
@@ -108,6 +116,8 @@ const router = (
       path: "/drip-compaign",
       element: (
         <PrivateRoute
+          user={user}
+          email_verified={email_verified}
           isAuthenticated={isAuthenticated}
           authLoading={authLoading}
           subscriptionLoading={subscriptionLoading}
@@ -124,6 +134,8 @@ const router = (
       path: "/a2p-verification",
       element: (
         <PrivateRoute
+          user={user}
+          email_verified={email_verified}
           isAuthenticated={isAuthenticated}
           authLoading={authLoading}
           subscriptionLoading={subscriptionLoading}
@@ -140,6 +152,8 @@ const router = (
       path: "/sms-campaign/:id",
       element: (
         <PrivateRoute
+          user={user}
+          email_verified={email_verified}
           isAuthenticated={isAuthenticated}
           authLoading={authLoading}
           subscriptionLoading={subscriptionLoading}
@@ -156,6 +170,8 @@ const router = (
       path: "/wallet",
       element: (
         <PrivateRoute
+          user={user}
+          email_verified={email_verified}
           isAuthenticated={isAuthenticated}
           authLoading={authLoading}
           subscriptionLoading={subscriptionLoading}
@@ -172,6 +188,8 @@ const router = (
       path: "/sms",
       element: (
         <PrivateRoute
+          user={user}
+          email_verified={email_verified}
           isAuthenticated={isAuthenticated}
           authLoading={authLoading}
           subscriptionLoading={subscriptionLoading}
@@ -188,6 +206,8 @@ const router = (
       path: "/phone-numbers",
       element: (
         <PrivateRoute
+          user={user}
+          email_verified={email_verified}
           isAuthenticated={isAuthenticated}
           authLoading={authLoading}
           subscriptionLoading={subscriptionLoading}
@@ -204,6 +224,8 @@ const router = (
       path: "/my-subscription",
       element: (
         <PrivateRoute
+          user={user}
+          email_verified={email_verified}
           isAuthenticated={isAuthenticated}
           authLoading={authLoading}
           subscriptionLoading={subscriptionLoading}
@@ -220,6 +242,8 @@ const router = (
       path: "/dialpad",
       element: (
         <PrivateRoute
+          user={user}
+          email_verified={email_verified}
           isAuthenticated={isAuthenticated}
           authLoading={authLoading}
           subscriptionLoading={subscriptionLoading}
@@ -236,6 +260,8 @@ const router = (
       path: "/email-validation",
       element: (
         <PrivateRoute
+          user={user}
+          email_verified={email_verified}
           isAuthenticated={isAuthenticated}
           authLoading={authLoading}
           subscriptionLoading={subscriptionLoading}
@@ -252,6 +278,8 @@ const router = (
       path: "/add-sms-campaign",
       element: (
         <PrivateRoute
+          user={user}
+          email_verified={email_verified}
           isAuthenticated={isAuthenticated}
           authLoading={authLoading}
           subscriptionLoading={subscriptionLoading}
@@ -268,6 +296,8 @@ const router = (
       path: "/email-templates",
       element: (
         <PrivateRoute
+          user={user}
+          email_verified={email_verified}
           isAuthenticated={isAuthenticated}
           authLoading={authLoading}
           subscriptionLoading={subscriptionLoading}
@@ -284,6 +314,8 @@ const router = (
       path: "/compaigns",
       element: (
         <PrivateRoute
+          user={user}
+          email_verified={email_verified}
           isAuthenticated={isAuthenticated}
           authLoading={authLoading}
           subscriptionLoading={subscriptionLoading}
@@ -300,6 +332,8 @@ const router = (
       path: "/sequences",
       element: (
         <PrivateRoute
+          user={user}
+          email_verified={email_verified}
           isAuthenticated={isAuthenticated}
           authLoading={authLoading}
           subscriptionLoading={subscriptionLoading}
@@ -316,6 +350,8 @@ const router = (
       path: "/accounts",
       element: (
         <PrivateRoute
+          user={user}
+          email_verified={email_verified}
           isAuthenticated={isAuthenticated}
           authLoading={authLoading}
           subscriptionLoading={subscriptionLoading}
@@ -332,6 +368,8 @@ const router = (
       path: "/compaign/:id",
       element: (
         <PrivateRoute
+          user={user}
+          email_verified={email_verified}
           isAuthenticated={isAuthenticated}
           authLoading={authLoading}
           subscriptionLoading={subscriptionLoading}
@@ -348,6 +386,8 @@ const router = (
       path: "/add-compaign",
       element: (
         <PrivateRoute
+          user={user}
+          email_verified={email_verified}
           isAuthenticated={isAuthenticated}
           authLoading={authLoading}
           subscriptionLoading={subscriptionLoading}
@@ -364,6 +404,8 @@ const router = (
       path: "/connect-email-account",
       element: (
         <PrivateRoute
+          user={user}
+          email_verified={email_verified}
           isAuthenticated={isAuthenticated}
           authLoading={authLoading}
           subscriptionLoading={subscriptionLoading}
@@ -380,6 +422,8 @@ const router = (
       path: "/email-schedule",
       element: (
         <PrivateRoute
+          user={user}
+          email_verified={email_verified}
           isAuthenticated={isAuthenticated}
           authLoading={authLoading}
           subscriptionLoading={subscriptionLoading}
@@ -396,6 +440,8 @@ const router = (
       path: "/common-box",
       element: (
         <PrivateRoute
+          user={user}
+          email_verified={email_verified}
           isAuthenticated={isAuthenticated}
           authLoading={authLoading}
           subscriptionLoading={subscriptionLoading}
@@ -412,6 +458,8 @@ const router = (
       path: "/account-settings",
       element: (
         <PrivateRoute
+          user={user}
+          email_verified={email_verified}
           isAuthenticated={isAuthenticated}
           authLoading={authLoading}
           subscriptionLoading={subscriptionLoading}

@@ -6,7 +6,7 @@ import {
   updatedUser,
 } from "../slices/user";
 import { toast } from "react-toastify";
-import { updatedMe } from "../slices/auth";
+import { updateMe } from "../slices/auth";
 const backendURL = `${process.env.REACT_APP_BACKEND_URL_PRODUCTION}`;
 
 export const updateUserRec = (token, user_id, data) => async (dispatch) => {
@@ -27,7 +27,7 @@ export const updateUserRec = (token, user_id, data) => async (dispatch) => {
           return dispatch(invalidRequest(response.data.message));
         }
         dispatch(updatedUser(response.data.message));
-        dispatch(updatedMe(response.data.data.userData));
+        dispatch(updateMe(response.data.data.userData));
         toast.success(response.data.message);
         return response?.data?.data?.userData;
       });

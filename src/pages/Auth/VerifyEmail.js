@@ -5,7 +5,7 @@ import { MdDriveFileRenameOutline } from "react-icons/md";
 import Button from "../../components/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { verifyOTPApi } from "../../redux/services/auth";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 const VerifyEmail = () => {
   const {
     handleSubmit,
@@ -34,6 +34,7 @@ const VerifyEmail = () => {
       navigateTo(`/reset-password/${email}`);
     }
   }, [isVerified, navigateTo, email]);
+
   return (
     <section className=" bg-gradient-to-r from-cyan-500 to-neutral-100 h-screen flex justify-center">
       <div className="  py-8 px-4 mx-auto max-w-screen-xl lg:py-16 grid lg:grid-cols-2 gap-8 lg:gap-16 m-auto">
@@ -68,8 +69,9 @@ const VerifyEmail = () => {
                       message: "Field required!",
                     },
                   }}
-                />{" "}
+                />
               </div>
+
               <div className="flex gap-2">
                 <Button
                   onClick={() => navigateTo("/sign-in")}

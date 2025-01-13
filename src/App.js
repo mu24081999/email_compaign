@@ -13,6 +13,7 @@ const App = () => {
     token,
     isAuthenticated,
     user_id,
+    user,
     isLoading: authLoading,
   } = useSelector((state) => state.auth);
 
@@ -45,6 +46,8 @@ const App = () => {
       checkSubscriptionValidity();
     }
   }, [subscription]);
+  const email_verified = user.verified;
+
   return (
     <div className=" bg-gray-50 dark:bg-gray-900 h-screen dark:text-white">
       <ToastContainer autoClose={2000} position="bottom-right" />
@@ -54,7 +57,9 @@ const App = () => {
           isValid,
           authLoading,
           subscriptionLoading,
-          startingAuth
+          startingAuth,
+          email_verified,
+          user
         )}
       />
     </div>
