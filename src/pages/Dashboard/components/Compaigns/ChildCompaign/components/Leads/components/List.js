@@ -97,7 +97,7 @@ const List = ({
   async function downloadCSV(array) {
     const list = await dispatch(getLeadsCSVData(token, compaign_id));
     console.log("🚀 ~ downloadCSV ~ list:", list);
-    exportToCSV(list);
+    // exportToCSV(list);
   }
   const handleSearch = (data) => {
     const { firstname, lastname, email, opened_at, open } = data;
