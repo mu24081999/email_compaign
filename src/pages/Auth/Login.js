@@ -22,11 +22,6 @@ const Login = () => {
   const [isTwoFa, setIsTwoFa] = useState([]);
   const { isAuthenticated, isLoading } = useSelector((state) => state.auth);
   const [userData, setUserData] = useState({});
-  console.log(
-    "🚀 ~ Login ~ userData:",
-    userData,
-    isAuthenticated && userData.id && userData.is_two_fa_enabled
-  );
   const handleAuth = async (data) => {
     const params = {
       email: data?.email,
@@ -73,12 +68,11 @@ const Login = () => {
                 <div>
                   <InputField
                     name="email"
-                    type="email"
                     control={control}
                     svg={<MdDriveFileRenameOutline />}
                     errors={errors}
                     // placeholder="Enter your email address"
-                    label="Email Address"
+                    label="Username/Email Address"
                     rules={{
                       required: {
                         value: true,
