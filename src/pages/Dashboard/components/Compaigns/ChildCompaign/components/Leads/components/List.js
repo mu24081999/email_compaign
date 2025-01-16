@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Table from "../../../../../../../../components/Table";
 import Button from "../../../../../../../../components/Button";
 import { FaDownload, FaSearch, FaTrashAlt } from "react-icons/fa";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   deleteLeadRec,
   getCompaignLeads,
@@ -32,6 +32,8 @@ const List = ({
     setValue,
     formState: { errors },
   } = useForm({});
+  const { compaign } = useSelector((state) => state.compaign);
+  console.log("🚀 ~ Leads ~ compaign:", compaign);
 
   const [showSearch, setShowSearch] = useState(false);
   const dispatch = useDispatch();
@@ -212,10 +214,11 @@ const List = ({
         <Table
           columns={columns}
           data={leadsData}
-          bulkActions={bulkActions}
+          bulkActions={compaign?.status !== "sending" && bulkActions}
           totalItems={pagination?.totalItems}
           itemsPerPage={10}
           onPageChange={(page) => fetchData(page)}
+          actions={compaign?.status === "sending" ? false : true}
         />
       ) : (
         <div className="lg:h-[80vh] items-center flex justify-center">

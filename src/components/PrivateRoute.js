@@ -10,11 +10,11 @@ const PrivateRoute = ({
   startingAuth,
   email_verified,
   user,
+  requiredRoles = [],
 }) => {
   const location = useLocation();
   const navigate = useNavigate();
   window.onbeforeunload = function (event) {
-    // Display a confirmation dialog
     event.returnValue =
       "You have unsaved changes. Are you sure you want to leave?";
     localStorage.setItem("lastLocation", location.pathname);
@@ -28,6 +28,7 @@ const PrivateRoute = ({
       localStorage.removeItem("lastLocation");
     }
   }, []);
+
   if (!email_verified && isAuthenticated) {
     return (
       <Navigate
@@ -46,8 +47,16 @@ const PrivateRoute = ({
     // Redirect to subscriptions if authenticated but not valid
     return <Navigate to="/subscriptions" replace state={{ from: location }} />;
   }
-
-  // Render children if authenticated and valid
+  if (requiredRoles?.length > 0) {
+    const userRole = user?.role;
+    const hasRequiredRoles = requiredRoles?.some((role) =>
+      userRole.includes(role)
+    );
+    console.log("🚀 ~ hasRequiredRoles:", hasRequiredRoles);
+    if (!hasRequiredRoles) {
+      return <Navigate to="/unauthorized" replace state={{ from: location }} />;
+    }
+  }
   return children;
 };
 

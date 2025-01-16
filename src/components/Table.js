@@ -36,7 +36,8 @@ const Table = ({
 
   const handleSelectAll = (e) => {
     if (e.target.checked) {
-      setSelectedRows(data.map((_, index) => _.id));
+      const filteredData = data?.filter((data) => data?.status !== "sending");
+      setSelectedRows(filteredData.map((_, index) => _.id));
     } else {
       setSelectedRows([]);
     }
@@ -64,7 +65,6 @@ const Table = ({
       }
       return 0;
     });
-  console.log("🚀 ~ sortedData:", sortedData);
 
   const totalPages = Math.ceil(totalItems / itemsPerPage);
 
@@ -152,6 +152,7 @@ const Table = ({
                         type="checkbox"
                         checked={selectedRows.includes(row?.id)}
                         onChange={() => handleCheckboxChange(row?.id)}
+                        disabled={row?.status === "sending"}
                         className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded"
                       />
                       <label

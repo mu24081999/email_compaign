@@ -13,6 +13,7 @@ const Leads = () => {
   const dispatch = useDispatch();
   const { token } = useSelector((state) => state.auth);
   const { leads } = useSelector((state) => state.lead);
+
   const { id } = useParams();
   const [isOpen, setIsOpen] = useState(false);
   const [leadsData, setLeadsData] = useState([]);

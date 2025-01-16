@@ -25,7 +25,6 @@ export const addCompaignRec = (token, data) => async (dispatch) => {
     const response = await axios
       .post(`${backendURL}/compaign/create-compaign`, data, config)
       .then((response) => {
-        console.log("🚀 ~ .then ~ response:", response);
         if (response?.data?.statusCode !== 200) {
           toast.error(response.data.message);
           return dispatch(invalidRequest(response.data.message));

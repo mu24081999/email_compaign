@@ -61,107 +61,118 @@ const SidebarWithNavbar = ({ component }) => {
   const navigate = (link) => {
     navigateTo(link);
   };
-  const sidebarItems = [
-    {
-      name: "Dashboard",
-      link: "/",
-      icon: MdOutlineDashboard,
-    },
-    {
-      name: "Common Box",
-      link: "/common-box",
-      icon: FaRegEnvelopeOpen,
-    },
-    {
-      name: "Email Campaigns",
-      link: "/compaigns",
-      icon: TbLocationShare,
-    },
-    {
-      name: "Templates",
-      link: "/email-templates",
-      icon: TbTemplate,
-    },
-    {
-      name: "Sequences",
-      link: "/sequences",
-      icon: HiOutlineTemplate,
-    },
-    {
-      name: "Email Accounts",
-      link: "/accounts",
-      icon: FaRegEnvelope,
-    },
-    {
-      name: "Email Validation",
-      link: "/email-validation",
-      icon: GrValidate,
-    },
-    // {
-    //   name: "Lead Finder",
-    //   link: "/lead-finder",
-    //   icon: MdOutlineScreenSearchDesktop,
-    // },
-    // {
-    //   name: "Drip Compaing",
-    //   link: "/drip-compaign",
-    //   icon: FaRegEnvelope,
-    // },
-    {
-      name: "Dialpad",
-      link: "/dialpad",
-      icon: IoKeypadOutline,
-    },
-    {
-      name: "Phone Numbers",
-      link: "/phone-numbers",
-      icon: RiContactsBook3Line,
-    },
-    {
-      name: "SMS Campaigns",
-      link: "/sms",
-      icon: MdOutlineSms,
-    },
-    {
-      name: "Conversations",
-      link: "/sms-conversation",
-      icon: FaRocketchat,
-    },
-    {
-      name: "Wallet",
-      link: "/wallet",
-      icon: IoWalletOutline,
-    },
+  const sidebarItems = Object.freeze({
+    super_admin: [],
+    admin: [],
+    user: [
+      {
+        name: "Dashboard",
+        link: "/",
+        icon: MdOutlineDashboard,
+      },
+      {
+        name: "Common Box",
+        link: "/common-box",
+        icon: FaRegEnvelopeOpen,
+      },
+      {
+        name: "Email Campaigns",
+        link: "/compaigns",
+        icon: TbLocationShare,
+      },
+      {
+        name: "Templates",
+        link: "/email-templates",
+        icon: TbTemplate,
+      },
+      {
+        name: "Sequences",
+        link: "/sequences",
+        icon: HiOutlineTemplate,
+      },
+      {
+        name: "Email Accounts",
+        link: "/accounts",
+        icon: FaRegEnvelope,
+      },
+      {
+        name: "Email Validation",
+        link: "/email-validation",
+        icon: GrValidate,
+      },
+      // {
+      //   name: "Lead Finder",
+      //   link: "/lead-finder",
+      //   icon: MdOutlineScreenSearchDesktop,
+      // },
+      // {
+      //   name: "Drip Compaing",
+      //   link: "/drip-compaign",
+      //   icon: FaRegEnvelope,
+      // },
+      {
+        name: "Dialpad",
+        link: "/dialpad",
+        icon: IoKeypadOutline,
+      },
+      {
+        name: "Phone Numbers",
+        link: "/phone-numbers",
+        icon: RiContactsBook3Line,
+      },
+      {
+        name: "SMS Campaigns",
+        link: "/sms",
+        icon: MdOutlineSms,
+      },
+      {
+        name: "Conversations",
+        link: "/sms-conversation",
+        icon: FaRocketchat,
+      },
+      {
+        name: "Wallet",
+        link: "/wallet",
+        icon: IoWalletOutline,
+      },
 
-    {
-      name: "A2P Verification",
-      link: "/a2p-verification",
-      icon: MdOutlineVerifiedUser,
-    },
-    {
-      name: "My Subscription",
-      link: "/my-subscription",
-      icon: TbCalendarDollar,
-    },
+      {
+        name: "A2P Verification",
+        link: "/a2p-verification",
+        icon: MdOutlineVerifiedUser,
+      },
+      {
+        name: "My Subscription",
+        link: "/my-subscription",
+        icon: TbCalendarDollar,
+      },
 
-    {
-      name: "Account Settings",
-      link: "/account-settings",
-      icon: FaCogs,
-    },
+      {
+        name: "Account Settings",
+        link: "/account-settings",
+        icon: FaCogs,
+      },
 
-    // {
-    //   name: "Account Settings",
-    //   link: "/account-settings",
-    //   icon: FaCogs size={24},
-    // },
-    // {
-    //   name: "Sign out",
-    //   link: "#",
-    //   onClick: () => logout,
-    //   icon: PiSignOutBold size={25},
-    // },
-  ];
+      // {
+      //   name: "Account Settings",
+      //   link: "/account-settings",
+      //   icon: FaCogs size={24},
+      // },
+      // {
+      //   name: "Sign out",
+      //   link: "#",
+      //   onClick: () => logout,
+      //   icon: PiSignOutBold size={25},
+      // },
+    ],
+    marketing_manager: [],
+    sms_manager: [],
+    email_manager: [],
+    voice_manager: [],
+    analyst: [],
+    support: [],
+  });
+
   const menuData = {
     title: (
       <div className="mt-1">
@@ -317,7 +328,7 @@ const SidebarWithNavbar = ({ component }) => {
       >
         <div className="h-full pb-4 overflow-y-auto bg-white dark:bg-gray-800">
           <ul className="space-y-2 font-medium">
-            {sidebarItems?.map((item, index) => {
+            {sidebarItems[user?.role]?.map((item, index) => {
               const Icon = item?.icon;
 
               return (
