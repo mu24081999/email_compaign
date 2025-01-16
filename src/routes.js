@@ -1,8 +1,9 @@
 import React, { lazy, Suspense } from "react";
 import { createBrowserRouter } from "react-router-dom";
-import Login from "./pages/Auth/Login";
+
+// import Login from "./pages/Auth/Login";
 import Dashboard from "./pages/Dashboard/Dashboard";
-import Register from "./pages/Auth/Register";
+// import Register from "./pages/Auth/Register";
 import EmailTemplate from "./pages/EmailTemplate/EmailTemplate";
 import PrivateRoute from "./components/PrivateRoute";
 import Compaign from "./pages/Dashboard/components/Compaigns/ChildCompaign/Compaign";
@@ -32,6 +33,10 @@ import Wallet from "./pages/Wallet";
 import A2P from "./pages/A2P";
 import Privacy from "./pages/Privacy";
 import Chat from "./pages/Chat";
+
+const Login = lazy(() => import("./pages/Auth/Login"));
+const Register = lazy(() => import("./pages/Auth/Register"));
+
 const router = (
   isAuthenticated,
   isValid,
@@ -486,13 +491,21 @@ const router = (
     },
     {
       path: "/sign-in",
-      element: <Login />,
+      element: (
+        <Suspense fallback={<div>Loading...</div>}>
+          <Login />
+        </Suspense>
+      ),
       children: [],
       breadcrumb: "Login",
     },
     {
       path: "/sign-up",
-      element: <Register />,
+      element: (
+        <Suspense fallback={<div>Loading...</div>}>
+          <Register />{" "}
+        </Suspense>
+      ),
       children: [],
       breadcrumb: "Login",
     },

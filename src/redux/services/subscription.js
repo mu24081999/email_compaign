@@ -55,9 +55,9 @@ export const createSubscriptionApi = (token, data) => async (dispatch) => {
           return dispatch(invalidRequest(response.data.message));
         }
         dispatch(addSubscription(response.data.message));
+        toast.success(response.data.message);
         dispatch(getUserSubscriptionApi(token, data?.user_id));
         dispatch(login(response.data.data.userData));
-        toast.success(response.data.message);
         return {
           done: true,
           subscription: response.data.data.subscription,
