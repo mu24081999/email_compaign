@@ -5,6 +5,7 @@ import {
   addSubscription,
   getUserSubscription,
   getPaymentIntend,
+  getAllSubacriptions,
 } from "../slices/subscriptions";
 import { toast } from "react-toastify";
 import { login } from "../slices/auth";
@@ -88,6 +89,33 @@ export const getUserSubscriptionApi = (token, user_id) => async (dispatch) => {
         return {
           done: true,
           response: response.data.data.subscription,
+        };
+      });
+    return response;
+  } catch (e) {
+    dispatch(invalidRequest(e.message));
+  }
+};
+export const getAllSubacriptionsApi = (token, query) => async (dispatch) => {
+  try {
+    dispatch(subscriptionRequestLoading());
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        "x-access-token": token,
+      },
+    };
+    const response = await axios
+      .get(`${backendURL}/subscriptions?${query && query}`, config)
+      .then((response) => {
+        if (response?.data?.statusCode !== 200) {
+          // toast.error(response.data.message);
+          return dispatch(invalidRequest(response.data.message));
+        }
+        dispatch(getAllSubacriptions(response.data.data));
+        return {
+          done: true,
+          response: response.data.data.subscriptionsData,
         };
       });
     return response;

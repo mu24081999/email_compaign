@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
-import Layout from "../../layout/Layout";
 import InputField from "../../components/FormFields/InputField/InputField";
 import Checkbox from "../../components/FormFields/Checkbox/Checkbox";
 import { useForm } from "react-hook-form";
-import { MdDriveFileRenameOutline, MdPassword } from "react-icons/md";
+import { MdDriveFileRenameOutline } from "react-icons/md";
 import Button from "../../components/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../redux/services/auth";
@@ -36,8 +35,18 @@ const Login = () => {
     }
   }, [userData, navigateTo]);
   useEffect(() => {
-    if (userData && userData.is_two_fa_enabled === false) {
+    if (
+      userData &&
+      userData.is_two_fa_enabled === false &&
+      userData?.role === "user"
+    ) {
       navigateTo("/");
+    } else if (
+      userData &&
+      userData.is_two_fa_enabled === false &&
+      userData?.role === "admin"
+    ) {
+      navigateTo("/admin/dashboard");
     }
   }, [isAuthenticated, userData, navigateTo]);
   return (
@@ -48,7 +57,7 @@ const Login = () => {
         <div className="  py-8 px-4 mx-auto max-w-screen-xl lg:py-16 grid lg:grid-cols-2 gap-8 lg:gap-16 m-auto">
           <div className="flex flex-col justify-center text-center">
             <h1 className="  mb-4 text-4xl font-extrabold tracking-tight leading-none  md:text-5xl lg:text-6xl dark:text-white text-gray-900">
-              Welcome back, Login
+              Welcome back
             </h1>
             <p className="mb-6 text-lg font-normal text-gray-700 lg:text-xl dark:text-gray-400">
               Sign in to your account and stay connected with the latest updates

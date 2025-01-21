@@ -63,7 +63,44 @@ const SidebarWithNavbar = ({ component }) => {
   };
   const sidebarItems = Object.freeze({
     super_admin: [],
-    admin: [],
+    admin: [
+      {
+        name: "Users",
+        link: "/admin/users",
+        icon: MdOutlineDashboard,
+      },
+      {
+        name: "Twilio Accounts",
+        link: "/admin/twilio_accounts",
+        icon: MdOutlineDashboard,
+      },
+
+      {
+        name: "Subscriptions",
+        link: "/admin/accounts/subscriptions",
+        icon: MdOutlineDashboard,
+      },
+      {
+        name: "Email Accounts",
+        link: "/accounts",
+        icon: FaRegEnvelope,
+      },
+      {
+        name: "Templates",
+        link: "/email-templates",
+        icon: TbTemplate,
+      },
+      {
+        name: "Sequences",
+        link: "/sequences",
+        icon: HiOutlineTemplate,
+      },
+      {
+        name: "Email Trigger",
+        link: "/admin/trigger-email",
+        icon: MdOutlineDashboard,
+      },
+    ],
     user: [
       {
         name: "Dashboard",

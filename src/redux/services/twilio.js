@@ -8,10 +8,78 @@ import {
   getClaimedNumbers,
   claimPhoneNumber,
   getMessages,
+  getTwilioAccounts,
 } from "../slices/twilio";
 
 import { toast } from "react-toastify";
 const backendURL = `${process.env.REACT_APP_BACKEND_URL_PRODUCTION}`;
+export const releasePhoneNumber = (token, formData) => async (dispatch) => {
+  try {
+    dispatch(twilioRequestLoading());
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        "x-access-token": token,
+      },
+    };
+    await axios
+      .post(`${backendURL}/users/twilio/release-number`, formData, config)
+      .then((response) => {
+        if (response?.data?.statusCode !== 200) {
+          toast.error(response.data.message);
+          return dispatch(invalidRequest(response.data.message));
+        }
+        dispatch(getClaimedNumbers(response.data.data.claimedNumbers));
+      });
+  } catch (e) {
+    dispatch(invalidRequest(e.message));
+  }
+};
+export const closeAccount = (token, formData) => async (dispatch) => {
+  try {
+    dispatch(twilioRequestLoading());
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        "x-access-token": token,
+      },
+    };
+    await axios
+      .post(`${backendURL}/users/twilio/close-account`, formData, config)
+      .then((response) => {
+        if (response?.data?.statusCode !== 200) {
+          toast.error(response.data.message);
+          return dispatch(invalidRequest(response.data.message));
+        }
+        toast.success(response.data.message);
+        dispatch(getClaimedNumbers(response.data.data.claimedNumbers));
+      });
+  } catch (e) {
+    dispatch(invalidRequest(e.message));
+  }
+};
+export const getAllTwilioAccounts = (token) => async (dispatch) => {
+  try {
+    dispatch(twilioRequestLoading());
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        "x-access-token": token,
+      },
+    };
+    await axios
+      .get(`${backendURL}/users//twilio/subaccounts`, config)
+      .then((response) => {
+        if (response?.data?.statusCode !== 200) {
+          toast.error(response.data.message);
+          return dispatch(invalidRequest(response.data.message));
+        }
+        dispatch(getTwilioAccounts(response.data.data.accountsData));
+      });
+  } catch (e) {
+    dispatch(invalidRequest(e.message));
+  }
+};
 export const getCallTokenApi = (token, formData) => async (dispatch) => {
   try {
     dispatch(twilioRequestLoading());

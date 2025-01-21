@@ -7,6 +7,8 @@ export const templateSlice = createSlice({
     callLogs: [],
     availableNumbers: [],
     claimedNumbers: [],
+    currentAccount: {},
+    twilioSubAccounts: [],
     sms: [],
     message: "",
     error: "",
@@ -24,6 +26,11 @@ export const templateSlice = createSlice({
       state.callLogs = [];
       state.availableNumbers = [];
       state.isLoading = false;
+    },
+    setCurrentAccount: (state, action) => {
+      state.currentAccount = action.payload;
+      state.isLoading = false;
+      state.error = "";
     },
     getCallToken: (state, action) => {
       state.callToken = action.payload;
@@ -55,16 +62,23 @@ export const templateSlice = createSlice({
       state.isLoading = false;
       state.error = "";
     },
+    getTwilioAccounts: (state, action) => {
+      state.twilioSubAccounts = action.payload;
+      state.isLoading = false;
+      state.error = "";
+    },
   },
 });
 export default templateSlice.reducer;
 export const {
   twilioRequestLoading,
   invalidRequest,
+  setCurrentAccount,
   getCallToken,
   getCallLogs,
   getAvailableNumbers,
   getClaimedNumbers,
   claimPhoneNumber,
   getMessages,
+  getTwilioAccounts,
 } = templateSlice.actions;

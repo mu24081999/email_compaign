@@ -10,6 +10,33 @@ import {
 } from "../slices/email";
 import { toast } from "react-toastify";
 const backendURL = `${process.env.REACT_APP_BACKEND_URL_PRODUCTION}`;
+export const sendEmails = (token, data) => async (dispatch) => {
+  try {
+    dispatch(emailRequestLoading());
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        "x-access-token": token,
+      },
+    };
+    const response = await axios
+      .post(`${backendURL}/email-accounts/send-admin-emails`, data, config)
+      .then((response) => {
+        if (response?.data?.statusCode !== 200) {
+          toast.error(response.data.message);
+          return dispatch(invalidRequest(response.data.message));
+        }
+        toast.success(response.data.message);
+        return {
+          done: true,
+          id: response?.data?.data?.email_account?.id,
+        };
+      });
+    return response;
+  } catch (error) {
+    dispatch(invalidRequest(error.message));
+  }
+};
 export const addEmailAccountApi = (token, data) => async (dispatch) => {
   try {
     dispatch(emailRequestLoading());

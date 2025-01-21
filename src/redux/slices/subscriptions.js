@@ -37,6 +37,11 @@ export const subscriptionSlice = createSlice({
       state.paymentIntend = action.payload;
       state.isLoading = false;
     },
+    getAllSubacriptions: (state, action) => {
+      state.subscriptions = action.payload;
+      state.isLoading = false;
+      state.message = "";
+    },
   },
 });
 export default subscriptionSlice.reducer;
@@ -47,4 +52,5 @@ export const {
   getUserSubscription,
   addSubscription,
   getPaymentIntend,
+  getAllSubacriptions,
 } = subscriptionSlice.actions;

@@ -47,16 +47,20 @@ const PrivateRoute = ({
     // Redirect to subscriptions if authenticated but not valid
     return <Navigate to="/subscriptions" replace state={{ from: location }} />;
   }
-  if (requiredRoles?.length > 0) {
-    const userRole = user?.role;
-    const hasRequiredRoles = requiredRoles?.some((role) =>
-      userRole.includes(role)
-    );
-    console.log("🚀 ~ hasRequiredRoles:", hasRequiredRoles);
-    if (!hasRequiredRoles) {
-      return <Navigate to="/unauthorized" replace state={{ from: location }} />;
-    }
-  }
+  // if (
+  //   !authLoading &&
+  //   !subscriptionLoading &&
+  //   isAuthenticated &&
+  //   requiredRoles?.length > 0
+  // ) {
+  //   const userRole = user?.role;
+  //   const hasRequiredRoles = requiredRoles?.some((role) =>
+  //     userRole.includes(role)
+  //   );
+  //   if (!hasRequiredRoles) {
+  //     return <Navigate to="/unauthorized" replace state={{ from: location }} />;
+  //   }
+  // }
   return children;
 };
 

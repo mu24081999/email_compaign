@@ -4,6 +4,7 @@ import {
   invalidRequest,
   userRequestLoading,
   updatedUser,
+  getAllUsers,
 } from "../slices/user";
 import { toast } from "react-toastify";
 import { updateMe } from "../slices/auth";
@@ -60,29 +61,27 @@ export const updateUserRec = (token, user_id, data) => async (dispatch) => {
 //     dispatch(invalidRequest(e.message));
 //   }
 // };
-// export const getPropertiesList = (token) => async (dispatch) => {
-//   try {
-//     dispatch(userRequestLoading());
-//     const config = {
-//       headers: {
-//         "Content-Type": "application/json",
-//         "x-access-token": token,
-//       },
-//     };
-//     await axios
-//       .get(`${backendURL}/properties/get-all-properties`, config)
-//       .then((response) => {
-//         console.log("🚀 ~ .then ~ response:", response);
-//         if (response?.data?.statusCode !== 200) {
-//           toast.error(response.data.message);
-//           return dispatch(invalidRequest(response.data.message));
-//         }
-//         dispatch(getAllProperties(response.data.data.propertiesData));
-//       });
-//   } catch (e) {
-//     dispatch(invalidRequest(e.message));
-//   }
-// };
+export const getUsersList = (token) => async (dispatch) => {
+  try {
+    dispatch(userRequestLoading());
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        "x-access-token": token,
+      },
+    };
+    await axios.get(`${backendURL}/users`, config).then((response) => {
+      if (response?.data?.statusCode !== 200) {
+        toast.error(response.data.message);
+        return dispatch(invalidRequest(response.data.message));
+      }
+      dispatch(getAllUsers(response.data.data));
+    });
+  } catch (e) {
+    dispatch(invalidRequest(e.message));
+  }
+};
+
 // export const getPropertyByIdRec = (token, property_id) => async (dispatch) => {
 //   try {
 //     dispatch(userRequestLoading());

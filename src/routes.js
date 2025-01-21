@@ -33,6 +33,15 @@ import Wallet from "./pages/Wallet";
 import A2P from "./pages/A2P";
 import Privacy from "./pages/Privacy";
 import Chat from "./pages/Chat";
+import UnAuthorized from "./pages/utils/UnAuthorized";
+
+//admin dashboard
+import AdminDashboard from "./pages/Admin/Dashboard";
+import AdminUsers from "./pages/Admin/Users";
+import AdminTwlioAccounts from "./pages/Admin/TwilioAccounts";
+import AdminTwilioAccountNumbers from "./pages/Admin/TwilioNumbers";
+import AdminEmailTrigger from "./pages/Admin/EmailTrigger";
+import AdminSubscription from "./pages/Admin/Subscriptions";
 
 const Login = lazy(() => import("./pages/Auth/Login"));
 const Register = lazy(() => import("./pages/Auth/Register"));
@@ -48,6 +57,114 @@ const router = (
 ) => {
   const routes = [
     {
+      path: "/admin/accounts/subscriptions",
+      element: (
+        <PrivateRoute
+          user={user}
+          email_verified={email_verified}
+          isAuthenticated={isAuthenticated}
+          authLoading={authLoading}
+          subscriptionLoading={subscriptionLoading}
+          startingAuth={startingAuth}
+          isValid={isValid}
+          requiredRoles={["admin"]}
+        >
+          <AdminSubscription />
+        </PrivateRoute>
+      ), // Protect the Dashboard route    children: [],
+      breadcrumb: "Admin Dashboard",
+    },
+    {
+      path: "/admin/trigger-email",
+      element: (
+        <PrivateRoute
+          user={user}
+          email_verified={email_verified}
+          isAuthenticated={isAuthenticated}
+          authLoading={authLoading}
+          subscriptionLoading={subscriptionLoading}
+          startingAuth={startingAuth}
+          isValid={isValid}
+          requiredRoles={["admin"]}
+        >
+          <AdminEmailTrigger />
+        </PrivateRoute>
+      ), // Protect the Dashboard route    children: [],
+      breadcrumb: "Admin Dashboard",
+    },
+    {
+      path: "/admin/account/phone-numbers/:sid",
+      element: (
+        <PrivateRoute
+          user={user}
+          email_verified={email_verified}
+          isAuthenticated={isAuthenticated}
+          authLoading={authLoading}
+          subscriptionLoading={subscriptionLoading}
+          startingAuth={startingAuth}
+          isValid={isValid}
+          requiredRoles={["admin"]}
+        >
+          <AdminTwilioAccountNumbers />
+        </PrivateRoute>
+      ), // Protect the Dashboard route    children: [],
+      breadcrumb: "Admin Dashboard",
+    },
+    {
+      path: "/admin/dashboard",
+      element: (
+        <PrivateRoute
+          user={user}
+          email_verified={email_verified}
+          isAuthenticated={isAuthenticated}
+          authLoading={authLoading}
+          subscriptionLoading={subscriptionLoading}
+          startingAuth={startingAuth}
+          isValid={isValid}
+          requiredRoles={["admin"]}
+        >
+          <AdminDashboard />
+        </PrivateRoute>
+      ), // Protect the Dashboard route    children: [],
+      breadcrumb: "Admin Dashboard",
+    },
+    {
+      path: "/admin/users",
+      element: (
+        <PrivateRoute
+          user={user}
+          email_verified={email_verified}
+          isAuthenticated={isAuthenticated}
+          authLoading={authLoading}
+          subscriptionLoading={subscriptionLoading}
+          startingAuth={startingAuth}
+          isValid={isValid}
+          requiredRoles={["admin"]}
+        >
+          <AdminUsers />
+        </PrivateRoute>
+      ), // Protect the Dashboard route    children: [],
+      breadcrumb: "Admin Users",
+    },
+    {
+      path: "/admin/twilio_accounts",
+      element: (
+        <PrivateRoute
+          user={user}
+          email_verified={email_verified}
+          isAuthenticated={isAuthenticated}
+          authLoading={authLoading}
+          subscriptionLoading={subscriptionLoading}
+          startingAuth={startingAuth}
+          isValid={isValid}
+          requiredRoles={["admin"]}
+        >
+          <AdminTwlioAccounts />
+        </PrivateRoute>
+      ), // Protect the Dashboard route    children: [],
+      breadcrumb: "Admin Users",
+    },
+    {
       path: "/",
       element: (
         <PrivateRoute
@@ -58,6 +175,7 @@ const router = (
           subscriptionLoading={subscriptionLoading}
           startingAuth={startingAuth}
           isValid={isValid}
+          requiredRoles={["user"]}
         >
           <Dashboard />
         </PrivateRoute>
@@ -477,6 +595,7 @@ const router = (
       children: [],
       breadcrumb: "compaign",
     },
+    { path: "/unauthorized", element: <UnAuthorized /> },
     {
       path: "/verify-email/:email",
       element: <VerifyEmail />,
