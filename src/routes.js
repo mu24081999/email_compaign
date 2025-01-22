@@ -42,6 +42,8 @@ import AdminTwlioAccounts from "./pages/Admin/TwilioAccounts";
 import AdminTwilioAccountNumbers from "./pages/Admin/TwilioNumbers";
 import AdminEmailTrigger from "./pages/Admin/EmailTrigger";
 import AdminSubscription from "./pages/Admin/Subscriptions";
+import AdminAddUser from "./pages/Admin/AddUser";
+import AdminUpdateSubscription from "./pages/Admin/UpdateSubscription";
 
 const Login = lazy(() => import("./pages/Auth/Login"));
 const Register = lazy(() => import("./pages/Auth/Register"));
@@ -56,6 +58,42 @@ const router = (
   user
 ) => {
   const routes = [
+    {
+      path: "/admin/user/update-subscription/:user_id",
+      element: (
+        <PrivateRoute
+          user={user}
+          email_verified={email_verified}
+          isAuthenticated={isAuthenticated}
+          authLoading={authLoading}
+          subscriptionLoading={subscriptionLoading}
+          startingAuth={startingAuth}
+          isValid={isValid}
+          requiredRoles={["admin"]}
+        >
+          <AdminUpdateSubscription />
+        </PrivateRoute>
+      ), // Protect the Dashboard route children: [],
+      breadcrumb: "Admin Dashboard",
+    },
+    {
+      path: "/admin/add-user",
+      element: (
+        <PrivateRoute
+          user={user}
+          email_verified={email_verified}
+          isAuthenticated={isAuthenticated}
+          authLoading={authLoading}
+          subscriptionLoading={subscriptionLoading}
+          startingAuth={startingAuth}
+          isValid={isValid}
+          requiredRoles={["admin"]}
+        >
+          <AdminAddUser />
+        </PrivateRoute>
+      ), // Protect the Dashboard route    children: [],
+      breadcrumb: "Admin Dashboard",
+    },
     {
       path: "/admin/accounts/subscriptions",
       element: (

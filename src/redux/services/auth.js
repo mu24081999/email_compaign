@@ -39,23 +39,35 @@ export const registerUser = (registerData) => async (dispatch) => {
     toast.success(response.data.message);
     dispatch(register(response.data.data.userData));
     return response.data;
-    // .then((response) => {
-    //   console.log("🚀 ~ .then ~ response:", response);
-    //   if (response?.data?.statusCode !== 200) {
-    //     toast.error(response.data.message);
-    //     return dispatch(invalidRequest(response.data.message));
-    //   }
-    //   toast.success(response.data.message);
-    //   dispatch(register(response.data.data.userData));
-    //   // Cookie.set("token", response.data.data.token);
-    //   return true;
-    // });
-    // return is_registered;
   } catch (e) {
     dispatch(invalidRequest(e.message));
   }
 };
+export const addUser = (registerData) => async (dispatch) => {
+  try {
+    dispatch(authRequestLoading());
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    const response = await axios.post(
+      `${backendURL}/auth/register`,
+      registerData,
+      config
+    );
+    if (response?.data?.statusCode !== 200) {
+      toast.error(response.data.message);
+      return dispatch(invalidRequest(response.data.message));
+    }
+    dispatch(forgotPassword(response.data.message));
+    toast.success(response.data.message);
 
+    return response.data;
+  } catch (e) {
+    dispatch(invalidRequest(e.message));
+  }
+};
 export const loginUser = (data) => async (dispatch) => {
   try {
     dispatch(authRequestLoading());

@@ -20,7 +20,6 @@ const MailProviderForm = ({ handleMenu }) => {
   const dispatch = useDispatch();
 
   const formSubmit = async (formData) => {
-    console.log(formData);
     const params = {
       firstname: formData?.firstname,
       lastname: formData?.lastname,

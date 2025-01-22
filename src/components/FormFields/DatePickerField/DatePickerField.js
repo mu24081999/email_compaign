@@ -84,7 +84,9 @@ const DatePickerFeild = React.forwardRef((props, ref) => {
                     ? "YYYY-MM-dd"
                     : "YYYY-MM-dd hh:mm:ss"
                 }
-                className={` text-lg  ${isDisabled ? "opacity-50" : ""}
+                className={` text-sm text-gray-600 py-3 w-full rounded-lg border border-gray-200   ${
+                  isDisabled ? "opacity-50" : ""
+                }
                                    ${isHighLight && " focus:bg-dark   "}`}
                 placeholder={props.placeholder ? props.placeholder : ""}
                 disabled={isDisabled}

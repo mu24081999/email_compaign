@@ -2,17 +2,16 @@ import React, { useEffect, useState } from "react";
 import Button from "../../../components/Button";
 import { useNavigate } from "react-router-dom";
 import Table from "../../../components/Table";
-import { getAllUsers } from "../../../redux/slices/user";
 import { useDispatch, useSelector } from "react-redux";
 import { getUsersList } from "../../../redux/services/user";
 import { loginUser } from "../../../redux/services/auth";
 const Content = () => {
-  const { token } = useSelector((state) => state.auth);
+  const { token, user_id } = useSelector((state) => state.auth);
   const { users } = useSelector((state) => state.user);
   const [usersData, setUsersData] = useState([]);
   const [pagination, setPagination] = useState({});
-  const dispatch = useDispatch();
   const navigateTo = useNavigate();
+  const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getUsersList(token));
     return () => {};
@@ -62,6 +61,12 @@ const Content = () => {
                   loginUser({ email: usr?.email, password: usr?.password })
                 ),
             },
+            {
+              color: "green",
+              label: "Subscription",
+              onClick: () =>
+                navigateTo(`/admin/user/update-subscription/${usr?.id}`),
+            },
           ],
         });
       });
@@ -69,15 +74,19 @@ const Content = () => {
     setPagination(users?.pagination);
 
     return () => {};
-  }, [users, dispatch]);
+  }, [users, dispatch, navigateTo, user_id]);
   return (
     <div>
       <div>
+        <div className="py-3">
+          <Button onClick={() => navigateTo("/admin/add-user")} className="">
+            Add User
+          </Button>
+        </div>
         <div>
           <Table
             columns={columns}
             data={usersData}
-            // bulkActions={bulkActions}
             totalItems={pagination?.totalItems}
             itemsPerPage={10}
             onPageChange={(page) => fetchData(page)}

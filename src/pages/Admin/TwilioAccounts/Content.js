@@ -15,7 +15,7 @@ import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 import InputField from "../../../components/FormFields/InputField/InputField";
 import { FaRegEdit, FaRegEnvelope } from "react-icons/fa";
-import Checkbox from "../../../components/FormFields/Checkbox/Checkbox";
+import Loader from "../../../components/Loader/Loader";
 const Content = () => {
   const {
     handleSubmit,
@@ -27,7 +27,7 @@ const Content = () => {
   const sidWatcher = watch("sid");
   const activeWatcher = watch("active");
   const { token } = useSelector((state) => state.auth);
-  const { twilioSubAccounts } = useSelector((state) => state.twilio);
+  const { twilioSubAccounts, isLoading } = useSelector((state) => state.twilio);
   const [usersData, setUsersData] = useState([]);
   const [pagination, setPagination] = useState({});
   const dispatch = useDispatch();
@@ -144,19 +144,23 @@ const Content = () => {
         </div>
       </form>
       <div>
-        <div>
-          <Table
-            columns={columns}
-            data={usersData}
-            pagination={false}
-            actions={false}
-            // bulkActions={bulkActions}
-            totalItems={pagination?.totalItems}
-            itemsPerPage={10}
-            onPageChange={(page) => fetchData(page)}
-            // actions={false}
-          />
-        </div>
+        {isLoading ? (
+          <Loader />
+        ) : (
+          <div>
+            <Table
+              columns={columns}
+              data={usersData}
+              pagination={false}
+              actions={false}
+              // bulkActions={bulkActions}
+              totalItems={pagination?.totalItems}
+              itemsPerPage={10}
+              onPageChange={(page) => fetchData(page)}
+              // actions={false}
+            />
+          </div>
+        )}
       </div>
     </div>
   );

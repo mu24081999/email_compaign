@@ -12,6 +12,8 @@ import Modal from "../../components/Modal";
 import moment from "moment/moment";
 import { useNavigate } from "react-router-dom";
 import { RxCross1 } from "react-icons/rx";
+import Button from "../../components/Button";
+import { logoutUser } from "../../redux/services/auth";
 
 const Pricing = ({ isValid }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -439,8 +441,18 @@ const Pricing = ({ isValid }) => {
       navigateTo("/");
     }
   }, [isSubscribed, navigateTo]);
+  const handleLogout = () => {
+    dispatch(logoutUser(token));
+  };
   return (
     <div>
+      {token && (
+        <div className=" flex justify-end px-5 py-2">
+          <Button onClick={handleLogout} className="py-2 bg-black">
+            Logout
+          </Button>
+        </div>
+      )}
       <div className="relative isolate bg-white px-6 py-24 sm:py-32 lg:px-8">
         <div
           className="absolute inset-x-0 -top-3 -z-10 transform-gpu overflow-hidden px-36 blur-3xl"
