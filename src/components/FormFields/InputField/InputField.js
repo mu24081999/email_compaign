@@ -138,6 +138,7 @@ const InputField = React.forwardRef((props, ref) => {
     min,
     isDisabled,
     placeholder,
+    heading,
     svg,
     ...others
   } = props;
@@ -171,6 +172,8 @@ const InputField = React.forwardRef((props, ref) => {
           render={({ field }) => (
             <>
               <div className="relative">
+                {heading && <h1 className="font-extrabold pb-2">{heading}</h1>}
+
                 {svg && (
                   <span
                     onClick={() => type === "password" && typeHandler()}

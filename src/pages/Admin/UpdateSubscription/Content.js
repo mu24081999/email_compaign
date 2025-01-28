@@ -44,7 +44,7 @@ const Content = () => {
       plan_name: data?.plan?.value,
       user_id: user_id,
     };
-    dispatch(createSubscriptionApi(token, params));
+    dispatch(createSubscriptionApi(token, params, false));
   };
   useEffect(() => {
     dispatch(getUserSubscriptionApi(token, user_id));
@@ -122,6 +122,7 @@ const Content = () => {
                 control={control}
                 errors={errors}
                 label="Emails Limit / Month"
+                heading="Emails Limit / Month"
                 rules={{
                   required: {
                     value: true,
@@ -137,6 +138,7 @@ const Content = () => {
                 control={control}
                 errors={errors}
                 label="Leads Limit"
+                heading="Leads Limit"
                 rules={{
                   required: {
                     value: true,
@@ -152,6 +154,7 @@ const Content = () => {
                 control={control}
                 errors={errors}
                 label="Templates Limit"
+                heading="Templates Limit"
                 rules={{
                   required: {
                     value: true,
@@ -167,6 +170,7 @@ const Content = () => {
                 control={control}
                 errors={errors}
                 label="Sequence Limit"
+                heading="Sequence Limit"
                 rules={{
                   required: {
                     value: true,
@@ -182,6 +186,7 @@ const Content = () => {
                 control={control}
                 errors={errors}
                 label="Email Validations Limit"
+                heading="Email Validations Limit"
                 rules={{
                   required: {
                     value: true,
@@ -197,6 +202,7 @@ const Content = () => {
                 control={control}
                 errors={errors}
                 label="Alocate Credit"
+                heading="Alocate Credit"
                 rules={{
                   required: {
                     value: true,
@@ -213,6 +219,7 @@ const Content = () => {
                 control={control}
                 errors={errors}
                 label="Monthly Payable"
+                heading="Monthly Payable"
                 rules={{
                   required: {
                     value: true,
@@ -228,6 +235,7 @@ const Content = () => {
                 control={control}
                 errors={errors}
                 label="Total Payable Amount"
+                heading="Total Payable Amount"
                 rules={{
                   required: {
                     value: true,
@@ -243,6 +251,7 @@ const Content = () => {
                 control={control}
                 errors={errors}
                 label="Discount Percentage"
+                heading="Discount Percentage"
                 rules={{
                   required: {
                     value: true,
@@ -258,6 +267,7 @@ const Content = () => {
                 control={control}
                 errors={errors}
                 label="Discount Amount"
+                heading="Discount Amount"
                 rules={{
                   required: {
                     value: true,

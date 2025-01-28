@@ -39,36 +39,38 @@ export const createPaymentIntendApi = (token, data) => async (dispatch) => {
     dispatch(invalidRequest(e.message));
   }
 };
-export const createSubscriptionApi = (token, data) => async (dispatch) => {
-  try {
-    dispatch(subscriptionRequestLoading());
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-        "x-access-token": token,
-      },
-    };
-    const response = await axios
-      .post(`${backendURL}/subscriptions`, data, config)
-      .then((response) => {
-        if (response?.data?.statusCode !== 200) {
-          toast.error(response.data.message);
-          return dispatch(invalidRequest(response.data.message));
-        }
-        dispatch(addSubscription(response.data.message));
-        toast.success(response.data.message);
-        dispatch(getUserSubscriptionApi(token, data?.user_id));
-        dispatch(login(response.data.data.userData));
-        return {
-          done: true,
-          subscription: response.data.data.subscription,
-        };
-      });
-    return response;
-  } catch (e) {
-    dispatch(invalidRequest(e.message));
-  }
-};
+export const createSubscriptionApi =
+  (token, data, login = true) =>
+  async (dispatch) => {
+    try {
+      dispatch(subscriptionRequestLoading());
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          "x-access-token": token,
+        },
+      };
+      const response = await axios
+        .post(`${backendURL}/subscriptions`, data, config)
+        .then((response) => {
+          if (response?.data?.statusCode !== 200) {
+            toast.error(response.data.message);
+            return dispatch(invalidRequest(response.data.message));
+          }
+          dispatch(addSubscription(response.data.message));
+          toast.success(response.data.message);
+          login && dispatch(getUserSubscriptionApi(token, data?.user_id));
+          login && dispatch(login(response.data.data.userData));
+          return {
+            done: true,
+            subscription: response.data.data.subscription,
+          };
+        });
+      return response;
+    } catch (e) {
+      dispatch(invalidRequest(e.message));
+    }
+  };
 export const getUserSubscriptionApi = (token, user_id) => async (dispatch) => {
   try {
     dispatch(subscriptionRequestLoading());

@@ -23,9 +23,7 @@ import Bar from "../../components/Charts/Bar";
 import useSocket from "../../context/SocketContext/useSocket";
 
 const DashboardContent = () => {
-  const { me } = useSocket();
   const { user_id, token } = useSelector((state) => state.auth);
-  const { emails } = useSelector((state) => state.email);
   const { email_report, lead_report, isLoading } = useSelector(
     (state) => state.dashboard
   );
