@@ -4,11 +4,15 @@ import Table from "../../../../components/Table";
 import Button from "../../../../components/Button";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getEmailAccountsApi } from "../../../../redux/services/email";
+import {
+  deleteEmailAccountApi,
+  getEmailAccountsApi,
+} from "../../../../redux/services/email";
 import Modal from "../../../../components/Modal";
 import ModalBody from "./ModalBody/ModalBody";
 import Layout from "../../../../layout/Layout";
 import useMain from "../../../../context/Main/useMain";
+import EditAccount from "./ModalBody/EditAccount";
 const EmailAccounts = () => {
   const {
     handleSubmit,
@@ -23,10 +27,20 @@ const EmailAccounts = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedEmail, setSelectedEmail] = useState(false);
   const [accountsData, setAccountsData] = useState([]);
+  const [openModal, setOpenModal] = useState(null);
   const handleSelectedEmail = () => {};
   const [pagination, setPagination] = useState({});
+  const [currentAccount, setCurrentAccount] = useState({});
 
   const columns = [
+    {
+      label: "First Name",
+      accessor: "firstname",
+    },
+    {
+      label: "Last Name",
+      accessor: "lastname",
+    },
     {
       label: "Email",
       accessor: "email",
@@ -84,7 +98,26 @@ const EmailAccounts = () => {
             {
               color: "green",
               label: "Warmup Account",
-              onClick: () => handleChildData(account),
+              onClick: () => {
+                handleChildData(account);
+                setOpenModal("warmup");
+              },
+            },
+            {
+              color: "green",
+              label: "Edit Account",
+              onClick: () => {
+                handleChildData(account);
+                setOpenModal("emailAccount");
+                setCurrentAccount(account);
+              },
+            },
+            {
+              color: "green",
+              label: "Delete Account",
+              onClick: () => {
+                dispatch(deleteEmailAccountApi(token, account?.id, user_id));
+              },
             },
           ],
         });
@@ -120,11 +153,17 @@ const EmailAccounts = () => {
             <Modal
               isOpen={isOpen}
               onClose={handleClose}
-              title="Warm-Up "
-              body=<ModalBody
-                handleClose={handleClose}
-                selectedEmail={selectedEmail}
-              />
+              title={openModal === "warmup" ? "Warm-Up" : "Edit Account"}
+              body={
+                openModal === "warmup" ? (
+                  <ModalBody
+                    handleClose={handleClose}
+                    selectedEmail={selectedEmail}
+                  />
+                ) : (
+                  <EditAccount currentAccount={currentAccount} />
+                )
+              }
               // onSave={handleSave}
               saveButtonText="Save Changes"
               closeButtonText="Dismiss"

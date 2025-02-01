@@ -44,13 +44,13 @@ const List = ({
     { label: "Open", accessor: "open" },
     { label: "Open Count", accessor: "open_count" },
     { label: "Last Opened At", accessor: "opened_at" },
-
-    // {
-    //   label: "Actions",
-    //   accessor: "actions",
-    //   type: "actions",
-    //   variant: "green",
-    // },
+    { label: "country", accessor: "country" },
+    { label: "state", accessor: "state" },
+    { label: "city", accessor: "city" },
+    { label: "address", accessor: "address" },
+    { label: "postalCode", accessor: "postalCode" },
+    { label: "company", accessor: "company" },
+    { label: "position", accessor: "position" },
   ];
   const deleteBulk = (ids) => {
     dispatch(deleteLeadRec(token, ids, compaign_id));
@@ -108,6 +108,13 @@ const List = ({
           open: item.open,
           open_count: item.open_count,
           opened_at: item.opened_at,
+          company: item.company,
+          phone: item.phone,
+          country: item.country,
+          state: item.state,
+          city: item.city,
+          address: item.address,
+          position: item.position,
         };
       });
     // console.log(list);

@@ -24,10 +24,6 @@ const Leads = () => {
   useEffect(() => {
     const data = [];
     leads?.leadsData?.map((lead) => {
-      console.log(
-        "🚀 ~ leads?.leadsData?.map ~ lead:",
-        moment(lead.opened_at).format("HH:mm:ss a")
-      );
       data.push({
         id: lead?.id,
         firstname: lead.firstname,
@@ -38,6 +34,7 @@ const Leads = () => {
         open_count: lead.open_count,
         email: lead?.email,
         open: lead?.open === true ? "TRUE" : "FALSE",
+        ...lead,
       });
     });
     setLeadsData(data);

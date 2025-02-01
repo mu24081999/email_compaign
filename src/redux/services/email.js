@@ -55,7 +55,7 @@ export const addEmailAccountApi = (token, data) => async (dispatch) => {
         }
         dispatch(addEmailAccount(response.data.message));
         toast.success(response.data.message);
-        dispatch(getEmailAccountsApi(token));
+        dispatch(getEmailAccountsApi(token, `user_id=${data?.user_id}`));
         return {
           done: true,
           id: response?.data?.data?.email_account?.id,
@@ -147,3 +147,32 @@ export const getEmailAccountDetailsApi = (token, id) => async (dispatch) => {
     dispatch(invalidRequest(error.message));
   }
 };
+export const deleteEmailAccountApi =
+  (token, id, user_id) => async (dispatch) => {
+    try {
+      dispatch(emailRequestLoading());
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          "x-access-token": token,
+        },
+      };
+      const response = await axios
+        .delete(
+          `${backendURL}/email-accounts/delete-email-account/${id}`,
+          config
+        )
+        .then((response) => {
+          if (response?.data?.statusCode !== 200) {
+            toast.error(response.data.message);
+            return dispatch(invalidRequest(response.data.message));
+          }
+          toast.success(response.data.message);
+          dispatch(getEmailAccountsApi(token, `user_id=${user_id}`));
+          dispatch(deleteEmailAccount(response.data.mesage));
+        });
+      return response;
+    } catch (error) {
+      dispatch(invalidRequest(error.message));
+    }
+  };

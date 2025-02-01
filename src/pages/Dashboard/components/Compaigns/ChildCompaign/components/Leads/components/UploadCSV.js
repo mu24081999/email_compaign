@@ -6,6 +6,8 @@ import Button from "../../../../../../../../components/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { addLeadRec } from "../../../../../../../../redux/services/leads";
 import { useParams } from "react-router-dom";
+import _ from "lodash";
+import Table from "../../../../../../../../components/Table";
 
 const UploadCSV = ({ close }) => {
   const dispatch = useDispatch();
@@ -18,7 +20,7 @@ const UploadCSV = ({ close }) => {
   const handleUploadCSV = () => {
     if (data.length > 0) {
       const formattedData = [];
-      if (data.length > 500) {
+      if (data?.length > 500) {
         return toast.error("You can only upload 500 contacts in a campaign.");
       } else {
         data?.map((item) => {
@@ -28,6 +30,13 @@ const UploadCSV = ({ close }) => {
             lastname: item?.lastname,
             email: item?.email,
             phone: item?.phone,
+            company: item?.company,
+            position: item?.position,
+            city: item?.city,
+            state: item?.state,
+            country: item?.country,
+            address: item?.address,
+            postalCode: item?.postalCode,
             user_id: user_id,
             compaign_id: parseInt(id),
           });
@@ -53,7 +62,22 @@ const UploadCSV = ({ close }) => {
         const validData = results.data.filter((row) =>
           Object.values(row).some(Boolean)
         );
-        setData(validData.slice(0, 500)); // Limit to 100 rows
+        const filteredData = validData?.map((row) => {
+          return {
+            firstname: row?.firstname,
+            lastname: row?.lastname,
+            email: row?.email,
+            company: row?.company,
+            phone: row?.phone,
+            position: row?.position,
+            country: row?.country,
+            state: row?.state,
+            city: row?.city,
+            address: row?.address,
+            postalCode: row?.postalCode,
+          };
+        });
+        setData(filteredData?.slice(0, 100)); // Limit to 100 rows
       },
       error: (error) => {
         console.error("Error parsing CSV file:", error);
@@ -61,6 +85,17 @@ const UploadCSV = ({ close }) => {
       },
     });
   };
+  const columns = [
+    { label: "First Name", accessor: "firstname" },
+    // { label: "Status", accessor: "status" },
+    { label: "Last Name", accessor: "lastname" }, // Example of nested accessor
+    // { label: "Sent", accessor: "email_sent_counter" },
+    { label: "Email", accessor: "email" },
+    { label: "Company", accessor: "company" },
+    { label: "Position", accessor: "position" },
+    { label: "Phone Number", accessor: "phone" },
+    { label: "Address", accessor: "address" },
+  ];
 
   return (
     <div className="p-5">
@@ -115,28 +150,8 @@ const UploadCSV = ({ close }) => {
           ) : (
             <div className=" max-h-[500px] overflow-scroll">
               {data.length > 0 && (
-                <div className="mt-5 overflow-auto">
-                  <h3 className="text-lg font-semibold mb-3">
-                    CSV Data Grouped by Keys:
-                  </h3>
-                  <table className="table-auto w-full border-collapse border border-gray-300">
-                    <tbody>
-                      {Object.keys(data[0]).map((key) => (
-                        <tr key={key} className="hover:bg-gray-50">
-                          <td className="border px-4 py-2 font-semibold bg-gray-100">
-                            {key}
-                          </td>
-                          <td className="border px-4 py-2">
-                            <ul className="list-disc pl-5">
-                              {data.map((row, index) => (
-                                <li key={index}>{row[key] || "N/A"}</li>
-                              ))}
-                            </ul>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
+                <div>
+                  <Table columns={columns} data={data} pagination={false} />
                 </div>
               )}
             </div>

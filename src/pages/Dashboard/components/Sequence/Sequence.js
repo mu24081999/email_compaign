@@ -285,8 +285,9 @@ const Sequence = () => {
               }}
             />
             <p>
-              Add firstname, lastname and email in the format {"{{firstname}}"}{" "}
-              to include in the sequence
+              Add firstname, lastname, email, phone, company, position, country,
+              state, city, address and postalCode in the format{" "}
+              {"{{firstname}}"} to include in the sequence
             </p>
           </div>
           <Button type="submit" className="py-2">
