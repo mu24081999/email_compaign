@@ -33,7 +33,6 @@ const List = ({
     formState: { errors },
   } = useForm({});
   const { compaign } = useSelector((state) => state.compaign);
-  console.log("🚀 ~ Leads ~ compaign:", compaign);
 
   const [showSearch, setShowSearch] = useState(false);
   const dispatch = useDispatch();
@@ -190,7 +189,7 @@ const List = ({
                 label="Email Address"
               />
             </div>
-            <div>
+            <div className="w-full">
               <DatePickerFeild
                 name="opened_at"
                 noShowTime={true}

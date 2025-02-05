@@ -17,6 +17,7 @@ const Leads = () => {
   const { id } = useParams();
   const [isOpen, setIsOpen] = useState(false);
   const [leadsData, setLeadsData] = useState([]);
+  console.log("🚀 ~ Leads ~ leadsData:", leadsData);
   const [pagination, setPagination] = useState();
   useEffect(() => {
     dispatch(getCompaignLeads(token, id));
@@ -25,16 +26,16 @@ const Leads = () => {
     const data = [];
     leads?.leadsData?.map((lead) => {
       data.push({
+        ...lead,
         id: lead?.id,
         firstname: lead.firstname,
         lastname: lead.lastname,
         opened_at: lead.opened_at
-          ? moment(lead.opened_at).format("DD MMM YYYY, hh:mm:ss a")
+          ? moment(lead.opened_at).format("DD MMM YYYY, hh:mm:ss A")
           : "Not open yet",
         open_count: lead.open_count,
         email: lead?.email,
         open: lead?.open === true ? "TRUE" : "FALSE",
-        ...lead,
       });
     });
     setLeadsData(data);
