@@ -443,6 +443,7 @@ const Pricing = ({ isValid }) => {
   }, [isSubscribed, navigateTo]);
   const handleLogout = () => {
     dispatch(logoutUser(token));
+    return navigateTo("/sign-in");
   };
   return (
     <div>

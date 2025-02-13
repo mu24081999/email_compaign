@@ -55,7 +55,7 @@ export const createSubscriptionApi =
         .then((response) => {
           if (response?.data?.statusCode !== 200) {
             toast.error(response.data.message);
-            return dispatch(invalidRequest(response.data.message));
+            // return dispatch(invalidRequest(response.data.message));
           }
           dispatch(addSubscription(response.data.message));
           toast.success(response.data.message);

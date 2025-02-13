@@ -27,7 +27,7 @@ const App = () => {
   }, [dispatch, token, user_id]);
   const [isValid, setIsValid] = useState(false);
   useEffect(() => {
-    if (subscription) {
+    if (subscription && user?.role !== "admin") {
       const checkSubscriptionValidity = () => {
         setStartingAuth(true);
         const currentDate = new Date();
@@ -45,7 +45,7 @@ const App = () => {
 
       checkSubscriptionValidity();
     }
-  }, [subscription]);
+  }, [subscription, user]);
   const email_verified = user.verified;
 
   return (
