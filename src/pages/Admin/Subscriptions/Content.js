@@ -33,12 +33,15 @@ const Content = () => {
     const filteredData = [];
     Array.isArray(subscriptions?.subscriptionsData) &&
       subscriptions?.subscriptionsData?.map((usr) => {
+        const currentDate = new Date();
+        const endDate = new Date(usr?.end_date);
+
         return filteredData?.push({
           ...usr,
           start_date: moment(usr?.start_date).format("MMM d, yyyy"),
           end_date: moment(usr?.end_date).format("MMM d, yyyy"),
           status:
-            usr.status === "active" ? (
+            currentDate <= endDate ? (
               <li style={{ color: "green" }}>Active</li>
             ) : (
               <li style={{ color: "red" }}> Blocked</li>

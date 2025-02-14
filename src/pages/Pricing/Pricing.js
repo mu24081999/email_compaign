@@ -432,6 +432,7 @@ const Pricing = ({ isValid }) => {
       start_date: moment(Date.now()).format("YYYY-MM-DDTHH:mm:ss"),
       end_date: moment(new Date(getDateAfter14Days())).format("YYYY-MM-DD"),
       yearly_price: 0.0,
+      freeTrialClaimed: true,
     };
     await dispatch(createSubscriptionApi(token, data));
     setIsSubscribed(true);
