@@ -25,7 +25,7 @@ app.use((req, res, next) => {
       ? "sub_build"
       : req.hostname === "senderside.com"
       ? "main_build"
-      : req.hostname === "postified.net" && "postified_build";
+      : req.hostname === "dashboard.senderside.com" && "postified_build";
   const buildPath = path.join(__dirname, buildDir);
 
   if (fs.existsSync(buildPath)) {
@@ -48,7 +48,7 @@ app.get("*", (req, res) => {
       ? "sub_build"
       : req.hostname === "senderside.com"
       ? "main_build"
-      : req.hostname === "postified.net" && "postified_build";
+      : req.hostname === "dashboard.senderside.com" && "postified_build";
   const buildPath = path.join(__dirname, buildDir, "index.html");
 
   if (fs.existsSync(buildPath)) {
