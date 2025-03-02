@@ -13,6 +13,44 @@ import { useDispatch, useSelector } from "react-redux";
 import _ from "lodash";
 import { getWalletApi } from "../../redux/services/wallet";
 import { getLogsApi } from "../../redux/services/walletLogs";
+const pricing = {
+  US: {
+    local_sms_inbound: 0.0079,
+    local_call_inbound: 0.0085,
+    local_sms_outbound: 0.0079,
+    local_call_outbound: 0.014,
+    tollfree_sms_inbound: 0.0079,
+    tollfree_call_inbound: 0.022,
+    tollfree_sms_outbound: 0.0079,
+    tollfree_call_outbound: 0.014,
+    local_number: 3.5,
+    tollfree: 4.5,
+  },
+  UK: {
+    local_sms_inbound: 0.0075,
+    local_call_inbound: 0.01,
+    local_sms_outbound: 0.0463,
+    local_call_outbound: 0.015,
+    tollfree_sms_inbound: 0.0075,
+    tollfree_call_inbound: 0.0575,
+    tollfree_sms_outbound: 0.0463,
+    tollfree_call_outbound: 0.015,
+    local_number: 4.2,
+    tollfree: 6.2,
+  },
+  CAN: {
+    local_sms_inbound: 0.0079,
+    local_call_inbound: 0.0085,
+    local_sms_outbound: 0.0079,
+    local_call_outbound: 0.014,
+    tollfree_sms_inbound: 0.0079,
+    tollfree_call_inbound: 0.022,
+    tollfree_sms_outbound: 0.0079,
+    tollfree_call_outbound: 0.014,
+    local_number: 3.5,
+    tollfree: 4.5,
+  },
+};
 const Content = () => {
   const {
     reset,
@@ -21,6 +59,10 @@ const Content = () => {
     control,
     formState: { errors },
   } = useForm();
+  const countryWatcher = watch("country");
+  const countryCode = countryWatcher?.value;
+  console.log("🚀 ~ Content ~ countryCode:", countryCode);
+  const profitMargin = 25;
   const dispatch = useDispatch();
   const { paymentIntend } = useSelector((state) => state.subscription);
   const { token, user_id } = useSelector((state) => state.auth);
@@ -31,7 +73,12 @@ const Content = () => {
     setIsOpen(false);
   };
   const amountWatcher = watch("amount");
-  const topups = [10, 20, 50, 100];
+  const topups = [5, 10, 20, 50, 100];
+  const getProfitPricing = (basePrice, profitMarging) => {
+    const profit = (basePrice / profitMarging) * 100;
+    const profitPrice = basePrice + profit;
+    return profitPrice.toFixed(4);
+  };
   const handleAddTransaction = async (formData) => {
     dispatch(
       createPaymentIntendApi(token, {
@@ -53,6 +100,7 @@ const Content = () => {
     dispatch(getWalletApi(token, user_id));
     dispatch(getLogsApi(token, user_id));
   }, [user_id, token, dispatch]);
+
   return (
     <>
       <div className="flex justify-center gap-5">
@@ -155,8 +203,9 @@ const Content = () => {
           <div>
             <div>
               <ReactSelectField
-                name="number_type"
+                name="country"
                 placeholder="Country"
+                defaultValue={{ label: "United States", value: "US" }}
                 control={control}
                 errors={errors}
                 label="Country"
@@ -165,11 +214,19 @@ const Content = () => {
                     label: "United States",
                     value: "US",
                   },
+                  {
+                    label: "United Kingdom",
+                    value: "UK",
+                  },
+                  {
+                    label: "Canada",
+                    value: "CAN",
+                  },
                 ]}
               />
             </div>
           </div>
-          <div className=" p-5 ">
+          <div className=" ">
             <div className="border">
               <div className="font-bold text-xl text-center bg-black dark:bg-gray-300 text-white dark:text-black p-2">
                 SMS
@@ -177,11 +234,61 @@ const Content = () => {
               <ul className=" list-disc px-5 grid lg:grid-cols-2 sm:grid-cols-1 md:grid-cols-2 p-3 bg-gray-100 dark:bg-gray-900">
                 <li className="flex gap-5 ">
                   <span className="font-bold">Inbound:</span>
-                  <span>{"$0.02"}/sms</span>
+                  <ul>
+                    <li>
+                      {" "}
+                      <span>
+                        $
+                        {getProfitPricing(
+                          pricing[countryCode]?.local_sms_inbound,
+                          profitMargin
+                        )}
+                        /sms
+                      </span>{" "}
+                      <span>( Local )</span>
+                    </li>
+                    <li>
+                      {" "}
+                      <span>
+                        $
+                        {getProfitPricing(
+                          pricing[countryCode]?.tollfree_sms_inbound,
+                          profitMargin
+                        )}
+                        /sms
+                      </span>{" "}
+                      <span>( Tollfree )</span>
+                    </li>
+                  </ul>
                 </li>
                 <li className="flex gap-5 ">
                   <span className="font-bold">Outbound:</span>
-                  <span>{"$0.03"}/sms</span>
+                  <ul>
+                    <li>
+                      {" "}
+                      <span>
+                        $
+                        {getProfitPricing(
+                          pricing[countryCode]?.local_sms_outbound,
+                          profitMargin
+                        )}
+                        /sms
+                      </span>{" "}
+                      <span>( Local )</span>
+                    </li>
+                    <li>
+                      {" "}
+                      <span>
+                        $
+                        {getProfitPricing(
+                          pricing[countryCode]?.tollfree_sms_outbound,
+                          profitMargin
+                        )}
+                        /sms
+                      </span>{" "}
+                      <span>( Tollfree )</span>
+                    </li>
+                  </ul>{" "}
                 </li>
               </ul>
             </div>
@@ -192,11 +299,61 @@ const Content = () => {
               <ul className=" list-disc px-5 grid lg:grid-cols-2 sm:grid-cols-1 md:grid-cols-2 p-3 bg-gray-100 dark:bg-gray-900">
                 <li className="flex gap-5 ">
                   <span className="font-bold">Inbound:</span>
-                  <span>{"$0.028"}/min</span>
+                  <ul>
+                    <li>
+                      {" "}
+                      <span>
+                        $
+                        {getProfitPricing(
+                          pricing[countryCode]?.local_call_inbound,
+                          profitMargin
+                        )}
+                        /min
+                      </span>{" "}
+                      <span>( Local )</span>
+                    </li>
+                    <li>
+                      {" "}
+                      <span>
+                        $
+                        {getProfitPricing(
+                          pricing[countryCode]?.tollfree_call_inbound,
+                          profitMargin
+                        )}
+                        /min
+                      </span>{" "}
+                      <span>( Tollfree )</span>
+                    </li>
+                  </ul>{" "}
                 </li>
                 <li className="flex gap-5 ">
                   <span className="font-bold">Outbound:</span>
-                  <span>{"$0.017"}/min</span>
+                  <ul>
+                    <li>
+                      {" "}
+                      <span>
+                        $
+                        {getProfitPricing(
+                          pricing[countryCode]?.local_call_outbound,
+                          profitMargin
+                        )}
+                        /min
+                      </span>{" "}
+                      <span>( Local )</span>
+                    </li>
+                    <li>
+                      {" "}
+                      <span>
+                        $
+                        {getProfitPricing(
+                          pricing[countryCode]?.tollfree_call_outbound,
+                          profitMargin
+                        )}
+                        /min
+                      </span>{" "}
+                      <span>( Tollfree )</span>
+                    </li>
+                  </ul>{" "}
                 </li>
               </ul>
             </div>
@@ -207,12 +364,12 @@ const Content = () => {
               <ul className=" list-disc px-5 grid lg:grid-cols-2 sm:grid-cols-1 md:grid-cols-2 p-3 bg-gray-100 dark:bg-gray-900">
                 <li className="flex gap-5 ">
                   <span className="font-bold">Local Number:</span>
-                  <span>{"$3.5"}</span>
+                  <span>${pricing[countryCode]?.local_number}</span>
                 </li>
-                {/* <li className="flex gap-5 ">
-                  <span className="font-bold">Toll Free:</span>
-                  <span>{"1"} credit/min</span>
-                </li> */}
+                <li className="flex gap-5 ">
+                  <span className="font-bold">Local Number:</span>
+                  <span>${pricing[countryCode]?.tollfree}</span>
+                </li>
               </ul>
             </div>
           </div>

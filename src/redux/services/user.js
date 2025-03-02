@@ -61,7 +61,7 @@ export const updateUserRec = (token, user_id, data) => async (dispatch) => {
 //     dispatch(invalidRequest(e.message));
 //   }
 // };
-export const getUsersList = (token) => async (dispatch) => {
+export const getUsersList = (token, query) => async (dispatch) => {
   try {
     dispatch(userRequestLoading());
     const config = {
@@ -70,13 +70,15 @@ export const getUsersList = (token) => async (dispatch) => {
         "x-access-token": token,
       },
     };
-    await axios.get(`${backendURL}/users`, config).then((response) => {
-      if (response?.data?.statusCode !== 200) {
-        toast.error(response.data.message);
-        return dispatch(invalidRequest(response.data.message));
-      }
-      dispatch(getAllUsers(response.data.data));
-    });
+    await axios
+      .get(`${backendURL}/users?${query && query}`, config)
+      .then((response) => {
+        if (response?.data?.statusCode !== 200) {
+          toast.error(response.data.message);
+          return dispatch(invalidRequest(response.data.message));
+        }
+        dispatch(getAllUsers(response.data.data));
+      });
   } catch (e) {
     dispatch(invalidRequest(e.message));
   }

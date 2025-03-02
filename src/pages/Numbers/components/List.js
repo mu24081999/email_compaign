@@ -106,6 +106,14 @@ const List = ({
                       label: "United States - US",
                       value: "US",
                     },
+                    {
+                      label: "United Kingdom - UK",
+                      value: "UK",
+                    },
+                    {
+                      label: "Canada - CA",
+                      value: "CA",
+                    },
                   ]}
                 />
               </div>
@@ -121,10 +129,10 @@ const List = ({
                       label: "Local",
                       value: "local",
                     },
-                    // {
-                    //   label: "Toll Free",
-                    //   value: "tollFree",
-                    // },
+                    {
+                      label: "Toll Free",
+                      value: "tollFree",
+                    },
                   ]}
                 />
               </div>
