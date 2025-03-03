@@ -174,10 +174,10 @@ const InputField = React.forwardRef((props, ref) => {
               <div className="relative">
                 {heading && <h1 className="font-extrabold pb-2">{heading}</h1>}
 
-                {svg && (
+                {type === "password" && svg && (
                   <span
                     onClick={() => type === "password" && typeHandler()}
-                    className={`absolute inset-y-0 right-0 px-3 my-1 rounded flex items-center bg-gray-800 mx-1 text-white cursor-pointer`}
+                    className={`absolute inset-y-0 right-0 px-3 my-1 rounded flex items-center mx-1 cursor-pointer`}
                   >
                     {svg}
                   </span>
@@ -197,7 +197,7 @@ const InputField = React.forwardRef((props, ref) => {
                     }
                   }}
                   placeholder={label}
-                  min={type === "number" && !props.min ? 0 : props.min}
+                  min={props.min}
                   disabled={props.isDisabled}
                   value={field.value}
                   className={`bg-white ps-3 py-3 peer w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow g-6  ${

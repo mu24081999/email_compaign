@@ -12,7 +12,7 @@ const Switcher = React.forwardRef((props, ref) => {
   const handleCheckboxChange = (e) => {
     setIsChecked(!isChecked);
     field.onChange(e.target.checked);
-    onChange(e);
+    onChange && onChange(e);
   };
 
   useEffect(() => {

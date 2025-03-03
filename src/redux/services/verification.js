@@ -5,10 +5,33 @@ import {
   addVerification,
   getUserVerification,
   updateVerification,
+  getAllRequests,
 } from "../slices/verification";
 
 import { toast } from "react-toastify";
 const backendURL = `${process.env.REACT_APP_BACKEND_URL_PRODUCTION}`;
+export const getAllRequestsApi = (token, query) => async (dispatch) => {
+  try {
+    dispatch(verificationRequestLoading());
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        "x-access-token": token,
+      },
+    };
+    await axios
+      .get(`${backendURL}/verifications?${query && query}`, config)
+      .then((response) => {
+        if (response?.data?.statusCode !== 200) {
+          toast.error(response.data.message);
+          return dispatch(invalidRequest(response.data.message));
+        }
+        dispatch(getAllRequests(response.data.data));
+      });
+  } catch (error) {
+    return dispatch(invalidRequest(error.message));
+  }
+};
 export const getUserVerificationApi = (token, user_id) => async (dispatch) => {
   try {
     dispatch(verificationRequestLoading());

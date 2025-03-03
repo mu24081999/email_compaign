@@ -22,6 +22,7 @@ const List = ({
     handleSubmit,
     formState: { errors },
     control,
+    reset,
   } = useForm();
 
   const [tableData, setTableData] = useState([]);
@@ -43,6 +44,8 @@ const List = ({
     Array.isArray(availableNumbers) &&
       availableNumbers?.map((number) => {
         const params = {
+          isoCountry: number.isoCountry,
+          region: number.region,
           phoneNumber: number.phoneNumber,
           accountSid: user.accountSid,
           authToken: user.authToken,
@@ -80,6 +83,7 @@ const List = ({
     };
     // console.log("🚀 ~ handleFormSubmit ~ params:", params);
     dispatch(getAvailableNumbersApi(token, params));
+    // reset();
   };
   return (
     <div>
@@ -88,13 +92,13 @@ const List = ({
       ) : ( */}
       <div className="px-3">
         <div className="">
-          <Heading
+          {/* <Heading
             text={"Search Parameters"}
             className="font-extrabold text-xl text-center py-3"
-          />
+          /> */}
           <form onSubmit={handleSubmit(handleFormSubmit)}>
-            <div className="grid grid-cols-3 gap-5">
-              <div>
+            <div className="flex  gap-5">
+              <div className="w-full">
                 <ReactSelectField
                   name="country"
                   placeholder="Country"
@@ -117,7 +121,7 @@ const List = ({
                   ]}
                 />
               </div>
-              <div>
+              <div className="w-full">
                 <ReactSelectField
                   name="number_type"
                   placeholder="Number Type"
@@ -136,9 +140,24 @@ const List = ({
                   ]}
                 />
               </div>
-              <div>
+
+              <div className="w-full">
+                <p className="font-extrabold pb-2">Area Code</p>
+                <InputField
+                  control={control}
+                  errors={errors}
+                  name="areaCode"
+                  min={3}
+                  placeholder="Area Code"
+                  label="Area Code"
+                />
+              </div>
+              <div className="w-full">
                 <div>
-                  <Heading text={"Campabilities"} className="font-extrabold" />
+                  <Heading
+                    text={"Campabilities"}
+                    className="font-extrabold text-black"
+                  />
                 </div>
                 <div className=" items-center h-5 grid grid-cols-4">
                   <Checkbox
@@ -153,12 +172,12 @@ const List = ({
                     errors={errors}
                     label="SMS"
                   />
-                  <Checkbox
+                  {/* <Checkbox
                     name="mms"
                     control={control}
                     errors={errors}
                     label="MMS"
-                  />
+                  /> */}
                   {/* <Checkbox
                       name="fax"
                       control={control}
@@ -167,21 +186,9 @@ const List = ({
                     /> */}
                 </div>
               </div>
-
-              {/* 
-                <div>
-                  <p className="font-extrabold pb-2">Area Code</p>
-                  <InputField
-                    control={control}
-                    errors={errors}
-                    name="areaCode"
-                    placeholder="Area Code"
-                    label="Area Code"
-                  />
-                </div> */}
             </div>
-            <div className="py-3">
-              <Button type="submit" className="py-3">
+            <div className="py-3 w-full">
+              <Button type="submit" loading={isLoading} className="py-3">
                 Search
               </Button>
             </div>

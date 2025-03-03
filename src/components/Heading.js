@@ -11,7 +11,7 @@ const Heading = ({
 
   return (
     <Tag
-      className={`text-${align} ${className} text-[${color}] dark:text-gray-100`} // Optional additional Tailwind classes
+      className={`text-${align} ${className} text-[${color}] dark:text-gray-100 font-space text-black `} // Optional additional Tailwind classes
       // style={{ color }}
     >
       {text}

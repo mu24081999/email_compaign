@@ -124,7 +124,8 @@ const Table = ({
               columns?.map((col) => (
                 <th
                   key={col.accessor}
-                  className="p-4  text-md text-center cursor-pointer"
+                  className={`p-4  text-md text-center cursor-pointer`}
+                  style={{ width: col?.width }}
                   onClick={() => handleSort(col.accessor)}
                 >
                   {col.label}

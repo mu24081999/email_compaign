@@ -18,7 +18,7 @@ const Numbers = () => {
       accountSid: user.accountSid,
       authToken: user.authToken,
       countryCode: "US",
-      areaCode: "415",
+      // areaCode: "415",
       capabilities: {
         voice: true,
         sms: true,

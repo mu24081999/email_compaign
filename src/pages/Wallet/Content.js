@@ -61,7 +61,6 @@ const Content = () => {
   } = useForm();
   const countryWatcher = watch("country");
   const countryCode = countryWatcher?.value;
-  console.log("🚀 ~ Content ~ countryCode:", countryCode);
   const profitMargin = 25;
   const dispatch = useDispatch();
   const { paymentIntend } = useSelector((state) => state.subscription);
@@ -75,7 +74,7 @@ const Content = () => {
   const amountWatcher = watch("amount");
   const topups = [5, 10, 20, 50, 100];
   const getProfitPricing = (basePrice, profitMarging) => {
-    const profit = (basePrice / profitMarging) * 100;
+    const profit = (basePrice / 100) * profitMargin;
     const profitPrice = basePrice + profit;
     return profitPrice.toFixed(4);
   };

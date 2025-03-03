@@ -53,9 +53,9 @@ const Login = () => {
     // <Layout
     //   component={
     <div>
-      <section className=" bg-gradient-to-r from-cyan-500 to-neutral-100 h-screen dark:bg-gray-900 flex justify-center">
-        <div className="  py-8 px-4 mx-auto max-w-screen-xl lg:py-16 grid lg:grid-cols-2 gap-8 lg:gap-16 m-auto">
-          <div className="flex flex-col justify-center text-center">
+      <section className=" bg-gray-100 h-screen dark:bg-gray-900 flex justify-center items-center">
+        {/* <div className="  py-8 px-4 mx-auto max-w-screen-xl lg:py-16 grid lg:grid-cols-2 gap-8 lg:gap-16 m-auto"> */}
+        {/* <div className="flex flex-col justify-center text-center">
             <h1 className="  mb-4 text-4xl font-extrabold tracking-tight leading-none  md:text-5xl lg:text-6xl dark:text-white text-gray-900">
               Welcome back
             </h1>
@@ -64,88 +64,88 @@ const Login = () => {
               and insights. Access your dashboard, track progress, and manage
               your settings all in one place
             </p>
-          </div>
-          <div>
-            <div className="w-full lg:max-w-xl p-6 space-y-8 sm:p-8 bg-white rounded-lg shadow-xl dark:bg-gray-800">
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
-                Sign In
-              </h2>
-              <form
-                className="mt-8 space-y-6"
-                onSubmit={handleSubmit(handleAuth)}
-              >
-                <div>
-                  <InputField
-                    name="email"
+          </div> */}
+        <div>
+          <div className="w-full lg:max-w-xl p-6 space-y-8 sm:p-8 bg-white shadow-xl dark:bg-gray-800">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white text-center">
+              Sign In
+            </h2>
+            <form
+              className="mt-8 space-y-6"
+              onSubmit={handleSubmit(handleAuth)}
+            >
+              <div>
+                <InputField
+                  name="email"
+                  control={control}
+                  svg={<MdDriveFileRenameOutline />}
+                  errors={errors}
+                  // placeholder="Enter your email address"
+                  label="Username/Email Address"
+                  rules={{
+                    required: {
+                      value: true,
+                      message: "Field required!",
+                    },
+                  }}
+                />{" "}
+              </div>
+              <div>
+                <InputField
+                  name="password"
+                  type="password"
+                  control={control}
+                  svg={<FaEye />}
+                  errors={errors}
+                  // placeholder="Enter your password"
+                  label="Password"
+                  rules={{
+                    required: {
+                      value: true,
+                      message: "Field required!",
+                    },
+                  }}
+                />
+              </div>
+              <div className="flex">
+                <div className="flex items-center h-5">
+                  <Checkbox
+                    name="remember"
                     control={control}
-                    svg={<MdDriveFileRenameOutline />}
                     errors={errors}
-                    // placeholder="Enter your email address"
-                    label="Username/Email Address"
-                    rules={{
-                      required: {
-                        value: true,
-                        message: "Field required!",
-                      },
-                    }}
+                    label="Remember me for 30 days"
                   />{" "}
                 </div>
-                <div>
-                  <InputField
-                    name="password"
-                    type="password"
-                    control={control}
-                    svg={<FaEye />}
-                    errors={errors}
-                    // placeholder="Enter your password"
-                    label="Password"
-                    rules={{
-                      required: {
-                        value: true,
-                        message: "Field required!",
-                      },
-                    }}
-                  />
-                </div>
-                <div className="flex">
-                  <div className="flex items-center h-5">
-                    <Checkbox
-                      name="remember"
-                      control={control}
-                      errors={errors}
-                      label="Remember me for 30 days"
-                    />{" "}
-                  </div>
 
-                  <Link
-                    to="/forgot-password"
-                    className="ms-auto text-sm font-medium text-blue-600 hover:underline dark:text-blue-500"
-                  >
-                    Lost Password?
-                  </Link>
-                </div>
-                <Button
-                  loading={isLoading}
-                  type="submit"
-                  // variant="success"
-                  size="lg"
-                  className="py-2"
+                <Link
+                  to="/forgot-password"
+                  className="ms-auto text-sm font-medium text-blue-600 hover:underline dark:text-blue-500"
                 >
-                  Login
-                </Button>
-                <div className="text-sm font-medium text-gray-900 dark:text-white">
-                  Not registered yet?{" "}
-                  <Link
-                    to="/sign-up"
-                    className="text-blue-600 hover:underline dark:text-blue-500"
-                  >
-                    Create account
-                  </Link>
-                </div>
-              </form>
-            </div>
+                  Lost Password?
+                </Link>
+              </div>
+              <Button
+                loading={isLoading}
+                type="submit"
+                // variant="success"
+                size="lg"
+                className="py-2"
+              >
+                Login
+              </Button>
+              <div className="text-sm font-medium text-gray-900 dark:text-white">
+                Not registered yet?{" "}
+                <Link
+                  to="/sign-up"
+                  className="text-blue-600 hover:underline dark:text-blue-500"
+                >
+                  Create account
+                </Link>
+              </div>
+            </form>
           </div>
         </div>
+        {/* </div> */}
       </section>
     </div>
     //   }

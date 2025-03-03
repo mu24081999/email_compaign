@@ -27,7 +27,11 @@ import logo from "../assets/1.png";
 import logo3 from "../assets/3.png";
 import logo4 from "../assets/4.png";
 import Dropdown from "./Dropdown";
-import { IoKeypadOutline, IoWalletOutline } from "react-icons/io5";
+import {
+  IoGitPullRequestOutline,
+  IoKeypadOutline,
+  IoWalletOutline,
+} from "react-icons/io5";
 import useMain from "../context/Main/useMain";
 import Dialer from "../pages/Dialpad/components/DialpadComponents/Dialer";
 import { PiSignOutBold } from "react-icons/pi";
@@ -84,6 +88,11 @@ const SidebarWithNavbar = ({ component }) => {
         name: "Email Accounts",
         link: "/accounts",
         icon: FaRegEnvelope,
+      },
+      {
+        name: "A2P Requests",
+        link: "/admin/a2p-requests",
+        icon: IoGitPullRequestOutline,
       },
       {
         name: "Templates",
@@ -364,7 +373,7 @@ const SidebarWithNavbar = ({ component }) => {
         aria-label="Sidebar"
       >
         <div className="h-full pb-4 overflow-y-auto bg-white dark:bg-gray-800">
-          <ul className="space-y-2 font-medium">
+          <ul className="space-y-2 font-medium font-space">
             {sidebarItems[user?.role]?.map((item, index) => {
               const Icon = item?.icon;
 
@@ -373,7 +382,7 @@ const SidebarWithNavbar = ({ component }) => {
                   key={index}
                   className={`${
                     location?.pathname === item?.link &&
-                    "bg-black  dark:bg-gray-600 text-white p-1 shadow-lg"
+                    "bg-black  dark:bg-gray-600 text-white p-1 shadow-lg font-space"
                   } px-3 `}
                 >
                   <Link

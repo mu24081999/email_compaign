@@ -44,6 +44,7 @@ import AdminEmailTrigger from "./pages/Admin/EmailTrigger";
 import AdminSubscription from "./pages/Admin/Subscriptions";
 import AdminAddUser from "./pages/Admin/AddUser";
 import AdminUpdateSubscription from "./pages/Admin/UpdateSubscription";
+import AdminA2PRequests from "./pages/Admin/A2PRequests";
 
 const Login = lazy(() => import("./pages/Auth/Login"));
 const Register = lazy(() => import("./pages/Auth/Register"));
@@ -72,6 +73,24 @@ const router = (
           requiredRoles={["admin"]}
         >
           <AdminUpdateSubscription />
+        </PrivateRoute>
+      ), // Protect the Dashboard route children: [],
+      breadcrumb: "Admin Dashboard",
+    },
+    {
+      path: "/admin/a2p-requests",
+      element: (
+        <PrivateRoute
+          user={user}
+          email_verified={email_verified}
+          isAuthenticated={isAuthenticated}
+          authLoading={authLoading}
+          subscriptionLoading={subscriptionLoading}
+          startingAuth={startingAuth}
+          isValid={isValid}
+          requiredRoles={["admin"]}
+        >
+          <AdminA2PRequests />
         </PrivateRoute>
       ), // Protect the Dashboard route children: [],
       breadcrumb: "Admin Dashboard",
