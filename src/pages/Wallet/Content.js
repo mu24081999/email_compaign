@@ -245,7 +245,7 @@ const Content = () => {
                         )}
                         /sms
                       </span>{" "}
-                      <span>( Local )</span>
+                      <span className="font-bold">- Local</span>
                     </li>
                     <li>
                       {" "}
@@ -257,7 +257,7 @@ const Content = () => {
                         )}
                         /sms
                       </span>{" "}
-                      <span>( Tollfree )</span>
+                      <span className="font-bold">- Toll-free</span>
                     </li>
                   </ul>
                 </li>
@@ -274,7 +274,7 @@ const Content = () => {
                         )}
                         /sms
                       </span>{" "}
-                      <span>( Local )</span>
+                      <span className="font-bold">- Local</span>
                     </li>
                     <li>
                       {" "}
@@ -286,7 +286,7 @@ const Content = () => {
                         )}
                         /sms
                       </span>{" "}
-                      <span>( Tollfree )</span>
+                      <span className="font-bold">- Toll-free</span>
                     </li>
                   </ul>{" "}
                 </li>
@@ -310,7 +310,7 @@ const Content = () => {
                         )}
                         /min
                       </span>{" "}
-                      <span>( Local )</span>
+                      <span className="font-bold">- Local</span>
                     </li>
                     <li>
                       {" "}
@@ -322,7 +322,7 @@ const Content = () => {
                         )}
                         /min
                       </span>{" "}
-                      <span>( Tollfree )</span>
+                      <span className="font-bold">- Toll-free</span>
                     </li>
                   </ul>{" "}
                 </li>
@@ -339,7 +339,7 @@ const Content = () => {
                         )}
                         /min
                       </span>{" "}
-                      <span>( Local )</span>
+                      <span className="font-bold">- Local</span>
                     </li>
                     <li>
                       {" "}
@@ -351,7 +351,7 @@ const Content = () => {
                         )}
                         /min
                       </span>{" "}
-                      <span>( Tollfree )</span>
+                      <span className="font-bold">- Toll-free</span>
                     </li>
                   </ul>{" "}
                 </li>
@@ -367,7 +367,7 @@ const Content = () => {
                   <span>${pricing[countryCode]?.local_number}</span>
                 </li>
                 <li className="flex gap-5 ">
-                  <span className="font-bold">Local Number:</span>
+                  <span className="font-bold">Toll-Free Number:</span>
                   <span>${pricing[countryCode]?.tollfree}</span>
                 </li>
               </ul>

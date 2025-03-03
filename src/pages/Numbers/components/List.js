@@ -68,7 +68,7 @@ const List = ({
     const params = {
       accountSid: user.accountSid,
       authToken: user.authToken,
-      countryCode: "US",
+      countryCode: data?.country?.value,
       areaCode: data?.areaCode,
       capabilities: {
         voice: data?.voice || false,
@@ -108,7 +108,7 @@ const List = ({
                     },
                     {
                       label: "United Kingdom - UK",
-                      value: "UK",
+                      value: "GB",
                     },
                     {
                       label: "Canada - CA",
