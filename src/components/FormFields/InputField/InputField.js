@@ -215,7 +215,7 @@ const InputField = React.forwardRef((props, ref) => {
                   </label>
                 )}
               </div>
-              {description && <p className="pb-5 pt-1 ps-1">{description}</p>}
+              {description && <p className=" pt-1 ps-1">{description}</p>}
             </>
           )}
         />

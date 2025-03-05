@@ -16,13 +16,13 @@ import { getLogsApi } from "../../redux/services/walletLogs";
 const pricing = {
   US: {
     local_sms_inbound: 0.0079,
-    local_call_inbound: 0.0085,
+    local_call_inbound: 0.018,
     local_sms_outbound: 0.0079,
-    local_call_outbound: 0.014,
+    local_call_outbound: 0.018,
     tollfree_sms_inbound: 0.0079,
-    tollfree_call_inbound: 0.022,
+    tollfree_call_inbound: 0.026,
     tollfree_sms_outbound: 0.0079,
-    tollfree_call_outbound: 0.014,
+    tollfree_call_outbound: 0.018,
     local_number: 3.5,
     tollfree: 4.5,
   },
@@ -40,13 +40,13 @@ const pricing = {
   },
   CAN: {
     local_sms_inbound: 0.0079,
-    local_call_inbound: 0.0085,
+    local_call_inbound: 0.018,
     local_sms_outbound: 0.0079,
-    local_call_outbound: 0.014,
+    local_call_outbound: 0.018,
     tollfree_sms_inbound: 0.0079,
-    tollfree_call_inbound: 0.022,
+    tollfree_call_inbound: 0.026,
     tollfree_sms_outbound: 0.0079,
-    tollfree_call_outbound: 0.014,
+    tollfree_call_outbound: 0.018,
     local_number: 3.5,
     tollfree: 4.5,
   },
@@ -61,7 +61,7 @@ const Content = () => {
   } = useForm();
   const countryWatcher = watch("country");
   const countryCode = countryWatcher?.value;
-  const profitMargin = 25;
+  const profitMargin = 10;
   const dispatch = useDispatch();
   const { paymentIntend } = useSelector((state) => state.subscription);
   const { token, user_id } = useSelector((state) => state.auth);
@@ -213,10 +213,10 @@ const Content = () => {
                     label: "United States",
                     value: "US",
                   },
-                  {
-                    label: "United Kingdom",
-                    value: "UK",
-                  },
+                  // {
+                  //   label: "United Kingdom",
+                  //   value: "UK",
+                  // },
                   {
                     label: "Canada",
                     value: "CAN",

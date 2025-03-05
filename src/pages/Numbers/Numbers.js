@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   getAvailableNumbersApi,
   getClaimedNumbersApi,
+  getReleasedNumbersApi,
 } from "../../redux/services/twilio";
 import Layout from "../../layout/Layout";
 import Content from "./Content";
@@ -10,9 +11,8 @@ import Loader from "../../components/Loader/Loader";
 const Numbers = () => {
   const dispatch = useDispatch();
   const { token, user } = useSelector((state) => state.auth);
-  const { availableNumbers, claimedNumbers, isLoading } = useSelector(
-    (state) => state.twilio
-  );
+  const { availableNumbers, claimedNumbers, isLoading, releasedNumbers } =
+    useSelector((state) => state.twilio);
   useEffect(() => {
     const params = {
       accountSid: user.accountSid,
@@ -33,6 +33,12 @@ const Numbers = () => {
         authToken: user.authToken,
       })
     );
+    dispatch(
+      getReleasedNumbersApi(token, {
+        accountSid: user.accountSid,
+        authToken: user.authToken,
+      })
+    );
   }, [token, dispatch, user]);
 
   return (
@@ -41,6 +47,7 @@ const Numbers = () => {
         <Content
           availableNumbers={availableNumbers}
           claimedNumbers={claimedNumbers}
+          releasedNumbers={releasedNumbers}
           isLoading={isLoading}
           Loader={Loader}
           dispatch={dispatch}

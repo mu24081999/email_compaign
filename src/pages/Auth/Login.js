@@ -74,7 +74,7 @@ const Login = () => {
               className="mt-8 space-y-6"
               onSubmit={handleSubmit(handleAuth)}
             >
-              <div>
+              <div className="w-96">
                 <InputField
                   name="email"
                   control={control}
@@ -90,7 +90,7 @@ const Login = () => {
                   }}
                 />{" "}
               </div>
-              <div>
+              <div className="w-96">
                 <InputField
                   name="password"
                   type="password"
@@ -98,6 +98,14 @@ const Login = () => {
                   svg={<FaEye />}
                   errors={errors}
                   // placeholder="Enter your password"
+                  description={
+                    <Link
+                      to="/forgot-password"
+                      className="ms-auto text-sm font-medium text-blue-600 hover:underline dark:text-blue-500 float-end"
+                    >
+                      Lost Password?
+                    </Link>
+                  }
                   label="Password"
                   rules={{
                     required: {
@@ -107,22 +115,13 @@ const Login = () => {
                   }}
                 />
               </div>
-              <div className="flex">
-                <div className="flex items-center h-5">
-                  <Checkbox
-                    name="remember"
-                    control={control}
-                    errors={errors}
-                    label="Remember me for 30 days"
-                  />{" "}
-                </div>
-
-                <Link
-                  to="/forgot-password"
-                  className="ms-auto text-sm font-medium text-blue-600 hover:underline dark:text-blue-500"
-                >
-                  Lost Password?
-                </Link>
+              <div className="">
+                <Checkbox
+                  name="remember"
+                  control={control}
+                  errors={errors}
+                  label="Remember me for 30 days"
+                />{" "}
               </div>
               <Button
                 loading={isLoading}

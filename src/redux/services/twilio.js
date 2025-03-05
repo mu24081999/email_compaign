@@ -9,6 +9,8 @@ import {
   claimPhoneNumber,
   getMessages,
   getTwilioAccounts,
+  getReleasedNumbers,
+  releaseNumber,
 } from "../slices/twilio";
 
 import { toast } from "react-toastify";
@@ -189,6 +191,52 @@ export const getClaimedNumbersApi = (token, formData) => async (dispatch) => {
           return dispatch(invalidRequest(response.data.message));
         }
         dispatch(getClaimedNumbers(response.data.data.claimedNumbers));
+      });
+  } catch (error) {
+    return dispatch(invalidRequest(error.message));
+  }
+};
+export const getReleasedNumbersApi = (token, formData) => async (dispatch) => {
+  try {
+    dispatch(twilioRequestLoading());
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        "x-access-token": token,
+      },
+    };
+    await axios
+      .post(`${backendURL}/twilio/calling/released-numbers`, formData, config)
+      .then((response) => {
+        console.log("🚀 ~ .then ~ response:", response);
+        if (response?.status !== 200) {
+          toast.error(response.data.message);
+          return dispatch(invalidRequest(response.data.message));
+        }
+        dispatch(getReleasedNumbers(response.data.data.releasedNumbers));
+      });
+  } catch (error) {
+    return dispatch(invalidRequest(error.message));
+  }
+};
+export const releasePhoneNumberApi = (token, formData) => async (dispatch) => {
+  try {
+    dispatch(twilioRequestLoading());
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        "x-access-token": token,
+      },
+    };
+    await axios
+      .post(`${backendURL}/twilio/calling/release-number`, formData, config)
+      .then((response) => {
+        console.log("🚀 ~ .then ~ response:", response);
+        if (response?.status !== 200) {
+          toast.error(response.data.message);
+          return dispatch(invalidRequest(response.data.message));
+        }
+        dispatch(releaseNumber(response.data.data));
       });
   } catch (error) {
     return dispatch(invalidRequest(error.message));

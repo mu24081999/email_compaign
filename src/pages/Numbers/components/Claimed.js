@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Table from "../../../components/Table";
+import { releasePhoneNumberApi } from "../../../redux/services/twilio";
 
 const Claimed = ({
   claimedNumbers,
@@ -15,6 +16,12 @@ const Claimed = ({
     { label: "SMS", accessor: "sms" },
     { label: "Voice", accessor: "voice" },
     { label: "MMS", accessor: "mms" },
+    {
+      label: "Actions",
+      accessor: "actions",
+      type: "actions",
+      variant: "green",
+    },
   ];
   useEffect(() => {
     const data = [];
@@ -25,6 +32,20 @@ const Claimed = ({
           sms: number?.capabilities?.sms === true ? "True" : "False",
           mms: number?.capabilities.mms === true ? "True" : "False",
           voice: number?.capabilities.voice === true ? "True" : "False",
+          actions: [
+            {
+              label: "Release Number",
+              onClick: () => {
+                const params = {
+                  accountSid: user?.accountSid,
+                  authToken: user?.authToken,
+                  phoneNumberSid: number?.sid,
+                };
+                console.log("🚀 ~ claimedNumbers?.map ~ params:", params);
+                dispatch(releasePhoneNumberApi(token, params));
+              },
+            },
+          ],
         });
       });
 
@@ -36,12 +57,20 @@ const Claimed = ({
       {isLoading ? (
         <Loader />
       ) : (
-        <Table
-          columns={columns}
-          pagination={false}
-          data={tableData}
-          actions={false}
-        />
+        <>
+          {tableData?.length > 0 ? (
+            <Table
+              columns={columns}
+              pagination={false}
+              data={tableData}
+              actions={false}
+            />
+          ) : (
+            <div className=" p-10 text-center bg-white dark:bg-gray-800">
+              Not a number claimed yet.
+            </div>
+          )}
+        </>
       )}
     </div>
   );

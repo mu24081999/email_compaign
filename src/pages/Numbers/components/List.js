@@ -110,10 +110,10 @@ const List = ({
                       label: "United States - US",
                       value: "US",
                     },
-                    {
-                      label: "United Kingdom - UK",
-                      value: "GB",
-                    },
+                    // {
+                    //   label: "United Kingdom - UK",
+                    //   value: "GB",
+                    // },
                     {
                       label: "Canada - CA",
                       value: "CA",
@@ -159,7 +159,7 @@ const List = ({
                     className="font-extrabold text-black"
                   />
                 </div>
-                <div className=" items-center h-5 grid grid-cols-4">
+                <div className=" items-center h-5 grid grid-cols-4 pt-5">
                   <Checkbox
                     name="voice"
                     control={control}
@@ -188,7 +188,7 @@ const List = ({
               </div>
             </div>
             <div className="py-3 w-full">
-              <Button type="submit" loading={isLoading} className="py-3">
+              <Button type="submit" className="py-3">
                 Search
               </Button>
             </div>

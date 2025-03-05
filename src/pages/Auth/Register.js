@@ -111,6 +111,11 @@ const Register = () => {
                     value: true,
                     message: "Field required!",
                   },
+                  pattern: {
+                    value: /^[A-Za-z\s]+$/, // Only alphabets and spaces allowed
+                    message: "Only alphabets are allowed!",
+                  },
+                  min: 3,
                 }}
               />{" "}
             </div>
