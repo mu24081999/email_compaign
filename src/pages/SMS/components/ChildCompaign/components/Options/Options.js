@@ -247,7 +247,7 @@ const Options = () => {
           compaign?.status === "" ||
           compaign?.status === "pending" ? ( */}
           <Button type="submit" className="py-3 px-3">
-            Lounch
+            Trigger
           </Button>
           {/* ) : (
             "Compaing is triggerred and under process."

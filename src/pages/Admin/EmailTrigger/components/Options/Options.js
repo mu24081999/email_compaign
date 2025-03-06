@@ -219,7 +219,7 @@ const Options = () => {
           <em>press enter or comma to add new tag</em>
         </div>
         <Button type="submit" className="py-3 px-3">
-          Lounch
+          Trigger
         </Button>
       </form>
       <div>

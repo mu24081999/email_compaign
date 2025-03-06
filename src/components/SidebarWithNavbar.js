@@ -343,12 +343,12 @@ const SidebarWithNavbar = ({ component }) => {
             <div className="">
               {isAuthenticated ? (
                 <div className="flex items-center">
-                  <div className="relative group inline-block p-1">
-                    <button className="p-2 bg-yellow-300 text-white rounded-full">
+                  <div className="relative inline-block p-1">
+                    <button className="p-2 bg-yellow-300 text-white rounded-full peer">
                       <FaQuestion size={20} />
                     </button>
 
-                    <div className="absolute left-1/2 transform -translate-x-1/2 mt-2 w-48 bg-white p-3 rounded-lg shadow-lg border opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-200">
+                    <div className="absolute left-1/2 transform -translate-x-1/2 mt-2 w-48 bg-white p-3 rounded-lg shadow-lg border opacity-0 scale-95 peer-hover:opacity-100 peer-hover:scale-100 transition-all duration-200">
                       <p className="text-sm text-gray-700">
                         Watch in-depth tutorials, guides, and updates on our
                         platform. Subscribe now: [
@@ -359,7 +359,7 @@ const SidebarWithNavbar = ({ component }) => {
                         >
                           Click Here
                         </Link>
-                        ]{" "}
+                        ]
                       </p>
                     </div>
                   </div>

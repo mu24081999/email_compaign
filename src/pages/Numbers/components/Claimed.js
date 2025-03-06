@@ -15,7 +15,7 @@ const Claimed = ({
     { label: "Phone Number", accessor: "friendlyName" },
     { label: "SMS", accessor: "sms" },
     { label: "Voice", accessor: "voice" },
-    { label: "MMS", accessor: "mms" },
+    // { label: "Country", accessor: "isoCountry" },
     {
       label: "Actions",
       accessor: "actions",
