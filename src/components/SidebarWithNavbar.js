@@ -47,7 +47,10 @@ const SidebarWithNavbar = ({ component }) => {
   const { incoming } = useCalling();
   const navigateTo = useNavigate();
   const { isCollapsed, setIsCollapsed_ } = useMain();
-
+  const [documentationPopover, setDocumentationPopover] = useState(false);
+  function setDocumentationPopoverHandler() {
+    setDocumentationPopover(!documentationPopover);
+  }
   const location = useLocation();
   const dispatch = useDispatch();
   const { token, user, isAuthenticated } = useSelector((state) => state.auth);
@@ -344,24 +347,31 @@ const SidebarWithNavbar = ({ component }) => {
               {isAuthenticated ? (
                 <div className="flex items-center">
                   <div className="relative inline-block p-1">
-                    <button className="p-2 bg-yellow-300 text-white rounded-full peer">
+                    <button
+                      className={`p-2 bg-yellow-300 text-white rounded-full hover:`}
+                      onClick={setDocumentationPopoverHandler}
+                    >
                       <FaQuestion size={20} />
                     </button>
 
-                    <div className="absolute left-1/2 transform -translate-x-1/2 mt-2 w-48 bg-white p-3 rounded-lg shadow-lg border opacity-0 scale-95 peer-hover:opacity-100 peer-hover:scale-100 transition-all duration-200">
-                      <p className="text-sm text-gray-700">
-                        Watch in-depth tutorials, guides, and updates on our
-                        platform. Subscribe now: [
-                        <Link
-                          className="text-blue-500"
-                          to={"https://www.youtube.com/@SenderSide"}
-                          target="__blank"
-                        >
-                          Click Here
-                        </Link>
-                        ]
-                      </p>
-                    </div>
+                    {documentationPopover && (
+                      <div
+                        className={`absolute left-1/2 transform -translate-x-1/2 mt-2 w-48 bg-white p-3 rounded-lg shadow-lg border scale-95  transition-all duration-200 `}
+                      >
+                        <p className="text-sm text-gray-700">
+                          Watch in-depth tutorials, guides, and updates on our
+                          platform. Subscribe now: [
+                          <Link
+                            className="text-blue-500"
+                            to={"https://www.youtube.com/@SenderSide"}
+                            target="__blank"
+                          >
+                            Click Here
+                          </Link>
+                          ]
+                        </p>
+                      </div>
+                    )}
                   </div>
 
                   <DarkModeSwitcher setDarkModeFunc={setDarkModeFunc} />
