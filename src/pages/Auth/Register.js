@@ -5,10 +5,11 @@ import { MdDriveFileRenameOutline, MdPassword } from "react-icons/md";
 import Button from "../../components/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { registerUser } from "../../redux/services/auth";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Checkbox from "../../components/FormFields/Checkbox/Checkbox";
 import { FaRegEye } from "react-icons/fa";
+import { registerTeamMember } from "../../redux/services/team";
 const Register = () => {
   const {
     handleSubmit,
@@ -17,20 +18,35 @@ const Register = () => {
     setValue,
     formState: { errors },
   } = useForm({});
-  const [isRegistered, setIsRegistered] = useState();
+  const params = new URLSearchParams(useLocation().search);
+  const authType = params.get("authType");
+  const [isRegistered, setIsRegistered] = useState(false);
+  const [isTeanRegistered, setIsTeanRegistered] = useState(false);
+
   const dispatch = useDispatch();
   const navigateTo = useNavigate();
   const { isAuthenticated, isLoading } = useSelector((state) => state.auth);
   const handleFormSubmit = async (data) => {
-    const params = {
+    let formData = {
       firstname: data.firstname,
       lastname: data.lastname,
       email: data.email,
       password: data.password,
       username: data.username,
     };
+    if (authType === "team") {
+      formData.reference = params.get("reference");
+      formData.invitation_ref = params.get("invitation_ref");
+      formData.confirmPassword = data.confirmPassword;
+      const registered = await dispatch(registerTeamMember(formData));
+      if (registered?.data?.userData) {
+        alert("User registration");
+        setIsTeanRegistered(true);
+      }
+      return;
+    }
     if (data.password === data.confirmPassword) {
-      const is_registered = await dispatch(registerUser(params));
+      const is_registered = await dispatch(registerUser(formData));
       if (is_registered?.data?.userData) {
         setIsRegistered(true);
       }
@@ -44,6 +60,26 @@ const Register = () => {
       navigateTo("/otp");
     }
   }, [isRegistered, navigateTo]);
+  useEffect(() => {
+    if (isTeanRegistered) {
+      navigateTo("/");
+    }
+  }, [isTeanRegistered, navigateTo]);
+  useEffect(() => {
+    if (params.get("firstname")) {
+      setValue("firstname", params.get("firstname"));
+    }
+    if (params.get("lastname")) {
+      setValue("lastname", params.get("lastname"));
+    }
+    if (params.get("email")) {
+      setValue("email", params.get("email"));
+      setValue("username", params.get("email").split("@")[0]);
+    }
+    if (params.get("role")) {
+      setValue("role", params.get("role"));
+    }
+  }, [setValue]);
   return (
     // <Layout
     //   component={

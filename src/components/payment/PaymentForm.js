@@ -9,6 +9,7 @@ import {
 } from "@stripe/react-stripe-js";
 import { useDispatch, useSelector } from "react-redux";
 import { addPaymentRec } from "../../redux/services/payment";
+import { FaCreditCard } from "react-icons/fa";
 const stripe_public_key = process.env.REACT_APP_STRIPE_PUBLISH_KEY_SANDBOX;
 const stripePromise = loadStripe(stripe_public_key);
 const PaymentForm = ({ clientSecret, afterPayment }) => {
@@ -74,9 +75,12 @@ const PaymentForm = ({ clientSecret, afterPayment }) => {
   };
 
   return (
-    <div className="max-w-lg mx-auto bg-white p-6 rounded-lg shadow-md mt-8">
-      <h2 className="text-2xl font-semibold text-gray-800 text-center mb-4">
-        Complete Your Payment
+    <div className="max-w-lg mx-auto bg-white rounded-lg">
+      <h2 className="text-2xl font-semibold text-gray-800 text-center flex py-2">
+        <span className="pt-1 pe-2">
+          <FaCreditCard />
+        </span>{" "}
+        Put Your Card Details
       </h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="bg-gray-100 p-3 rounded-md">

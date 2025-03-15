@@ -48,7 +48,7 @@ const Options = () => {
     const params = {
       accountSid: user.accountSid,
       authToken: user.authToken,
-      user_id: user.id,
+      user_id: user_id,
       sequence_id: selectedSequence?.id,
       schedule_id: data?.schedule_id?.value,
       campaign_id: parseInt(id),

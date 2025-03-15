@@ -19,7 +19,7 @@ const Button = ({
   // Styles for different variants
   const variantStyles = {
     primary:
-      "sm:w-full md:w-fit rounded-lg bg-[#00b5d5] text-white hover:bg-cyan-700 focus:ring-blue-500",
+      "sm:w-full md:w-fit rounded-lg bg-black text-white hover:bg-cyan-700 focus:ring-blue-500", //2563eb
     secondary:
       "sm:w-full md:w-fit rounded-lg bg-gray-500 text-white hover:bg-gray-600 focus:ring-gray-500",
     danger:
@@ -30,9 +30,9 @@ const Button = ({
 
   // Styles for different sizes
   const sizeStyles = {
-    sm: "px-3 py-1 text-sm",
-    md: "px-4 py-1",
-    lg: "px-6 py-1 text-lg",
+    sm: "px-2 py-1 text-sm",
+    md: "px-3 py-1",
+    lg: "px-4 py-1 text-lg",
   };
 
   return (

@@ -25,6 +25,7 @@ const Login = () => {
     const params = {
       email: data?.email,
       password: data?.password,
+      is_team: data?.is_team,
     };
     const response = await dispatch(loginUser(params));
     setUserData(response);
@@ -122,6 +123,14 @@ const Login = () => {
                   errors={errors}
                   label="Remember me for 30 days"
                 />{" "}
+              </div>
+              <div className="">
+                <Checkbox
+                  name="is_team"
+                  control={control}
+                  errors={errors}
+                  label="Team Login"
+                />
               </div>
               <Button
                 loading={isLoading}

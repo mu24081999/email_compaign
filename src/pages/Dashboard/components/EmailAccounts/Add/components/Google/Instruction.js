@@ -11,7 +11,7 @@ const Instruction = ({ handleMenu }) => {
     formState: { errors },
   } = useForm();
   return (
-    <div className=" rounded-2xl  max-w-[60%]">
+    <div className=" rounded-2xl border shadow-2xl p-5  max-w-[60%] h-[86vh] bg-white">
       <Button
         className="my-2"
         onClick={() =>
@@ -29,15 +29,15 @@ const Instruction = ({ handleMenu }) => {
         title={"Connect Your Google Account"}
         description="Gmail / G-suite"
       />{" "}
-      <div className="my-5 bg-gray-100 flex  justify-center rounded-xl ">
-        <div className=" h-[50vh] overflow-scroll max-w-2xl w-full bg-white border  dark:bg-gray-900 shadow-lg rounded-xl p-8">
+      <div className="my-5 items-center bg-white flex  justify-center rounded-xl ">
+        <div className=" h-[56vh] overflow-scroll max-w-2xl w-full bg-white border  dark:bg-gray-900 shadow-lg rounded-xl p-8">
           <h1 className="text-2xl font-bold text-gray-800 dark:text-white mb-6 text-center">
             How to Create Google App Password
           </h1>
           <ol className="list-decimal list-inside space-y-4 text-gray-700 dark:text-white">
             <li>
               <span className="font-semibold">
-                Go to Google Account Security:
+                Go to Google Account Security:&nbsp;
               </span>
               <a
                 href="https://myaccount.google.com/security"

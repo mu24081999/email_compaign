@@ -38,8 +38,8 @@ const Content = () => {
 
         return filteredData?.push({
           ...usr,
-          start_date: moment(usr?.start_date).format("MMM d, yyyy"),
-          end_date: moment(usr?.end_date).format("MMM d, yyyy"),
+          start_date: moment(usr?.start_date).format("YYYY-MM-DD"),
+          end_date: moment(usr?.end_date).format("YYYY-MM-DD"),
           status:
             currentDate <= endDate ? (
               <li style={{ color: "green" }}>Active</li>

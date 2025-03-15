@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Button from "./Button";
 import { Link, useNavigate } from "react-router-dom";
+import _ from "lodash";
 
 const Table = ({
   columns,
@@ -18,7 +19,6 @@ const Table = ({
   const [sortDirection, setSortDirection] = useState({});
   const [statusFilter, setStatusFilter] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-
   const getValue = (row, accessor) => {
     const keys = accessor.split(".");
     return keys.reduce((value, key) => value?.[key], row);
@@ -74,7 +74,38 @@ const Table = ({
       onPageChange(page); // Trigger the parent callback to fetch new data
     }
   };
+  const getPageNumbers = () => {
+    const maxPagesToShow = 5; // Adjust based on design
+    let pages = [];
 
+    if (totalPages <= maxPagesToShow) {
+      // If total pages are few, show all pages
+      pages = Array.from({ length: totalPages }, (_, i) => i + 1);
+    } else {
+      // Always show the first page
+      pages.push(1);
+
+      if (currentPage > 3) {
+        pages.push("...");
+      }
+
+      let start = Math.max(2, currentPage - 1);
+      let end = Math.min(totalPages - 1, currentPage + 1);
+
+      for (let i = start; i <= end; i++) {
+        pages.push(i);
+      }
+
+      if (currentPage < totalPages - 2) {
+        pages.push("...");
+      }
+
+      // Always show the last page
+      pages.push(totalPages);
+    }
+
+    return pages;
+  };
   return (
     <div className="py-5 relative overflow-x-auto shadow-md sm:rounded-lg font-space bg-white border dark:bg-gray-800 p-5">
       <div className="pb-2 flex justify-between items-center">
@@ -86,6 +117,7 @@ const Table = ({
                   size="sm"
                   className={`py-3 bg-gray-100 border hover:bg-gray-200`}
                   onClick={() => action?.onClick(selectedRows)}
+                  variant="secondary"
                 >
                   {action?.icon}
                 </Button>
@@ -219,13 +251,50 @@ const Table = ({
           >
             Previous
           </button>
-          <span className="text-gray-700 dark:text-white">
+          {/* <span className="text-gray-700 dark:text-white">
             Page {currentPage} of {totalPages}
-          </span>
+          </span> */}
+          {/* <div className="flex space-x-2">
+            {_.isInteger(totalPages) &&
+              [...Array(totalPages)].map((_, index) => {
+                const pageNumber = index + 1;
+                return (
+                  <button
+                    key={pageNumber}
+                    onClick={() => handlePageChange(pageNumber)}
+                    className={`px-3 py-1 rounded-full ${
+                      currentPage === pageNumber
+                        ? "bg-[#2563eb] text-white"
+                        : "bg-gray-200 text-black"
+                    }`}
+                  >
+                    {pageNumber}
+                  </button>
+                );
+              })}
+          </div> */}
+          <div className="flex space-x-1">
+            {getPageNumbers().map((page, index) => (
+              <button
+                key={index}
+                onClick={() =>
+                  typeof page === "number" && handlePageChange(page)
+                }
+                className={`px-3 py-1 rounded-full ${
+                  currentPage === page
+                    ? "bg-[#2563eb] text-white"
+                    : "bg-gray-200 text-black"
+                } ${page === "..." ? "cursor-default" : ""}`}
+                disabled={page === "..."}
+              >
+                {page}
+              </button>
+            ))}
+          </div>
           <button
             onClick={() => handlePageChange(currentPage + 1)}
             disabled={currentPage === totalPages}
-            className="px-4 py-2 rounded-full bg-cyan-500 text-white  disabled:bg-gray-300"
+            className="px-4 py-2 text-white rounded-full bg-[#2563eb]  disabled:bg-gray-300"
           >
             Next
           </button>

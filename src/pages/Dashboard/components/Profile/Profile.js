@@ -10,7 +10,7 @@ import TwoFA from "./components/TwoFA";
 const Profile = () => {
   const dispatch = useDispatch();
   const { claimedNumbers, isLoading } = useSelector((state) => state.twilio);
-  const { token, user } = useSelector((state) => state.auth);
+  const { token, user, user_id } = useSelector((state) => state.auth);
   const tabsData = [
     {
       id: "account_settings",
@@ -32,6 +32,7 @@ const Profile = () => {
           dispatch={dispatch}
           user={user}
           token={token}
+          user_id={user_id}
         />
       ),
     },

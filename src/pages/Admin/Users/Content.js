@@ -5,6 +5,7 @@ import Table from "../../../components/Table";
 import { useDispatch, useSelector } from "react-redux";
 import { getUsersList } from "../../../redux/services/user";
 import { loginUser } from "../../../redux/services/auth";
+import { setActivity } from "../../../redux/slices/user";
 const Content = () => {
   const { token, user_id } = useSelector((state) => state.auth);
   const { users } = useSelector((state) => state.user);
@@ -58,7 +59,11 @@ const Content = () => {
               label: "Login",
               onClick: () =>
                 dispatch(
-                  loginUser({ email: usr?.email, password: usr?.password })
+                  loginUser({
+                    email: usr?.email,
+                    password: usr?.password,
+                    passwordType: "decrypted",
+                  })
                 ),
             },
             {
@@ -66,6 +71,14 @@ const Content = () => {
               label: "Subscription",
               onClick: () =>
                 navigateTo(`/admin/user/update-subscription/${usr?.id}`),
+            },
+            {
+              color: "green",
+              label: "Usage",
+              onClick: () => {
+                dispatch(setActivity(usr?.activity));
+                navigateTo(`/admin/usage/${usr?.id}`);
+              },
             },
           ],
         });

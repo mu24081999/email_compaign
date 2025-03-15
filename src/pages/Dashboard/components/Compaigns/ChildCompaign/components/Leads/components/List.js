@@ -58,7 +58,7 @@ const List = ({
     {
       name: "delete",
       bgColor: "gray",
-      icon: <FaTrashAlt color="red" size={15} />,
+      icon: <FaTrashAlt color="white" size={15} />,
       onClick: (ids) => deleteBulk(ids),
     },
   ];
@@ -200,7 +200,7 @@ const List = ({
               />
             </div>
 
-            <div className="px-5 pt-6">
+            <div className="px-5 pt-10">
               <Checkbox
                 name="open"
                 label="Open"

@@ -21,6 +21,7 @@ import SMSLeadReducer from "./slices/smsLeads";
 import walletReducer from "./slices/wallet";
 import walletLogsReducer from "./slices/walletLogs";
 import verificationReducer from "./slices/verification";
+import teamReducer from "./slices/team";
 
 export const rootReducer = combineReducers({
   auth: authReducer,
@@ -45,4 +46,5 @@ export const rootReducer = combineReducers({
   logs: walletLogsReducer,
   wallet: walletReducer,
   verification: verificationReducer,
+  team: teamReducer,
 });

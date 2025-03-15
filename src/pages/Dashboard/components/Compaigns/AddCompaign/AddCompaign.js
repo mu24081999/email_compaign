@@ -32,7 +32,7 @@ const AddCompaign = () => {
     <Layout
       component={
         <div className="lg:h-[90vh]  flex justify-center items-center">
-          <div className="flex flex-col gap-14 w-[50%]">
+          <div className="flex flex-col gap-5 w-[50%]">
             <div>
               <Heading
                 text={"Let's create a new compaign"}
@@ -42,13 +42,17 @@ const AddCompaign = () => {
               />
               <p className="text-center">What would you like to name it?</p>
             </div>
-            <form onSubmit={handleSubmit(add)} className="flex flex-col gap-10">
-              <div>
+            <form
+              onSubmit={handleSubmit(add)}
+              className="flex flex-col gap-5 justify-center"
+            >
+              <div className="lg:px-20">
                 <InputField
                   name="title"
                   control={control}
                   errors={errors}
-                  placeholder="Enter compaign name"
+                  label="Compaign Name"
+                  style={{ height: "70px", fontSize: "20px" }}
                   rules={{
                     required: {
                       value: true,
@@ -57,7 +61,7 @@ const AddCompaign = () => {
                   }}
                 />
               </div>
-              <div className="flex gap-3">
+              <div className="flex gap-3 justify-center">
                 <Button
                   onClick={() => navigateTo("/")}
                   variant="secondary"

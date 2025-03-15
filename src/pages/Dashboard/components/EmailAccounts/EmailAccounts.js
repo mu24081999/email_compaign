@@ -13,6 +13,7 @@ import ModalBody from "./ModalBody/ModalBody";
 import Layout from "../../../../layout/Layout";
 import useMain from "../../../../context/Main/useMain";
 import EditAccount from "./ModalBody/EditAccount";
+import { FaPlus } from "react-icons/fa";
 const EmailAccounts = () => {
   const {
     handleSubmit,
@@ -133,8 +134,11 @@ const EmailAccounts = () => {
             <Button
               onClick={() => navigateTo("/connect-email-account")}
               size="lg"
-              className="py-1 flex"
+              className="py-2 flex"
             >
+              <span className="mt-1 pe-1">
+                <FaPlus />
+              </span>
               Add Email Account
             </Button>
           </div>

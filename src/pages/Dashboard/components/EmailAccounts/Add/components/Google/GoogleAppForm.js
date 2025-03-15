@@ -34,105 +34,107 @@ const GoogleAppForm = ({ handleMenu }) => {
     }
   };
   return (
-    <div className="p-5 rounded-2xl border border-gray-300 shadow-xl max-w-[60%]">
-      <Button
-        className="mb-2"
-        onClick={() =>
-          handleMenu({
-            menu: true,
-            instruction: false,
-            form: false,
-          })
-        }
-      >
-        Back
-      </Button>
-      <ListItemCard
-        icon={<FcGoogle size={30} color="blue" />}
-        title={"Connect Your Google Account"}
-        description="Gmail / G-suite"
-      />{" "}
-      <form
-        className="grid lg:grid-cols-2 sm:grid-cols-1 gap-5 pt-5"
-        onSubmit={handleSubmit(formSubmit)}
-      >
-        <div className="col-span-2">
-          {" "}
-          <InputField
-            name="firstname"
-            svg={<FaEdit />}
-            control={control}
-            errors={errors}
-            label="First Name"
-            rules={{
-              required: {
-                value: true,
-                message: "Field required!",
-              },
-            }}
-          />
-        </div>
-        <div className="col-span-2">
-          {" "}
-          <InputField
-            name="lastname"
-            svg={<FaEdit />}
-            control={control}
-            errors={errors}
-            label="Last Name"
-            rules={{
-              required: {
-                value: true,
-                message: "Field required!",
-              },
-            }}
-          />
-        </div>
-        <div className="col-span-2">
-          {" "}
-          <InputField
-            name="email"
-            svg={<FaEnvelope />}
-            control={control}
-            errors={errors}
-            label="Email Account"
-            rules={{
-              required: {
-                value: true,
-                message: "Field required!",
-              },
-            }}
-          />
-        </div>
-        <div className="col-span-2">
-          <InputField
-            name="password"
-            control={control}
-            svg={<FaLock />}
-            errors={errors}
-            label="Google App Password"
-            description={
-              <>
-                <p>Enter your 16 character app password</p>
-                <p className="font-extrabold  text-indigo-700">
-                  wthout any space
-                </p>
-              </>
-            }
-            rules={{
-              required: {
-                value: true,
-                message: "Field required!",
-              },
-            }}
-          />
-        </div>
-        <div>
-          <Button type="submit" className="py-2 ">
-            Submit
-          </Button>
-        </div>
-      </form>
+    <div className="flex items-center justify-center w-full h-[86vh]">
+      <div className="p-5 bg-white rounded-2xl border shadow-xl max-w-[60%]">
+        <Button
+          className="mb-2"
+          onClick={() =>
+            handleMenu({
+              menu: true,
+              instruction: false,
+              form: false,
+            })
+          }
+        >
+          Back
+        </Button>
+        <ListItemCard
+          icon={<FcGoogle size={30} color="blue" />}
+          title={"Connect Your Google Account"}
+          description="Gmail / G-suite"
+        />{" "}
+        <form
+          className="grid lg:grid-cols-2 sm:grid-cols-1 gap-5 pt-5"
+          onSubmit={handleSubmit(formSubmit)}
+        >
+          <div className="col-span-2">
+            {" "}
+            <InputField
+              name="firstname"
+              svg={<FaEdit />}
+              control={control}
+              errors={errors}
+              label="First Name"
+              rules={{
+                required: {
+                  value: true,
+                  message: "Field required!",
+                },
+              }}
+            />
+          </div>
+          <div className="col-span-2">
+            {" "}
+            <InputField
+              name="lastname"
+              svg={<FaEdit />}
+              control={control}
+              errors={errors}
+              label="Last Name"
+              rules={{
+                required: {
+                  value: true,
+                  message: "Field required!",
+                },
+              }}
+            />
+          </div>
+          <div className="col-span-2">
+            {" "}
+            <InputField
+              name="email"
+              svg={<FaEnvelope />}
+              control={control}
+              errors={errors}
+              label="Email Account"
+              rules={{
+                required: {
+                  value: true,
+                  message: "Field required!",
+                },
+              }}
+            />
+          </div>
+          <div className="col-span-2">
+            <InputField
+              name="password"
+              control={control}
+              svg={<FaLock />}
+              errors={errors}
+              label="Google App Password"
+              description={
+                <>
+                  <p>Enter your 16 character app password</p>
+                  <p className="font-extrabold  text-indigo-700">
+                    wthout any space
+                  </p>
+                </>
+              }
+              rules={{
+                required: {
+                  value: true,
+                  message: "Field required!",
+                },
+              }}
+            />
+          </div>
+          <div>
+            <Button type="submit" className="py-2 ">
+              Submit
+            </Button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };

@@ -43,10 +43,10 @@ const ModalBody = ({ close }) => {
           {menuItems?.map((item, index) => (
             <div
               key={index}
-              className={`hover:shadow-xl border-b hover:border hover:border-gray-500 py-10  text-[30px] space-x-3  rounded-lg ${item?.text_color} font-sans font-extrabold flex gap-5 p-5 cursor-pointer`}
+              className={`hover:shadow-xl border-b hover:border hover:border-gray-500 py-5  text-[20px] space-x-3  rounded-lg ${item?.text_color} font-sans font-bold flex gap-2 p-5 cursor-pointer`}
               onClick={item?.onClick}
             >
-              <span className="-mt-1">{item?.icon}</span>
+              <span className="">{item?.icon}</span>
               <span> {item?.name}</span>
             </div>
           ))}

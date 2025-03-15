@@ -34,6 +34,7 @@ import A2P from "./pages/A2P";
 import Privacy from "./pages/Privacy";
 import Chat from "./pages/Chat";
 import UnAuthorized from "./pages/utils/UnAuthorized";
+import Team from "./pages/Team/Team";
 
 //admin dashboard
 import AdminDashboard from "./pages/Admin/Dashboard";
@@ -45,7 +46,7 @@ import AdminSubscription from "./pages/Admin/Subscriptions";
 import AdminAddUser from "./pages/Admin/AddUser";
 import AdminUpdateSubscription from "./pages/Admin/UpdateSubscription";
 import AdminA2PRequests from "./pages/Admin/A2PRequests";
-
+import Usage from "./pages/Admin/Usage";
 const Login = lazy(() => import("./pages/Auth/Login"));
 const Register = lazy(() => import("./pages/Auth/Register"));
 
@@ -91,6 +92,24 @@ const router = (
           requiredRoles={["admin"]}
         >
           <AdminA2PRequests />
+        </PrivateRoute>
+      ), // Protect the Dashboard route children: [],
+      breadcrumb: "Admin Dashboard",
+    },
+    {
+      path: "/admin/usage/:user_id",
+      element: (
+        <PrivateRoute
+          user={user}
+          email_verified={email_verified}
+          isAuthenticated={isAuthenticated}
+          authLoading={authLoading}
+          subscriptionLoading={subscriptionLoading}
+          startingAuth={startingAuth}
+          isValid={isValid}
+          requiredRoles={["admin"]}
+        >
+          <Usage />
         </PrivateRoute>
       ), // Protect the Dashboard route children: [],
       breadcrumb: "Admin Dashboard",
@@ -243,6 +262,24 @@ const router = (
       path: "/privacy-policy",
       element: <Privacy />, // Protect the Dashboard route    children: [],
       breadcrumb: "Dashboard",
+    },
+    {
+      path: "/team-members",
+      element: (
+        <PrivateRoute
+          user={user}
+          email_verified={email_verified}
+          isAuthenticated={isAuthenticated}
+          authLoading={authLoading}
+          subscriptionLoading={subscriptionLoading}
+          startingAuth={startingAuth}
+          isValid={isValid}
+        >
+          <Team />
+        </PrivateRoute>
+      ),
+      children: [],
+      breadcrumb: "email-template",
     },
     {
       path: "/lead-finder",

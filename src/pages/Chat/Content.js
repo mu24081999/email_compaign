@@ -25,7 +25,7 @@ const Content = () => {
   // Scroll to the last message when messages change
 
   const dispatch = useDispatch();
-  const { user, token } = useSelector((state) => state.auth);
+  const { user, token, user_id } = useSelector((state) => state.auth);
   const { sendSMS, messagesArray } = useSocket();
   const { claimedNumbers, sms } = useSelector((state) => state.twilio);
   const [defaultMessages, setDefaultMessages] = useState([]);
@@ -118,7 +118,7 @@ const Content = () => {
   const handleFormSubmit = async (event) => {
     if (event.key === "Enter") {
       const params = {
-        userId: user.id,
+        userId: user_id,
         authToken: user.authToken,
         accountSid: user.accountSid,
         from: user.twilio_selected_number,
@@ -127,7 +127,7 @@ const Content = () => {
         from_name: user?.firstname + " " + user.lastname,
       };
       const newMessage = {
-        user_id: user.id,
+        user_id: user_id,
         body: inputValue,
         from: user.twilio_selected_number,
         to: selectedMessage,

@@ -32,26 +32,35 @@ const AccountSettings = () => {
       phone: data?.phone,
       username: data?.username,
     };
-    console.log("🚀 ~ handleProfileUpdate ~ params:", params);
     dispatch(updateUserRec(token, user_id, params));
   };
 
   useEffect(() => {
-    setValue("firstname", user?.firstname);
-    setValue("lastname", user?.lastname);
-    setValue("email", _(user?.email));
-    setValue("username", _(user?.username));
+    console.log("lol", user?.member, user?.member?.firstname);
+    setValue(
+      "firstname",
+      user?.member?.fistname ? user?.member?.firstname : user?.firstname
+    );
+    setValue(
+      "lastname",
+      user?.member?.lastname ? user?.member?.lastname : user?.lastname
+    );
+    setValue("email", user?.member?.email ? user?.member?.email : user?.email);
+    setValue(
+      "username",
+      user?.member?.lastname ? user?.member?.lastname : user?.username
+    );
   }, [user, setValue]);
 
   return (
     <div className="py-10">
-      <div class="flex items-center justify-center">
+      <div class="flex items-center justify-center h-[68vh]">
         {/* <!-- Author: FormBold Team --> */}
-        <div class="mx-auto w-full max-w-[550px]  flex items-center">
+        <div class=" max-w-[550px] border rounded-2xl p-5 shadow-2xl">
           <div>
             <div>
               <Heading
-                className="text-3xl font-extrabold text-center"
+                className="text-3xl font-extrabold text-center py-5"
                 text={"Update Your Account Setting"}
               />
             </div>

@@ -37,7 +37,7 @@ import {
 import useMain from "../context/Main/useMain";
 import Dialer from "../pages/Dialpad/components/DialpadComponents/Dialer";
 import { PiSignOutBold } from "react-icons/pi";
-import { RiContactsBook3Line } from "react-icons/ri";
+import { RiContactsBook3Line, RiTeamLine } from "react-icons/ri";
 import useCalling from "../context/CallingContext/useCalling";
 import { GrValidate } from "react-icons/gr";
 import { GiSecretBook } from "react-icons/gi";
@@ -70,7 +70,7 @@ const SidebarWithNavbar = ({ component }) => {
   const navigate = (link) => {
     navigateTo(link);
   };
-  const sidebarItems = Object.freeze({
+  let sidebarItems = Object.freeze({
     super_admin: [],
     admin: [
       {
@@ -151,16 +151,11 @@ const SidebarWithNavbar = ({ component }) => {
         link: "/email-validation",
         icon: GrValidate,
       },
-      // {
-      //   name: "Lead Finder",
-      //   link: "/lead-finder",
-      //   icon: MdOutlineScreenSearchDesktop,
-      // },
-      // {
-      //   name: "Drip Compaing",
-      //   link: "/drip-compaign",
-      //   icon: FaRegEnvelope,
-      // },
+      {
+        name: "Team Members",
+        link: "/team-members",
+        icon: RiTeamLine,
+      },
       {
         name: "Dialpad",
         link: "/dialpad",
@@ -203,18 +198,6 @@ const SidebarWithNavbar = ({ component }) => {
         link: "/account-settings",
         icon: FaCogs,
       },
-
-      // {
-      //   name: "Account Settings",
-      //   link: "/account-settings",
-      //   icon: FaCogs size={24},
-      // },
-      // {
-      //   name: "Sign out",
-      //   link: "#",
-      //   onClick: () => logout,
-      //   icon: PiSignOutBold size={25},
-      // },
     ],
     marketing_manager: [],
     sms_manager: [],
@@ -223,7 +206,15 @@ const SidebarWithNavbar = ({ component }) => {
     analyst: [],
     support: [],
   });
-
+  if (user?.member?.id) {
+    const filteredSidebarItems = {
+      ...sidebarItems,
+      user: user?.member?.id
+        ? sidebarItems.user.filter((item) => item.link !== "/team-members")
+        : sidebarItems.user,
+    };
+    sidebarItems = filteredSidebarItems;
+  }
   const menuData = {
     title: (
       <div className="mt-1">
@@ -313,7 +304,7 @@ const SidebarWithNavbar = ({ component }) => {
                 {isCollapsed ? (
                   <img
                     src={darkMode ? logo4 : logo3}
-                    className="h-12"
+                    className="h-10"
                     alt="Senderside Logo"
                   />
                 ) : (

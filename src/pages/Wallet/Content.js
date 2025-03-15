@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 import _ from "lodash";
 import { getWalletApi } from "../../redux/services/wallet";
 import { getLogsApi } from "../../redux/services/walletLogs";
+import moment from "moment/moment";
 const pricing = {
   US: {
     local_sms_inbound: 0.0079,
@@ -102,66 +103,67 @@ const Content = () => {
 
   return (
     <>
-      <div className="flex justify-center gap-5">
+      <div className="flex flex-col justify-center gap-5">
         <div className="flex flex-wrap flex-col gap-5">
           {/*  */}
           <div>
-            <div className="flex gap-5 border rounded-xl p-5 bg-white dark:bg-gray-900 shadow ">
-              <div>
-                <FaWallet size={60} color="indigo" />
-              </div>
-              <div>
-                <Heading
-                  className="font-extrabold font-mono text-3xl"
-                  text={"$" + (wallet?.credit || 0)}
-                />
-                <p className="text-sm">You can add more balance .</p>
-              </div>
-            </div>
-          </div>
-          <div>
-            <div className="flex gap-5 border flex-wrap rounded-xl p-5 bg-white dark:bg-gray-900 shadow">
-              <form onSubmit={handleSubmit(handleAddTransaction)}>
-                <div className="flex flex-wrap justify-center gap-5  ">
-                  <div className="col-span-2">
-                    <InputField
-                      name="amount"
-                      type="number"
-                      control={control}
-                      svg={<FaDollarSign />}
-                      errors={errors}
-                      min={10}
-                      // placeholder="Enter your email address"
-                      label="Amount"
-                      rules={{
-                        required: {
-                          value: true,
-                          message: "Field required!",
-                        },
-                      }}
-                    />{" "}
-                  </div>
-                  <div className="">
-                    <Button type="submit" className="py-3">
-                      Add Balance
-                    </Button>
-                  </div>
+            <div className="flex flex-col gap-5 border rounded-xl p-5 bg-white dark:bg-gray-900 shadow ">
+              <div className="flex justify-start gap-5">
+                <div>
+                  <FaWallet size={60} className=" text-black opacity-90" />
                 </div>
-              </form>
+                <div>
+                  <Heading
+                    className="font-extrabold font-mono text-3xl"
+                    text={"$" + (wallet?.credit || 0)}
+                  />
+                  <p className="text-sm">You can add more balance .</p>
+                </div>
+              </div>
+              <div>
+                <form onSubmit={handleSubmit(handleAddTransaction)}>
+                  <div className="grid lg:grid-cols-9 sm:grid-cols-4 gap-5  ">
+                    <div className="col-span-8">
+                      <InputField
+                        name="amount"
+                        type="number"
+                        control={control}
+                        svg={<FaDollarSign />}
+                        errors={errors}
+                        min={10}
+                        // placeholder="Enter your email address"
+                        label="Amount"
+                        rules={{
+                          required: {
+                            value: true,
+                            message: "Field required!",
+                          },
+                        }}
+                      />{" "}
+                    </div>
+                    <div className="w-36">
+                      <Button type="submit" className="py-3">
+                        Add Balance
+                      </Button>
+                    </div>
+                  </div>
+                </form>
+              </div>
             </div>
           </div>
         </div>
+
         <div className="border rounded-xl p-5 bg-white dark:bg-gray-900">
           <Heading
             text={"Add Topup"}
-            className="text-center font-extrabold text-xl mb-5"
+            className=" font-extrabold text-2xl mb-4"
           ></Heading>
-          <div className="flex gap-5 flex-wrap justify-center">
+          <div className="grid lg:grid-cols-5 sm:grid-cols-1 gap-5">
             {topups?.map((amount, index) => (
               <div
                 onClick={() => handleAddTransaction({ amount: amount })}
                 key={index}
-                className="text-center border bg-gray-100 p-8 text-xl font-extrabold  hover:bg-gray-50 dark:bg-gray-900 rounded-xl cursor-pointer"
+                className="text-center border bg-gray-100 px-12 py-2 text-xl font-extrabold  hover:bg-gray-50 dark:bg-gray-900 rounded cursor-pointer"
               >
                 ${amount}
               </div>
@@ -176,16 +178,20 @@ const Content = () => {
             <div className="overflow-scroll max-h-[55vh] dark:bg-gray-900">
               {logs?.length > 0 ? (
                 logs?.map((log, index) => (
-                  <div key={index} className="px-5 py-8 border relative">
-                    <div className="font-bold">{log.description}</div>
-                    <div className="text-sm font-gray">{log?.date}</div>
-                    <div className="absolute right-5 top-10 font-extrabold text-xl ">
-                      <span>
-                        {log?.type === "plus"
-                          ? "+"
-                          : log?.type === "minus" && "-"}
-                      </span>
-                      ${log?.amount}
+                  <div key={index} className="px-5 py-2 border relative">
+                    <div className="flex justify-between">
+                      <div className="font-bold">{log.description}</div>
+                      <div className=" right-5 text-md ">
+                        <span>
+                          {log?.type === "plus"
+                            ? "+"
+                            : log?.type === "minus" && "-"}
+                        </span>
+                        ${log?.amount}
+                      </div>
+                    </div>
+                    <div className="text-sm font-gray">
+                      {moment(log?.createdAt).format("DD.MMM.YYYY , HH:mm")}
                     </div>
                   </div>
                 ))
@@ -195,7 +201,7 @@ const Content = () => {
             </div>
           </div>
         </div>
-        <div className="flex flex-col gap-5 border rounded-xl p-5 bg-white dark:bg-gray-900 shadow">
+        <div className=" h-[53vh] overflow-scroll flex flex-col gap-5 border rounded-xl p-5 bg-white dark:bg-gray-900 shadow">
           <div className="font-extrabold text-xl">
             Calls/SMS Pricing Calculator
           </div>
@@ -225,142 +231,149 @@ const Content = () => {
               />
             </div>
           </div>
-          <div className=" ">
-            <div className="border">
-              <div className="font-bold text-xl text-center bg-black dark:bg-gray-300 text-white dark:text-black p-2">
+          <div className=" flex flex-col gap-5 ">
+            <div className="border bg-gray-100 dark:bg-gray-900 pb-5 pt-2">
+              <div className="font-bold text-2xl dark:bg-gray-300  dark:text-black p-2">
                 SMS
               </div>
-              <ul className=" list-disc px-5 grid lg:grid-cols-2 sm:grid-cols-1 md:grid-cols-2 p-3 bg-gray-100 dark:bg-gray-900">
-                <li className="flex gap-5 ">
-                  <span className="font-bold">Inbound:</span>
-                  <ul>
-                    <li>
-                      {" "}
-                      <span>
-                        $
-                        {getProfitPricing(
-                          pricing[countryCode]?.local_sms_inbound,
-                          profitMargin
-                        )}
-                        /sms
-                      </span>{" "}
-                      <span className="font-bold">- Local</span>
-                    </li>
-                    <li>
-                      {" "}
-                      <span>
-                        $
-                        {getProfitPricing(
-                          pricing[countryCode]?.tollfree_sms_inbound,
-                          profitMargin
-                        )}
-                        /sms
-                      </span>{" "}
-                      <span className="font-bold">- Toll-free</span>
-                    </li>
-                  </ul>
-                </li>
-                <li className="flex gap-5 ">
-                  <span className="font-bold">Outbound:</span>
-                  <ul>
-                    <li>
-                      {" "}
-                      <span>
-                        $
-                        {getProfitPricing(
-                          pricing[countryCode]?.local_sms_outbound,
-                          profitMargin
-                        )}
-                        /sms
-                      </span>{" "}
-                      <span className="font-bold">- Local</span>
-                    </li>
-                    <li>
-                      {" "}
-                      <span>
-                        $
-                        {getProfitPricing(
-                          pricing[countryCode]?.tollfree_sms_outbound,
-                          profitMargin
-                        )}
-                        /sms
-                      </span>{" "}
-                      <span className="font-bold">- Toll-free</span>
-                    </li>
-                  </ul>{" "}
-                </li>
-              </ul>
+              <div className="ps-5">
+                <ul className=" list-disc grid lg:grid-cols-2 sm:grid-cols-1 md:grid-cols-2 ">
+                  <li className=" list-none gap-5 ">
+                    <span className="font-bold">Inbound:</span>
+                    <ul>
+                      <li>
+                        {" "}
+                        <span>
+                          $
+                          {getProfitPricing(
+                            pricing[countryCode]?.local_sms_inbound,
+                            profitMargin
+                          )}
+                          /sms
+                        </span>{" "}
+                        <span className="font-bold">- Local</span>
+                      </li>
+                      <li>
+                        {" "}
+                        <span>
+                          $
+                          {getProfitPricing(
+                            pricing[countryCode]?.tollfree_sms_inbound,
+                            profitMargin
+                          )}
+                          /sms
+                        </span>{" "}
+                        <span className="font-bold">- Toll-free</span>
+                      </li>
+                    </ul>
+                  </li>
+                  <li className="list-none ">
+                    <span className="font-bold">Outbound:</span>
+
+                    <ul>
+                      <li>
+                        {" "}
+                        <span>
+                          $
+                          {getProfitPricing(
+                            pricing[countryCode]?.local_sms_outbound,
+                            profitMargin
+                          )}
+                          /sms
+                        </span>{" "}
+                        <span className="font-bold">- Local</span>
+                      </li>
+                      <li>
+                        {" "}
+                        <span>
+                          $
+                          {getProfitPricing(
+                            pricing[countryCode]?.tollfree_sms_outbound,
+                            profitMargin
+                          )}
+                          /sms
+                        </span>{" "}
+                        <span className="font-bold">- Toll-free</span>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
             </div>
-            <div className="border">
-              <div className="font-bold text-xl text-center bg-black dark:bg-gray-300 text-white dark:text-black p-2">
+            <div className="border bg-gray-100 dark:bg-gray-900 pb-5 pt-2">
+              <div className="font-bold text-2xl dark:bg-gray-300  dark:text-black p-2">
                 Voice
               </div>
-              <ul className=" list-disc px-5 grid lg:grid-cols-2 sm:grid-cols-1 md:grid-cols-2 p-3 bg-gray-100 dark:bg-gray-900">
-                <li className="flex gap-5 ">
-                  <span className="font-bold">Inbound:</span>
-                  <ul>
-                    <li>
-                      {" "}
-                      <span>
-                        $
-                        {getProfitPricing(
-                          pricing[countryCode]?.local_call_inbound,
-                          profitMargin
-                        )}
-                        /min
-                      </span>{" "}
-                      <span className="font-bold">- Local</span>
-                    </li>
-                    <li>
-                      {" "}
-                      <span>
-                        $
-                        {getProfitPricing(
-                          pricing[countryCode]?.tollfree_call_inbound,
-                          profitMargin
-                        )}
-                        /min
-                      </span>{" "}
-                      <span className="font-bold">- Toll-free</span>
-                    </li>
-                  </ul>{" "}
-                </li>
-                <li className="flex gap-5 ">
-                  <span className="font-bold">Outbound:</span>
-                  <ul>
-                    <li>
-                      {" "}
-                      <span>
-                        $
-                        {getProfitPricing(
-                          pricing[countryCode]?.local_call_outbound,
-                          profitMargin
-                        )}
-                        /min
-                      </span>{" "}
-                      <span className="font-bold">- Local</span>
-                    </li>
-                    <li>
-                      {" "}
-                      <span>
-                        $
-                        {getProfitPricing(
-                          pricing[countryCode]?.tollfree_call_outbound,
-                          profitMargin
-                        )}
-                        /min
-                      </span>{" "}
-                      <span className="font-bold">- Toll-free</span>
-                    </li>
-                  </ul>{" "}
-                </li>
-              </ul>
+              <div className="ps-5">
+                <ul className=" list-disc grid lg:grid-cols-2 sm:grid-cols-1 md:grid-cols-2 ">
+                  <li className=" list-none gap-5 ">
+                    <span className="font-bold">Inbound:</span>
+                    <ul>
+                      <li>
+                        {" "}
+                        <span>
+                          $
+                          {getProfitPricing(
+                            pricing[countryCode]?.local_call_inbound,
+                            profitMargin
+                          )}
+                          /call
+                        </span>{" "}
+                        <span className="font-bold">- Local</span>
+                      </li>
+                      <li>
+                        {" "}
+                        <span>
+                          $
+                          {getProfitPricing(
+                            pricing[countryCode]?.tollfree_call_inbound,
+                            profitMargin
+                          )}
+                          /call
+                        </span>{" "}
+                        <span className="font-bold">- Toll-free</span>
+                      </li>
+                    </ul>
+                  </li>
+                  <li className="list-none ">
+                    <span className="font-bold">Outbound:</span>
+
+                    <ul>
+                      <li>
+                        {" "}
+                        <span>
+                          $
+                          {getProfitPricing(
+                            pricing[countryCode]?.local_sms_outbound,
+                            profitMargin
+                          )}
+                          /sms
+                        </span>{" "}
+                        <span className="font-bold">- Local</span>
+                      </li>
+                      <li>
+                        {" "}
+                        <span>
+                          $
+                          {getProfitPricing(
+                            pricing[countryCode]?.tollfree_sms_outbound,
+                            profitMargin
+                          )}
+                          /sms
+                        </span>{" "}
+                        <span className="font-bold">- Toll-free</span>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
             </div>
-            <div className="border">
-              <div className="font-bold text-xl text-center bg-black dark:bg-gray-300 text-white dark:text-black p-2">
+
+            <div className="border bg-gray-100 dark:bg-gray-900">
+              <div className="font-bold text-2xl dark:bg-gray-300  dark:text-black p-2">
                 Phone Number
               </div>
-              <ul className=" list-disc px-5 grid lg:grid-cols-2 sm:grid-cols-1 md:grid-cols-2 p-3 bg-gray-100 dark:bg-gray-900">
+              <ul className=" list-disc px-5 grid lg:grid-cols-2 sm:grid-cols-1 md:grid-cols-2 p-3 ">
                 <li className="flex gap-5 ">
                   <span className="font-bold">Local Number:</span>
                   <span>${pricing[countryCode]?.local_number}</span>
@@ -379,7 +392,7 @@ const Content = () => {
         <Modal
           isOpen={isOpen}
           onClose={handleClose}
-          title="Payment Form"
+          title="Complete Your Payment"
           body=<StripePayment
             clientSecret={paymentIntend?.client_secret}
             afterPayment={afterPayment}
@@ -388,7 +401,7 @@ const Content = () => {
           // onSave={handleSave}
           saveButtonText="Save Changes"
           closeButtonText="Dismiss"
-          size="md"
+          size="sm"
         />
       </div>
     </>

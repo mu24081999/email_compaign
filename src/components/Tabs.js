@@ -34,7 +34,7 @@ const Tabs = ({ tabsData, className, noContentPadding, activeTabId }) => {
             >
               <button
                 id={tab?.id}
-                className={` text-md inline-block font-extrabold p-4  rounded-t-lg `}
+                className={` text-md inline-block p-4  rounded-t-lg `}
                 type="button"
                 role="tab"
                 aria-controls={tab.id}

@@ -36,135 +36,137 @@ const MailProviderForm = ({ handleMenu }) => {
     }
   };
   return (
-    <div className="p-5 rounded-2xl border border-gray-300 shadow-xl max-w-[60%]">
-      <div className="pb-5">
-        <Button
-          onClick={() =>
-            handleMenu({
-              menu: true,
-              instruction: false,
-              form: false,
-            })
-          }
-        >
-          Back
-        </Button>
-      </div>
-      <ListItemCard
-        icon={<FaRegEnvelope size={30} color="blue" />}
-        title={"Connect Your Email Account"}
-        description="IMAP / SMTP"
-      />{" "}
-      <form
-        className="grid lg:grid-cols-2 sm:grid-cols-1 gap-5 pt-5"
-        onSubmit={handleSubmit(formSubmit)}
-      >
-        <div className="col-span-2">
-          {" "}
-          <InputField
-            name="firstname"
-            svg={<FaEdit />}
-            control={control}
-            errors={errors}
-            label="First Name"
-            rules={{
-              required: {
-                value: true,
-                message: "Field required!",
-              },
-            }}
-          />
-        </div>
-        <div className="col-span-2">
-          {" "}
-          <InputField
-            name="lastname"
-            svg={<FaEdit />}
-            control={control}
-            errors={errors}
-            label="Last Name"
-            rules={{
-              required: {
-                value: true,
-                message: "Field required!",
-              },
-            }}
-          />
-        </div>
-        <div className="col-span-2">
-          <InputField
-            name="email"
-            svg={<FaEnvelope />}
-            control={control}
-            errors={errors}
-            label="Email Account"
-            placeholder={"Email Account"}
-            rules={{
-              required: {
-                value: true,
-                message: "Field required!",
-              },
-            }}
-          />
-        </div>
-        <div className="col-span-2">
-          <InputField
-            name="password"
-            svg={<FaUserLock />}
-            control={control}
-            errors={errors}
-            label="Password"
-            placeholder={"Password"}
-            rules={{
-              required: {
-                value: true,
-                message: "Field required!",
-              },
-            }}
-          />
-        </div>
-        <div className="col-span-1">
-          {" "}
-          <InputField
-            name="port"
-            control={control}
-            errors={errors}
-            label="Port"
-            placeholder={"Port"}
-            rules={{
-              required: {
-                value: true,
-                message: "Field required!",
-              },
-            }}
-          />
-        </div>
-        <div className="col-span-1">
-          <InputField
-            name="smpt_host"
-            control={control}
-            errors={errors}
-            label="SMTP Host"
-            placeholder={"SMTP Host"}
-            description={
-              <>
-                <p>eg: mail.website.com</p>
-              </>
+    <div className="flex justify-center items-center w-full h-[86vh]">
+      <div className="p-5 rounded-2xl border bg-white border-gray-300 shadow-xl max-w-[60%]">
+        <div className="pb-5">
+          <Button
+            onClick={() =>
+              handleMenu({
+                menu: true,
+                instruction: false,
+                form: false,
+              })
             }
-            rules={{
-              required: {
-                value: true,
-                message: "Field required!",
-              },
-            }}
-          />
-        </div>
-        <div>
-          <Button type="submit" loading={isLoading} className="py-2 ">
-            Submit
+          >
+            Back
           </Button>
         </div>
-      </form>
+        <ListItemCard
+          icon={<FaRegEnvelope size={30} color="blue" />}
+          title={"Connect Your Email Account"}
+          description="IMAP / SMTP"
+        />{" "}
+        <form
+          className="grid lg:grid-cols-2 sm:grid-cols-1 gap-5 pt-5"
+          onSubmit={handleSubmit(formSubmit)}
+        >
+          <div className="col-span-2">
+            {" "}
+            <InputField
+              name="firstname"
+              svg={<FaEdit />}
+              control={control}
+              errors={errors}
+              label="First Name"
+              rules={{
+                required: {
+                  value: true,
+                  message: "Field required!",
+                },
+              }}
+            />
+          </div>
+          <div className="col-span-2">
+            {" "}
+            <InputField
+              name="lastname"
+              svg={<FaEdit />}
+              control={control}
+              errors={errors}
+              label="Last Name"
+              rules={{
+                required: {
+                  value: true,
+                  message: "Field required!",
+                },
+              }}
+            />
+          </div>
+          <div className="col-span-2">
+            <InputField
+              name="email"
+              svg={<FaEnvelope />}
+              control={control}
+              errors={errors}
+              label="Email Account"
+              placeholder={"Email Account"}
+              rules={{
+                required: {
+                  value: true,
+                  message: "Field required!",
+                },
+              }}
+            />
+          </div>
+          <div className="col-span-2">
+            <InputField
+              name="password"
+              svg={<FaUserLock />}
+              control={control}
+              errors={errors}
+              label="Password"
+              placeholder={"Password"}
+              rules={{
+                required: {
+                  value: true,
+                  message: "Field required!",
+                },
+              }}
+            />
+          </div>
+          <div className="col-span-1">
+            {" "}
+            <InputField
+              name="port"
+              control={control}
+              errors={errors}
+              label="Port"
+              placeholder={"Port"}
+              rules={{
+                required: {
+                  value: true,
+                  message: "Field required!",
+                },
+              }}
+            />
+          </div>
+          <div className="col-span-1">
+            <InputField
+              name="smpt_host"
+              control={control}
+              errors={errors}
+              label="SMTP Host"
+              placeholder={"SMTP Host"}
+              description={
+                <>
+                  <p>eg: mail.website.com</p>
+                </>
+              }
+              rules={{
+                required: {
+                  value: true,
+                  message: "Field required!",
+                },
+              }}
+            />
+          </div>
+          <div>
+            <Button type="submit" loading={isLoading} className="py-2 ">
+              Submit
+            </Button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };

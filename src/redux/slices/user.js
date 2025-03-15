@@ -7,6 +7,7 @@ export const userSlice = createSlice({
     isLoading: false,
     users: [],
     userDetails: {},
+    activity: {},
     message: "",
     error: "",
     type: "",
@@ -52,6 +53,11 @@ export const userSlice = createSlice({
       state.isLoading = false;
       state.type = "success";
     },
+    setActivity: (state, action) => {
+      state.activity = action.payload;
+      state.isLoading = false;
+      state.type = "success";
+    },
   },
 });
 
@@ -64,4 +70,5 @@ export const {
   getUserById,
   deleteUser,
   invalidRequest,
+  setActivity,
 } = userSlice.actions;

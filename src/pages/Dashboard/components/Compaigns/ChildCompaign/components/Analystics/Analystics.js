@@ -19,7 +19,8 @@ const Analystics = ({ data, loading, dispatch, token, id }) => {
     <div>
       <Button
         loading={loading}
-        className="bg-black px-1 mb-2"
+        variant="secondary"
+        className=" px-1 mb-2"
         onClick={refresh}
       >
         <IoIosRefresh size={15} />

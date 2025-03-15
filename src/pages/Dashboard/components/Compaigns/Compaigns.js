@@ -8,7 +8,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import Button from "../../../../components/Button";
 import Layout from "../../../../layout/Layout";
-import { FaTrashAlt } from "react-icons/fa";
+import { FaPlus, FaTrashAlt } from "react-icons/fa";
 
 const Compaigns = () => {
   const dispatch = useDispatch();
@@ -99,7 +99,7 @@ const Compaigns = () => {
     {
       name: "delete",
       bgColor: "gray",
-      icon: <FaTrashAlt color="red" size={15} />,
+      icon: <FaTrashAlt color="white" size={15} />,
       onClick: (ids) => deleteBulk(ids),
     },
   ];
@@ -113,6 +113,9 @@ const Compaigns = () => {
               size="lg"
               className="py-3 flex"
             >
+              <span className="mt-1 pe-1">
+                <FaPlus />
+              </span>{" "}
               Add New Compaign
             </Button>
           </div>

@@ -84,7 +84,7 @@ const Leads = () => {
           saveButtonText="Save Changes"
           closeButtonText="Dismiss"
           noStartMargin={isCollapsed}
-          // size="xl"
+          size="md"
         />
       </div>
     </div>

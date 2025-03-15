@@ -35,102 +35,104 @@ const OutlookForm = ({ handleMenu }) => {
     }
   };
   return (
-    <div className="p-5 rounded-2xl border border-gray-300 shadow-xl max-w-[60%]">
-      <Button
-        className="mb-2"
-        onClick={() =>
-          handleMenu({
-            menu: true,
-            instruction: false,
-            form: false,
-          })
-        }
-      >
-        Back
-      </Button>
-      <ListItemCard
-        icon={<PiMicrosoftOutlookLogo size={30} color="red" />}
-        title={"Connect Your Microsoft Outlook"}
-        description="Microsoft Outlook Account"
-      />{" "}
-      <form
-        className="grid lg:grid-cols-2 sm:grid-cols-1 gap-5 py-5"
-        onSubmit={handleSubmit(formSubmit)}
-      >
-        <div className="col-span-2">
-          {" "}
-          <InputField
-            name="firstname"
-            svg={<FaEdit />}
-            control={control}
-            errors={errors}
-            label="First Name"
-            rules={{
-              required: {
-                value: true,
-                message: "Field required!",
-              },
-            }}
-          />
-        </div>
-        <div className="col-span-2">
-          {" "}
-          <InputField
-            name="lastname"
-            svg={<FaEdit />}
-            control={control}
-            errors={errors}
-            label="Last Name"
-            rules={{
-              required: {
-                value: true,
-                message: "Field required!",
-              },
-            }}
-          />
-        </div>
-        <div className="col-span-2">
-          {" "}
-          <InputField
-            name="email"
-            svg={<FaEnvelope />}
-            control={control}
-            errors={errors}
-            label="Email Account"
-            rules={{
-              required: {
-                value: true,
-                message: "Field required!",
-              },
-            }}
-          />
-        </div>
-        <div className="col-span-2">
-          <InputField
-            name="password"
-            control={control}
-            svg={<FaLock />}
-            errors={errors}
-            label="Account Password"
-            description={
-              <>
-                <p>Enter your account password </p>
-              </>
-            }
-            rules={{
-              required: {
-                value: true,
-                message: "Field required!",
-              },
-            }}
-          />
-        </div>
-        <div>
-          <Button loading={isLoading} type="submit" className="py-2 ">
-            Submit
-          </Button>
-        </div>
-      </form>
+    <div className="flex items-center justify-center w-full h-[86vh]">
+      <div className="p-5 rounded-2xl border bg-white dark:bg-gray-800 border-gray-300 shadow-xl max-w-[60%]">
+        <Button
+          className="mb-2"
+          onClick={() =>
+            handleMenu({
+              menu: true,
+              instruction: false,
+              form: false,
+            })
+          }
+        >
+          Back
+        </Button>
+        <ListItemCard
+          icon={<PiMicrosoftOutlookLogo size={30} color="red" />}
+          title={"Connect Your Microsoft Outlook"}
+          description="Microsoft Outlook Account"
+        />{" "}
+        <form
+          className="grid lg:grid-cols-2 sm:grid-cols-1 gap-5 py-5"
+          onSubmit={handleSubmit(formSubmit)}
+        >
+          <div className="col-span-2">
+            {" "}
+            <InputField
+              name="firstname"
+              svg={<FaEdit />}
+              control={control}
+              errors={errors}
+              label="First Name"
+              rules={{
+                required: {
+                  value: true,
+                  message: "Field required!",
+                },
+              }}
+            />
+          </div>
+          <div className="col-span-2">
+            {" "}
+            <InputField
+              name="lastname"
+              svg={<FaEdit />}
+              control={control}
+              errors={errors}
+              label="Last Name"
+              rules={{
+                required: {
+                  value: true,
+                  message: "Field required!",
+                },
+              }}
+            />
+          </div>
+          <div className="col-span-2">
+            {" "}
+            <InputField
+              name="email"
+              svg={<FaEnvelope />}
+              control={control}
+              errors={errors}
+              label="Email Account"
+              rules={{
+                required: {
+                  value: true,
+                  message: "Field required!",
+                },
+              }}
+            />
+          </div>
+          <div className="col-span-2">
+            <InputField
+              name="password"
+              control={control}
+              svg={<FaLock />}
+              errors={errors}
+              label="Account Password"
+              description={
+                <>
+                  <p>Enter your account password </p>
+                </>
+              }
+              rules={{
+                required: {
+                  value: true,
+                  message: "Field required!",
+                },
+              }}
+            />
+          </div>
+          <div>
+            <Button loading={isLoading} type="submit" className="py-2 ">
+              Submit
+            </Button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };

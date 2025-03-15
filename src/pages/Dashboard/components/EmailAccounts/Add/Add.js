@@ -34,10 +34,10 @@ const Add = () => {
       component={
         <div className="lg:mx-60 ">
           {googleAppSettings?.menu === true && (
-            <div className="  flex items-center justify-center">
+            <div className="  h-[86vh] flex items-center justify-center">
               {/* Connect */}
-              <div className="h-[70vh] flex flex-col items-center justify-center gap-8">
-                <div className="border p-10 border-gray-500 rounded-2xl shadow-lg">
+              <div className=" flex flex-col items-center justify-center gap-8">
+                <div className=" p-5 bg-white dark:bg-gray-800  rounded-2xl shadow-lg">
                   <Button
                     onClick={() => navigateTo("/accounts")}
                     className="mb-5"
@@ -102,7 +102,7 @@ const Add = () => {
             </div>
           )}
           {googleAppSettings?.form === true && (
-            <div className="flex justify-center">
+            <div className="flex items-center">
               <GoogleAppForm handleMenu={handleMenu} />
             </div>
           )}
