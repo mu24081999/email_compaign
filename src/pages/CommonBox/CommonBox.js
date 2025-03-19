@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Layout from "../../layout/Layout";
 import { useDispatch, useSelector } from "react-redux";
-import { SidebarCom } from "./components/Sidebar";
+import SidebarCom from "./components/Sidebar";
 import { getUserCompaignsApi } from "../../redux/services/compaign";
 import SidebarSkeleton from "../../components/SidebarSkeleton";
 import { useForm } from "react-hook-form";
@@ -9,6 +9,16 @@ import TextAreaField from "../../components/FormFields/TextAreaField/TextAreaFie
 import { sendEmailReply } from "../../redux/services/unibox.";
 import Button from "../../components/Button";
 import Heading from "../../components/Heading";
+import {
+  HiOutlineCalendar,
+  HiOutlineClock,
+  HiOutlineMail,
+  HiOutlineUser,
+} from "react-icons/hi";
+import { load } from "cheerio";
+import moment from "moment";
+import _ from "lodash";
+
 const CommonBox = () => {
   const {
     handleSubmit,
@@ -20,6 +30,11 @@ const CommonBox = () => {
   const { replies, isLoading } = useSelector((state) => state.unibox);
   const [campaign, setCampaign] = useState({});
   const [selectedReply, setSelectedReply] = useState({});
+  const [isReplying, setIsReplying] = useState(false);
+  function htmlToText(html) {
+    const $ = load(html);
+    return $.text().trim();
+  }
   useEffect(() => {
     const query = `no_limit=true`;
     dispatch(getUserCompaignsApi(token, user_id, query));
@@ -47,7 +62,7 @@ const CommonBox = () => {
   };
   function extractNameAndEmail(input) {
     const regex = /"([^"]+)"\s+<([^>]+)>/; // Regex to match the name and email
-    const match = input.match(regex);
+    const match = _.isString(input) && input?.length > 0 && input.match(regex);
     if (match) {
       const name = match[1]; // Captures the text inside quotes
       const email = match[2]; // Captures the text inside angle brackets
@@ -77,32 +92,72 @@ const CommonBox = () => {
   return (
     <Layout
       component={
-        <main className="h-[87vh] flex w-full shadow-lg rounded border">
-          <div>
+        <main className="h-[90vh] flex w-full shadow-lg rounded bg-white">
+          <div className="">
             <Heading
               text={"Common-Box"}
-              className="bg-white p-5 border text dark:bg-gray-800 font-extrabold"
+              className="bg-white p-5 text-xl dark:bg-gray-800 font-extrabold"
             />
             <SidebarCom setCampaignData={handleCampaignDataFromChild} />
           </div>
-          <section className="flex flex-col w-4/12 bg-gray-50  dark:bg-gray-800 border">
-            <Heading
-              text={"Inbox"}
-              className="bg-white p-5 border text dark:bg-gray-800 font-extrabold"
-            />
+          <section className="flex flex-col w-5/6   dark:bg-gray-800">
             {isLoading ? (
               <SidebarSkeleton />
             ) : (
-              <div>
-                {/* <label className="px-3">
-                <input
-                  className="rounded-lg p-4 bg-gray-50 dark:bg-gray-900 transition duration-200 focus:outline-none focus:ring-2 w-full"
-                  placeholder="Search..."
-                  onKeyUp={handleOnSearchReply}
-                />
-              </label> */}
-
-                <ul className="mt-6">
+              <div className="">
+                {/* Inbox Section */}
+                <div className="flex-1  p-6 overflow-auto h-[90vh]">
+                  <h2 className="text-xl font-bold mb-6">Inbox</h2>
+                  <div className="space-y-2">
+                    {Array.isArray(replies) &&
+                      replies?.length > 0 &&
+                      replies?.map((email, index) => (
+                        <div
+                          key={index}
+                          onClick={() => handleReplyClick(email)}
+                          className={`p-4 rounded-lg cursor-pointer transition-all ${
+                            email.body === selectedReply?.body
+                              ? "bg-blue-50 border-blue-200"
+                              : "hover:bg-gray-50 border-transparent"
+                          } border`}
+                        >
+                          <div className="flex justify-between items-start mb-2">
+                            <h3 className="font-semibold text-gray-800 dark:text-gray-300">
+                              {email?.subject}
+                            </h3>
+                            <span className="text-sm text-gray-500">
+                              {getRelativeTime(
+                                email?.createdAt ? email?.createdAt : email.date
+                              )}{" "}
+                            </span>
+                          </div>
+                          <div className="flex items-center gap-2 text-sm text-gray-600 mb-2">
+                            <HiOutlineUser className="text-gray-400" />
+                            <span>
+                              {" "}
+                              {extractNameAndEmail(email?.from || "")?.name ||
+                                email.from}
+                            </span>
+                          </div>
+                          <p className="text-sm text-gray-600 line-clamp-2">
+                            {htmlToText(email?.body || "")?.slice(0, 100)}
+                          </p>
+                          <div className="flex items-center gap-2 mt-2">
+                            <span
+                              className={`text-xs px-2 py-1 rounded-full ${
+                                email?.status === "Unread"
+                                  ? "bg-blue-100 text-blue-700"
+                                  : "bg-gray-100 text-gray-600"
+                              }`}
+                            >
+                              Read
+                            </span>
+                          </div>
+                        </div>
+                      ))}
+                  </div>
+                </div>
+                {/* <ul className="mt-6">
                   {Array.isArray(replies) && replies?.length > 0 ? (
                     replies?.map((reply, index) => (
                       <li
@@ -143,11 +198,152 @@ const CommonBox = () => {
                       <p className="text-center">No Replies Found</p>
                     </div>
                   )}
-                </ul>
+                </ul> */}
               </div>
             )}
           </section>
-          <section className="w-6/12 flex flex-col bg-gray-50 border dark:bg-gray-800">
+          {/* Details Section */}
+          <div className="w-96 bg-white shadow-sm border-l border-gray-200 p-6 overflow-auto">
+            <h2 className="text-xl font-bold mb-6 text-gray-800">Details</h2>
+            {selectedReply ? (
+              <div className="space-y-6">
+                <div className="pb-6 border-b border-gray-200">
+                  <h3 className="text-xl font-semibold text-gray-800 mb-4">
+                    {selectedReply?.subject}
+                  </h3>
+                  <div className="space-y-3">
+                    <div className="flex items-center gap-2 text-gray-600">
+                      <HiOutlineUser className="text-gray-400" />
+                      <span>
+                        {" "}
+                        {extractNameAndEmail(selectedReply.from)?.name ||
+                          selectedReply?.from}
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-2 text-gray-600">
+                      <HiOutlineMail className="text-gray-400" />
+                      <span>
+                        {" "}
+                        {extractNameAndEmail(selectedReply.from)?.name ||
+                          selectedReply?.from}
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-2 text-gray-600">
+                      <HiOutlineCalendar className="text-gray-400" />
+                      <span>
+                        {moment(
+                          selectedReply?.date
+                            ? selectedReply?.date
+                            : selectedReply?.createdAt
+                        ).format("YYYY-MM-DD")}
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-2 text-gray-600">
+                      <HiOutlineClock className="text-gray-400" />
+                      <span>
+                        {" "}
+                        {moment(
+                          selectedReply?.date
+                            ? selectedReply?.date
+                            : selectedReply?.createdAt
+                        ).format("HH:mm A")}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div className="space-y-4">
+                  <h4 className="font-semibold text-gray-800">Content</h4>
+                  <p className="text-gray-600 whitespace-pre-line">
+                    {/* {htmlToText(selectedReply?.body)} */}
+                    <div
+                      className="text-md italic text-gray-400"
+                      dangerouslySetInnerHTML={{
+                        __html: selectedReply?.body,
+                      }}
+                    ></div>
+                  </p>
+                </div>
+
+                {/* Reply Section */}
+                <div className="pt-6 border-t border-gray-200">
+                  {!isReplying ? (
+                    <button
+                      onClick={() => setIsReplying(true)}
+                      className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
+                    >
+                      Reply
+                    </button>
+                  ) : (
+                    <div className="space-y-4">
+                      <h4 className="font-semibold text-gray-800">
+                        Your Reply
+                      </h4>
+                      <form
+                        onSubmit={handleSubmit(formSubmit)}
+                        className="mt-6 rounded-xl"
+                      >
+                        <TextAreaField
+                          name="reply_body"
+                          control={control}
+                          errors={errors}
+                          placeholder="Reply"
+                        />
+                        <div className="flex items-center justify-end p-2">
+                          <Button
+                            type="submit"
+                            loading={isLoading}
+                            className="py-2 bg-black"
+                          >
+                            Reply
+                          </Button>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setIsReplying(false);
+                            }}
+                            className="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors"
+                          >
+                            Cancel
+                          </button>
+                        </div>
+                      </form>
+                    </div>
+                  )}
+                </div>
+              </div>
+            ) : (
+              <div className="flex flex-col items-center justify-center h-[80%] text-gray-400">
+                <svg
+                  className="w-16 h-16 mx-auto mb-4"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <circle
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  />
+                  <path
+                    d="M8 15C8.5 16 10 17 12 17C14 17 15.5 16 16 15"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                  />
+                  <path
+                    d="M9 10H9.01M15 10H15.01"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                  />
+                </svg>
+                <p className="text-lg">No open content</p>
+              </div>
+            )}
+          </div>
+          {/* <section className=" flex flex-col bg-gray-50 border dark:bg-gray-800">
             <Heading
               text={selectedReply?.subject || "Details"}
               className="bg-white p-5 border text dark:bg-gray-800 font-extrabold"
@@ -173,45 +369,8 @@ const CommonBox = () => {
                       </p>
                     </div>
                   </div>
-                  {/* <div>
-                    <ul className="flex text-gray-400 space-x-4">
-                      <li className="w-6 h-6">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M11 15l-3-3m0 0l3-3m-3 3h8M3 12a9 9 0 1118 0 9 9 0 01-18 0z"
-                          />
-                        </svg>
-                      </li>
-                      <li className="w-6 h-6">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z"
-                          />
-                        </svg>
-                      </li>
-                    </ul>
-                  </div> */}
                 </div>
                 <section>
-                  {/* <h1 className="font-bold text-2xl border bg-white dark:bg-gray-800 rounded shadow-lg p-3 text-center">
-                    {selectedReply?.subject}
-                  </h1> */}
                   <article
                     className="mt-8 leading-7 rounded shadow-xl tracking-wider border p-5 h-[50vh] overflow-scroll bg-gray-100 dark:bg-gray-800"
                     dangerouslySetInnerHTML={{ __html: selectedReply?.body }}
@@ -250,7 +409,7 @@ const CommonBox = () => {
                 <p className="text-center">No open content</p>
               </div>
             )}
-          </section>
+          </section> */}
         </main>
       }
     />

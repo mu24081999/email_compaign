@@ -5,18 +5,19 @@ import { Sidebar } from "flowbite-react";
 import { TbLocationShare } from "react-icons/tb";
 import Campaigns from "./Campaigns";
 import Statuses from "./Statuses";
+import "./style.css";
 
-export function SidebarCom({ setCampaignData }) {
+const SidebarCom = ({ setCampaignData }) => {
   return (
-    <>
-      <Sidebar className="h-[79vh]">
-        <Sidebar.Items>
+    <div>
+      <Sidebar className="h-[79vh]" id="sidebar_main">
+        <Sidebar.Items className="">
           <Sidebar.ItemGroup>
             <Sidebar.Collapse
               icon={TbLocationShare}
               label="Campaigns"
               open={false}
-              className="bg-white dark:bg-gray-700 py-4 border-gray-300 shadow-lg px-2 hover:bg-gray-100"
+              className="bg-white dark:bg-gray-700 py-4 border-gray-300  px-2 hover:bg-gray-100"
             >
               <Campaigns setCampaignData={setCampaignData} />
             </Sidebar.Collapse>
@@ -24,13 +25,14 @@ export function SidebarCom({ setCampaignData }) {
               icon={TbLocationShare}
               label="Statuses"
               open={false}
-              className="bg-white dark:bg-gray-700 py-4 border-gray-300 shadow-lg px-2 hover:bg-gray-100"
+              className="bg-white dark:bg-gray-700 py-4 border-gray-300 px-2 hover:bg-gray-100"
             >
               <Statuses setCampaignData={setCampaignData} />
             </Sidebar.Collapse>
           </Sidebar.ItemGroup>
         </Sidebar.Items>
       </Sidebar>
-    </>
+    </div>
   );
-}
+};
+export default SidebarCom;

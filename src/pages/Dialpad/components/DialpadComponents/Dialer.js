@@ -28,7 +28,7 @@ const Dialer = () => {
   } = useCalling();
   return (
     <div>
-      <div className="  dark:bg-gray-900 mx-auto w-80  rounded-xl relative overflow-hidden  p-4 shadow-xl border bg-cyan-500 bg-opacity-10">
+      <div className=" dark:bg-gray-900 mx-auto w-80  rounded-xl relative overflow-hidden  p-4 shadow-xl border bg-cyan-500 bg-opacity-10">
         {(userState === USER_STATE.READY ||
           userState === USER_STATE.ON_CALL_KEYPAD) && (
           <div>

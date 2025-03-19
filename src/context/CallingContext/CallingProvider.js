@@ -38,7 +38,8 @@ const CalllingContext = ({ children }) => {
     if (callToken) {
       try {
         const device = new Device(callToken, {
-          logLevel: 1,
+          logLevel: "silent",
+          // logLevel: 1,
           edge: "ashburn",
         });
         device.register();
