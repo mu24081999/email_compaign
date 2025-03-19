@@ -1,6 +1,13 @@
 import React, { useEffect, useState } from "react";
 
-const Tabs = ({ tabsData, className, noContentPadding, activeTabId }) => {
+const Tabs = ({
+  tabsData,
+  className,
+  noContentPadding,
+  activeTabId,
+  noPadding,
+  headerSize,
+}) => {
   // State to track the currently active tab
   const [activeTab, setActiveTab] = useState(tabsData[0]?.id || "");
 
@@ -34,7 +41,9 @@ const Tabs = ({ tabsData, className, noContentPadding, activeTabId }) => {
             >
               <button
                 id={tab?.id}
-                className={` text-md inline-block p-4  rounded-t-lg `}
+                className={` text-${
+                  headerSize ? headerSize : "lg"
+                } inline-block p-4  rounded-t-lg `}
                 type="button"
                 role="tab"
                 aria-controls={tab.id}
