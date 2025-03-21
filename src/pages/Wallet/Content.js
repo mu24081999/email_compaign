@@ -344,7 +344,7 @@ const Content = () => {
                         <span>
                           $
                           {getProfitPricing(
-                            pricing[countryCode]?.local_sms_outbound,
+                            pricing[countryCode]?.local_call_outbound,
                             profitMargin
                           )}
                           /sms
@@ -356,7 +356,7 @@ const Content = () => {
                         <span>
                           $
                           {getProfitPricing(
-                            pricing[countryCode]?.tollfree_sms_outbound,
+                            pricing[countryCode]?.tollfree_call_outbound,
                             profitMargin
                           )}
                           /sms
