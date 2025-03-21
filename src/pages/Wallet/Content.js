@@ -317,7 +317,7 @@ const Content = () => {
                             pricing[countryCode]?.local_call_inbound,
                             profitMargin
                           )}
-                          /call
+                          /min
                         </span>{" "}
                         <span className="font-bold">- Local</span>
                       </li>
@@ -329,7 +329,7 @@ const Content = () => {
                             pricing[countryCode]?.tollfree_call_inbound,
                             profitMargin
                           )}
-                          /call
+                          /min
                         </span>{" "}
                         <span className="font-bold">- Toll-free</span>
                       </li>
