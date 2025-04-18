@@ -205,7 +205,7 @@ const CommonBox = () => {
           {/* Details Section */}
           <div className="w-96 bg-white shadow-sm border-l border-gray-200 p-6 overflow-auto">
             <h2 className="text-xl font-bold mb-6 text-gray-800">Details</h2>
-            {selectedReply ? (
+            {selectedReply?.subject ? (
               <div className="space-y-6">
                 <div className="pb-6 border-b border-gray-200">
                   <h3 className="text-xl font-semibold text-gray-800 mb-4">
@@ -231,11 +231,12 @@ const CommonBox = () => {
                     <div className="flex items-center gap-2 text-gray-600">
                       <HiOutlineCalendar className="text-gray-400" />
                       <span>
-                        {moment(
-                          selectedReply?.date
-                            ? selectedReply?.date
-                            : selectedReply?.createdAt
-                        ).format("YYYY-MM-DD")}
+                        {(selectedReply?.date || selectedReply?.createdAt) &&
+                          moment(
+                            selectedReply?.date
+                              ? selectedReply?.date
+                              : selectedReply?.createdAt
+                          ).format("YYYY-MM-DD")}
                       </span>
                     </div>
                     <div className="flex items-center gap-2 text-gray-600">

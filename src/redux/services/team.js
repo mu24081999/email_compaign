@@ -91,7 +91,7 @@ export const registerTeamMember = (registerData) => async (dispatch) => {
       },
     };
     const response = await axios.post(
-      `${backendURL}/team/register`,
+      `${backendURL}/team/register-member`,
       registerData,
       config
     );

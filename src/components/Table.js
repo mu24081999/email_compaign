@@ -251,28 +251,6 @@ const Table = ({
           >
             Previous
           </button>
-          {/* <span className="text-gray-700 dark:text-white">
-            Page {currentPage} of {totalPages}
-          </span> */}
-          {/* <div className="flex space-x-2">
-            {_.isInteger(totalPages) &&
-              [...Array(totalPages)].map((_, index) => {
-                const pageNumber = index + 1;
-                return (
-                  <button
-                    key={pageNumber}
-                    onClick={() => handlePageChange(pageNumber)}
-                    className={`px-3 py-1 rounded-full ${
-                      currentPage === pageNumber
-                        ? "bg-[#2563eb] text-white"
-                        : "bg-gray-200 text-black"
-                    }`}
-                  >
-                    {pageNumber}
-                  </button>
-                );
-              })}
-          </div> */}
           <div className="flex space-x-1">
             {getPageNumbers().map((page, index) => (
               <button
