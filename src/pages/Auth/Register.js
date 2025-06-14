@@ -62,7 +62,7 @@ const Register = () => {
   }, [isRegistered, navigateTo]);
   useEffect(() => {
     if (isTeanRegistered) {
-      navigateTo("/lawfirm");
+      navigateTo("/");
     }
   }, [isTeanRegistered, navigateTo]);
   useEffect(() => {

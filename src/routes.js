@@ -47,6 +47,7 @@ import AdminAddUser from "./pages/Admin/AddUser";
 import AdminUpdateSubscription from "./pages/Admin/UpdateSubscription";
 import AdminA2PRequests from "./pages/Admin/A2PRequests";
 import Usage from "./pages/Admin/Usage";
+import EmailFlow from "./pages/EmailFlow";
 const Login = lazy(() => import("./pages/Auth/Login"));
 const Register = lazy(() => import("./pages/Auth/Register"));
 
@@ -96,6 +97,7 @@ const router = (
       ), // Protect the Dashboard route children: [],
       breadcrumb: "Admin Dashboard",
     },
+
     {
       path: "/admin/usage/:user_id",
       element: (
@@ -276,6 +278,24 @@ const router = (
           isValid={isValid}
         >
           <Team />
+        </PrivateRoute>
+      ),
+      children: [],
+      breadcrumb: "email-template",
+    },
+    {
+      path: "/email-flow",
+      element: (
+        <PrivateRoute
+          user={user}
+          email_verified={email_verified}
+          isAuthenticated={isAuthenticated}
+          authLoading={authLoading}
+          subscriptionLoading={subscriptionLoading}
+          startingAuth={startingAuth}
+          isValid={isValid}
+        >
+          <EmailFlow />
         </PrivateRoute>
       ),
       children: [],

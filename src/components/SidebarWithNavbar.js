@@ -192,7 +192,11 @@ const SidebarWithNavbar = ({ component }) => {
         link: "/my-subscription",
         icon: TbCalendarDollar,
       },
-
+      {
+        name: "Email Flow",
+        link: "/email-flow",
+        icon: TbCalendarDollar,
+      },
       {
         name: "Account Settings",
         link: "/account-settings",
