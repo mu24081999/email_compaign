@@ -138,7 +138,7 @@ function Content() {
       user_id: user_id,
       name: "My Email Automation Flow",
     };
-    dispatch(addEmailFLowApi(token, params));
+    // dispatch(addEmailFLowApi(token, params));
     // Send to backend via fetch/axios here
     // axios.post('/api/save-flow', sequence)
   };

@@ -72,7 +72,7 @@ function AutomationNode({ data, isConnectable }) {
         type="target"
         position={Position.Left}
         isConnectable={isConnectable}
-        className="w-3 h-3 !bg-blue-500"
+        className="w-3 h-2 !bg-blue-500"
       />
 
       <div className="space-y-5">
@@ -128,7 +128,7 @@ function AutomationNode({ data, isConnectable }) {
           >
             Sequence
           </button>
-          {/* <button
+          <button
             onClick={() => setSelectedType("template")}
             className={`flex-1 py-2 px-3 rounded-lg text-sm font-medium transition-all ${
               selectedType === "template"
@@ -137,7 +137,7 @@ function AutomationNode({ data, isConnectable }) {
             }`}
           >
             Template
-          </button> */}
+          </button>
         </div>
 
         {/* Item list */}
@@ -151,7 +151,7 @@ function AutomationNode({ data, isConnectable }) {
             <div
               key={item.id}
               className={`p-3 rounded-lg cursor-pointer transition-all relative ${
-                selectedItem?.id === item.id
+                selectedItem === item.id
                   ? "bg-blue-50 border-2 border-blue-500"
                   : "border-2 border-gray-100 hover:border-blue-200"
               }`}
@@ -161,12 +161,12 @@ function AutomationNode({ data, isConnectable }) {
                 <MdContentCopy className="w-5 h-5 text-blue-500 mt-1" />
                 <div>
                   <h3 className="font-medium text-gray-900">
-                    {item.subject || item.name}
+                    {item.subject || item.title}
                   </h3>
                   <p
                     className="text-sm text-gray-600"
                     dangerouslySetInnerHTML={{
-                      __html: item?.content?.slice?.(0, 100) + "...",
+                      __html: item?.content?.slice?.(0, 50) + "...",
                     }}
                   ></p>
                 </div>
