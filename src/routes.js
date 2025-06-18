@@ -48,6 +48,7 @@ import AdminUpdateSubscription from "./pages/Admin/UpdateSubscription";
 import AdminA2PRequests from "./pages/Admin/A2PRequests";
 import Usage from "./pages/Admin/Usage";
 import EmailFlow from "./pages/EmailFlow";
+import UnsubscribePage from "./pages/Unsubscribe";
 const Login = lazy(() => import("./pages/Auth/Login"));
 const Register = lazy(() => import("./pages/Auth/Register"));
 
@@ -342,6 +343,12 @@ const router = (
       element: <ForgotPassword />,
       children: [],
       breadcrumb: "forgot-password",
+    },
+    {
+      path: "/unsubscribe",
+      element: <UnsubscribePage />,
+      children: [],
+      breadcrumb: "unsubscribe",
     },
     {
       path: "/reset-password/:email",
