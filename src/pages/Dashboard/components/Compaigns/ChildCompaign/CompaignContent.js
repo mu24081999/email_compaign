@@ -92,7 +92,7 @@ const CompaignContent = () => {
       <div className="float-end px-8">
         {compaign?.status === "paused" ? (
           <Button
-            className="flex gap-2 py-3 mt-1  bg-green-500 hover:bg-green-600"
+            className="flex gap-2 py-2 mt-1  bg-green-500 hover:bg-green-600"
             onClick={resumeCompaign}
           >
             <span className="mt-1">
@@ -103,13 +103,13 @@ const CompaignContent = () => {
         ) : (
           compaign?.status === "sending" && (
             <Button
-              className="flex gap-2 py-3 mt-1 bg-black hover:bg-gray-800"
+              className="flex gap-2 py-2 mt-1 bg-black hover:bg-gray-800"
               onClick={pauseCompaign}
             >
               <span className="mt-1">
                 <CiPause1 />
               </span>
-              <span>Pause Compaign</span>
+              <span>Pause Campaign</span>
             </Button>
           )
         )}

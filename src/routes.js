@@ -49,6 +49,7 @@ import AdminA2PRequests from "./pages/Admin/A2PRequests";
 import Usage from "./pages/Admin/Usage";
 import EmailFlow from "./pages/EmailFlow";
 import UnsubscribePage from "./pages/Unsubscribe";
+import UnsubscribedEmails from "./pages/UnsubscribedEmails/index";
 const Login = lazy(() => import("./pages/Auth/Login"));
 const Register = lazy(() => import("./pages/Auth/Register"));
 
@@ -260,6 +261,24 @@ const router = (
         </PrivateRoute>
       ), // Protect the Dashboard route    children: [],
       breadcrumb: "Dashboard",
+    },
+    {
+      path: "/unsubscribed-emails",
+      element: (
+        <PrivateRoute
+          user={user}
+          email_verified={email_verified}
+          isAuthenticated={isAuthenticated}
+          authLoading={authLoading}
+          subscriptionLoading={subscriptionLoading}
+          startingAuth={startingAuth}
+          isValid={isValid}
+          requiredRoles={["user"]}
+        >
+          <UnsubscribedEmails />
+        </PrivateRoute>
+      ), // Protect the Dashboard route    children: [],
+      breadcrumb: "Unsubscribed Emails",
     },
     {
       path: "/privacy-policy",

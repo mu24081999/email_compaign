@@ -198,6 +198,11 @@ const SidebarWithNavbar = ({ component }) => {
         icon: TbCalendarDollar,
       },
       {
+        name: "Unsubscribed Leads",
+        link: "/unsubscribed-emails",
+        icon: TbCalendarDollar,
+      },
+      {
         name: "Account Settings",
         link: "/account-settings",
         icon: FaCogs,

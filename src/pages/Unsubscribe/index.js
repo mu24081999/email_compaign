@@ -25,7 +25,6 @@ export default function UnsubscribePage() {
       const response = await axios.post(`${backendURL}/unsubscribed`, params);
       if (response?.data?.statusCode !== 200) {
         setUnsubscribed(false);
-
         return toast.error(response.data.message);
       }
       toast.success(response.data.message || "Successfully unsubscribed.");
