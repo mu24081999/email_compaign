@@ -350,7 +350,7 @@ const CommonBox = () => {
 
   useEffect(() => {
     dispatch(getUserCompaignsApi(token, user_id, `no_limit=true`));
-  }, [user_id, token, dispatch]);
+  }, [user_id, token]);
 
   function getRelativeTime(dateString) {
     const date = new Date(dateString);

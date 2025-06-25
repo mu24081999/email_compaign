@@ -58,14 +58,14 @@ const SidebarCom = ({ setCampaignData }) => {
             >
               <Campaigns setCampaignData={setCampaignData} />
             </Sidebar.Collapse>
-            <Sidebar.Collapse
+            {/* <Sidebar.Collapse
               icon={TbLocationShare}
               label="Statuses"
               open={false}
               className="bg-white dark:bg-gray-800 py-4 px-2 border-b dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-md"
             >
               <Statuses setCampaignData={setCampaignData} />
-            </Sidebar.Collapse>
+            </Sidebar.Collapse> */}
           </Sidebar.ItemGroup>
         </Sidebar.Items>
       </Sidebar>
